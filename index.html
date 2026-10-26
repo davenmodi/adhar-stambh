@@ -403,9 +403,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- content ----------
   const ZC = { Mandir: '#b493d4', Shastra: '#6cc2ad', Sant: '#e48b62', Route: '#d8a650' };
   const ITEMS = {
-    entrance: { zone: 'Route', name: 'Entrance from Mulyo', what: 'Visitors arrive from the Mulyo section and step straight into the chaos hallway.', build: 'A 4 ft opening in the outer wall.', size: '4 ft opening', at: [2, 2] },
-    hallway: { zone: 'Mandir', name: 'Chaos hallway', what: 'A short, cramped hallway painted black from floor to ceiling. One stream of notifications and photos runs along the walls at eye level: deadlines, missed calls, bills, traffic, 99+ unread. Two cold flicker bulbs keep it restless. It doubles as the queue for the Shanti room.', build: 'Walls painted matte black. One continuous printed vinyl strip, about 19 ft long and 2 ft tall, wrapping all three walls at 4–6 ft. Two flicker bulbs. No sound, so nothing leaks into the Shanti room.', size: 'About 9 ft long, 4 ft wide', at: [4.5, 2] },
-    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the opposite side, facing the Better Living booth.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 9 ft outside, about 8.5 × 8.5 ft inside', at: [4.5, 8.5] },
+    entrance: { zone: 'Route', name: 'Entrance from Mulyo', what: 'Visitors arrive from the Mulyo section and step straight into the chaos hallway.', build: 'A 4 ft opening in the outer wall.', size: '5 ft opening', at: [2, 2.5] },
+    hallway: { zone: 'Mandir', name: 'Chaos hallway', what: 'A short, cramped hallway painted black from floor to ceiling. One stream of notifications and photos runs along the walls at eye level: deadlines, missed calls, bills, traffic, 99+ unread. Two cold flicker bulbs keep it restless. It doubles as the queue for the Shanti room.', build: 'Walls painted matte black. One continuous printed vinyl strip, about 19 ft long and 2 ft tall, wrapping all three walls at 4–6 ft. Two flicker bulbs. No sound, so nothing leaks into the Shanti room.', size: 'About 9 ft long, 5 ft wide', at: [4.5, 2] },
+    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the opposite side, facing the Better Living booth.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 8 ft outside, about 8.5 × 7.5 ft inside', at: [4.5, 9] },
     bky: { zone: 'Mandir', name: 'BKY booth', what: 'A volunteer-run booth where the BKY team talks with visitors. What happens here is up to the BKY lead.', build: 'Booth kit: 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 1.2] },
     charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 18.8] },
     bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions, straight ahead as people step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [4.5, 18.8] },
@@ -438,7 +438,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), mat);
     m.rotation.x = -Math.PI / 2; m.position.set((x0 + x1) / 2, y || 0, (z0 + z1) / 2); scene.add(m); return m;
   }
-  const SH = { x0: 0, x1: 9, z0: 4, z1: 13 }; // Shanti box
+  const SH = { x0: 0, x1: 9, z0: 5, z1: 13 }; // Shanti box
   function buildFloor() {
     // Black loop carpet over the gym floor
     const carpet = canvasTex(256, 256, (ctx, w, h) => {
@@ -447,12 +447,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     });
     carpet.tex.wrapS = carpet.tex.wrapT = THREE.RepeatWrapping; carpet.tex.repeat.set(10, 10);
     M.floor.map = carpet.tex; M.floor.color.set(0xffffff); M.floor.roughness = 1; M.floor.needsUpdate = true;
-    floorRect(9, 0, 40, 20, M.floor); floorRect(0, 0, 9, 4, M.floor); floorRect(0, 13, 9, 20, M.floor);
+    floorRect(9, 0, 40, 20, M.floor); floorRect(0, 0, 9, 5, M.floor); floorRect(0, 13, 9, 20, M.floor);
     const apron = std(0x0d0d0f, { roughness: 1 });
     floorRect(-12, -10, 52, 0, apron, -0.01); floorRect(-12, 20, 52, 32, apron, -0.01);
     floorRect(-12, 0, 0, 20, apron, -0.01); floorRect(40, 0, 52, 20, apron, -0.01);
     const tint = (x0, z0, x1, z1, c) => floorRect(x0, z0, x1, z1, new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.07, depthWrite: false }), 0.006);
-    tint(9, 0, 16.5, 20, 0x9b6cc4); tint(0, 0, 9, 4, 0x9b6cc4); tint(0, 13, 9, 20, 0x9b6cc4);
+    tint(9, 0, 16.5, 20, 0x9b6cc4); tint(0, 0, 9, 5, 0x9b6cc4); tint(0, 13, 9, 20, 0x9b6cc4);
     tint(16.5, 0, 29.2, 20, 0x3fb39a); tint(29.2, 0, 40, 20, 0xe07a4a);
     const pts = [];
     for (let x = 0; x <= 40; x++) {
@@ -469,12 +469,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   function buildWalls() {
     wallSeg([0, 0], [40, 0]);
     wallSeg([0, 20], [40, 20]);
-    wallSeg([0, 4], [0, 13], { minus: M.ivory });
+    wallSeg([0, 5], [0, 13], { minus: M.ivory });
     wallSeg([0, 13], [0, 20]);
     wallSeg([40, 4], [40, 20]);
-    wallSeg([0, 4], [6, 4], { plus: M.ivory });       // hallway / Shanti north wall, door at x 6–9
-    wallSeg([9, 0], [9, 4]);                          // end of the hallway
-    wallSeg([9, 4], [9, 13], { plus: M.ivory });      // Shanti east wall (closed)
+    wallSeg([0, 5], [6, 5], { plus: M.ivory });       // hallway / Shanti north wall, door at x 6–9
+    wallSeg([9, 0], [9, 5]);                          // end of the hallway
+    wallSeg([9, 5], [9, 13], { plus: M.ivory });      // Shanti east wall (closed)
     wallSeg([0, 13], [6, 13], { minus: M.ivory });    // Shanti south wall, exit at x 6–9 facing the Better Living booth
     wallSeg([31, 6.7], [32.4, 4.1]);                  // fins
     wallSeg([31, 13.3], [32.4, 15.9]);
@@ -573,13 +573,13 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   function buildHallway() {
     const black = std(0x060607, { roughness: 0.92 }); SEE.push(black);
     const face = (w, x, z, rotY) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 8), black); m.position.set(x, 4, z); m.rotation.y = rotY; scene.add(m); clickable(m, 'hallway'); };
-    face(9, 4.5, 0.19, 0); face(6, 3, 3.81, Math.PI); face(4, 8.81, 2, -Math.PI / 2);
+    face(9, 4.5, 0.19, 0); face(6, 3, 4.81, Math.PI); face(5, 8.81, 2.5, -Math.PI / 2);
     const strip = (w, x, z, rotY, seed) => {
       const t = canvasTex(Math.round(w * 160), 320, (ctx, cw, ch) => drawStream(ctx, cw, ch, seed));
       const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 2), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true }));
       m.position.set(x, 5.0, z); m.rotation.y = rotY; scene.add(m); clickable(m, 'hallway');
     };
-    strip(9, 4.5, 0.21, 0, 1); strip(6, 3, 3.79, Math.PI, 2); strip(4, 8.79, 2, -Math.PI / 2, 3);
+    strip(9, 4.5, 0.21, 0, 1); strip(6, 3, 4.79, Math.PI, 2); strip(5, 8.79, 2.5, -Math.PI / 2, 3);
     [[2.5, 1.6], [6.5, 2.4]].forEach(([x, z]) => {
       const l = new THREE.PointLight(0xbcd4ff, 0.9, 9, 1.4); l.position.set(x, 7.4, z); scene.add(l); flicker.push(l);
       const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.16, 10, 8), new THREE.MeshBasicMaterial({ color: 0xdbe8ff })); bulb.position.set(x, 7.6, z); scene.add(bulb);
@@ -675,18 +675,18 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
   function buildShanti() {
     const H = 7.8, y = H / 2 + 0.05;
-    jaliPanel(8.6, H, { bays: 3, photos: ['Photo: Pramukh Swami Maharaj', 'portrait', 'Photo: mandir murti'] }, 0.2, y, 8.5, Math.PI / 2, true);
+    jaliPanel(7.6, H, { bays: 3, photos: ['Photo: Pramukh Swami Maharaj', 'portrait', 'Photo: mandir murti'] }, 0.2, y, 9, Math.PI / 2, true);
     jaliPanel(5.6, H, { bays: 2 }, 3.0, y, 12.8, Math.PI, true);
-    jaliPanel(5.6, H, { bays: 2 }, 3.0, y, 4.2, 0, true);
-    jaliPanel(8.6, H, { bays: 3 }, 8.8, y, 8.5, -Math.PI / 2, true);
+    jaliPanel(5.6, H, { bays: 2 }, 3.0, y, 5.2, 0, true);
+    jaliPanel(7.6, H, { bays: 3 }, 8.8, y, 9, -Math.PI / 2, true);
     // glossy floor: a translucent white skin over the mirrored jali
-    const fl = floorRect(0.17, 4.17, 8.83, 12.83, new THREE.MeshStandardMaterial({ color: 0xf6f1e7, roughness: 0.12, metalness: 0.05, transparent: true, opacity: 0.8 }), 0.004);
+    const fl = floorRect(0.17, 5.17, 8.83, 12.83, new THREE.MeshStandardMaterial({ color: 0xf6f1e7, roughness: 0.12, metalness: 0.05, transparent: true, opacity: 0.8 }), 0.004);
     clickable(fl, 'shanti');
     floorRect(-1, 3, 10, 14, new THREE.MeshBasicMaterial({ color: 0x0a0908 }), -8.2);
     // warm light inside, and a ceiling seen only from eye level
-    const l = new THREE.PointLight(0xffe2b8, 0.9, 13, 1.2); l.position.set(4.5, 6.8, 8.5); scene.add(l);
+    const l = new THREE.PointLight(0xffe2b8, 0.9, 13, 1.2); l.position.set(4.5, 6.8, 9); scene.add(l);
     shantiCeil = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), new THREE.MeshBasicMaterial({ color: 0xf6ecd8, side: THREE.DoubleSide }));
-    shantiCeil.rotation.x = Math.PI / 2; shantiCeil.position.set(4.5, 8.0, 8.5); scene.add(shantiCeil);
+    shantiCeil.rotation.x = Math.PI / 2; shantiCeil.position.set(4.5, 8.0, 9); shantiCeil.scale.y = 8 / 9; scene.add(shantiCeil);
     const cove = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.MeshBasicMaterial({ color: 0xfff1d6, side: THREE.DoubleSide }));
     cove.rotation.x = Math.PI / 2; cove.position.set(4.5, 7.99, 8.5); cove.visible = false;
     // speaker
@@ -874,8 +874,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ctx.fillStyle = '#fffaf0'; ctx.fillText('મંદિર', w / 2, h * 0.73);
     }, 160);
     lintel.material = new THREE.MeshBasicMaterial({ map: lintel.material.map });
-    lintel.position.set(7.5, 7.45, 3.8); lintel.rotation.y = Math.PI; scene.add(lintel); clickable(lintel, 'signs');
-    scene.add(box(3.0, 0.08, 0.36, M.ivory, 7.5, 6.9, 4.0));
+    lintel.position.set(7.5, 7.45, 4.8); lintel.rotation.y = Math.PI; scene.add(lintel); clickable(lintel, 'signs');
+    scene.add(box(3.0, 0.08, 0.36, M.ivory, 7.5, 6.9, 5.0));
   }
 
   function buildNFC() {
@@ -1018,7 +1018,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
 
   // ---------- route ----------
-  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 5.3], [6.4, 8.6], [7.5, 11.6], [7.5, 14.4], [5.6, 15.0], [12.5, 15.8], [13, 5.2], [15.6, 10.8], [18.2, 10.2], [22.7, 10.3], [26.7, 10.2], [28.6, 9.6], [29.6, 4.6], [32.4, 2], [34.6, 4.6], [35.6, 9.5], [37.6, 10], [36.8, 5], [37.5, 2], [43, 2]];
+  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 15.0], [12.5, 15.8], [13, 5.2], [15.6, 10.8], [18.2, 10.2], [22.7, 10.3], [26.7, 10.2], [28.6, 9.6], [29.6, 4.6], [32.4, 2], [34.6, 4.6], [35.6, 9.5], [37.6, 10], [36.8, 5], [37.5, 2], [43, 2]];
   let walkCurve = null;
   function buildRoute() {
     walkCurve = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, EYE, z)), false, 'centripetal', 0.5);
@@ -1296,16 +1296,16 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   function buildDims() {
     dimLine(0, -1.6, 40, -1.6, '40 ft'); dimLine(41.8, 0, 41.8, 20, '20 ft');
     dimLine(0, 21.6, 16.5, 21.6, 'Mandir 16.5 ft'); dimLine(16.5, 21.6, 29.2, 21.6, 'Shastra 12.7 ft'); dimLine(29.2, 21.6, 40, 21.6, 'Sant 10.8 ft');
-    dimLine(-1.6, 0, -1.6, 4, 'Entrance 4 ft'); dimLine(43.4, 0, 43.4, 4, 'Exit 4 ft');
-    dimLine(0, 1.2, 9, 1.2, 'Hallway 9 ft'); dimLine(0.7, 0, 0.7, 4, '4 ft');
-    dimLine(0, 13.7, 9, 13.7, '9 ft'); dimLine(9.7, 4, 9.7, 13, '9 ft');
+    dimLine(-1.6, 0, -1.6, 5, 'Entrance 5 ft'); dimLine(43.4, 0, 43.4, 4, 'Exit 4 ft');
+    dimLine(0, 1.2, 9, 1.2, 'Hallway 9 ft'); dimLine(0.7, 0, 0.7, 5, '5 ft');
+    dimLine(0, 13.7, 9, 13.7, '9 ft'); dimLine(9.7, 5, 9.7, 13, '8 ft');
     dimLine(10, 2.3, 16, 2.3, 'Booth 6 ft');
     dimLine(17.05, 1.9, 28.9, 1.9, 'Spine wall 11.9 ft'); dimLine(18.7, 1.2, 18.7, 5.5, '4.3 ft');
     dimLine(22.4, 8.8, 22.4, 12.1, 'Aisle 3.3 ft');
     dimLine(19.3, 18.4, 26.9, 18.4, 'NFC wall 7.6 ft');
     dimLine(29.9, 7, 29.9, 13, 'Portrait 6 ft'); dimLine(33.1, 0, 33.1, 4.1, '4.1 ft'); dimLine(33.1, 15.9, 33.1, 20, '4.1 ft');
     dimTag(20, 8.6, 0, 'Walls 8 ft high');
-    dimTag(4.5, 8.6, 8.5, 'Shanti room 9 × 9 × 8 ft');
+    dimTag(4.5, 8.6, 9, 'Shanti room 9 × 8 × 8 ft');
     dimTag(23, 7.8, 0.7, '8 spines · 1.4 × 1 × 7.2 ft');
     dimTag(18.7, 4.9, 6.4, 'Case 1.8 × 1.8 × 4.4 ft');
     dimTag(22.7, 12.3, 10.3, '5 scrolls 1.5 × 9.5 ft · truss 12 ft');
@@ -1346,7 +1346,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // people viewing a piece
     CASES.forEach(([x, z]) => cgSet(inRect(x - 2.1, z - 2.1, x + 2.1, z + 2.1), 3));
     [[38.9, 4.9], [38.9, 15.1]].forEach(([x, z]) => cgSet(inRect(x - 1.95, z - 1.95, x + 1.95, z + 1.95), 3));
-    [[0.2, 4.2, 8.8, 12.8], [26.0, 7.4, 30.4, 12.6], [31.2, 7.0, 33.4, 13.0], [36.8, 6.0, 39.6, 14.0]].forEach(r => cgSet(inRect(...r), 3));
+    [[0.2, 5.2, 8.8, 12.8], [26.0, 7.4, 30.4, 12.6], [31.2, 7.0, 33.4, 13.0], [36.8, 6.0, 39.6, 14.0]].forEach(r => cgSet(inRect(...r), 3));
     // floor texture
     const COL = { 0: 'rgba(52, 199, 110, 0.36)', 2: 'rgba(242, 168, 60, 0.5)', 3: 'rgba(96, 146, 240, 0.42)' };
     const t = canvasTex(CG.nx * 4, CG.nz * 4, (ctx) => {
@@ -1379,8 +1379,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- 2D plan with dimensions and materials ----------
   const MATERIALS = [
     [1, 'Walls', '≈155 linear ft, 8 ft high', '½ in plywood in 4 × 8 ft sheets on 2×3 frames, painted flat charcoal; kickers for bracing', 'About 40 sheets'],
-    [2, 'Chaos hallway', '9 × 4 ft', 'Matte black paint on all three walls, printed vinyl strip 2 ft tall at 4–6 ft, 2 cool LED bare-bulb pendants', '≈19 ft of strip'],
-    [3, 'Shanti room', '9 × 9 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
+    [2, 'Chaos hallway', '9 × 5 ft', 'Matte black paint on all three walls, printed vinyl strip 2 ft tall at 4–6 ft, 2 cool LED bare-bulb pendants', '≈19 ft of strip'],
+    [3, 'Shanti room', '9 × 8 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
     [4, 'Mandir lintel', '3 × 1 ft', 'Laser-cut MDF jali with carved letters, painted ivory', '1'],
     [5, 'Booth kits', '6 ft wall, 15 in ledge', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet', '3'],
     [6, 'Spine wall', '8 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 4 that open: 7 ft piano hinge, magnetic catch, door stop, printed insides', '8 spines'],
@@ -1409,8 +1409,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const badge = (x, z, n) => out.push(`<g class="p-badge"><circle cx="${X(x)}" cy="${Y(z)}" r="9"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`);
     rect(0, 0, 16.5, 20, 'p-zm'); rect(16.5, 0, 29.2, 20, 'p-zs'); rect(29.2, 0, 40, 20, 'p-zt');
     for (let x = 0; x <= 40; x++) line(x, 0, x, 20, 'p-grid'); for (let z = 0; z <= 20; z++) line(0, z, 40, z, 'p-grid');
-    rect(0, 4, 9, 13, 'p-ivory');
-    rect(6, 3.8, 9, 4.2, 'p-piece');
+    rect(0, 5, 9, 13, 'p-ivory');
+    rect(6, 4.8, 9, 5.2, 'p-piece');
     rect(10, 0.2, 16, 1.5, 'p-piece'); rect(10, 18.5, 16, 19.8, 'p-piece'); rect(1.5, 18.5, 7.5, 19.8, 'p-piece');
     SPINES.forEach((sp, i) => rect(17.05 + i * 1.49, 0.18, 17.05 + i * 1.49 + 1.38, 1.18, sp[2] ? 'p-piece p-open' : 'p-piece'));
     CASES.forEach(([x, z]) => rect(x - 0.9, z - 0.9, x + 0.9, z + 0.9, 'p-piece'));
@@ -1425,10 +1425,10 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // dimensions
     dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 20, '20 ft', 1.1);
     dim(0, 21.3, 16.5, 21.3, 'Mandir 16.5 ft', 0.65); dim(16.5, 21.3, 29.2, 21.3, 'Shastra 12.7 ft', 0.65); dim(29.2, 21.3, 40, 21.3, 'Sant 10.8 ft', 0.65);
-    dim(-1.4, 0, -1.4, 4, '4 ft', -1.0); text(-2.2, 6.0, 'Entrance', 'p-note', 'middle');
+    dim(-1.4, 0, -1.4, 5, '5 ft', -1.0); text(-2.2, 6.0, 'Entrance', 'p-note', 'middle');
     dim(43.2, 0, 43.2, 4, '4 ft', 1.0); text(43.8, 6.0, 'Exit', 'p-note', 'middle');
-    dim(0, 2.6, 9, 2.6, 'Hallway 9 × 4 ft', -0.55);
-    dim(0, 14.1, 9, 14.1, '9 ft', 0.55); dim(9.8, 4, 9.8, 9, '9 × 9 ft room', 1.75);
+    dim(0, 3.1, 9, 3.1, 'Hallway 9 × 5 ft', -0.55);
+    dim(0, 14.1, 9, 14.1, '9 ft', 0.55); dim(9.8, 5, 9.8, 9, '9 × 8 ft room', 1.75);
     dim(10, 2.3, 16, 2.3, 'Booth 6 ft', 0.55);
     dim(17.05, 2.0, 28.9, 2.0, 'Spine wall 11.9 ft', 0.55);
     dim(18.7, 1.25, 18.7, 5.45, '4.3 ft', -1.1);
@@ -1437,7 +1437,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(29.6, 7, 29.6, 13, '6 ft', -0.9);
     dim(33.2, 0.15, 33.2, 4.1, '4 ft', -0.9); dim(33.2, 15.9, 33.2, 19.85, '4 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 8.5, 3], [7.5, 4.9, 4], [13, 1.0, 5], [13, 19.1, 5], [4.5, 19.1, 5], [23, 0.7, 6], [18.7, 6.4, 7], [26.7, 6.4, 7], [18.7, 14, 7], [26.7, 14, 7], [22.7, 15.2, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [31.9, 5.6, 11], [31.9, 14.4, 11], [34.6, 2.7, 12], [34.6, 17.3, 12], [38.9, 4.9, 13], [38.9, 15.1, 13], [38.6, 10, 14]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [13, 1.0, 5], [13, 19.1, 5], [4.5, 19.1, 5], [23, 0.7, 6], [18.7, 6.4, 7], [26.7, 6.4, 7], [18.7, 14, 7], [26.7, 14, 7], [22.7, 15.2, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [31.9, 5.6, 11], [31.9, 14.4, 11], [34.6, 2.7, 12], [34.6, 17.3, 12], [38.9, 4.9, 13], [38.9, 15.1, 13], [38.6, 10, 14]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');

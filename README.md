@@ -14,14 +14,14 @@ Read this section before changing anything. These decisions were made deliberate
 ### Space
 - 40 × 20 ft, one open room. Plywood walls, 8 ft high, built from 4 × 8 ft modules. No walls between the three parts.
 - Gym floor covered with black loop carpet.
-- Entrance at the top-left (from the Mulyo section), exit at the top-right.
+- Entrance at the top-left (5 ft opening, from the Mulyo section), exit at the top-right.
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
 
 ### Mandir
-- **Chaos hallway** (about 9 × 4 ft): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
-- **Shanti room** (9 × 9 ft, sealed, with a ceiling): a backlit carved jali wall on the west wall with three arches and three framed photos, a glossy white floor, and a kirtan instrumental. **No screens, no projector.** Groups of about 8 for 90 seconds. People enter at the NE corner and **exit through the south wall, facing the Better Living (BLS) booth**.
+- **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
+- **Shanti room** (9 × 8 ft, sealed, with a ceiling; shrunk from 9 × 9 to widen the hallway): a backlit carved jali wall on the west wall with three arches and three framed photos, a glossy white floor, and a kirtan instrumental. **No screens, no projector.** Groups of about 8 for 90 seconds. People enter at the NE corner and **exit through the south wall, facing the Better Living (BLS) booth**.
 - **Booths:** BKY, BAPS Charities and Better Living Sessions are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
@@ -49,6 +49,9 @@ Read this section before changing anything. These decisions were made deliberate
 - Room coordinates are in feet: x runs 0–40 along the length, z runs 0–20 across. Item info lives in `ITEMS`; the 2D materials list in `MATERIALS`; the media list in `MEDIA` (inside `build2D`).
 - The 2D plan, the dimensions and the walk-through stops are hand-placed. If you move a piece, update its `ITEMS.at`, its collider in `addColliders`, its dimension lines in `buildDims` and `build2D`, and the `ROUTE` and `STOPS` if the walk passes it.
 - Test before you merge: open the page, check Overview, Floor plan, Walk through, Walk around and the 2D tabs, and look at the browser console for errors.
+
+## Walking space
+- The **Walking space** toggle shades clear walkway (green), people using a piece (amber) and viewers (blue), and measures clear widths at the places people pass. Aim for 4 ft or more; under 3 ft shows red.
 
 ## Working together
 - One person changes a part at a time, or works on a branch and opens a pull request.
