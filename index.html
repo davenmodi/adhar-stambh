@@ -149,6 +149,13 @@ table.mat td.q { white-space: nowrap; color: var(--fg); }
 .copy-msg:empty { display: none; }
 .mtype { display: inline-block; font-size: 11px; font-weight: 600; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
 table.media { min-width: 820px; }
+.clr { position: absolute; transform: translate(-50%, -50%); pointer-events: none; font: 700 11px var(--body); white-space: nowrap; border-radius: 999px; padding: 3px 9px; color: #fff; }
+.clr.ok { background: #2f8a55; } .clr.warn { background: #b7791f; } .clr.bad { background: #c0392b; }
+.clear-legend { position: absolute; right: 12px; bottom: 34px; display: flex; flex-wrap: wrap; gap: 6px 14px; max-width: calc(100% - 24px); background: rgba(14, 14, 17, 0.88); color: #ece7dc; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 8px 12px; font: 600 12px var(--body); }
+.clear-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.clear-legend .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.sw.g { background: #34c76e; } .sw.a { background: #f2a83c; } .sw.b { background: #6092f0; } .sw.r { background: #c0392b; }
+.viewer.is2d .clear-legend { display: none !important; }
 section.text { display: grid; gap: 16px; }
 h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; line-height: 1.15; text-wrap: balance; }
 .lede { margin: -6px 0 0; color: var(--muted); max-width: 70ch; }
@@ -207,6 +214,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button class="btn" id="tLabels" type="button" aria-pressed="true">Labels</button>
         <button class="btn" id="tLights" type="button" aria-pressed="true">Exhibit lighting</button>
         <button class="btn" id="tDims" type="button" aria-pressed="false">Dimensions</button>
+        <button class="btn" id="tClear" type="button" aria-pressed="false">Walking space</button>
       </div>
     </div>
     <div class="viewer" id="viewer">
@@ -234,6 +242,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <dl><dt>Build</dt><dd id="cBuild"></dd><dt>Size</dt><dd id="cSize"></dd></dl>
         <button class="act" id="cAct" type="button" hidden></button>
       </aside>
+      <div class="clear-legend" id="clearLegend" hidden><span><i class="sw g"></i>Clear walkway</span><span><i class="sw a"></i>People using it</span><span><i class="sw b"></i>Viewers / readers</span><span><i class="sw r"></i>Under 3 ft</span></div>
       <div id="plan2d" hidden></div>
       <div id="loading">Loading model…</div>
     </div>
@@ -1258,6 +1267,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   let showLabels = true;
   const tLabels = document.getElementById('tLabels');
   tLabels.addEventListener('click', () => { showLabels = !showLabels; tLabels.setAttribute('aria-pressed', String(showLabels)); });
+  const tClear = document.getElementById('tClear'), clearLegend = document.getElementById('clearLegend');
+  tClear.addEventListener('click', () => { showClear = !showClear; tClear.setAttribute('aria-pressed', String(showClear)); clearLegend.hidden = !showClear; });
   const tDims = document.getElementById('tDims'); let showDims = false;
   tDims.addEventListener('click', () => { showDims = !showDims; tDims.setAttribute('aria-pressed', String(showDims)); });
   const tWalls = document.getElementById('tWalls'); let seeThrough = false;
@@ -1306,6 +1317,63 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimTag(13, 8.6, 0.6, 'Header 6 × 0.9 ft');
     scene.add(dimGroup);
     DIMS.forEach(d => { const el = document.createElement('div'); el.className = d.kind; el.textContent = d.text; el.hidden = true; labelBox.appendChild(el); d.el = el; });
+  }
+
+  // ---------- walking space ----------
+  // A 3 in grid over the floor: objects, people using a piece, people viewing a piece, and the clear walkway left over.
+  const CG = { res: 0.25, nx: 160, nz: 80 };
+  const cgrid = new Uint8Array(CG.nx * CG.nz); // 0 walkway, 1 object, 2 using, 3 viewing
+  const clearGroup = new THREE.Group(); clearGroup.visible = false;
+  const CLEARS = [];
+  let showClear = false;
+  const ftIn = ft => { let i = Math.round(ft * 12); return Math.floor(i / 12) + '′-' + (i % 12) + '″'; };
+  function cgSet(fn, type, over) {
+    for (let j = 0; j < CG.nz; j++) for (let i = 0; i < CG.nx; i++) {
+      const x = (i + 0.5) * CG.res, z = (j + 0.5) * CG.res, k = j * CG.nx + i;
+      if (fn(x, z) && (over || cgrid[k] === 0 || cgrid[k] > type)) cgrid[k] = type;
+    }
+  }
+  const inRect = (x0, z0, x1, z1) => (x, z) => x >= x0 && x <= x1 && z >= z0 && z <= z1;
+  const nearSeg = (ax, az, bx, bz, r) => (x, z) => { const dx = bx - ax, dz = bz - az, L2 = dx * dx + dz * dz; let t = ((x - ax) * dx + (z - az) * dz) / L2; t = Math.max(0, Math.min(1, t)); return Math.hypot(x - ax - dx * t, z - az - dz * t) <= r; };
+  function buildClearance() {
+    // objects
+    WALLS.forEach(([a, b]) => cgSet(nearSeg(a[0], a[1], b[0], b[1], 0.3), 1, true));
+    BOXES.forEach(b => cgSet(inRect(b.cx - b.hx, b.cz - b.hz, b.cx + b.hx, b.cz + b.hz), 1, true));
+    SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; cgSet(nearSeg(x - cx, z - sz, x + cx, z + sz, 0.2), 1, true); });
+    // people using a piece (standing to talk, tap, read or open)
+    [[10, 1.5, 16, 4.5], [10, 15.5, 16, 18.5], [1.5, 15.5, 7.5, 18.5], [19.3, 16.4, 26.9, 19.3], [17.05, 1.2, 28.9, 3.7], [34.0, 3.05, 35.2, 5.5], [34.0, 14.5, 35.2, 16.95]]
+      .forEach(r => cgSet(inRect(...r), 2));
+    // people viewing a piece
+    CASES.forEach(([x, z]) => cgSet(inRect(x - 2.1, z - 2.1, x + 2.1, z + 2.1), 3));
+    [[38.9, 4.9], [38.9, 15.1]].forEach(([x, z]) => cgSet(inRect(x - 1.95, z - 1.95, x + 1.95, z + 1.95), 3));
+    [[0.2, 4.2, 8.8, 12.8], [26.0, 7.4, 30.4, 12.6], [31.2, 7.0, 33.4, 13.0], [36.8, 6.0, 39.6, 14.0]].forEach(r => cgSet(inRect(...r), 3));
+    // floor texture
+    const COL = { 0: 'rgba(52, 199, 110, 0.36)', 2: 'rgba(242, 168, 60, 0.5)', 3: 'rgba(96, 146, 240, 0.42)' };
+    const t = canvasTex(CG.nx * 4, CG.nz * 4, (ctx) => {
+      for (let j = 0; j < CG.nz; j++) for (let i = 0; i < CG.nx; i++) { const v = cgrid[j * CG.nx + i]; if (v === 1) continue; ctx.fillStyle = COL[v]; ctx.fillRect(i * 4, j * 4, 4, 4); }
+    });
+    t.tex.magFilter = THREE.NearestFilter; t.tex.minFilter = THREE.LinearFilter;
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(40, 20), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true, depthWrite: false }));
+    plane.rotation.x = -Math.PI / 2; plane.position.set(20, 0.025, 10); plane.renderOrder = 5; clearGroup.add(plane);
+    // clear widths at the places people pass
+    const free = (x, z) => { const i = Math.floor(x / CG.res), j = Math.floor(z / CG.res); return i >= 0 && j >= 0 && i < CG.nx && j < CG.nz && cgrid[j * CG.nx + i] === 0; };
+    const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, depthTest: false });
+    [['Hallway', 4.5, 2.0, 'z'], ['Behind the BLS booth', 4.5, 14.2, 'z'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 13, 10, 'z'], ['Into Shastra', 17.2, 10, 'z'], ['Spine readers to cases', 18.7, 4.6, 'z'], ['Spines, middle', 22.7, 4.4, 'z'], ['Through the scrolls', 22.7, 10.3, 'z'], ['Top fin gap', 32.6, 2.0, 'z'], ['Bottom fin gap', 32.6, 18.0, 'z'], ['Behind the portrait', 35.6, 10, 'x'], ['To the exit', 38.0, 2.0, 'z']]
+      .forEach(([name, x, z, ax]) => {
+        if (!free(x, z)) return;
+        const st = 0.05; let a = 0, b = 0;
+        const step = (s) => ax === 'z' ? free(x, z + s) : free(x + s, z);
+        while (step(-(a + st)) && a < 25) a += st;
+        while (step(b + st) && b < 25) b += st;
+        const w = a + b;
+        const p0 = ax === 'z' ? [x, z - a] : [x - a, z], p1 = ax === 'z' ? [x, z + b] : [x + b, z];
+        const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([p0[0], 0.06, p0[1], p1[0], 0.06, p1[1]], 3));
+        const ln = new THREE.Line(g, lineMat); ln.renderOrder = 11; clearGroup.add(ln);
+        const lvl = w >= 4 ? 'ok' : w >= 3 ? 'warn' : 'bad';
+        CLEARS.push({ pos: new THREE.Vector3((p0[0] + p1[0]) / 2, 0.06, (p0[1] + p1[1]) / 2), text: ftIn(w) + ' clear', lvl, name, w });
+      });
+    scene.add(clearGroup);
+    CLEARS.forEach(c => { const el = document.createElement('div'); el.className = 'clr ' + c.lvl; el.textContent = c.text; el.title = c.name; el.hidden = true; labelBox.appendChild(el); c.el = el; });
   }
 
   // ---------- 2D plan with dimensions and materials ----------
@@ -1498,10 +1566,16 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     doors.forEach(d => { d.a += ((d.open ? -1.7 : 0) - d.a) * Math.min(1, dt * 5); d.pivot.rotation.y = d.a; });
     flicker.forEach((l, i) => { const f = Math.sin(now * 0.013 + i * 3) + Math.sin(now * 0.041 + i); l.intensity = f > 1.2 ? 0.1 : 0.85 + 0.15 * Math.sin(now * 0.05); });
     if (mode === '2d') { requestAnimationFrame(tick); return; }
-    dimGroup.visible = showDims;
+    dimGroup.visible = showDims; clearGroup.visible = showClear;
     renderer.render(scene, camera);
     const w = viewer.clientWidth, h = viewer.clientHeight;
-    const vis = showLabels && !showDims && mode !== 'walk' && mode !== 'roam';
+    const vis = showLabels && !showDims && !showClear && mode !== 'walk' && mode !== 'roam';
+    CLEARS.forEach(c => {
+      if (!showClear || mode === 'walk' || mode === 'roam') { c.el.hidden = true; return; }
+      tmp.copy(c.pos).project(camera);
+      if (tmp.z > 1 || tmp.x < -1.1 || tmp.x > 1.1 || tmp.y < -1.1 || tmp.y > 1.1) { c.el.hidden = true; return; }
+      c.el.hidden = false; c.el.style.left = ((tmp.x + 1) / 2 * w) + 'px'; c.el.style.top = ((1 - tmp.y) / 2 * h) + 'px';
+    });
     DIMS.forEach(d => {
       if (!showDims) { d.el.hidden = true; return; }
       tmp.copy(d.pos).project(camera);
@@ -1528,7 +1602,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     buildFloor(); buildWalls(); buildHallway(); buildShanti();
     booth('bky', 10, 0, 1, 'BKY', 'BKY'); booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities'); booth('bls', 1.5, 20, -1, 'Better Living', 'BLS');
     buildSpines(); buildCases(); buildPages(); buildNFC();
-    buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); applyLights(); addColliders(); buildStops(); buildDims(); build2D();
+    buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
     const img = new Image();
     img.onload = () => { portraitImg = img; needsPortrait.forEach(t => t.redraw()); };
     img.src = 'portrait.jpg';
