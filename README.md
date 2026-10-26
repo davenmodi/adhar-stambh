@@ -22,7 +22,7 @@ Read this section before changing anything. These decisions were made deliberate
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
 - **Shanti room** (9 × 8 ft, sealed, with a ceiling; shrunk from 9 × 9 to widen the hallway): a backlit carved jali wall on the west wall with three arches and three framed photos, a glossy white floor, and a kirtan instrumental. **No screens, no projector.** Groups of about 8 for 90 seconds. People enter at the NE corner and **exit through the south wall, facing the Better Living (BLS) booth**.
-- **Booths:** BKY is on the north wall and wraps onto the blank outside wall of the Shanti room (two kits, 12 ft of wall in an L). BAPS Charities and Better Living Sessions are on the south wall, with BLS right outside the Shanti exit. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
+- **Booths:** BKY is an L in the corner by the hallway: one 6 ft wall on the north wall joined to a second 6 ft wall on the blank end of the hallway and Shanti room. Better Living Sessions is on the side wall right outside the Shanti exit (not on the Charities wall). BAPS Charities is on the south wall. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
 - **Floating pages:** 5 long fabric scrolls, 1.5 × 9.5 ft, hanging from a truss, with a clear aisle down the middle. Keep it to a few scrolls; more felt crowded.
@@ -33,9 +33,9 @@ Read this section before changing anything. These decisions were made deliberate
 
 ### Sant
 - **Split portrait:** 5 panels form one portrait of Mahant Swami Maharaj from the front; the backs carry 5 topics. Two angled fins hide the rest of Sant until you walk past.
-- **2 birthday kiosks** behind the portrait: enter a birthday and see where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day.
+- **Birthday wall** behind the portrait: a TV on the south wall with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
 - **2 prasangs** (the bicycle and the book), one on each side of the reflection wall at the end.
-- **Reflection wall** with take-home cards.
+- **Reflection wall** with a final teaching. No take-home cards. An interactive piece for this spot is still to be decided.
 
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered on the portrait base. Each name is in English and Gujarati.
