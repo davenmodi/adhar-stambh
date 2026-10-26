@@ -280,7 +280,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     <h2>Supporting pieces</h2>
     <div class="grid3">
       <article class="piece m-c"><span class="tag">Mandir</span><h3>Chaos hallway</h3><p>About 9 ft of cramped hallway, black from floor to ceiling, with one stream of notifications and photos running along the walls at eye level under two cold flicker bulbs. It doubles as the Shanti queue.</p><button type="button" data-item="hallway">Show in model</button></article>
-      <article class="piece m-c"><span class="tag">Mandir</span><h3>Three booth kits</h3><p>BKY wraps the corner by the Shanti exit with twice the display wall. BAPS Charities and Better Living Sessions face each other across the room. Volunteers stand and talk with visitors; each lead decides what happens in their booth.</p><button type="button" data-item="bky">Show in model</button></article>
+      <article class="piece m-c"><span class="tag">Mandir</span><h3>Three booth kits</h3><p>BKY's booth on the north wall wraps onto the blank outside wall of the Shanti room, for twice the display wall. BAPS Charities and Better Living Sessions sit on the south wall, with BLS right outside the Shanti exit. Volunteers stand and talk with visitors; each lead decides what happens in their booth.</p><button type="button" data-item="bky">Show in model</button></article>
       <article class="piece s-c"><span class="tag">Shastra</span><h3>Scripture spine wall</h3><p>Eight giant spines like a library shelf. Four open to show the teaching, a story, and what it means in everyday life.</p><button type="button" data-item="spines">Show in model</button></article>
       <article class="piece s-c"><span class="tag">Shastra</span><h3>Four glass cases</h3><p>Shikshapatri, Vachanamrut, Swamini Vato and Satsang Diksha, each in its own case and spotlight, spread to the four corners of the zone.</p><button type="button" data-item="case0">Show in model</button></article>
       <article class="piece s-c"><span class="tag">Shastra</span><h3>Two NFC stations</h3><p>Side by side on one wall as an “Ask the Shastras” spot. Tap a question card on a tablet and the answer comes up on the TV above, so the whole group can read it.</p><button type="button" data-item="nfc0">Show in model</button></article>
@@ -405,10 +405,10 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   const ITEMS = {
     entrance: { zone: 'Route', name: 'Entrance from Mulyo', what: 'Visitors arrive from the Mulyo section and step straight into the chaos hallway.', build: 'A 4 ft opening in the outer wall.', size: '5 ft opening', at: [2, 2.5] },
     hallway: { zone: 'Mandir', name: 'Chaos hallway', what: 'A short, cramped hallway painted black from floor to ceiling. One stream of notifications and photos runs along the walls at eye level: deadlines, missed calls, bills, traffic, 99+ unread. Two cold flicker bulbs keep it restless. It doubles as the queue for the Shanti room.', build: 'Walls painted matte black. One continuous printed vinyl strip, about 19 ft long and 2 ft tall, wrapping all three walls at 4–6 ft. Two flicker bulbs. No sound, so nothing leaks into the Shanti room.', size: 'About 9 ft long, 5 ft wide', at: [4.5, 2] },
-    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the opposite side, facing the BKY corner.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 8 ft outside, about 8.5 × 7.5 ft inside', at: [4.5, 9] },
-    bky: { zone: 'Mandir', name: 'BKY corner', what: 'An L-shaped BKY booth that wraps the corner beside the Shanti room exit, using the blank side wall for twice the display space. Volunteers talk with visitors here; what happens is up to the BKY lead.', build: 'Two booth kits (12 ft of wall in an L): 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '12 ft of wall in an L, about 3 ft standing zone', at: [2.5, 17.2] },
+    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the opposite side, facing the Better Living booth.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 8 ft outside, about 8.5 × 7.5 ft inside', at: [4.5, 9] },
+    bky: { zone: 'Mandir', name: 'BKY booth', what: 'The BKY booth on the north wall, extended around the corner onto the blank outside wall of the Shanti room for twice the display space. Volunteers talk with visitors here; what happens is up to the BKY lead.', build: 'Two booth kits (12 ft of wall in an L): 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '12 ft of wall in an L, about 3 ft standing zone', at: [12, 3] },
     charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 18.8] },
-    bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions on the north wall, across from BAPS Charities. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 1.2] },
+    bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions, straight ahead as people step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [4.5, 18.8] },
     spines: { zone: 'Shastra', name: 'Scripture spine wall', what: 'Eight giant book spines line the wall like a library shelf. Four of them open: Vachanamrut, Swamini Vato, Shikshapatri and Satsang Diksha. Inside each: the teaching, a story, and what it means in everyday life.', build: 'Plywood boxes about 1.4 ft wide and 7 ft tall, painted as leather spines with gold bands. Full-length piano hinge, door stop and magnetic catch on the four that open.', size: 'About 12 ft of wall, 1 ft deep', at: [23, 1] },
     case0: { zone: 'Shastra', name: 'Shikshapatri case', what: 'One of the four core scriptures in a glass case under its own spotlight. The cases sit at the four corners of the zone so people move between them.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.7, 6.4] },
     case1: { zone: 'Shastra', name: 'Vachanamrut case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.7, 6.4] },
@@ -475,7 +475,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     wallSeg([0, 5], [6, 5], { plus: M.ivory });       // hallway / Shanti north wall, door at x 6–9
     wallSeg([9, 0], [9, 5]);                          // end of the hallway
     wallSeg([9, 5], [9, 13], { plus: M.ivory });      // Shanti east wall (closed)
-    wallSeg([0, 13], [6, 13], { minus: M.ivory });    // Shanti south wall, exit at x 6–9 facing the BKY corner
+    wallSeg([0, 13], [6, 13], { minus: M.ivory });    // Shanti south wall, exit at x 6–9 facing the Better Living booth
     wallSeg([31, 6.7], [32.4, 4.1]);                  // fins
     wallSeg([31, 13.3], [32.4, 15.9]);
     const finHit = new THREE.Group(); scene.add(finHit);
@@ -1099,7 +1099,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }));
 
   // Walk-through stops, timeline and pause
-  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [1.5, 18]], ['Shastra', 12, [22.7, 10.3]], ['Portrait', 13, [30.8, 10]], ['Birthday', 18, [34.6, 2.7]], ['Panel backs', 19, [30.8, 10]], ['Reflection', 20, [39.8, 10]], ['Exit', 22, [43, 2]]];
+  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [4.5, 20]], ['Shastra', 12, [22.7, 10.3]], ['Portrait', 13, [30.8, 10]], ['Birthday', 18, [34.6, 2.7]], ['Panel backs', 19, [30.8, 10]], ['Reflection', 20, [39.8, 10]], ['Exit', 22, [43, 2]]];
   let stopU = [];
   function buildStops() {
     const n = ROUTE.length - 1, L = walkCurve.getLengths(400);
@@ -1239,7 +1239,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     BOXES.push({ cx: 30.8, cz: 10, hx: 0.35, hz: 3.3 });
     [[20.3, 4.6], [25.1, 4.6], [20.3, 16], [25.1, 16]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.15, hz: 0.15 }));
     BOXES.push({ cx: 23, cz: 0.7, hx: 6, hz: 0.55 });
-    BOXES.push({ cx: 13, cz: 0.85, hx: 3, hz: 0.65 }, { cx: 13, cz: 19.15, hx: 3, hz: 0.65 }, { cx: 3.4, cz: 19.15, hx: 3, hz: 0.65 }, { cx: 0.85, cz: 16.3, hx: 0.65, hz: 3 });
+    BOXES.push({ cx: 13, cz: 0.85, hx: 3, hz: 0.65 }, { cx: 13, cz: 19.15, hx: 3, hz: 0.65 }, { cx: 4.5, cz: 19.15, hx: 3, hz: 0.65 }, { cx: 9.85, cz: 8.4, hx: 0.65, hz: 3 });
     [21.1, 25.1].forEach(x => BOXES.push({ cx: x, cz: 19.4, hx: 0.7, hz: 0.4 }));
     BOXES.push({ cx: 39.4, cz: 10, hx: 0.4, hz: 1.3 });
   }
@@ -1345,7 +1345,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     BOXES.forEach(b => cgSet(inRect(b.cx - b.hx, b.cz - b.hz, b.cx + b.hx, b.cz + b.hz), 1, true));
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; cgSet(nearSeg(x - cx, z - sz, x + cx, z + sz, 0.2), 1, true); });
     // people using a piece (standing to talk, tap, read or open)
-    [[10, 1.5, 16, 4.5], [10, 15.5, 16, 18.5], [1.5, 15.5, 6.4, 18.5], [1.5, 13.6, 4.5, 18.5], [19.3, 16.4, 26.9, 19.3], [17.05, 1.2, 28.9, 3.7], [34.0, 3.05, 35.2, 5.5], [34.0, 14.5, 35.2, 16.95]]
+    [[10, 1.5, 16, 4.5], [10, 15.5, 16, 18.5], [1.5, 15.5, 7.5, 18.5], [10.5, 5.4, 13.5, 11.4], [19.3, 16.4, 26.9, 19.3], [17.05, 1.2, 28.9, 3.7], [34.0, 3.05, 35.2, 5.5], [34.0, 14.5, 35.2, 16.95]]
       .forEach(r => cgSet(inRect(...r), 2));
     // people viewing a piece
     CASES.forEach(([x, z]) => cgSet(inRect(x - 2.1, z - 2.1, x + 2.1, z + 2.1), 3));
@@ -1362,7 +1362,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // clear widths at the places people pass
     const free = (x, z) => { const i = Math.floor(x / CG.res), j = Math.floor(z / CG.res); return i >= 0 && j >= 0 && i < CG.nx && j < CG.nz && cgrid[j * CG.nx + i] === 0; };
     const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, depthTest: false });
-    [['Hallway', 4.5, 2.0, 'z'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 13, 10, 'z'], ['Into Shastra', 17.2, 10, 'z'], ['Spine readers to cases', 18.7, 4.6, 'z'], ['Spines, middle', 22.7, 4.4, 'z'], ['Through the scrolls', 22.7, 10.3, 'z'], ['Top fin gap', 32.6, 2.0, 'z'], ['Bottom fin gap', 32.6, 18.0, 'z'], ['Behind the portrait', 35.6, 10, 'x'], ['To the exit', 38.0, 2.0, 'z']]
+    [['Hallway', 4.5, 2.0, 'z'], ['Behind the BLS booth', 4.5, 14.2, 'z'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 10, 'z'], ['Into Shastra', 17.2, 10, 'z'], ['Spine readers to cases', 18.7, 4.6, 'z'], ['Spines, middle', 22.7, 4.4, 'z'], ['Through the scrolls', 22.7, 10.3, 'z'], ['Top fin gap', 32.6, 2.0, 'z'], ['Bottom fin gap', 32.6, 18.0, 'z'], ['Behind the portrait', 35.6, 10, 'x'], ['To the exit', 38.0, 2.0, 'z']]
       .forEach(([name, x, z, ax]) => {
         if (!free(x, z)) return;
         const st = 0.05; let a = 0, b = 0;
@@ -1386,7 +1386,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [2, 'Chaos hallway', '9 × 5 ft', 'Matte black paint on all three walls, printed vinyl strip 2 ft tall at 4–6 ft, 2 cool LED bare-bulb pendants', '≈19 ft of strip'],
     [3, 'Shanti room', '9 × 8 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
     [4, 'Mandir lintel', '3 × 1 ft', 'Laser-cut MDF jali with carved letters, painted ivory', '1'],
-    [5, 'Booth kits', '6 ft wall, 15 in ledge each', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet; BKY uses two kits as an L in the corner', '4 (BKY 2, BLS 1, Charities 1)'],
+    [5, 'Booth kits', '6 ft wall, 15 in ledge each', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet; BKY uses two kits as an L, onto the Shanti room wall', '4 (BKY 2, BLS 1, Charities 1)'],
     [6, 'Spine wall', '8 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 4 that open: 7 ft piano hinge, magnetic catch, door stop, printed insides', '8 spines'],
     [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '4'],
     [8, 'Floating pages', '7 × 11 ft area, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, black truss with 4 posts (or ceiling rigging), clear line', '5 scrolls'],
@@ -1415,7 +1415,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     for (let x = 0; x <= 40; x++) line(x, 0, x, 20, 'p-grid'); for (let z = 0; z <= 20; z++) line(0, z, 40, z, 'p-grid');
     rect(0, 5, 9, 13, 'p-ivory');
     rect(6, 4.8, 9, 5.2, 'p-piece');
-    rect(10, 0.2, 16, 1.5, 'p-piece'); rect(10, 18.5, 16, 19.8, 'p-piece'); rect(0.4, 18.5, 6.4, 19.8, 'p-piece'); rect(0.2, 13.3, 1.5, 18.5, 'p-piece');
+    rect(10, 0.2, 16, 1.5, 'p-piece'); rect(10, 18.5, 16, 19.8, 'p-piece'); rect(1.5, 18.5, 7.5, 19.8, 'p-piece'); rect(9.2, 5.4, 10.5, 11.4, 'p-piece');
     SPINES.forEach((sp, i) => rect(17.05 + i * 1.49, 0.18, 17.05 + i * 1.49 + 1.38, 1.18, sp[2] ? 'p-piece p-open' : 'p-piece'));
     CASES.forEach(([x, z]) => rect(x - 0.9, z - 0.9, x + 0.9, z + 0.9, 'p-piece'));
     rect(19.9, 4.6, 25.5, 16, 'p-dash');
@@ -1441,7 +1441,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(29.6, 7, 29.6, 13, '6 ft', -0.9);
     dim(33.2, 0.15, 33.2, 4.1, '4 ft', -0.9); dim(33.2, 15.9, 33.2, 19.85, '4 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [13, 1.0, 5], [13, 19.1, 5], [3.4, 19.1, 5], [0.85, 15.5, 5], [23, 0.7, 6], [18.7, 6.4, 7], [26.7, 6.4, 7], [18.7, 14, 7], [26.7, 14, 7], [22.7, 15.2, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [31.9, 5.6, 11], [31.9, 14.4, 11], [34.6, 2.7, 12], [34.6, 17.3, 12], [38.9, 4.9, 13], [38.9, 15.1, 13], [38.6, 10, 14]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [13, 1.0, 5], [13, 19.1, 5], [4.5, 19.1, 5], [9.85, 8.4, 5], [23, 0.7, 6], [18.7, 6.4, 7], [26.7, 6.4, 7], [18.7, 14, 7], [26.7, 14, 7], [22.7, 15.2, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [31.9, 5.6, 11], [31.9, 14.4, 11], [34.6, 2.7, 12], [34.6, 17.3, 12], [38.9, 4.9, 13], [38.9, 15.1, 13], [38.6, 10, 14]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');
@@ -1451,7 +1451,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [3, 'Shanti room music', 'Audio', '1 loop', '10–15 min, seamless loop, instrumental only', 'Instrumental of a kirtan people know; confirm usage rights'],
       [4, 'Mandir lettering', 'Fabrication', '1', 'Vector file for a 3 × 1 ft laser-cut jali lintel', '“MANDIR · મંદિર” set in the jali pattern'],
       [5, 'Booth headers', 'Print', '3', '6 × 0.9 ft foam board', 'Names: BKY, BAPS Charities, Better Living Sessions; approved logos if used'],
-      [5, 'Booth displays', 'From others', '3 sets', 'Two display spaces per 6 ft wall (BKY has four across its corner), on French cleats', 'Made by each activity lead; set a review date'],
+      [5, 'Booth displays', 'From others', '3 sets', 'Two display spaces per 6 ft wall (BKY has four across its L), on French cleats', 'Made by each activity lead; set a review date'],
       [6, 'Spine wraps', 'Print', '8', 'About 1.4 × 7.2 ft front plus 1 ft sides each', 'Title of each scripture, leather texture, gold bands'],
       [6, 'Spine insides', 'Print', '4', 'About 1.2 × 6.9 ft each', 'For each of the 4 that open: the teaching, a story, and what it means in everyday life. Writing needed'],
       [7, 'Case name plates', 'Print', '4', 'About 17 × 4 in', 'Shikshapatri, Vachanamrut, Swamini Vato, Satsang Diksha'],
@@ -1604,8 +1604,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   fontsReady.then(() => {
     try {
     buildFloor(); buildWalls(); buildHallway(); buildShanti();
-    booth('bls', 10, 0, 1, 'Better Living', 'BLS'); booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities');
-    boothAt('bky', 3.4, 20, Math.PI, 'BKY', 'BKY'); boothAt('bky', 0, 16.3, Math.PI / 2, 'BKY', 'BKY');
+    booth('bky', 10, 0, 1, 'BKY', 'BKY'); boothAt('bky', 9.0, 8.4, Math.PI / 2, 'BKY', 'BKY');
+    booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities'); booth('bls', 1.5, 20, -1, 'Better Living', 'BLS');
     buildSpines(); buildCases(); buildPages(); buildNFC();
     buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
     const img = new Image();

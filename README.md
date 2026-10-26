@@ -21,8 +21,8 @@ Read this section before changing anything. These decisions were made deliberate
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
-- **Shanti room** (9 × 8 ft, sealed, with a ceiling; shrunk from 9 × 9 to widen the hallway): a backlit carved jali wall on the west wall with three arches and three framed photos, a glossy white floor, and a kirtan instrumental. **No screens, no projector.** Groups of about 8 for 90 seconds. People enter at the NE corner and **exit through the south wall, facing the BKY corner**.
-- **Booths:** BKY is an L-shaped booth (two kits, 12 ft of wall) wrapping the corner beside the Shanti exit. Better Living Sessions is on the north wall, facing BAPS Charities on the south wall. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
+- **Shanti room** (9 × 8 ft, sealed, with a ceiling; shrunk from 9 × 9 to widen the hallway): a backlit carved jali wall on the west wall with three arches and three framed photos, a glossy white floor, and a kirtan instrumental. **No screens, no projector.** Groups of about 8 for 90 seconds. People enter at the NE corner and **exit through the south wall, facing the Better Living (BLS) booth**.
+- **Booths:** BKY is on the north wall and wraps onto the blank outside wall of the Shanti room (two kits, 12 ft of wall in an L). BAPS Charities and Better Living Sessions are on the south wall, with BLS right outside the Shanti exit. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
 - **Floating pages:** 5 long fabric scrolls, 1.5 × 9.5 ft, hanging from a truss, with a clear aisle down the middle. Keep it to a few scrolls; more felt crowded.
