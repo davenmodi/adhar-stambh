@@ -1,0 +1,1547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html,body{margin:0}body{-webkit-text-size-adjust:100%}img{max-width:100%}</style>
+<title>Aadhar Stambh V2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+Gujarati:wght@500&display=swap">
+<style>
+/* Layout: plan document. Header, a dark exhibit viewer with its controls, then the build write-up in card grids. */
+:root {
+  --bg: #eceef1;
+  --surface: #ffffff;
+  --fg: #15171c;
+  --muted: #586070;
+  --line: #d3d8df;
+  --accent: #9a6a22;
+  --mandir: #6e4a8e;
+  --shastra: #2c7465;
+  --sant: #a8502a;
+  --stage: #0b0b0d;
+  --display: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --body: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115; --surface: #171a20; --fg: #ecebe6; --muted: #9ba2ae; --line: #2b3039;
+    --accent: #d8a650; --mandir: #b493d4; --shastra: #6cc2ad; --sant: #e48b62; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1115; --surface: #171a20; --fg: #ecebe6; --muted: #9ba2ae; --line: #2b3039;
+  --accent: #d8a650; --mandir: #b493d4; --shastra: #6cc2ad; --sant: #e48b62; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+header { display: grid; gap: 10px; max-width: 760px; }
+.eyebrow { margin: 0; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+h1 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(34px, 6vw, 56px); line-height: 1.05; text-wrap: balance; }
+h1 b { font-weight: 600; }
+h1 span { font-family: var(--body); font-size: 0.32em; font-weight: 600; letter-spacing: 0.14em; vertical-align: middle; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 3px 8px; margin-left: 6px; }
+.intro { margin: 0; color: var(--muted); max-width: 66ch; }
+.route { margin: 0; font-size: 13px; font-weight: 500; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.route i { font-style: normal; color: var(--muted); }
+.route b { font-weight: 600; padding: 2px 8px; border-radius: 4px; color: #fff; }
+.route .m { background: var(--mandir); } .route .s { background: var(--shastra); } .route .t { background: var(--sant); }
+:root[data-theme="dark"] .route b { color: #101114; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .route b { color: #101114; } }
+
+.viewer-block { display: grid; gap: 10px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls .group { display: flex; flex-wrap: wrap; gap: 6px; }
+.controls .sep { width: 1px; height: 24px; background: var(--line); margin: 0 4px; }
+.btn { font: 600 12.5px var(--body); letter-spacing: 0.02em; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+.btn:hover { border-color: var(--muted); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.play { color: var(--accent); }
+.btn.play[aria-pressed="true"] { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+.viewer { position: relative; height: clamp(440px, 70vh, 760px); background: var(--stage); border-radius: 10px; overflow: hidden; touch-action: none; }
+.viewer canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.viewer canvas:active { cursor: grabbing; }
+#loading { position: absolute; inset: 0; display: grid; place-items: center; color: #b9b2a3; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; background: var(--stage); }
+.scale { position: absolute; left: 12px; bottom: 10px; font-size: 11px; color: #a9a397; letter-spacing: 0.04em; pointer-events: none; }
+.hint { position: absolute; right: 12px; bottom: 10px; font-size: 11px; color: #8d877c; pointer-events: none; text-align: right; }
+#labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.lbl { position: absolute; transform: translate(-50%, -100%); pointer-events: auto; font: 600 11px var(--body); letter-spacing: 0.03em; color: #f2ede3; background: rgba(14, 14, 17, 0.78); border: 1px solid rgba(255, 255, 255, 0.14); border-left: 3px solid var(--c, #d8a650); border-radius: 4px; padding: 3px 7px; white-space: nowrap; cursor: pointer; }
+.lbl:hover, .lbl:focus-visible { background: rgba(14, 14, 17, 0.95); outline: none; border-color: rgba(255, 255, 255, 0.4); }
+#card { position: absolute; top: 12px; right: 12px; width: min(340px, calc(100% - 24px)); max-height: calc(100% - 24px); overflow: auto; background: rgba(18, 18, 21, 0.94); color: #ece7dc; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 16px 16px 14px; display: grid; gap: 8px; }
+#card .tag { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--c, #d8a650); }
+#card h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 24px; line-height: 1.15; }
+#card p { margin: 0; font-size: 13px; line-height: 1.55; color: #cfc8ba; }
+#card dl { margin: 4px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 12.5px; }
+#card dt { color: #8f897d; font-weight: 600; letter-spacing: 0.04em; }
+#card dd { margin: 0; color: #e2dccf; }
+#card .close { position: absolute; top: 8px; right: 8px; background: none; border: 0; color: #a9a397; font-size: 20px; line-height: 1; cursor: pointer; padding: 4px 8px; border-radius: 4px; }
+#card .close:focus-visible { outline: 2px solid #d8a650; }
+#card .act { justify-self: start; margin-top: 4px; font: 600 12px var(--body); color: #141414; background: #d8a650; border: 0; border-radius: 5px; padding: 7px 12px; cursor: pointer; }
+@media (max-width: 640px) {
+  #card { top: auto; bottom: 10px; left: 10px; right: 10px; width: auto; max-height: 55%; }
+  .hint { display: none; }
+}
+
+.glabel { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; align-self: center; margin-right: 2px; }
+.btn.m-z { border-left: 3px solid var(--mandir); } .btn.s-z { border-left: 3px solid var(--shastra); } .btn.t-z { border-left: 3px solid var(--sant); }
+.ib { font: 600 16px var(--body); width: 36px; height: 36px; display: grid; place-items: center; color: #f2ede3; background: rgba(14, 14, 17, 0.84); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 6px; cursor: pointer; padding: 0; touch-action: none; user-select: none; -webkit-user-select: none; }
+.ib:hover { border-color: rgba(255, 255, 255, 0.42); }
+.ib:focus-visible, .stops button:focus-visible, #c:focus-visible { outline: 2px solid #d8a650; outline-offset: -2px; }
+.ib.wide { width: auto; min-width: 72px; padding: 0 12px; font-size: 12.5px; }
+.zoomctl { position: absolute; left: 12px; top: 12px; display: grid; gap: 6px; }
+.pad { position: absolute; right: 14px; bottom: 34px; display: grid; grid-template-columns: repeat(3, 46px); grid-template-rows: repeat(2, 46px); gap: 6px; }
+.pad .ib { width: 46px; height: 46px; }
+.pad [data-k="KeyW"] { grid-column: 2; grid-row: 1; } .pad [data-k="ArrowLeft"] { grid-column: 1; grid-row: 2; } .pad [data-k="KeyS"] { grid-column: 2; grid-row: 2; } .pad [data-k="ArrowRight"] { grid-column: 3; grid-row: 2; }
+.tour { position: absolute; left: 50%; transform: translateX(-50%); bottom: 12px; width: min(700px, calc(100% - 24px)); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 12px; align-items: center; background: rgba(14, 14, 17, 0.88); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 10px 12px; }
+.tour input { width: 100%; accent-color: #d8a650; }
+.stops { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+.stops button { font: 600 11px var(--body); color: #e8e2d6; background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 999px; padding: 4px 10px; cursor: pointer; }
+.stops button[aria-current="true"] { background: #d8a650; color: #141414; border-color: #d8a650; }
+#c { outline: none; }
+.dim, .dimtag { position: absolute; transform: translate(-50%, -50%); pointer-events: none; font: 700 10.5px var(--body); letter-spacing: 0.02em; white-space: nowrap; border-radius: 3px; padding: 2px 6px; }
+.dim { color: #1a1408; background: #e8b25c; }
+.dimtag { color: #f6e6c6; background: rgba(14, 14, 17, 0.88); border: 1px solid #e8b25c; transform: translate(-50%, -100%); }
+.viewer.is2d { height: auto; background: var(--surface); border: 1px solid var(--line); touch-action: auto; }
+.viewer.is2d canvas, .viewer.is2d #labels, .viewer.is2d .scale, .viewer.is2d .hint, .viewer.is2d .zoomctl, .viewer.is2d #card, .viewer.is2d .pad, .viewer.is2d .tour { display: none !important; }
+#plan2d { padding: 20px; display: grid; gap: 14px; color: var(--fg); }
+.plan-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.plan-head h3 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 24px; }
+.plan-head p { margin: 0; font-size: 12.5px; color: var(--muted); }
+.plan-scroll, .mat-scroll { overflow-x: auto; }
+.plan-scroll svg { display: block; width: 100%; min-width: 760px; height: auto; }
+.p-grid { stroke: var(--line); stroke-width: 0.6; }
+.p-zm { fill: var(--mandir); fill-opacity: 0.07; } .p-zs { fill: var(--shastra); fill-opacity: 0.07; } .p-zt { fill: var(--sant); fill-opacity: 0.07; }
+.p-wall { stroke: var(--fg); stroke-width: 7; stroke-linecap: square; }
+.p-ivory { fill: #e9d9b2; fill-opacity: 0.45; stroke: var(--muted); stroke-width: 1; }
+.p-piece { fill: var(--line); stroke: var(--muted); stroke-width: 1.2; }
+.p-open { fill: var(--accent); fill-opacity: 0.35; }
+.p-dash { fill: none; stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 4; }
+.p-scroll { stroke: var(--fg); stroke-width: 3.5; stroke-linecap: round; }
+.p-dim { stroke: var(--accent); stroke-width: 1.1; }
+.p-dimt { fill: var(--fg); font: 600 11px var(--body); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.p-note { fill: var(--muted); font: 600 11px var(--body); letter-spacing: 0.08em; }
+.p-badge circle { fill: var(--accent); }
+.p-badge text { fill: var(--surface); font: 700 10px var(--body); }
+table.mat { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; }
+table.mat th { text-align: left; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+table.mat td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--muted); }
+table.mat td b { color: var(--fg); font-weight: 600; }
+table.mat td.n span { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--surface); font-size: 10px; font-weight: 700; }
+table.mat td.q { white-space: nowrap; color: var(--fg); }
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 600 13px var(--body); color: var(--muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 12px 10px; margin-bottom: -1px; cursor: pointer; }
+.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); }
+.tabs button:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tabs .cnt, .chip span { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 3px; }
+[data-panel] { display: grid; gap: 14px; min-width: 0; }
+.media-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 12px var(--body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip[aria-pressed="true"] span { color: var(--bg); opacity: 0.75; }
+.chip.copy { margin-left: auto; }
+.copy-msg { font-size: 12px; color: var(--muted); flex-basis: 100%; text-align: right; }
+.copy-msg:empty { display: none; }
+.mtype { display: inline-block; font-size: 11px; font-weight: 600; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
+table.media { min-width: 820px; }
+section.text { display: grid; gap: 16px; }
+h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; line-height: 1.15; text-wrap: balance; }
+.lede { margin: -6px 0 0; color: var(--muted); max-width: 70ch; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 900px) { .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .grid3 { grid-template-columns: minmax(0, 1fr); } }
+.piece { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.piece.statement { border-top: 4px solid var(--c); border-radius: 0 0 8px 8px; }
+.piece .tag { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--c); }
+.piece h3 { margin: 0; font-size: 17px; font-weight: 600; }
+.piece.statement h3 { font-family: var(--display); font-weight: 500; font-size: 24px; }
+.piece p { margin: 0; color: var(--muted); font-size: 14px; }
+.piece .build { font-size: 13px; color: var(--fg); border-top: 1px dashed var(--line); padding-top: 8px; }
+.piece .build b { font-weight: 600; color: var(--muted); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 6px; }
+.piece button { justify-self: start; font: 600 12px var(--body); color: var(--c); background: none; border: 1px solid var(--line); border-radius: 5px; padding: 6px 10px; cursor: pointer; }
+.piece button:hover { border-color: var(--c); }
+.piece button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+.notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 28px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 700px) { .notes { grid-template-columns: minmax(0, 1fr); } }
+.notes li { padding: 12px 0; border-top: 1px solid var(--line); min-width: 0; font-size: 14px; color: var(--muted); }
+.notes li b { display: block; color: var(--fg); font-weight: 600; margin-bottom: 2px; }
+.changes { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; max-width: 80ch; font-size: 14px; }
+.m-c { --c: var(--mandir); } .s-c { --c: var(--shastra); } .t-c { --c: var(--sant); } .r-c { --c: var(--accent); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">Light Beyond Lamps · Section 6</p>
+    <h1><b>Aadhar Stambh</b><span>V2</span></h1>
+    <p class="intro">A 40 × 20 ft open room in three movements: the Mandir gives peace and belonging, the Shastras give wisdom, and the Sant shows what living it looks like. One statement piece leads each part, with supporting pieces around it. Drag to orbit, scroll or pinch to zoom, right-drag or Shift-drag to pan, double-click a spot to zoom in, and click any piece. Walk around puts you at eye level, moving with WASD, the arrow keys or the on-screen pad.</p>
+    <p class="route"><i>Mulyo</i><i>→</i><b class="m">Mandir</b><i>→</i><b class="s">Shastra</b><i>→</i><b class="t">Sant</b><i>→</i><i>Exit</i></p>
+  </header>
+
+  <section class="viewer-block" aria-label="3D model">
+    <div class="controls">
+      <div class="group" role="group" aria-label="Camera">
+        <button class="btn" id="vOverview" type="button" aria-pressed="true">Overview</button>
+        <button class="btn" id="vPlan" type="button" aria-pressed="false">Floor plan</button>
+        <button class="btn play" id="vWalk" type="button" aria-pressed="false">▶ Walk through</button>
+        <button class="btn" id="vRoam" type="button" aria-pressed="false">Walk around</button>
+        <button class="btn" id="v2d" type="button" aria-pressed="false">2D plan, materials + media</button>
+      </div>
+      <span class="sep" aria-hidden="true"></span>
+      <div class="group" role="group" aria-label="Go to">
+        <span class="glabel">Go to</span>
+        <button class="btn m-z" type="button" data-zone="mandir">Mandir</button>
+        <button class="btn s-z" type="button" data-zone="shastra">Shastra</button>
+        <button class="btn t-z" type="button" data-zone="sant">Sant</button>
+      </div>
+      <span class="sep" aria-hidden="true"></span>
+      <div class="group" role="group" aria-label="Display">
+        <button class="btn" id="tWalls" type="button" aria-pressed="false">See-through walls</button>
+        <button class="btn" id="tLabels" type="button" aria-pressed="true">Labels</button>
+        <button class="btn" id="tLights" type="button" aria-pressed="true">Exhibit lighting</button>
+        <button class="btn" id="tDims" type="button" aria-pressed="false">Dimensions</button>
+      </div>
+    </div>
+    <div class="viewer" id="viewer">
+      <canvas id="c" tabindex="0" aria-label="3D model of the Aadhar Stambh section"></canvas>
+      <div id="labels"></div>
+      <div class="scale" id="scaleNote">1 grid = 1 ft · walls 8 ft</div>
+      <div class="hint" id="hint">Double-click a spot to zoom in · WASD to move · Q/E to turn</div>
+      <div class="zoomctl" id="zoomCtl"><button class="ib" id="zIn" type="button" aria-label="Zoom in">+</button><button class="ib" id="zOut" type="button" aria-label="Zoom out">−</button></div>
+      <div class="pad" id="pad" hidden>
+        <button class="ib" type="button" data-k="KeyW" aria-label="Walk forward">▲</button>
+        <button class="ib" type="button" data-k="ArrowLeft" aria-label="Turn left">◀</button>
+        <button class="ib" type="button" data-k="KeyS" aria-label="Walk back">▼</button>
+        <button class="ib" type="button" data-k="ArrowRight" aria-label="Turn right">▶</button>
+      </div>
+      <div class="tour" id="tour" hidden>
+        <button class="ib wide" id="tourPlay" type="button">Pause</button>
+        <input type="range" id="tourBar" min="0" max="1000" value="0" aria-label="Walk-through position">
+        <div class="stops" id="tourStops"></div>
+      </div>
+      <aside id="card" hidden aria-live="polite">
+        <button class="close" id="cardClose" type="button" aria-label="Close">×</button>
+        <span class="tag" id="cTag"></span>
+        <h3 id="cName"></h3>
+        <p id="cWhat"></p>
+        <dl><dt>Build</dt><dd id="cBuild"></dd><dt>Size</dt><dd id="cSize"></dd></dl>
+        <button class="act" id="cAct" type="button" hidden></button>
+      </aside>
+      <div id="plan2d" hidden></div>
+      <div id="loading">Loading model…</div>
+    </div>
+  </section>
+
+  <section class="text">
+    <h2>Three statement pieces</h2>
+    <p class="lede">Each pillar has one thing people will remember. Everything else in that part supports it.</p>
+    <div class="grid3">
+      <article class="piece statement m-c">
+        <span class="tag">Mandir · peace</span>
+        <h3>The Shanti room</h3>
+        <p>A short chaos hallway drops visitors into a sealed, glowing room: a backlit carved jali wall with three arches, three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds.</p>
+        <p class="build"><b>Build</b>Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the wall with warm LED strip behind. Foam arches and pillars. Blankets behind ivory fabric for sound.</p>
+        <button type="button" data-item="shanti">Show in model</button>
+      </article>
+      <article class="piece statement s-c">
+        <span class="tag">Shastra · wisdom</span>
+        <h3>Floating pages</h3>
+        <p>Five long scrolls of scripture hang from above at different angles, written top to bottom with verses in Gujarati and English. They nearly reach the floor, so visitors walk among them, between the four glass cases.</p>
+        <p class="build"><b>Build</b>Scrolls about 1.5 × 9.5 ft on translucent voile or backlit fabric, dowels top and bottom, hung from a black truss about 12 ft up. Four warm spots from the side.</p>
+        <button type="button" data-item="pages">Show in model</button>
+      </article>
+      <article class="piece statement t-c">
+        <span class="tag">Sant · living it</span>
+        <h3>The split portrait</h3>
+        <p>Five tall panels form one portrait of Mahant Swami Maharaj when seen from Shastra. Walk around the ends and each back carries one lesson, from “What is a Guru?” to “Living the teachings”.</p>
+        <p class="build"><b>Build</b>5 panels about 14 in × 7.5 ft, double-sided prints on weighted bases. Two angled fins hide the rest of Sant until you pass.</p>
+        <button type="button" data-item="portrait">Show in model</button>
+      </article>
+    </div>
+  </section>
+
+  <section class="text">
+    <h2>Supporting pieces</h2>
+    <div class="grid3">
+      <article class="piece m-c"><span class="tag">Mandir</span><h3>Chaos hallway</h3><p>About 9 ft of cramped hallway, black from floor to ceiling, with one stream of notifications and photos running along the walls at eye level under two cold flicker bulbs. It doubles as the Shanti queue.</p><button type="button" data-item="hallway">Show in model</button></article>
+      <article class="piece m-c"><span class="tag">Mandir</span><h3>Three booth kits</h3><p>BKY, BAPS Charities and Better Living Sessions. Volunteers stand and talk with visitors. Each lead decides what happens in their booth.</p><button type="button" data-item="bky">Show in model</button></article>
+      <article class="piece s-c"><span class="tag">Shastra</span><h3>Scripture spine wall</h3><p>Eight giant spines like a library shelf. Four open to show the teaching, a story, and what it means in everyday life.</p><button type="button" data-item="spines">Show in model</button></article>
+      <article class="piece s-c"><span class="tag">Shastra</span><h3>Four glass cases</h3><p>Shikshapatri, Vachanamrut, Swamini Vato and Satsang Diksha, each in its own case and spotlight, spread to the four corners of the zone.</p><button type="button" data-item="case0">Show in model</button></article>
+      <article class="piece s-c"><span class="tag">Shastra</span><h3>Two NFC stations</h3><p>Side by side on one wall as an “Ask the Shastras” spot. Tap a question card on a tablet and the answer comes up on the TV above, so the whole group can read it.</p><button type="button" data-item="nfc0">Show in model</button></article>
+      <article class="piece t-c"><span class="tag">Sant</span><h3>Birthday kiosks</h3><p>Two standing kiosks behind the portrait. Enter your birthday and see where Pramukh Swami Maharaj or Mahant Swami Maharaj was on that day.</p><button type="button" data-item="kiosk0">Show in model</button></article>
+      <article class="piece t-c"><span class="tag">Sant</span><h3>Two prasangs</h3><p>The bicycle and the book, one on each side of the reflection wall at the end. Each sits on its own plinth with one light and a short story card.</p><button type="button" data-item="bike">Show in model</button></article>
+      <article class="piece t-c"><span class="tag">Sant</span><h3>Reflection wall</h3><p>A final teaching of Pramukh Swami Maharaj and Mahant Swami Maharaj, with take-home cards: one teaching and one thing to try this week.</p><button type="button" data-item="reflection">Show in model</button></article>
+      <article class="piece r-c"><span class="tag">All three</span><h3>Names in the pieces</h3><p>No banners. Mandir is carved into the jali over the Shanti room door, Shastra is the first word on the first scroll, and Sant is lettered on the base of the portrait, each in English and Gujarati.</p><button type="button" data-item="signs">Show in model</button></article>
+    </div>
+  </section>
+
+  <section class="text">
+    <h2>Notes before you build</h2>
+    <ul class="notes">
+      <li><b>Walls</b>Plywood in 4 × 8 ft modules on 2×3 frames, painted flat before setup, bolted together and braced with kickers, since nothing anchors to the hall floor. About 120 ft of outer wall and about 35 ft inside. Confirm which outer walls the hall or neighbouring sections already give you.</li>
+      <li><b>Walls and floor</b>The model assumes 8 ft walls from standard sheets. The gym floor gets black loop carpet (about $1 a sq ft, 12 ft wide rolls). Ask the facility what it allows on the gym floor, use only gaffer tape, and put felt pads under every wall foot.</li>
+      <li><b>Shanti room</b>Confirm with the venue that a covered room is allowed (flame-retardant fabric, sprinklers, exits). At about 8 people every 2 minutes it handles about 240 people an hour, and the hallway holds the line.</li>
+      <li><b>Floating pages</b>Get venue approval for the truss or ceiling rigging, and sign-off on the verses before printing. Order the fabric scrolls early: dye-sub printing takes about a week.</li>
+      <li><b>NFC</b>Each station is a tablet (the tap point) with a 45–50 in TV above, connected by a wired HDMI adapter rather than wireless casting. One web page and one working card by day 5. If not, put QR codes on the same cards so nothing is reprinted.</li>
+      <li><b>Crowds</b>About 6 ft of clear walking space everywhere. Places where people stop, like the booths, spines and NFC stations, sit outside that line.</li>
+      <li><b>Lighting</b>About 18 clamp-on spots at 3000K on dimmers, plus LED strip behind the jali. Hall lights off; exit signs stay on.</li>
+      <li><b>Booth leads</b>Each lead gets a 6 ft wall, a ledge, one spot and one outlet. No speakers or mics, nothing freestanding in the walkway, and content shown to you by a set date.</li>
+      <li><b>Birthday kiosks</b>Someone needs to compile the archive of where Swami was each day into one file early. That data is the long pole, not the kiosk. Test with real birthdays before the show.</li>
+      <li><b>Still open</b>The reflection wall wording, the three Shanti room photos, the prasang story cards, and whether the entrance and exit really sit on opposite 20 ft ends.</li>
+      <li><b>Timeline</b>Order prints, jali sheets, foam pieces, plinths, glass cases and tablets in the first 3 days. Week 2 is painting, setup and testing. The Media assets tab in the 2D view lists every print, file and piece of writing to make; give each one an owner this week.</li>
+    </ul>
+  </section>
+
+  <section class="text">
+    <h2>What changed from V1</h2>
+    <ul class="changes">
+      <li>40 × 20 ft instead of 45 × 50 ft, as one open room with no walls between the three parts.</li>
+      <li>The walk now runs Mandir, then Shastra, then Sant.</li>
+      <li>The projector chaos-to-calm cycle became a short poster hallway into a backlit jali room with music.</li>
+      <li>The text lantern became hanging scripture scrolls. A spine wall was added and the NFC stations went from 6 to 2, each with a TV above to show the answer.</li>
+      <li>Each part is named inside its own statement piece instead of on signs.</li>
+      <li>The light tunnel and moving-portrait gallery were cut. The birthday kiosks stay, now behind the portrait.</li>
+      <li>Sant ends with two prasangs instead of three, one on each side of the reflection wall.</li>
+      <li>The portrait panels stand in a single row with angled fins instead of the staggered V.</li>
+      <li>BKY, Charities and Better Living became booth kits run by their activity leads.</li>
+    </ul>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+  const viewer = document.getElementById('viewer');
+  const canvas = document.getElementById('c');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0b0b0d);
+  const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 500);
+  const maxAniso = renderer.capabilities.getMaxAnisotropy();
+  const EYE = 5.3;
+
+  // ---------- helpers ----------
+  function canvasTex(w, h, draw) {
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    const tex = new THREE.CanvasTexture(c); tex.encoding = THREE.sRGBEncoding; tex.anisotropy = maxAniso;
+    const api = { tex, redraw: () => { ctx.save(); ctx.clearRect(0, 0, w, h); draw(ctx, w, h); ctx.restore(); tex.needsUpdate = true; } };
+    api.redraw(); return api;
+  }
+  function wrap(ctx, text, x, y, maxW, lh) {
+    const words = text.split(' '); const lines = []; let line = '';
+    words.forEach(wd => { const t = line ? line + ' ' + wd : wd; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = wd; } else line = t; });
+    if (line) lines.push(line);
+    lines.forEach((l, i) => ctx.fillText(l, x, y + i * lh));
+    return lines.length;
+  }
+  const std = (c, o) => new THREE.MeshStandardMaterial(Object.assign({ color: c, roughness: 0.85 }, o || {}));
+  const M = {
+    wall: std(0x26272d), trim: std(0x1a1b1f), floor: std(0x151518, { roughness: 0.95 }),
+    black: std(0x0f0f11, { roughness: 0.55 }), brass: std(0xb08a4a, { metalness: 0.6, roughness: 0.35 }),
+    ivory: std(0xf1e8d6, { roughness: 0.7 }), shirtA: std(0x3d5a80), shirtB: std(0x8a5a44), shirtC: std(0x5b6b4a), shirtD: std(0x6b4c7a), skin: std(0x8d5a3b, { roughness: 0.7 }),
+    glass: new THREE.MeshStandardMaterial({ color: 0xcfe3ea, transparent: true, opacity: 0.16, roughness: 0.05, metalness: 0.2, depthWrite: false }),
+    line: new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.22 })
+  };
+  const SEE = [M.wall, M.trim, M.ivory]; // materials that fade with "See-through walls"
+  const CLICK = []; // meshes that open an info card
+  const SEGS = [], BOXES = []; // walls and solid pieces for walking around
+  const WALLS = []; // wall lines for the 2D plan
+  function clickable(obj, id) { obj.traverse(o => { if (o.isMesh) { o.userData.item = id; CLICK.push(o); } }); }
+  function add(o) { scene.add(o); return o; }
+  function box(w, h, d, mat, x, y, z) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); return m; }
+
+  // A wall from a to b (plan feet: x along 40 ft, z along 20 ft). plus/minus pick the material of each broad face.
+  function wallSeg(a, b, opts) {
+    opts = opts || {};
+    const h = opts.h || 8, plus = opts.plus || M.wall, minus = opts.minus || M.wall;
+    const dx = b[0] - a[0], dz = b[1] - a[1], len = Math.hypot(dx, dz);
+    const g = new THREE.Group();
+    const m = new THREE.Mesh(new THREE.BoxGeometry(len + 0.1, h, 0.35), [M.wall, M.wall, M.trim, M.trim, plus, minus]);
+    m.position.y = h / 2; g.add(m);
+    g.position.set((a[0] + b[0]) / 2, 0, (a[1] + b[1]) / 2);
+    g.rotation.y = Math.atan2(-dz, dx);
+    SEGS.push({ ax: a[0], az: a[1], bx: b[0], bz: b[1] }); WALLS.push([a, b]);
+    scene.add(g); return g;
+  }
+  function spot(x, y, z, tx, ty, tz, color, intensity, dist, angle) {
+    const s = new THREE.SpotLight(color, intensity, dist || 18, angle || 0.5, 0.6, 1);
+    s.position.set(x, y, z); s.target.position.set(tx, ty, tz); scene.add(s); scene.add(s.target); return s;
+  }
+  function person(x, z, mat, faceAngle, scale) {
+    scale = scale || 1;
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.72, 3.9, 14), mat); body.position.y = 1.95; g.add(body);
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.42, 16, 12), M.skin); head.position.y = 4.4; g.add(head);
+    g.scale.setScalar(scale); g.position.set(x, 0, z); g.rotation.y = faceAngle || 0;
+    scene.add(g); return g;
+  }
+  function plate(w, h, draw, pxPerFt) {
+    const p = pxPerFt || 160;
+    const t = canvasTex(Math.round(w * p), Math.round(h * p), draw);
+    return new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true }));
+  }
+
+  // ---------- content ----------
+  const ZC = { Mandir: '#b493d4', Shastra: '#6cc2ad', Sant: '#e48b62', Route: '#d8a650' };
+  const ITEMS = {
+    entrance: { zone: 'Route', name: 'Entrance from Mulyo', what: 'Visitors arrive from the Mulyo section and step straight into the chaos hallway.', build: 'A 4 ft opening in the outer wall.', size: '4 ft opening', at: [2, 2] },
+    hallway: { zone: 'Mandir', name: 'Chaos hallway', what: 'A short, cramped hallway painted black from floor to ceiling. One stream of notifications and photos runs along the walls at eye level: deadlines, missed calls, bills, traffic, 99+ unread. Two cold flicker bulbs keep it restless. It doubles as the queue for the Shanti room.', build: 'Walls painted matte black. One continuous printed vinyl strip, about 19 ft long and 2 ft tall, wrapping all three walls at 4–6 ft. Two flicker bulbs. No sound, so nothing leaks into the Shanti room.', size: 'About 9 ft long, 4 ft wide', at: [4.5, 2] },
+    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the opposite side, facing the Better Living booth.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 9 ft outside, about 8.5 × 8.5 ft inside', at: [4.5, 8.5] },
+    bky: { zone: 'Mandir', name: 'BKY booth', what: 'A volunteer-run booth where the BKY team talks with visitors. What happens here is up to the BKY lead.', build: 'Booth kit: 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 1.2] },
+    charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 18.8] },
+    bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions, straight ahead as people step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [4.5, 18.8] },
+    spines: { zone: 'Shastra', name: 'Scripture spine wall', what: 'Eight giant book spines line the wall like a library shelf. Four of them open: Vachanamrut, Swamini Vato, Shikshapatri and Satsang Diksha. Inside each: the teaching, a story, and what it means in everyday life.', build: 'Plywood boxes about 1.4 ft wide and 7 ft tall, painted as leather spines with gold bands. Full-length piano hinge, door stop and magnetic catch on the four that open.', size: 'About 12 ft of wall, 1 ft deep', at: [23, 1] },
+    case0: { zone: 'Shastra', name: 'Shikshapatri case', what: 'One of the four core scriptures in a glass case under its own spotlight. The cases sit at the four corners of the zone so people move between them.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.7, 6.4] },
+    case1: { zone: 'Shastra', name: 'Vachanamrut case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.7, 6.4] },
+    case2: { zone: 'Shastra', name: 'Swamini Vato case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.7, 14] },
+    case3: { zone: 'Shastra', name: 'Satsang Diksha case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.7, 14] },
+    pages: { zone: 'Shastra', name: 'Floating pages', what: 'Five long scrolls of scripture hang from above at different angles, each written top to bottom with verses in Gujarati and English. They nearly touch the floor, so visitors walk among them down a clear aisle in the middle.', build: 'Each scroll is about 1.5 ft wide and 9.5 ft long, printed on translucent voile or backlit fabric, with a thin dowel at the top and a weighted dowel at the bottom hem. Hung from a black truss about 12 ft up (or the hall ceiling grid if the venue allows). Bottom about 1 ft off the floor. Four warm spots from the side so the text glows.', size: 'About 7 × 6 ft area, 3 ft aisle down the middle', at: [22.7, 10.3] },
+    nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [21.1, 19] },
+    nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, right beside the first so the two read as one Ask the Shastras wall. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [25.1, 19] },
+    portrait: { zone: 'Sant', name: 'Split portrait', what: 'Five tall panels stand in a row. From Shastra they form one portrait of Mahant Swami Maharaj. Walk around the ends and each back carries one lesson: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, and Living the teachings.', build: '5 panels about 14 in wide and 7.5 ft tall, double-sided prints on ply or foam board, weighted bases. One spot on the front, one on the backs.', size: '6 ft wide row, about 3 ft to walk past each end', at: [30.8, 10] },
+    fins: { zone: 'Sant', name: 'Angled fins', what: 'Two short walls angle off the ends of the portrait. They screen the rest of Sant from Shastra, so the prasangs and reflection wall are a reveal.', build: 'Two plywood wall modules, painted dark.', size: 'About 3 ft each, with a 4 ft gap at each end', at: [31.7, 5.4] },
+    kiosk0: { zone: 'Sant', name: 'Birthday kiosk', what: 'Enter your birthday and see where Pramukh Swami Maharaj or Mahant Swami Maharaj was on that day, from the archive of his daily travels.', build: 'Standing kiosk: black pedestal with an angled touchscreen or tablet running one web page. The archive of where Swami was each day goes into one data file, so the page works offline.', size: 'About 1 × 1 ft footprint, 3 ft standing zone', at: [34.6, 2.7] },
+    kiosk1: { zone: 'Sant', name: 'Birthday kiosk', what: 'The second birthday kiosk, facing the first, so two families can look up birthdays at once.', build: 'Same kiosk and web page as the first.', size: 'About 1 × 1 ft footprint, 3 ft standing zone', at: [34.6, 17.3] },
+    bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs at the end of Sant, on either side of the reflection wall: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.9, 4.9] },
+    book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang at the end of Sant: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.9, 15.1] },
+    reflection: { zone: 'Sant', name: 'Reflection wall', what: 'The last thing visitors see before they leave: a final teaching of Pramukh Swami Maharaj and Mahant Swami Maharaj, and a rack of take-home cards with one teaching and one thing to try this week.', build: 'Printed panel, one spot, card ledge. Wording to be confirmed.', size: '8 ft wide', at: [39.4, 10] },
+    exit: { zone: 'Route', name: 'Exit', what: 'The end of Aadhar Stambh and of the exhibition route through this section.', build: 'A 4 ft opening in the outer wall.', size: '4 ft opening', at: [38, 2] },
+    signs: { zone: 'Route', name: 'Names in the pieces', what: 'No banners. Each part is named inside its own statement piece: Mandir carved into the jali over the Shanti room door, Shastra as the first word on the first scroll, and Sant lettered on the base of the portrait. Each name is in English and Gujarati.', build: 'Mandir: carved or laser-cut letters on a jali lintel, painted ivory. Shastra: printed at the top of the first scroll. Sant: brass or gold-painted letters on the front of the portrait base.', size: 'Lintel about 3 ft wide; Sant letters about 5 in tall', at: [7.5, 4] },
+  };
+  const LABELS = [
+    ['hallway', 'Chaos hallway', 8.8], ['shanti', 'Shanti room', 9], ['bky', 'BKY booth', 8.6], ['charities', 'BAPS Charities booth', 8.6], ['bls', 'Better Living booth', 8.6],
+    ['spines', 'Spine wall', 8.4], ['case0', 'Shikshapatri', 5.2], ['case1', 'Vachanamrut', 5.2], ['case2', 'Swamini Vato', 5.2], ['case3', 'Satsang Diksha', 5.2], ['pages', 'Floating pages', 12],
+    ['nfc0', 'NFC + TV', 8.2], ['nfc1', 'NFC + TV', 8.2], ['portrait', 'Split portrait', 8.3], ['fins', 'Fin', 8.4], ['kiosk0', 'Birthday kiosk', 5.6], ['kiosk1', 'Birthday kiosk', 5.6], ['bike', 'Bicycle', 4.6], ['book', 'Book', 4.6], ['reflection', 'Reflection wall', 8]
+  ];
+
+  // ---------- floor, grid, zones ----------
+  function floorRect(x0, z0, x1, z1, mat, y) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(x1 - x0, z1 - z0), mat);
+    m.rotation.x = -Math.PI / 2; m.position.set((x0 + x1) / 2, y || 0, (z0 + z1) / 2); scene.add(m); return m;
+  }
+  const SH = { x0: 0, x1: 9, z0: 4, z1: 13 }; // Shanti box
+  function buildFloor() {
+    // Black loop carpet over the gym floor
+    const carpet = canvasTex(256, 256, (ctx, w, h) => {
+      ctx.fillStyle = '#1b1b1e'; ctx.fillRect(0, 0, w, h);
+      for (let i = 0; i < 9000; i++) { const v = 20 + Math.floor(Math.random() * 22); ctx.fillStyle = `rgb(${v},${v},${v + 2})`; ctx.fillRect(Math.random() * w, Math.random() * h, 1.5, 1.5); }
+    });
+    carpet.tex.wrapS = carpet.tex.wrapT = THREE.RepeatWrapping; carpet.tex.repeat.set(10, 10);
+    M.floor.map = carpet.tex; M.floor.color.set(0xffffff); M.floor.roughness = 1; M.floor.needsUpdate = true;
+    floorRect(9, 0, 40, 20, M.floor); floorRect(0, 0, 9, 4, M.floor); floorRect(0, 13, 9, 20, M.floor);
+    const apron = std(0x0d0d0f, { roughness: 1 });
+    floorRect(-12, -10, 52, 0, apron, -0.01); floorRect(-12, 20, 52, 32, apron, -0.01);
+    floorRect(-12, 0, 0, 20, apron, -0.01); floorRect(40, 0, 52, 20, apron, -0.01);
+    const tint = (x0, z0, x1, z1, c) => floorRect(x0, z0, x1, z1, new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.07, depthWrite: false }), 0.006);
+    tint(9, 0, 16.5, 20, 0x9b6cc4); tint(0, 0, 9, 4, 0x9b6cc4); tint(0, 13, 9, 20, 0x9b6cc4);
+    tint(16.5, 0, 29.2, 20, 0x3fb39a); tint(29.2, 0, 40, 20, 0xe07a4a);
+    const pts = [];
+    for (let x = 0; x <= 40; x++) {
+      if (x > SH.x0 && x < SH.x1) { pts.push(x, 0, 0, x, 0, SH.z0, x, 0, SH.z1, x, 0, 20); } else pts.push(x, 0, 0, x, 0, 20);
+    }
+    for (let z = 0; z <= 20; z++) {
+      if (z > SH.z0 && z < SH.z1) pts.push(SH.x1, 0, z, 40, 0, z); else pts.push(0, 0, z, 40, 0, z);
+    }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+    const grid = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0x2c2e35, transparent: true, opacity: 0.55 })); grid.position.y = 0.012; scene.add(grid);
+  }
+
+  // ---------- walls ----------
+  function buildWalls() {
+    wallSeg([0, 0], [40, 0]);
+    wallSeg([0, 20], [40, 20]);
+    wallSeg([0, 4], [0, 13], { minus: M.ivory });
+    wallSeg([0, 13], [0, 20]);
+    wallSeg([40, 4], [40, 20]);
+    wallSeg([0, 4], [6, 4], { plus: M.ivory });       // hallway / Shanti north wall, door at x 6–9
+    wallSeg([9, 0], [9, 4]);                          // end of the hallway
+    wallSeg([9, 4], [9, 13], { plus: M.ivory });      // Shanti east wall (closed)
+    wallSeg([0, 13], [6, 13], { minus: M.ivory });    // Shanti south wall, exit at x 6–9 facing the Better Living booth
+    wallSeg([31, 6.7], [32.4, 4.1]);                  // fins
+    wallSeg([31, 13.3], [32.4, 15.9]);
+    const finHit = new THREE.Group(); scene.add(finHit);
+  }
+
+  // ---------- chaos hallway ----------
+  const flicker = [];
+  function drawPoster(ctx, w, h, kind) {
+    const paper = ['#f3e04a', '#f4f1ea', '#ffffff', '#f4f1ea', '#fbe7e1', '#f4f1ea', '#141414', '#e9eef2', '#f4f1ea', '#ffe66d'][kind];
+    ctx.fillStyle = paper; ctx.fillRect(0, 0, w, h);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const big = (t, y, size, color) => { ctx.fillStyle = color; ctx.font = `800 ${size}px Montserrat, sans-serif`; wrap(ctx, t, w / 2, y, w - 50, size * 1.05); };
+    if (kind === 0) { big('DEADLINE', h * 0.35, 92, '#c0141c'); big('TOMORROW', h * 0.55, 70, '#141414'); big('9:00 AM SHARP', h * 0.8, 34, '#141414'); }
+    if (kind === 1) {
+      ctx.fillStyle = '#141414'; ctx.fillRect(w * 0.18, h * 0.06, w * 0.64, h * 0.88);
+      for (let i = 0; i < 6; i++) { ctx.fillStyle = '#dfe6ee'; ctx.fillRect(w * 0.22, h * 0.14 + i * h * 0.12, w * 0.56, h * 0.09); }
+      ctx.fillStyle = '#e8262c'; ctx.beginPath(); ctx.arc(w * 0.78, h * 0.09, 40, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#ffffff'; ctx.font = '800 34px Montserrat, sans-serif'; ctx.fillText('99+', w * 0.78, h * 0.09);
+    }
+    if (kind === 2) { ctx.fillStyle = '#c0141c'; ctx.fillRect(0, h * 0.12, w, h * 0.2); big('BREAKING', h * 0.22, 70, '#ffffff'); big('[Headline you can’t stop scrolling]', h * 0.55, 38, '#141414'); }
+    if (kind === 3) {
+      big('THIS WEEK', h * 0.09, 40, '#141414');
+      for (let r = 0; r < 5; r++) for (let c = 0; c < 4; c++) {
+        const x = 30 + c * (w - 60) / 4, y = h * 0.18 + r * h * 0.15;
+        ctx.strokeStyle = '#141414'; ctx.lineWidth = 2; ctx.strokeRect(x, y, (w - 60) / 4 - 8, h * 0.13);
+        ctx.fillStyle = 'rgba(192, 20, 28, 0.75)'; ctx.fillRect(x + 6, y + 8, (w - 60) / 4 - 20, 18); ctx.fillRect(x + 6, y + 34, (w - 60) / 4 - 34, 18);
+      }
+    }
+    if (kind === 4) { big('PAST DUE', h * 0.3, 84, '#c0141c'); big('FINAL NOTICE', h * 0.52, 40, '#141414'); for (let i = 0; i < 5; i++) { ctx.fillStyle = '#c9b8b0'; ctx.fillRect(60, h * 0.66 + i * 34, w - 120, 12); } }
+    if (kind === 5) {
+      big('TO DO', h * 0.08, 52, '#141414');
+      ctx.textAlign = 'left'; ctx.font = '500 30px Montserrat, sans-serif';
+      ['Call back', 'Pay bills', 'Finish report', 'Groceries', 'Reply to 40 emails', 'Fix the car', 'Pick up kids', 'Gym?', 'Sleep'].forEach((t, i) => {
+        ctx.strokeStyle = '#141414'; ctx.lineWidth = 2; ctx.strokeRect(40, h * 0.16 + i * h * 0.09 - 14, 26, 26);
+        ctx.fillStyle = '#141414'; ctx.fillText(t, 84, h * 0.16 + i * h * 0.09);
+      });
+    }
+    if (kind === 6) { ctx.shadowColor = '#ff2bd6'; ctx.shadowBlur = 24; big('SALE', h * 0.32, 110, '#ff6ae6'); ctx.shadowColor = '#3ef2ff'; big('ENDS TONIGHT', h * 0.6, 54, '#7ff7ff'); ctx.shadowBlur = 0; }
+    if (kind === 7) {
+      ctx.strokeStyle = '#9aa8b5'; ctx.lineWidth = 10;
+      for (let i = 0; i < 6; i++) { ctx.beginPath(); ctx.moveTo(0, h * (0.15 + i * 0.15)); ctx.bezierCurveTo(w * 0.3, h * (0.05 + i * 0.16), w * 0.6, h * (0.3 + i * 0.12), w, h * (0.1 + i * 0.15)); ctx.stroke(); }
+      ctx.strokeStyle = '#d7141c'; ctx.lineWidth = 16; ctx.beginPath(); ctx.moveTo(0, h * 0.62); ctx.bezierCurveTo(w * 0.4, h * 0.4, w * 0.6, h * 0.8, w, h * 0.5); ctx.stroke();
+      ctx.fillStyle = '#141414'; ctx.fillRect(0, 0, w, h * 0.12); big('+45 MIN DELAY', h * 0.06, 40, '#ffffff');
+    }
+    if (kind === 8) { ctx.strokeStyle = '#141414'; ctx.lineWidth = 14; ctx.strokeRect(w * 0.2, h * 0.3, w * 0.55, h * 0.3); ctx.fillStyle = '#141414'; ctx.fillRect(w * 0.75, h * 0.4, w * 0.06, h * 0.1); ctx.fillStyle = '#d7141c'; ctx.fillRect(w * 0.22, h * 0.32, w * 0.04, h * 0.26); big('1%', h * 0.75, 90, '#d7141c'); }
+    if (kind === 9) {
+      ['Reply ASAP!!', 'Call me back', 'Where are you?', 'URGENT', 'Did you see this?'].forEach((t, i) => {
+        ctx.save(); ctx.translate(w * (0.3 + (i % 2) * 0.4), h * (0.15 + i * 0.17)); ctx.rotate((i % 2 ? 1 : -1) * 0.08);
+        ctx.fillStyle = ['#fff59d', '#ffcc80', '#a5d6a7', '#f48fb1', '#90caf9'][i]; ctx.fillRect(-w * 0.26, -h * 0.07, w * 0.52, h * 0.14);
+        ctx.fillStyle = '#141414'; ctx.font = '700 30px Montserrat, sans-serif'; ctx.fillText(t, 0, 0); ctx.restore();
+      });
+    }
+  }
+  function poster(x, y, z, rotY, w, h, kind, tilt) {
+    const t = canvasTex(Math.round(500 * w / h), 500, (ctx, cw, ch) => drawPoster(ctx, cw, ch, kind));
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({ map: t.tex, emissiveMap: t.tex, emissive: 0xffffff, emissiveIntensity: 0.3, roughness: 0.9 }));
+    const g = new THREE.Group(); g.position.set(x, y, z); g.rotation.y = rotY; m.rotation.z = tilt; g.add(m); scene.add(g);
+    clickable(g, 'hallway');
+  }
+  // One stream of notifications and photos running along black walls at eye level
+  function drawStream(ctx, w, h, seed) {
+    ctx.clearRect(0, 0, w, h);
+    let s = seed * 131 + 7; const rnd = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+    const NOTES = [['Messages', 'Reply ASAP!!', '#34c759'], ['Calendar', 'Meeting moved to 7:30 AM', '#ff3b30'], ['Bank', 'Payment due today', '#0a84ff'], ['Maps', '+45 min delay on your route', '#30b0c7'], ['Mail', '99+ unread', '#0a84ff'], ['Phone', '3 missed calls', '#34c759'], ['Battery', '2% remaining', '#ff9f0a'], ['News', 'BREAKING: you won’t believe…', '#ff2d55'], ['Work', 'Deadline: tomorrow 9:00 AM', '#5e5ce6'], ['Delivery', 'Your package is delayed', '#ff9f0a'], ['Group chat', '128 new messages', '#34c759'], ['Shop', 'SALE ends tonight', '#ff2d55']];
+    let x = 10, k = Math.floor(rnd() * NOTES.length);
+    while (x < w - 40) {
+      const photo = rnd() < 0.33, cy = h * (0.5 + (rnd() - 0.5) * 0.42), tilt = (rnd() - 0.5) * 0.12;
+      ctx.save(); ctx.translate(x, cy); ctx.rotate(tilt);
+      if (photo) {
+        const pw = 150 + rnd() * 70, ph = pw * 0.68;
+        const g = ctx.createLinearGradient(0, -ph / 2, 0, ph / 2);
+        const pal = [['#1b2433', '#c96b3b'], ['#101820', '#3a4a5c'], ['#2a1a1a', '#d43c3c'], ['#1a2230', '#e0b04a']][Math.floor(rnd() * 4)];
+        g.addColorStop(0, pal[0]); g.addColorStop(1, pal[1]);
+        ctx.fillStyle = '#f2f2f2'; ctx.fillRect(-4, -ph / 2 - 4, pw + 8, ph + 8);
+        ctx.fillStyle = g; ctx.fillRect(0, -ph / 2, pw, ph);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+        for (let b = 0; b < 7; b++) { const bw = pw / 8, bh = ph * (0.25 + rnd() * 0.5); ctx.fillRect(b * bw * 1.15, ph / 2 - bh, bw, bh); }
+        for (let d = 0; d < 9; d++) { ctx.fillStyle = rnd() < 0.5 ? '#ff3b30' : '#ffe08a'; ctx.beginPath(); ctx.arc(rnd() * pw, ph * (0.25 + rnd() * 0.2), 2.5, 0, Math.PI * 2); ctx.fill(); }
+        x += pw + 18 + rnd() * 26;
+      } else {
+        const [app, msg, col] = NOTES[k % NOTES.length]; k++;
+        ctx.font = '600 21px Montserrat, sans-serif';
+        const nw = Math.max(250, ctx.measureText(msg).width + 92), nh = 74;
+        ctx.fillStyle = 'rgba(242, 242, 247, 0.95)';
+        ctx.beginPath(); ctx.moveTo(14, -nh / 2); ctx.arcTo(nw, -nh / 2, nw, nh / 2, 16); ctx.arcTo(nw, nh / 2, 0, nh / 2, 16); ctx.arcTo(0, nh / 2, 0, -nh / 2, 16); ctx.arcTo(0, -nh / 2, nw, -nh / 2, 16); ctx.fill();
+        ctx.fillStyle = col; ctx.fillRect(14, -18, 36, 36);
+        ctx.fillStyle = '#6b6b70'; ctx.font = '600 14px Montserrat, sans-serif'; ctx.textBaseline = 'middle'; ctx.fillText(app.toUpperCase() + ' · now', 62, -14);
+        ctx.fillStyle = '#111114'; ctx.font = '600 21px Montserrat, sans-serif'; ctx.fillText(msg, 62, 12);
+        if (rnd() < 0.35) { ctx.fillStyle = '#ff3b30'; ctx.beginPath(); ctx.arc(nw - 4, -nh / 2 + 4, 13, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = '#fff'; ctx.font = '700 13px Montserrat, sans-serif'; ctx.textAlign = 'center'; ctx.fillText(String(2 + Math.floor(rnd() * 40)), nw - 4, -nh / 2 + 5); ctx.textAlign = 'left'; }
+        x += nw + 14 + rnd() * 30;
+      }
+      ctx.restore();
+    }
+  }
+  function buildHallway() {
+    const black = std(0x060607, { roughness: 0.92 }); SEE.push(black);
+    const face = (w, x, z, rotY) => { const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 8), black); m.position.set(x, 4, z); m.rotation.y = rotY; scene.add(m); clickable(m, 'hallway'); };
+    face(9, 4.5, 0.19, 0); face(6, 3, 3.81, Math.PI); face(4, 8.81, 2, -Math.PI / 2);
+    const strip = (w, x, z, rotY, seed) => {
+      const t = canvasTex(Math.round(w * 160), 320, (ctx, cw, ch) => drawStream(ctx, cw, ch, seed));
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, 2), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true }));
+      m.position.set(x, 5.0, z); m.rotation.y = rotY; scene.add(m); clickable(m, 'hallway');
+    };
+    strip(9, 4.5, 0.21, 0, 1); strip(6, 3, 3.79, Math.PI, 2); strip(4, 8.79, 2, -Math.PI / 2, 3);
+    [[2.5, 1.6], [6.5, 2.4]].forEach(([x, z]) => {
+      const l = new THREE.PointLight(0xbcd4ff, 0.9, 9, 1.4); l.position.set(x, 7.4, z); scene.add(l); flicker.push(l);
+      const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.16, 10, 8), new THREE.MeshBasicMaterial({ color: 0xdbe8ff })); bulb.position.set(x, 7.6, z); scene.add(bulb);
+      scene.add(box(0.03, 0.4, 0.03, M.black, x, 7.95, z));
+    });
+  }
+
+  // ---------- Shanti room ----------
+  let portraitImg = null; const needsPortrait = [];
+  let shantiCeil = null;
+  function drawJali(ctx, w, h, opts) {
+    const ppf = opts.ppf, bays = opts.bays, photos = opts.photos || [];
+    const g = ctx.createRadialGradient(w / 2, h * 0.45, h * 0.1, w / 2, h * 0.45, Math.max(w, h) * 0.75);
+    g.addColorStop(0, '#fff6e4'); g.addColorStop(1, '#ead3a8');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    // carved lattice: a field of quatrefoils
+    const cell = 0.5 * ppf, rr = cell * 0.27;
+    for (let y = cell / 2; y < h; y += cell) for (let x = cell / 2; x < w; x += cell) {
+      ctx.lineWidth = Math.max(2, ppf * 0.03);
+      ctx.strokeStyle = 'rgba(155, 112, 58, 0.30)';
+      [[0, -1], [1, 0], [0, 1], [-1, 0]].forEach(([ox, oy]) => { ctx.beginPath(); ctx.arc(x + ox * rr + 2, y + oy * rr + 2, rr, 0, Math.PI * 2); ctx.stroke(); });
+      ctx.strokeStyle = 'rgba(255, 252, 244, 0.95)';
+      [[0, -1], [1, 0], [0, 1], [-1, 0]].forEach(([ox, oy]) => { ctx.beginPath(); ctx.arc(x + ox * rr, y + oy * rr, rr, 0, Math.PI * 2); ctx.stroke(); });
+      ctx.fillStyle = 'rgba(255, 250, 238, 0.9)'; ctx.beginPath(); ctx.arc(x, y, rr * 0.35, 0, Math.PI * 2); ctx.fill();
+    }
+    const solid = '#f6eedd', shade = 'rgba(140, 100, 50, 0.35)';
+    // dado and cornice
+    const dado = 1.0 * ppf, corn = 0.7 * ppf;
+    ctx.fillStyle = solid; ctx.fillRect(0, h - dado, w, dado); ctx.fillRect(0, 0, w, corn);
+    ctx.fillStyle = shade; ctx.fillRect(0, h - dado, w, 3); ctx.fillRect(0, corn - 3, w, 3);
+    for (let x = 0; x < w; x += 0.4 * ppf) { ctx.strokeStyle = 'rgba(140, 100, 50, 0.22)'; ctx.lineWidth = 2; ctx.strokeRect(x + 6, h - dado + 10, 0.4 * ppf - 12, dado - 20); }
+    for (let x = 0; x < w; x += 0.3 * ppf) { ctx.fillStyle = 'rgba(140, 100, 50, 0.25)'; ctx.beginPath(); ctx.arc(x + 0.15 * ppf, corn * 0.6, 0.06 * ppf, 0, Math.PI * 2); ctx.fill(); }
+    // pillars and arches
+    const pw = 0.55 * ppf, bw = (w - pw * (bays + 1)) / bays;
+    for (let i = 0; i <= bays; i++) {
+      const x = i * (bw + pw);
+      ctx.fillStyle = solid; ctx.fillRect(x, corn, pw, h - corn - dado);
+      for (let f = 1; f < 4; f++) { ctx.fillStyle = shade; ctx.fillRect(x + f * pw / 4 - 1.5, corn + 0.6 * ppf, 3, h - corn - dado - 1.2 * ppf); }
+      ctx.fillStyle = '#efe3c9'; ctx.fillRect(x - 0.08 * ppf, corn, pw + 0.16 * ppf, 0.35 * ppf); ctx.fillRect(x - 0.08 * ppf, h - dado - 0.35 * ppf, pw + 0.16 * ppf, 0.35 * ppf);
+    }
+    for (let i = 0; i < bays; i++) {
+      const x0 = pw + i * (bw + pw), x1 = x0 + bw, cx = (x0 + x1) / 2;
+      const spring = h * 0.42, apex = corn + 0.35 * ppf, band = 0.28 * ppf;
+      const archPath = (inset) => {
+        ctx.beginPath();
+        ctx.moveTo(x0 + inset, h - dado);
+        ctx.lineTo(x0 + inset, spring);
+        ctx.quadraticCurveTo(x0 + inset, apex + (spring - apex) * 0.25 + inset, cx, apex + inset);
+        ctx.quadraticCurveTo(x1 - inset, apex + (spring - apex) * 0.25 + inset, x1 - inset, spring);
+        ctx.lineTo(x1 - inset, h - dado);
+      };
+      ctx.lineWidth = band; ctx.strokeStyle = 'rgba(140, 100, 50, 0.35)'; archPath(band / 2 + 4); ctx.stroke();
+      ctx.strokeStyle = solid; archPath(band / 2); ctx.stroke();
+      ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(140, 100, 50, 0.4)'; archPath(band + 6); ctx.stroke();
+      // a small carved finial at the apex
+      ctx.fillStyle = solid; ctx.beginPath(); ctx.arc(cx, apex - 0.05 * ppf, 0.16 * ppf, 0, Math.PI * 2); ctx.fill();
+      const ph = photos[i];
+      if (ph) {
+        const fw = Math.min(bw * 0.62, 2.1 * ppf), fh = fw * 1.45, fx = cx - fw / 2, fy = h - dado - 0.9 * ppf - fh;
+        ctx.fillStyle = '#b8914f'; ctx.fillRect(fx - 0.12 * ppf, fy - 0.12 * ppf, fw + 0.24 * ppf, fh + 0.24 * ppf);
+        ctx.fillStyle = '#efe2c4'; ctx.fillRect(fx - 0.05 * ppf, fy - 0.05 * ppf, fw + 0.1 * ppf, fh + 0.1 * ppf);
+        if (ph === 'portrait' && portraitImg) {
+          const ir = portraitImg.width / portraitImg.height, fr = fw / fh;
+          let sw = portraitImg.width, sh = portraitImg.height, sx = 0, sy = 0;
+          if (ir > fr) { sw = sh * fr; sx = (portraitImg.width - sw) / 2; } else { sh = sw / fr; sy = (portraitImg.height - sh) / 2; }
+          ctx.drawImage(portraitImg, sx, sy, sw, sh, fx, fy, fw, fh);
+        } else {
+          const pg = ctx.createLinearGradient(fx, fy, fx, fy + fh); pg.addColorStop(0, '#e9b06a'); pg.addColorStop(1, '#b8692f');
+          ctx.fillStyle = pg; ctx.fillRect(fx, fy, fw, fh);
+          ctx.fillStyle = 'rgba(255, 245, 225, 0.92)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+          ctx.font = `600 ${Math.round(0.17 * ppf)}px Montserrat, sans-serif`;
+          wrap(ctx, ph === 'portrait' ? 'Photo' : ph, cx, fy + fh / 2 - 0.2 * ppf, fw - 0.3 * ppf, 0.24 * ppf);
+        }
+      }
+    }
+    // warm bloom from the hidden LED strip
+    const bloom = ctx.createRadialGradient(w / 2, h * 0.5, 0, w / 2, h * 0.5, Math.max(w, h) * 0.6);
+    bloom.addColorStop(0, 'rgba(255, 236, 200, 0.18)'); bloom.addColorStop(1, 'rgba(255, 236, 200, 0)');
+    ctx.fillStyle = bloom; ctx.fillRect(0, 0, w, h);
+  }
+  function jaliPanel(wft, hft, opts, x, y, z, rotY, mirror) {
+    const ppf = 150;
+    const t = canvasTex(Math.round(wft * ppf), Math.round(hft * ppf), (ctx, w, h) => drawJali(ctx, w, h, Object.assign({ ppf }, opts)));
+    if ((opts.photos || []).includes('portrait')) needsPortrait.push(t);
+    const mat = new THREE.MeshBasicMaterial({ map: t.tex });
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(wft, hft), mat);
+    m.position.set(x, y, z); m.rotation.y = rotY; scene.add(m); clickable(m, 'shanti');
+    if (mirror) {
+      const rm = new THREE.Mesh(new THREE.PlaneGeometry(wft, hft), new THREE.MeshBasicMaterial({ map: t.tex, color: 0x8a8580, side: THREE.DoubleSide }));
+      rm.position.set(x, -y, z); rm.rotation.y = rotY; rm.scale.y = -1; scene.add(rm);
+    }
+    return m;
+  }
+  function buildShanti() {
+    const H = 7.8, y = H / 2 + 0.05;
+    jaliPanel(8.6, H, { bays: 3, photos: ['Photo: Pramukh Swami Maharaj', 'portrait', 'Photo: mandir murti'] }, 0.2, y, 8.5, Math.PI / 2, true);
+    jaliPanel(5.6, H, { bays: 2 }, 3.0, y, 12.8, Math.PI, true);
+    jaliPanel(5.6, H, { bays: 2 }, 3.0, y, 4.2, 0, true);
+    jaliPanel(8.6, H, { bays: 3 }, 8.8, y, 8.5, -Math.PI / 2, true);
+    // glossy floor: a translucent white skin over the mirrored jali
+    const fl = floorRect(0.17, 4.17, 8.83, 12.83, new THREE.MeshStandardMaterial({ color: 0xf6f1e7, roughness: 0.12, metalness: 0.05, transparent: true, opacity: 0.8 }), 0.004);
+    clickable(fl, 'shanti');
+    floorRect(-1, 3, 10, 14, new THREE.MeshBasicMaterial({ color: 0x0a0908 }), -8.2);
+    // warm light inside, and a ceiling seen only from eye level
+    const l = new THREE.PointLight(0xffe2b8, 0.9, 13, 1.2); l.position.set(4.5, 6.8, 8.5); scene.add(l);
+    shantiCeil = new THREE.Mesh(new THREE.PlaneGeometry(9, 9), new THREE.MeshBasicMaterial({ color: 0xf6ecd8, side: THREE.DoubleSide }));
+    shantiCeil.rotation.x = Math.PI / 2; shantiCeil.position.set(4.5, 8.0, 8.5); scene.add(shantiCeil);
+    const cove = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), new THREE.MeshBasicMaterial({ color: 0xfff1d6, side: THREE.DoubleSide }));
+    cove.rotation.x = Math.PI / 2; cove.position.set(4.5, 7.99, 8.5); cove.visible = false;
+    // speaker
+    const spk = box(0.6, 0.9, 0.5, M.black, 1.0, 7.0, 12.4); scene.add(spk);
+  }
+
+  // ---------- booths ----------
+  function booth(id, x0, wallZ, dir, name, team) {
+    const cx = x0 + 3, z = wallZ + dir * 0.2, g = new THREE.Group();
+    const panel = plate(6, 5.4, (ctx, w, h) => {
+      ctx.fillStyle = '#1e2026'; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(216, 166, 80, 0.55)'; ctx.setLineDash([14, 12]); ctx.lineWidth = 4;
+      ctx.strokeRect(w * 0.07, h * 0.16, w * 0.4, h * 0.5); ctx.strokeRect(w * 0.53, h * 0.16, w * 0.4, h * 0.5);
+      ctx.setLineDash([]); ctx.fillStyle = 'rgba(236, 231, 220, 0.75)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '600 30px Montserrat, sans-serif'; ctx.fillText('Display space', w * 0.27, h * 0.41); ctx.fillText('Display space', w * 0.73, h * 0.41);
+      ctx.font = '500 26px Montserrat, sans-serif'; ctx.fillStyle = 'rgba(236, 231, 220, 0.55)';
+      ctx.fillText('Set by the ' + team + ' lead', w / 2, h * 0.08);
+    });
+    panel.position.set(cx, 1.3 + 2.7, z + dir * 0.02); panel.rotation.y = dir > 0 ? 0 : Math.PI; g.add(panel);
+    const header = plate(6, 0.9, (ctx, w, h) => {
+      ctx.fillStyle = '#111215'; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#d8a650'; ctx.fillRect(0, h - 6, w, 6);
+      ctx.fillStyle = '#f3ede1'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '600 70px "Bodoni Moda", Georgia, serif'; ctx.fillText(name, w / 2, h / 2);
+    });
+    header.position.set(cx, 7.25, z + dir * 0.06); header.rotation.y = panel.rotation.y; g.add(header);
+    const ledge = box(6, 0.12, 1.3, M.brass, cx, 3.4, wallZ + dir * 0.85); g.add(ledge);
+    scene.add(g); clickable(g, id);
+    spot(cx, 9.5, wallZ + dir * 4.5, cx, 3.5, wallZ + dir * 0.3, 0xffe7c2, 1.5, 14, 0.62);
+  }
+
+  // ---------- Shastra ----------
+  const SPINES = [
+    ['Vachanamrut', 0x5a1f1f, true], ['Bhaktachintamani', 0x1f2f4f, false], ['Swamini Vato', 0x1f3a2e, true], ['Swaminarayan Bhashyam', 0x4a3216, false],
+    ['Shikshapatri', 0x3b2a52, true], ['Harililamrut', 0x2a2a2e, false], ['Satsang Diksha', 0x5a3a12, true], ['Yogi Gita', 0x2b4146, false]
+  ];
+  const doors = [];
+  function spineTex(title, color, open) {
+    const hex = '#' + color.toString(16).padStart(6, '0');
+    return canvasTex(260, 1340, (ctx, w, h) => {
+      ctx.fillStyle = hex; ctx.fillRect(0, 0, w, h);
+      const lg = ctx.createLinearGradient(0, 0, w, 0); lg.addColorStop(0, 'rgba(0,0,0,0.35)'); lg.addColorStop(0.5, 'rgba(255,255,255,0.08)'); lg.addColorStop(1, 'rgba(0,0,0,0.35)');
+      ctx.fillStyle = lg; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#c9a25a';
+      [70, 100, h - 120, h - 90].forEach(y => ctx.fillRect(14, y, w - 28, 10));
+      ctx.strokeStyle = '#c9a25a'; ctx.lineWidth = 3; ctx.strokeRect(30, 150, w - 60, h - 320);
+      ctx.save(); ctx.translate(w / 2, h / 2); ctx.rotate(-Math.PI / 2);
+      ctx.fillStyle = '#e6c27a'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      let size = 84; ctx.font = `600 ${size}px "Bodoni Moda", Georgia, serif`;
+      while (ctx.measureText(title).width > h - 380 && size > 40) { size -= 4; ctx.font = `600 ${size}px "Bodoni Moda", Georgia, serif`; }
+      ctx.fillText(title, 0, 0); ctx.restore();
+      if (open) { ctx.fillStyle = '#d8a650'; ctx.fillRect(w - 46, h * 0.5 - 70, 46, 140); }
+    });
+  }
+  function insideTex(title) {
+    return canvasTex(260, 1340, (ctx, w, h) => {
+      ctx.fillStyle = '#f2e8d4'; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#5a1f1f'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = '600 30px "Bodoni Moda", Georgia, serif'; wrap(ctx, title, w / 2, 90, w - 40, 34);
+      [['TEACHING', 260], ['STORY', 620], ['EVERYDAY LIFE', 980]].forEach(([t, y]) => {
+        ctx.fillStyle = '#9a6a22'; ctx.font = '700 20px Montserrat, sans-serif'; ctx.fillText(t, w / 2, y);
+        ctx.fillStyle = 'rgba(60, 40, 20, 0.35)';
+        for (let i = 0; i < 7; i++) ctx.fillRect(30, y + 40 + i * 30, w - 60 - (i % 3) * 30, 9);
+      });
+    });
+  }
+  function buildSpines() {
+    const W = 1.38, D = 1.0, H = 7.2, z0 = 0.18;
+    SPINES.forEach(([title, color, open], i) => {
+      const x = 17.05 + i * 1.49, cx = x + W / 2;
+      const leather = std(color, { roughness: 0.6 });
+      const g = new THREE.Group();
+      g.add(box(W, H, 0.12, leather, cx, H / 2, z0 + 0.06));
+      g.add(box(0.1, H, D, leather, x + 0.05, H / 2, z0 + D / 2));
+      g.add(box(0.1, H, D, leather, x + W - 0.05, H / 2, z0 + D / 2));
+      g.add(box(W, 0.12, D, leather, cx, H - 0.06, z0 + D / 2));
+      g.add(box(W, 0.12, D, leather, cx, 0.06, z0 + D / 2));
+      const inside = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.22, H - 0.3), new THREE.MeshBasicMaterial({ map: (open ? insideTex(title) : spineTex(title, color, false)).tex }));
+      inside.position.set(cx, H / 2, z0 + 0.13); g.add(inside);
+      const pivot = new THREE.Group(); pivot.position.set(x, 0, z0 + D);
+      const ft = spineTex(title, color, open);
+      const door = new THREE.Mesh(new THREE.BoxGeometry(W, H, 0.1), [leather, leather, leather, leather, new THREE.MeshStandardMaterial({ map: ft.tex, roughness: 0.6, emissive: 0xffffff, emissiveMap: ft.tex, emissiveIntensity: 0.12 }), leather]);
+      door.position.set(W / 2, H / 2, 0.05); pivot.add(door); g.add(pivot);
+      scene.add(g); clickable(g, 'spines');
+      if (open) { door.userData.door = doors.length; doors.push({ pivot, open: false, a: 0 }); }
+    });
+    spot(23, 9.8, 6.5, 23, 4, 0.5, 0xffe2b0, 1.7, 18, 0.78);
+  }
+  const CASES = [[18.7, 6.4, 'Shikshapatri'], [26.7, 6.4, 'Vachanamrut'], [18.7, 14, 'Swamini Vato'], [26.7, 14, 'Satsang Diksha']];
+  function buildCases() {
+    CASES.forEach(([x, z, name], i) => {
+      const g = new THREE.Group();
+      g.add(box(1.8, 3.0, 1.8, M.black, x, 1.5, z));
+      const gl = box(1.62, 1.4, 1.62, M.glass, x, 3.72, z); g.add(gl);
+      const edges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.62, 1.4, 1.62)), M.line); edges.position.set(x, 3.72, z); g.add(edges);
+      const cover = std(0x6b1f1f, { roughness: 0.5 }), paper = std(0xf3ead8, { roughness: 0.8 });
+      const L = box(0.55, 0.06, 0.75, cover, x - 0.29, 3.2, z); L.rotation.z = 0.12; g.add(L);
+      const R = box(0.55, 0.06, 0.75, cover, x + 0.29, 3.2, z); R.rotation.z = -0.12; g.add(R);
+      const pL = box(0.5, 0.05, 0.7, paper, x - 0.27, 3.25, z); pL.rotation.z = 0.12; g.add(pL);
+      const pR = box(0.5, 0.05, 0.7, paper, x + 0.27, 3.25, z); pR.rotation.z = -0.12; g.add(pR);
+      const tag = plate(1.4, 0.32, (ctx, w, h) => {
+        ctx.fillStyle = '#16161a'; ctx.fillRect(0, 0, w, h); ctx.fillStyle = '#e6c27a'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.font = '600 34px "Bodoni Moda", Georgia, serif'; ctx.fillText(name, w / 2, h / 2 + 2);
+      }, 180);
+      const facing = z < 10 ? 1 : -1;
+      tag.position.set(x, 2.5, z + facing * 0.91); tag.rotation.y = facing > 0 ? 0 : Math.PI; g.add(tag);
+      scene.add(g); clickable(g, 'case' + i);
+      spot(x, 9.6, z + facing * 0.6, x, 3.4, z, 0xfff0d8, 1.5, 12, 0.24);
+    });
+  }
+  // Floating pages: long scripture scrolls hanging from a truss, text from top to bottom, with an aisle down the middle
+  function scrollTex(seed, title) {
+    return canvasTex(300, 1920, (ctx, w, h) => {
+      ctx.fillStyle = '#f7f2e8'; ctx.fillRect(0, 0, w, h);
+      let s = seed * 97 + 13; const rnd = () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+      const heads = ['વચનામૃત', 'શિક્ષાપત્રી', 'સ્વામીની વાતો', 'સત્સંગદીક્ષા'];
+      let y = 70;
+      if (title) {
+        ctx.textAlign = 'center'; ctx.fillStyle = '#2a2018'; ctx.font = '600 58px "Bodoni Moda", Georgia, serif';
+        ctx.fillText('SHASTRA'.split('').join(String.fromCharCode(8202)), w / 2, 120);
+        ctx.fillStyle = '#7a2a1a'; ctx.font = '500 32px "Noto Sans Gujarati", sans-serif'; ctx.fillText('શાસ્ત્ર', w / 2, 172);
+        ctx.fillStyle = 'rgba(42, 32, 24, 0.5)'; ctx.fillRect(w / 2 - 40, 200, 80, 2);
+        y = 260;
+      }
+      while (y < h - 60) {
+        if (rnd() < 0.14) {
+          ctx.fillStyle = 'rgba(70, 40, 20, 0.85)'; ctx.font = '500 30px "Noto Sans Gujarati", sans-serif'; ctx.textAlign = 'left';
+          ctx.fillText(heads[Math.floor(rnd() * heads.length)], 26, y + 10); y += 52; continue;
+        }
+        const lines = 3 + Math.floor(rnd() * 5);
+        for (let i = 0; i < lines && y < h - 60; i++) {
+          let x = 26; const end = w - 26 - rnd() * 60;
+          while (x < end) {
+            const ww = 10 + rnd() * 42; if (x + ww > end) break;
+            ctx.strokeStyle = 'rgba(35, 28, 22, 0.78)'; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(x, y);
+            for (let k = 0; k <= ww; k += 4) ctx.lineTo(x + k, y + Math.sin((k + seed * 7 + i) * 0.9) * 3.2 - (rnd() < 0.12 ? 6 : 0));
+            ctx.stroke(); x += ww + 7 + rnd() * 6;
+          }
+          y += 24;
+        }
+        y += 22;
+      }
+    });
+  }
+  const SCROLLS = [[20.2, 8.0, -0.9], [23.0, 7.7, 0.4], [25.8, 8.1, 1.15], [21.4, 12.6, -0.5], [24.4, 12.7, -1.0]];
+  function buildPages() {
+    const top = 11.8, g = new THREE.Group();
+    [[20.3, 4.6], [25.1, 4.6], [20.3, 16], [25.1, 16]].forEach(([x, z]) => g.add(box(0.2, top, 0.2, M.black, x, top / 2, z)));
+    [4.6, 16].forEach(z => g.add(box(7.2, 0.22, 0.22, M.black, 22.7, top, z)));
+    [19.9, 22.7, 25.5].forEach(x => g.add(box(0.18, 0.18, 11.6, M.black, x, top, 10.3)));
+    const texs = [scrollTex(1, true), scrollTex(2), scrollTex(3), scrollTex(4), scrollTex(5)];
+    const W = 1.5, H = 9.6, y0 = 1.0, linePts = [];
+    SCROLLS.forEach(([x, z, rot], i) => {
+      const t = texs[i % texs.length];
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(W, H), new THREE.MeshStandardMaterial({ map: t.tex, side: THREE.DoubleSide, roughness: 0.9, transparent: true, opacity: 0.94, emissive: 0xfff1da, emissiveMap: t.tex, emissiveIntensity: 0.28 }));
+      m.position.set(x, y0 + H / 2, z); m.rotation.y = rot; g.add(m);
+      const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, W + 0.1, 8), M.brass); rod.rotation.z = Math.PI / 2; rod.position.set(0, -H / 2, 0);
+      const rodTop = rod.clone(); rodTop.position.y = H / 2; m.add(rod); m.add(rodTop);
+      const cx = Math.cos(rot) * W / 2, sz = -Math.sin(rot) * W / 2;
+      linePts.push(x - cx * 0.8, y0 + H, z - sz * 0.8, x - cx * 0.8, top, z - sz * 0.8, x + cx * 0.8, y0 + H, z + sz * 0.8, x + cx * 0.8, top, z + sz * 0.8);
+      SEGS.push({ ax: x - cx, az: z - sz, bx: x + cx, bz: z + sz });
+    });
+    const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(linePts, 3));
+    g.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 })));
+    scene.add(g); clickable(g, 'pages');
+    spot(19.9, top - 0.3, 10.3, 23.8, 4.5, 8.0, 0xffe2b8, 1.6, 18, 0.55);
+    spot(25.5, top - 0.3, 10.3, 21.6, 4.5, 12.6, 0xffe2b8, 1.6, 18, 0.55);
+  }
+
+  // ---------- names built into the pieces ----------
+  function buildNames() {
+    // "Mandir" carved into a jali lintel over the Shanti room door, facing the hallway
+    const lintel = plate(3.0, 1.05, (ctx, w, h) => {
+      const g = ctx.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#fbf3e2'); g.addColorStop(1, '#ecd9b4');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(150, 108, 55, 0.35)'; ctx.lineWidth = 2;
+      for (let x = 14; x < w; x += 28) { ctx.beginPath(); ctx.arc(x, 14, 9, 0, Math.PI * 2); ctx.stroke(); ctx.beginPath(); ctx.arc(x, h - 14, 9, 0, Math.PI * 2); ctx.stroke(); }
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const word = 'MANDIR'.split('').join(String.fromCharCode(8202));
+      ctx.font = '600 66px "Bodoni Moda", Georgia, serif';
+      ctx.fillStyle = 'rgba(120, 82, 38, 0.45)'; ctx.fillText(word, w / 2 + 3, h * 0.43 + 3);
+      ctx.fillStyle = '#fffaf0'; ctx.fillText(word, w / 2, h * 0.43);
+      ctx.font = '500 28px "Noto Sans Gujarati", sans-serif';
+      ctx.fillStyle = 'rgba(120, 82, 38, 0.45)'; ctx.fillText('મંદિર', w / 2 + 2, h * 0.73 + 2);
+      ctx.fillStyle = '#fffaf0'; ctx.fillText('મંદિર', w / 2, h * 0.73);
+    }, 160);
+    lintel.material = new THREE.MeshBasicMaterial({ map: lintel.material.map });
+    lintel.position.set(7.5, 7.45, 3.8); lintel.rotation.y = Math.PI; scene.add(lintel); clickable(lintel, 'signs');
+    scene.add(box(3.0, 0.08, 0.36, M.ivory, 7.5, 6.9, 4.0));
+  }
+
+  function buildNFC() {
+    [[21.1, 'nfc0'], [25.1, 'nfc1']].forEach(([x, id]) => {
+      const g = new THREE.Group(), z = 19.8;
+      // TV above: the answer shows here, big enough for the whole group
+      g.add(box(3.55, 2.05, 0.16, M.black, x, 6.5, z - 0.1));
+      const tv = plate(3.4, 1.9, (ctx, w, h) => {
+        const bg = ctx.createLinearGradient(0, 0, w, h); bg.addColorStop(0, '#0f2422'); bg.addColorStop(1, '#14161c');
+        ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#d8a650'; ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        ctx.font = '700 22px Montserrat, sans-serif'; ctx.fillText('ASK THE SHASTRAS', 44, 62);
+        ctx.fillStyle = '#f2ece0'; ctx.font = '500 40px "Bodoni Moda", Georgia, serif';
+        wrap(ctx, '“When I feel anxious, what do the Shastras say?”', 44, 128, w - 88, 48);
+        ctx.fillStyle = 'rgba(242, 236, 224, 0.75)'; ctx.font = '500 24px Montserrat, sans-serif';
+        wrap(ctx, '[The answer from the scriptures goes here, with its reference]', 44, 250, w - 88, 32);
+        ctx.fillStyle = 'rgba(108, 194, 173, 0.9)'; ctx.fillRect(44, h - 52, 160, 5);
+        ctx.fillStyle = 'rgba(242, 236, 224, 0.5)'; ctx.font = '500 18px Montserrat, sans-serif'; ctx.fillText('Tap another card for a new question', 222, h - 44);
+      }, 200);
+      tv.position.set(x, 6.5, z - 0.19); tv.rotation.y = Math.PI; g.add(tv);
+      // Tablet: the tap point
+      g.add(box(1.3, 1.5, 0.25, M.trim, x, 4.35, z - 0.12));
+      const scr = plate(0.95, 1.25, (ctx, w, h) => {
+        ctx.fillStyle = '#0f1a1c'; ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = '#6cc2ad'; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(w / 2, h * 0.36, 34, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(w / 2, h * 0.36, 54, -0.7, 0.7); ctx.stroke(); ctx.beginPath(); ctx.arc(w / 2, h * 0.36, 54, Math.PI - 0.7, Math.PI + 0.7); ctx.stroke();
+        ctx.fillStyle = '#e8f2ef'; ctx.textAlign = 'center'; ctx.font = '600 22px Montserrat, sans-serif'; ctx.fillText('Tap a card here', w / 2, h * 0.66);
+        ctx.fillStyle = '#8fb5ab'; ctx.font = '500 16px Montserrat, sans-serif'; ctx.fillText('Answer shows above', w / 2, h * 0.75);
+      }, 160);
+      scr.position.set(x, 4.35, z - 0.26); scr.rotation.y = Math.PI; g.add(scr);
+      g.add(box(1.4, 0.1, 0.7, M.brass, x, 3.3, z - 0.4));
+      for (let k = 0; k < 4; k++) g.add(box(0.28, 0.02, 0.4, std([0xe9d9b5, 0xcfe4dd, 0xe6c7c0, 0xd9d2ea][k]), x - 0.48 + k * 0.32, 3.37, z - 0.4));
+      scene.add(g); clickable(g, id);
+    });
+  }
+
+  // ---------- Sant ----------
+  const TOPICS = ['What is a Guru?', 'The Guru Parampara', 'Pramukh Swami Maharaj', 'Mahant Swami Maharaj', 'Living the teachings'];
+  function buildPortrait() {
+    const X = 30.8, N = 5, PW = 1.14, GAP = 0.08, H = 7.5, total = N * PW + (N - 1) * GAP, z0 = 10 - total / 2;
+    const g = new THREE.Group();
+    g.add(box(0.7, 0.6, total + 0.3, M.black, X, 0.3, 10));
+    const name = plate(total, 0.42, (ctx, w, h) => {
+      ctx.clearRect(0, 0, w, h); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#d8b06a'; ctx.font = '600 44px "Bodoni Moda", Georgia, serif';
+      ctx.fillText('SANT'.split('').join(String.fromCharCode(8202)) + '   ·   સંત', w / 2, h / 2 + 2);
+    }, 160);
+    name.position.set(X - 0.36, 0.32, 10); name.rotation.y = -Math.PI / 2; g.add(name);
+    for (let k = 0; k < N; k++) {
+      const zc = z0 + k * (PW + GAP) + PW / 2;
+      const front = canvasTex(228, 1500, (ctx, w, h) => {
+        if (portraitImg) {
+          const iw = portraitImg.width, ih = portraitImg.height, fr = total / H;
+          let sw = iw, sh = ih, sx = 0, sy = 0;
+          if (iw / ih > fr) { sw = ih * fr; sx = (iw - sw) / 2; } else { sh = iw / fr; sy = (ih - sh) / 2; }
+          const sliceW = sw * (PW / total), off = sw * (k * (PW + GAP) / total);
+          ctx.drawImage(portraitImg, sx + off, sy, sliceW, sh, 0, 0, w, h);
+        } else { ctx.fillStyle = '#c7773a'; ctx.fillRect(0, 0, w, h); }
+      });
+      needsPortrait.push(front);
+      const back = canvasTex(228, 1500, (ctx, w, h) => {
+        ctx.fillStyle = '#1d1a24'; ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#d8a650'; ctx.fillRect(30, 120, w - 60, 4);
+        ctx.fillStyle = '#d8a650'; ctx.textAlign = 'center'; ctx.font = '700 22px Montserrat, sans-serif'; ctx.fillText('0' + (k + 1), w / 2, 90);
+        ctx.fillStyle = '#f2ece0'; ctx.font = '500 34px "Bodoni Moda", Georgia, serif'; wrap(ctx, TOPICS[k], w / 2, 190, w - 40, 40);
+        ctx.fillStyle = 'rgba(242, 236, 224, 0.35)'; for (let i = 0; i < 14; i++) ctx.fillRect(30, 330 + i * 34, w - 60 - (i % 4) * 22, 10);
+        ctx.strokeStyle = 'rgba(216, 166, 80, 0.5)'; ctx.lineWidth = 3; ctx.strokeRect(30, 900, w - 60, 420);
+        ctx.fillStyle = 'rgba(216, 166, 80, 0.7)'; ctx.font = '500 18px Montserrat, sans-serif'; ctx.fillText('[photo]', w / 2, 1110);
+      });
+      const fm = new THREE.MeshStandardMaterial({ map: front.tex, roughness: 0.7, emissive: 0xffffff, emissiveMap: front.tex, emissiveIntensity: 0.18 });
+      const bm = new THREE.MeshStandardMaterial({ map: back.tex, roughness: 0.7, emissive: 0xffffff, emissiveMap: back.tex, emissiveIntensity: 0.12 });
+      const p = new THREE.Mesh(new THREE.BoxGeometry(0.28, H, PW), [bm, fm, M.black, M.black, M.black, M.black]);
+      p.position.set(X, 0.6 + H / 2, zc); g.add(p);
+    }
+    scene.add(g); clickable(g, 'portrait');
+    spot(26.5, 9.8, 10, X, 4.2, 10, 0xffe6c4, 1.6, 16, 0.42);
+    spot(35.5, 9.8, 10, X, 4.2, 10, 0xffe6c4, 1.1, 14, 0.42);
+  }
+  function plinthCard(x, z, dx, dz, title, id) {
+    const g = new THREE.Group();
+    g.add(box(1.5, 2.8, 1.5, M.black, x, 1.4, z));
+    const card = plate(1.3, 0.85, (ctx, w, h) => {
+      ctx.fillStyle = '#f2ead8'; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#7a2a1a'; ctx.textAlign = 'center'; ctx.font = '600 30px "Bodoni Moda", Georgia, serif'; ctx.fillText(title, w / 2, 44);
+      ctx.fillStyle = 'rgba(60, 40, 20, 0.4)'; for (let i = 0; i < 4; i++) ctx.fillRect(24, 70 + i * 18, w - 48 - (i % 2) * 30, 6);
+    }, 180);
+    card.position.set(x + dx * 0.76, 1.9, z + dz * 0.76); card.rotation.y = Math.atan2(dx, dz); g.add(card);
+    scene.add(g); clickable(g, id);
+    spot(x + dx * 1.6, 9.6, z + dz * 1.6, x, 3.0, z, 0xffe2b0, 1.6, 12, 0.26);
+    return g;
+  }
+  // Birthday kiosks: enter a birthday, see where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day
+  function buildKiosks() {
+    [[34.6, 2.7, 1, 'kiosk0'], [34.6, 17.3, -1, 'kiosk1']].forEach(([x, z, dir, id]) => {
+      const g = new THREE.Group();
+      g.add(box(1.0, 3.3, 0.7, M.black, x, 1.65, z));
+      g.add(box(1.3, 0.06, 0.9, M.brass, x, 3.33, z + dir * 0.05));
+      const scr = plate(1.25, 0.85, (ctx, w, h) => {
+        ctx.fillStyle = '#16121a'; ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#e48b62'; ctx.textAlign = 'center'; ctx.font = '700 15px Montserrat, sans-serif'; ctx.fillText('ON YOUR BIRTHDAY', w / 2, 30);
+        ctx.fillStyle = '#f2ece0'; ctx.font = '500 22px "Bodoni Moda", Georgia, serif'; ctx.fillText('Where was Swami that day?', w / 2, 60);
+        [['Day', 30], ['Month', 82], ['Year', 140]].forEach(([t, x0]) => { ctx.strokeStyle = 'rgba(242, 236, 224, 0.4)'; ctx.lineWidth = 2; ctx.strokeRect(x0, 78, t === 'Year' ? 64 : 44, 26); ctx.fillStyle = 'rgba(242, 236, 224, 0.6)'; ctx.font = '500 11px Montserrat, sans-serif'; ctx.fillText(t, x0 + (t === 'Year' ? 32 : 22), 95); });
+        ctx.fillStyle = '#e48b62'; ctx.fillRect(w / 2 - 34, 112, 68, 14);
+        ctx.fillStyle = 'rgba(242, 236, 224, 0.25)'; ctx.beginPath(); ctx.ellipse(w / 2, 136, 70, 0.1, 0, 0, Math.PI * 2); ctx.fill();
+      }, 160);
+      scr.position.set(x, 3.75, z + dir * 0.05); scr.rotation.set(0, dir > 0 ? 0 : Math.PI, 0); scr.rotateX(-0.55);
+      const bezel = new THREE.Mesh(new THREE.BoxGeometry(1.36, 0.94, 0.06), M.trim);
+      bezel.rotation.copy(scr.rotation); bezel.position.copy(scr.position); bezel.translateZ(-0.04);
+      g.add(bezel); g.add(scr);
+      scene.add(g); clickable(g, id);
+    });
+  }
+
+  function buildPrasangs() {
+    const metal = std(0x2b2b2e, { roughness: 0.4, metalness: 0.6 });
+    const b = plinthCard(38.9, 4.9, -1, 0, 'The Bicycle', 'bike');
+    const bike = new THREE.Group();
+    [-0.42, 0.42].forEach(dx => { const w = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.035, 8, 28), metal); w.position.set(dx, 0.36, 0); bike.add(w); });
+    const bar = (x1, y1, x2, y2) => { const len = Math.hypot(x2 - x1, y2 - y1); const m = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, len, 6), metal); m.position.set((x1 + x2) / 2, (y1 + y2) / 2, 0); m.rotation.z = Math.atan2(y2 - y1, x2 - x1) - Math.PI / 2; bike.add(m); };
+    bar(-0.42, 0.36, 0, 0.36); bar(0, 0.36, -0.12, 0.78); bar(-0.42, 0.36, -0.12, 0.78); bar(-0.12, 0.78, 0.3, 0.8); bar(0.3, 0.8, 0.42, 0.36); bar(0, 0.36, 0.3, 0.8); bar(0.3, 0.8, 0.26, 1.0);
+    bike.position.set(38.9, 2.8, 4.9); bike.rotation.y = Math.PI / 2; b.add(bike);
+    const k = plinthCard(38.9, 15.1, -1, 0, 'Ignited Minds', 'book');
+    const bk = box(0.6, 0.12, 0.85, std(0x23324f, { roughness: 0.6 }), 38.9, 2.88, 15.1); bk.rotation.y = 0.3; k.add(bk);
+  }
+  function buildReflection() {
+    const g = new THREE.Group();
+    const p = plate(8, 6, (ctx, w, h) => {
+      ctx.fillStyle = '#17151b'; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(216, 166, 80, 0.6)'; ctx.lineWidth = 3; ctx.strokeRect(30, 30, w - 60, h - 60);
+      ctx.fillStyle = '#d8a650'; ctx.textAlign = 'center'; ctx.font = '700 26px Montserrat, sans-serif'; ctx.fillText('REFLECTION', w / 2, 140);
+      ctx.fillStyle = '#f1ebdf'; ctx.font = 'italic 500 50px "Bodoni Moda", Georgia, serif';
+      wrap(ctx, '[A final teaching of Pramukh Swami Maharaj and Mahant Swami Maharaj. Wording to be confirmed.]', w / 2, 330, w - 260, 66);
+      ctx.fillStyle = 'rgba(241, 235, 223, 0.6)'; ctx.font = '500 28px Montserrat, sans-serif'; ctx.fillText('Take a card home', w / 2, h - 110);
+    });
+    p.position.set(39.78, 4.4, 10); p.rotation.y = -Math.PI / 2; g.add(p);
+    g.add(box(0.8, 0.1, 2.6, M.brass, 39.4, 1.25, 10));
+    for (let k = 0; k < 5; k++) g.add(box(0.36, 0.05, 0.26, std(0xf0e6d0), 39.4, 1.33 + k * 0.012, 9.2 + k * 0.4));
+    scene.add(g); clickable(g, 'reflection');
+    spot(35, 9.8, 10, 39.6, 4.2, 10, 0xffe6c4, 1.5, 14, 0.5);
+  }
+
+  // ---------- route ----------
+  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 5.3], [6.4, 8.6], [7.5, 11.6], [7.5, 14.4], [5.6, 15.0], [12.5, 15.8], [13, 5.2], [15.6, 10.8], [18.2, 10.2], [22.7, 10.3], [26.7, 10.2], [28.6, 9.6], [29.6, 4.6], [32.4, 2], [34.6, 4.6], [35.6, 9.5], [37.6, 10], [36.8, 5], [37.5, 2], [43, 2]];
+  let walkCurve = null;
+  function buildRoute() {
+    walkCurve = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, EYE, z)), false, 'centripetal', 0.5);
+    const lab = (text, x, z) => { const p = plate(5, 1.2, (ctx, w, h) => { ctx.fillStyle = 'rgba(232, 178, 92, 0.75)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '700 84px Montserrat, sans-serif'; ctx.fillText(text, w / 2, h / 2); }, 120); p.rotation.x = -Math.PI / 2; p.position.set(x, 0.03, z); scene.add(p); };
+    lab('FROM MULYO', -5.5, 2); lab('EXIT', 44, 2);
+  }
+
+  // ---------- lights ----------
+  let ambient, hemi;
+  function buildLights() {
+    ambient = new THREE.AmbientLight(0x8f97a8, 0.1); scene.add(ambient);
+    hemi = new THREE.HemisphereLight(0xfff4e0, 0x2a2622, 0); scene.add(hemi);
+  }
+
+  // ---------- camera: orbit, plan, walk-through, walk around ----------
+  camera.rotation.order = 'YXZ';
+  const orbit = { target: new THREE.Vector3(20, 0, 10), theta: -0.6, phi: 0.82, radius: 42 };
+  const goal = { target: orbit.target.clone(), theta: orbit.theta, phi: orbit.phi, radius: orbit.radius };
+  let mode = 'overview';
+  const tour = { t: 0, playing: true, yawOff: 0, pitchOff: 0, yaw: null, hold: 0, next: 0, look: null };
+  const roam = { x: -2.5, z: 2, yaw: -Math.PI / 2, pitch: -0.05 };
+  const keys = {};
+  function fitRadius(base) { const a = viewer.clientWidth / Math.max(1, viewer.clientHeight); return base * Math.max(1, 1.55 / a); }
+  function setGoal(o) { Object.keys(o).forEach(k => { if (k === 'target') goal.target.copy(o.target); else goal[k] = o[k]; }); }
+  const btn = { overview: document.getElementById('vOverview'), plan: document.getElementById('vPlan'), walk: document.getElementById('vWalk'), roam: document.getElementById('vRoam'), d2: document.getElementById('v2d') };
+  const tourEl = document.getElementById('tour'), padEl = document.getElementById('pad'), zoomEl = document.getElementById('zoomCtl'), hintEl = document.getElementById('hint'), scaleEl = document.getElementById('scaleNote');
+  const tourPlay = document.getElementById('tourPlay'), tourBar = document.getElementById('tourBar'), tourStops = document.getElementById('tourStops');
+  const HINTS = {
+    orbit: 'Double-click a spot to zoom in · WASD to move · Q/E to turn',
+    roam: 'Drag to look · WASD, arrow keys or the pad to move · Shift for faster',
+    walk: 'Drag to look around · Space to pause'
+  };
+  function setMode(m) {
+    const prev = mode; mode = m;
+    btn.overview.setAttribute('aria-pressed', String(m === 'overview'));
+    btn.plan.setAttribute('aria-pressed', String(m === 'plan'));
+    btn.walk.setAttribute('aria-pressed', String(m === 'walk'));
+    btn.roam.setAttribute('aria-pressed', String(m === 'roam'));
+    btn.d2.setAttribute('aria-pressed', String(m === '2d'));
+    const was2d = viewer.classList.contains('is2d');
+    viewer.classList.toggle('is2d', m === '2d'); document.getElementById('plan2d').hidden = m !== '2d';
+    if (was2d && m !== '2d') resize();
+    btn.walk.textContent = m === 'walk' ? '■ Stop walk-through' : '▶ Walk through';
+    btn.roam.textContent = m === 'roam' ? '■ Stop walking' : 'Walk around';
+    tourEl.hidden = m !== 'walk'; padEl.hidden = m !== 'roam'; zoomEl.hidden = m === 'walk' || m === 'roam';
+    scaleEl.hidden = m === 'walk';
+    hintEl.hidden = m === 'walk';
+    hintEl.textContent = m === 'roam' ? HINTS.roam : HINTS.orbit;
+    if (m === 'overview') setGoal({ target: new THREE.Vector3(20, 0, 10), theta: -0.6, phi: 0.82, radius: fitRadius(42) });
+    if (m === 'plan') setGoal({ target: new THREE.Vector3(20, 0, 10), theta: 0, phi: 0.001, radius: fitRadius(44) });
+    if (m === 'walk') { tour.t = 0; tour.playing = true; tour.hold = 0; tour.next = 0; tour.look = null; tour.yawOff = 0; tour.pitchOff = 0; tour.yaw = null; card.hidden = true; syncTour(); }
+    if (m === 'roam' && prev !== 'roam') { roam.x = -2.5; roam.z = 2; roam.yaw = -Math.PI / 2; roam.pitch = -0.05; card.hidden = true; canvas.focus({ preventScroll: true }); }
+  }
+  btn.overview.addEventListener('click', () => setMode('overview'));
+  btn.plan.addEventListener('click', () => setMode('plan'));
+  btn.walk.addEventListener('click', () => setMode(mode === 'walk' ? 'overview' : 'walk'));
+  btn.roam.addEventListener('click', () => setMode(mode === 'roam' ? 'overview' : 'roam'));
+  btn.d2.addEventListener('click', () => setMode(mode === '2d' ? 'overview' : '2d'));
+  function freeOrbit() { if (mode === 'overview' || mode === 'plan') { mode = 'free'; btn.overview.setAttribute('aria-pressed', 'false'); btn.plan.setAttribute('aria-pressed', 'false'); } }
+
+  // Go to a part of the section, in whichever mode is active
+  const ZONES = {
+    mandir: { at: [7.5, 10], roam: [-2.5, 2, -Math.PI / 2], stop: 0 },
+    shastra: { at: [23, 10], roam: [16.8, 10.2, -Math.PI / 2], stop: 3 },
+    sant: { at: [34.5, 10], roam: [24.5, 10.3, -Math.PI / 2], stop: 4 }
+  };
+  document.querySelectorAll('[data-zone]').forEach(b => b.addEventListener('click', () => {
+    const Z = ZONES[b.dataset.zone];
+    if (mode === '2d') setMode('free');
+    if (mode === 'roam') { roam.x = Z.roam[0]; roam.z = Z.roam[1]; roam.yaw = Z.roam[2]; roam.pitch = -0.05; return; }
+    if (mode === 'walk') { jumpStop(Z.stop); return; }
+    mode = 'free'; ['overview', 'plan'].forEach(k => btn[k].setAttribute('aria-pressed', 'false'));
+    setGoal({ target: new THREE.Vector3(Z.at[0], 2, Z.at[1]), radius: 24, theta: -0.3, phi: 0.82 });
+  }));
+
+  // Walk-through stops, timeline and pause
+  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [4.5, 20]], ['Shastra', 12, [22.7, 10.3]], ['Portrait', 13, [30.8, 10]], ['Birthday', 18, [34.6, 2.7]], ['Panel backs', 19, [30.8, 10]], ['Reflection', 20, [39.8, 10]], ['Exit', 22, [43, 2]]];
+  let stopU = [];
+  function buildStops() {
+    const n = ROUTE.length - 1, L = walkCurve.getLengths(400);
+    stopU = STOPS.map(([, i]) => L[Math.round(400 * i / n)] / L[400]);
+    STOPS.forEach(([name], k) => {
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = name;
+      b.addEventListener('click', () => jumpStop(k)); tourStops.appendChild(b);
+    });
+  }
+  function jumpStop(k) { tour.t = stopU[k]; tour.hold = 3; tour.look = STOPS[k][2]; tour.next = k + 1; tour.yaw = null; tour.yawOff = 0; tour.pitchOff = 0; syncTour(); }
+  function syncTour() {
+    tourPlay.textContent = tour.playing ? 'Pause' : (tour.t >= 1 ? 'Replay' : 'Play');
+    tourBar.value = String(Math.round(tour.t * 1000));
+    let cur = 0; stopU.forEach((u, k) => { if (tour.t + 0.015 >= u) cur = k; });
+    [...tourStops.children].forEach((b, k) => b.setAttribute('aria-current', String(k === cur)));
+  }
+  tourPlay.addEventListener('click', () => { if (tour.t >= 1) { tour.t = 0; tour.yaw = null; tour.next = 0; tour.hold = 0; } tour.playing = !tour.playing; syncTour(); });
+  tourBar.addEventListener('input', () => { tour.t = Number(tourBar.value) / 1000; tour.playing = false; tour.yaw = null; tour.hold = 0; tour.next = stopU.findIndex(u => u > tour.t + 0.001); if (tour.next < 0) tour.next = stopU.length; syncTour(); });
+
+  // Zoom buttons and the walking pad
+  function zoomBy(dir) { goal.radius = THREE.MathUtils.clamp(goal.radius * (dir > 0 ? 1.25 : 0.8), 6, 120); }
+  document.getElementById('zIn').addEventListener('click', () => zoomBy(-1));
+  document.getElementById('zOut').addEventListener('click', () => zoomBy(1));
+  padEl.querySelectorAll('[data-k]').forEach(b => {
+    const k = b.dataset.k;
+    const on = e => { e.preventDefault(); keys[k] = true; b.setPointerCapture && b.setPointerCapture(e.pointerId); };
+    const off = () => { keys[k] = false; };
+    b.addEventListener('pointerdown', on); b.addEventListener('pointerup', off); b.addEventListener('pointercancel', off); b.addEventListener('lostpointercapture', off);
+  });
+
+  // Keyboard, only while the pointer is over the model or the model has focus
+  let hover = false;
+  viewer.addEventListener('pointerenter', () => { hover = true; }); viewer.addEventListener('pointerleave', () => { hover = false; });
+  const NAV = ['KeyW', 'KeyA', 'KeyS', 'KeyD', 'KeyQ', 'KeyE', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ShiftLeft', 'ShiftRight'];
+  window.addEventListener('keydown', e => {
+    const tag = e.target && e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    const active = hover || document.activeElement === canvas;
+    if (!active) return;
+    if (e.code === 'Space' && mode === 'walk') { e.preventDefault(); if (tour.t >= 1) { tour.t = 0; tour.next = 0; } tour.playing = !tour.playing; syncTour(); return; }
+    if ((e.code === 'Equal' || e.code === 'NumpadAdd') && mode !== 'roam' && mode !== 'walk') { zoomBy(-1); return; }
+    if ((e.code === 'Minus' || e.code === 'NumpadSubtract') && mode !== 'roam' && mode !== 'walk') { zoomBy(1); return; }
+    if (!NAV.includes(e.code) || mode === 'walk') return;
+    keys[e.code] = true; e.preventDefault();
+  });
+  window.addEventListener('keyup', e => { keys[e.code] = false; });
+  window.addEventListener('blur', () => Object.keys(keys).forEach(k => { keys[k] = false; }));
+
+  // Pointer: orbit and pan, look around while walking, pinch zoom, click to pick, double-click to zoom in
+  const pointers = new Map(); let drag = null, pinch0 = 0;
+  canvas.addEventListener('contextmenu', e => e.preventDefault());
+  canvas.addEventListener('pointerdown', e => {
+    canvas.focus({ preventScroll: true });
+    canvas.setPointerCapture(e.pointerId); pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    drag = { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, pan: e.button === 2 || e.shiftKey, moved: 0 };
+    if (pointers.size === 2) { const [a, b] = [...pointers.values()]; pinch0 = Math.hypot(a.x - b.x, a.y - b.y); }
+  });
+  canvas.addEventListener('pointermove', e => {
+    if (!pointers.has(e.pointerId) || !drag) return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 2) {
+      const [a, b] = [...pointers.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y);
+      if (pinch0 && mode !== 'roam' && mode !== 'walk') { goal.radius = THREE.MathUtils.clamp(goal.radius * pinch0 / d, 6, 120); orbit.radius = goal.radius; freeOrbit(); }
+      pinch0 = d; drag.moved += 10; return;
+    }
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
+    drag.moved = Math.max(drag.moved, Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy));
+    if (mode === 'roam') { roam.yaw += dx * 0.0045; roam.pitch = THREE.MathUtils.clamp(roam.pitch + dy * 0.0035, -1.1, 0.9); return; }
+    if (mode === 'walk') { tour.yawOff += dx * 0.0045; tour.pitchOff = THREE.MathUtils.clamp(tour.pitchOff + dy * 0.0035, -0.9, 0.8); return; }
+    if (drag.pan) {
+      const s = orbit.radius * 0.0016, st = Math.sin(orbit.theta), ct = Math.cos(orbit.theta);
+      goal.target.x += (-dx * ct - dy * st) * s; goal.target.z += (dx * st - dy * ct) * s;
+      goal.target.x = THREE.MathUtils.clamp(goal.target.x, -5, 45); goal.target.z = THREE.MathUtils.clamp(goal.target.z, -5, 25);
+      orbit.target.copy(goal.target);
+    } else {
+      goal.theta -= dx * 0.006; goal.phi = THREE.MathUtils.clamp(goal.phi - dy * 0.005, 0.001, 1.48);
+      orbit.theta = goal.theta; orbit.phi = goal.phi;
+    }
+    if (drag.moved > 6) freeOrbit();
+  });
+  const endPointer = e => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.delete(e.pointerId); if (pointers.size < 2) pinch0 = 0;
+    if (drag && drag.moved < 6 && pointers.size === 0) pick(e.clientX, e.clientY);
+    if (pointers.size === 0) drag = null;
+  };
+  canvas.addEventListener('pointerup', endPointer); canvas.addEventListener('pointercancel', endPointer);
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault(); if (mode === 'walk' || mode === 'roam') return;
+    goal.radius = THREE.MathUtils.clamp(goal.radius * (1 + Math.sign(e.deltaY) * Math.min(0.25, Math.abs(e.deltaY) * 0.0012)), 6, 120);
+    freeOrbit();
+  }, { passive: false });
+  canvas.addEventListener('dblclick', e => {
+    if (mode === 'walk' || mode === 'roam') return;
+    const r = canvas.getBoundingClientRect();
+    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(scene.children, true).find(h => h.object.visible && h.object.isMesh);
+    if (!hit) return;
+    freeOrbit(); mode = 'free';
+    setGoal({ target: new THREE.Vector3(THREE.MathUtils.clamp(hit.point.x, -3, 43), Math.min(3, Math.max(0, hit.point.y)), THREE.MathUtils.clamp(hit.point.z, -3, 23)), radius: Math.max(10, goal.radius * 0.55) });
+    if (goal.phi < 0.35) goal.phi = 0.7;
+  });
+
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  function pick(cx, cy) {
+    const r = canvas.getBoundingClientRect();
+    ndc.set(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(CLICK, false).find(h => h.object.visible);
+    if (!hit) { card.hidden = true; return; }
+    const id = hit.object.userData.item;
+    if (hit.object.userData.door !== undefined) { const d = doors[hit.object.userData.door]; d.open = !d.open; }
+    openCard(id, false);
+  }
+
+  // Collision for walking around
+  const R = 0.75;
+  function pushSeg(p, s) {
+    const dx = s.bx - s.ax, dz = s.bz - s.az, L2 = dx * dx + dz * dz;
+    let t = ((p.x - s.ax) * dx + (p.z - s.az) * dz) / L2; t = Math.max(0, Math.min(1, t));
+    const cx = s.ax + dx * t, cz = s.az + dz * t, ex = p.x - cx, ez = p.z - cz, d = Math.hypot(ex, ez), min = R + 0.18;
+    if (d < min && d > 1e-5) { const k = min / d; p.x = cx + ex * k; p.z = cz + ez * k; }
+  }
+  function pushBox(p, b) {
+    const hx = b.hx + R, hz = b.hz + R, dx = p.x - b.cx, dz = p.z - b.cz;
+    if (Math.abs(dx) < hx && Math.abs(dz) < hz) { if (hx - Math.abs(dx) < hz - Math.abs(dz)) p.x = b.cx + (dx >= 0 ? 1 : -1) * hx; else p.z = b.cz + (dz >= 0 ? 1 : -1) * hz; }
+  }
+  function collide(p) {
+    for (let i = 0; i < 3; i++) { SEGS.forEach(s => pushSeg(p, s)); BOXES.forEach(b => pushBox(p, b)); }
+    p.x = THREE.MathUtils.clamp(p.x, -6, 46); p.z = THREE.MathUtils.clamp(p.z, -3, 23);
+  }
+  function addColliders() {
+    CASES.forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.9, hz: 0.9 }));
+    [[38.9, 4.9], [38.9, 15.1]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.75, hz: 0.75 }));
+    [[34.6, 2.7], [34.6, 17.3]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.6, hz: 0.5 }));
+    BOXES.push({ cx: 30.8, cz: 10, hx: 0.35, hz: 3.3 });
+    [[20.3, 4.6], [25.1, 4.6], [20.3, 16], [25.1, 16]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.15, hz: 0.15 }));
+    BOXES.push({ cx: 23, cz: 0.7, hx: 6, hz: 0.55 });
+    BOXES.push({ cx: 13, cz: 0.85, hx: 3, hz: 0.65 }, { cx: 13, cz: 19.15, hx: 3, hz: 0.65 }, { cx: 4.5, cz: 19.15, hx: 3, hz: 0.65 });
+    [21.1, 25.1].forEach(x => BOXES.push({ cx: x, cz: 19.4, hx: 0.7, hz: 0.4 }));
+    BOXES.push({ cx: 39.4, cz: 10, hx: 0.4, hz: 1.3 });
+  }
+
+  // ---------- info card & labels ----------
+  const card = document.getElementById('card');
+  const cTag = document.getElementById('cTag'), cName = document.getElementById('cName'), cWhat = document.getElementById('cWhat'), cBuild = document.getElementById('cBuild'), cSize = document.getElementById('cSize'), cAct = document.getElementById('cAct');
+  document.getElementById('cardClose').addEventListener('click', () => { card.hidden = true; });
+  function openCard(id, fly) {
+    const it = ITEMS[id]; if (!it) return;
+    card.style.setProperty('--c', ZC[it.zone]);
+    cTag.textContent = it.zone; cName.textContent = it.name; cWhat.textContent = it.what; cBuild.textContent = it.build; cSize.textContent = it.size;
+    cAct.hidden = id !== 'spines';
+    if (id === 'spines') { const anyOpen = doors.some(d => d.open); cAct.textContent = anyOpen ? 'Close the spines' : 'Open the four spines'; }
+    card.hidden = false;
+    if (fly && mode !== 'walk') { mode = 'free'; ['overview', 'plan'].forEach(k => btn[k].setAttribute('aria-pressed', 'false')); const th = id === 'signs' || id === 'hallway' ? Math.PI - 0.2 : it.at[0] > 37 ? -Math.PI / 2 : it.at[1] > 13 ? Math.PI - 0.3 : it.at[1] < 5 ? -0.3 : -0.6; setGoal({ target: new THREE.Vector3(it.at[0], 2, it.at[1]), radius: id === 'shanti' ? 15 : id === 'signs' ? 13 : 18, theta: th, phi: id === 'shanti' ? 0.55 : id === 'signs' ? 0.62 : 0.78 }); }
+  }
+  cAct.addEventListener('click', () => { const anyOpen = doors.some(d => d.open); doors.forEach(d => { d.open = !anyOpen; }); cAct.textContent = anyOpen ? 'Open the four spines' : 'Close the spines'; });
+  document.querySelectorAll('[data-item]').forEach(b => b.addEventListener('click', () => {
+    if (mode === 'walk' || mode === 'roam' || mode === '2d') setMode('free');
+    openCard(b.dataset.item, true); viewer.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+  }));
+  const labelBox = document.getElementById('labels'); const labelEls = [];
+  LABELS.forEach(([id, text, y]) => {
+    const it = ITEMS[id]; const el = document.createElement('button'); el.type = 'button'; el.className = 'lbl'; el.textContent = text;
+    el.style.setProperty('--c', ZC[it.zone]); el.addEventListener('click', () => openCard(id, false));
+    labelBox.appendChild(el); labelEls.push({ el, pos: new THREE.Vector3(it.at[0], y, it.at[1]) });
+  });
+  let showLabels = true;
+  const tLabels = document.getElementById('tLabels');
+  tLabels.addEventListener('click', () => { showLabels = !showLabels; tLabels.setAttribute('aria-pressed', String(showLabels)); });
+  const tDims = document.getElementById('tDims'); let showDims = false;
+  tDims.addEventListener('click', () => { showDims = !showDims; tDims.setAttribute('aria-pressed', String(showDims)); });
+  const tWalls = document.getElementById('tWalls'); let seeThrough = false;
+  tWalls.addEventListener('click', () => {
+    seeThrough = !seeThrough; tWalls.setAttribute('aria-pressed', String(seeThrough));
+    SEE.forEach(m => { m.transparent = seeThrough; m.opacity = seeThrough ? 0.16 : 1; m.depthWrite = !seeThrough; m.needsUpdate = true; });
+  });
+  const tLights = document.getElementById('tLights'); let exhibit = true;
+  function applyLights() { ambient.intensity = exhibit ? 0.1 : 0.35; hemi.intensity = exhibit ? 0 : 1.05; }
+  tLights.addEventListener('click', () => { exhibit = !exhibit; tLights.setAttribute('aria-pressed', String(exhibit)); applyLights(); });
+
+  // ---------- dimensions in 3D ----------
+  const dimGroup = new THREE.Group(); dimGroup.visible = false;
+  const DIMS = [];
+  const dimMat = new THREE.LineBasicMaterial({ color: 0xe8b25c, depthTest: false, transparent: true, opacity: 0.95 });
+  function dimLine(ax, az, bx, bz, text, y) {
+    y = y === undefined ? 0.12 : y;
+    const dx = bx - ax, dz = bz - az, L = Math.hypot(dx, dz), nx = -dz / L * 0.35, nz = dx / L * 0.35;
+    const pts = [ax, y, az, bx, y, bz, ax - nx, y, az - nz, ax + nx, y, az + nz, bx - nx, y, bz - nz, bx + nx, y, bz + nz];
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
+    const l = new THREE.LineSegments(g, dimMat); l.renderOrder = 10; dimGroup.add(l);
+    DIMS.push({ pos: new THREE.Vector3((ax + bx) / 2, y, (az + bz) / 2), text, kind: 'dim' });
+  }
+  function dimTag(x, y, z, text) { DIMS.push({ pos: new THREE.Vector3(x, y, z), text, kind: 'dimtag' }); }
+  function buildDims() {
+    dimLine(0, -1.6, 40, -1.6, '40 ft'); dimLine(41.8, 0, 41.8, 20, '20 ft');
+    dimLine(0, 21.6, 16.5, 21.6, 'Mandir 16.5 ft'); dimLine(16.5, 21.6, 29.2, 21.6, 'Shastra 12.7 ft'); dimLine(29.2, 21.6, 40, 21.6, 'Sant 10.8 ft');
+    dimLine(-1.6, 0, -1.6, 4, 'Entrance 4 ft'); dimLine(43.4, 0, 43.4, 4, 'Exit 4 ft');
+    dimLine(0, 1.2, 9, 1.2, 'Hallway 9 ft'); dimLine(0.7, 0, 0.7, 4, '4 ft');
+    dimLine(0, 13.7, 9, 13.7, '9 ft'); dimLine(9.7, 4, 9.7, 13, '9 ft');
+    dimLine(10, 2.3, 16, 2.3, 'Booth 6 ft');
+    dimLine(17.05, 1.9, 28.9, 1.9, 'Spine wall 11.9 ft'); dimLine(18.7, 1.2, 18.7, 5.5, '4.3 ft');
+    dimLine(22.4, 8.8, 22.4, 12.1, 'Aisle 3.3 ft');
+    dimLine(19.3, 18.4, 26.9, 18.4, 'NFC wall 7.6 ft');
+    dimLine(29.9, 7, 29.9, 13, 'Portrait 6 ft'); dimLine(33.1, 0, 33.1, 4.1, '4.1 ft'); dimLine(33.1, 15.9, 33.1, 20, '4.1 ft');
+    dimTag(20, 8.6, 0, 'Walls 8 ft high');
+    dimTag(4.5, 8.6, 8.5, 'Shanti room 9 × 9 × 8 ft');
+    dimTag(23, 7.8, 0.7, '8 spines · 1.4 × 1 × 7.2 ft');
+    dimTag(18.7, 4.9, 6.4, 'Case 1.8 × 1.8 × 4.4 ft');
+    dimTag(22.7, 12.3, 10.3, '5 scrolls 1.5 × 9.5 ft · truss 12 ft');
+    dimTag(23.1, 7.9, 19.6, 'TVs 3.5 × 2 ft, 5.5–7.5 ft up');
+    dimTag(30.8, 8.6, 10, '5 panels 14 in × 7.5 ft');
+    dimTag(34.6, 4.6, 2.7, 'Kiosk 1 × 0.7 × 3.3 ft');
+    dimTag(38.9, 3.4, 15.1, 'Plinth 1.5 × 1.5 × 2.8 ft');
+    dimTag(39.4, 7.8, 10, 'Reflection 8 × 6 ft');
+    dimTag(13, 8.6, 0.6, 'Header 6 × 0.9 ft');
+    scene.add(dimGroup);
+    DIMS.forEach(d => { const el = document.createElement('div'); el.className = d.kind; el.textContent = d.text; el.hidden = true; labelBox.appendChild(el); d.el = el; });
+  }
+
+  // ---------- 2D plan with dimensions and materials ----------
+  const MATERIALS = [
+    [1, 'Walls', '≈155 linear ft, 8 ft high', '½ in plywood in 4 × 8 ft sheets on 2×3 frames, painted flat charcoal; kickers for bracing', 'About 40 sheets'],
+    [2, 'Chaos hallway', '9 × 4 ft', 'Matte black paint on all three walls, printed vinyl strip 2 ft tall at 4–6 ft, 2 cool LED bare-bulb pendants', '≈19 ft of strip'],
+    [3, 'Shanti room', '9 × 9 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
+    [4, 'Mandir lintel', '3 × 1 ft', 'Laser-cut MDF jali with carved letters, painted ivory', '1'],
+    [5, 'Booth kits', '6 ft wall, 15 in ledge', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet', '3'],
+    [6, 'Spine wall', '8 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 4 that open: 7 ft piano hinge, magnetic catch, door stop, printed insides', '8 spines'],
+    [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '4'],
+    [8, 'Floating pages', '7 × 11 ft area, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, black truss with 4 posts (or ceiling rigging), clear line', '5 scrolls'],
+    [9, 'NFC wall', '7.6 ft wide', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
+    [10, 'Split portrait', '6 ft wide, 7.5 ft panels', '5 panels 14 in wide in ¾ in plywood or 10 mm foam board, double-sided prints, base 0.7 × 6 × 0.6 ft with gold letters', '5 panels'],
+    [11, 'Fins', '≈3 ft each', 'Plywood wall modules painted charcoal', '2'],
+    [12, 'Birthday kiosks', '1 × 0.7 × 3.3 ft', 'Plywood pedestal painted black, angled tablet or touchscreen, one offline web page with the date archive', '2'],
+    [13, 'Prasang plinths', '1.5 × 1.5 × 2.8 ft', 'Plywood plinth painted black, the object, printed story card', '2'],
+    [14, 'Reflection wall', '8 × 6 ft', 'Printed panel on foam board or Dibond, card ledge 2.6 ft, take-home cards', '1'],
+    [15, 'Lighting', 'Whole section', 'Clamp-on LED spots at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', 'About 18 spots'],
+    [16, 'Floor covering', '40 × 20 ft', 'Black loop carpet in 12 ft wide rolls (two runs of 40 ft, one cut to 8 ft), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 960 sq ft']
+  ];
+  function build2D() {
+    const S = 20, OX = 96, OY = 70, X = v => (OX + v * S).toFixed(1), Y = v => (OY + v * S).toFixed(1);
+    const out = [];
+    const rect = (x0, z0, x1, z1, cls) => out.push(`<rect x="${X(x0)}" y="${Y(z0)}" width="${((x1 - x0) * S).toFixed(1)}" height="${((z1 - z0) * S).toFixed(1)}" class="${cls}"/>`);
+    const line = (x0, z0, x1, z1, cls) => out.push(`<line x1="${X(x0)}" y1="${Y(z0)}" x2="${X(x1)}" y2="${Y(z1)}" class="${cls}"/>`);
+    const text = (x, z, t, cls, anchor) => out.push(`<text x="${X(x)}" y="${Y(z)}" class="${cls}" text-anchor="${anchor || 'middle'}" dominant-baseline="central">${t}</text>`);
+    const dim = (x0, z0, x1, z1, t, off) => {
+      const dx = x1 - x0, dz = z1 - z0, L = Math.hypot(dx, dz), nx = -dz / L * 0.3, nz = dx / L * 0.3;
+      line(x0, z0, x1, z1, 'p-dim'); line(x0 - nx, z0 - nz, x0 + nx, z0 + nz, 'p-dim'); line(x1 - nx, z1 - nz, x1 + nx, z1 + nz, 'p-dim');
+      const o = off || 0; text((x0 + x1) / 2 + (dz ? o : 0), (z0 + z1) / 2 + (dx ? o : 0), t, 'p-dimt');
+    };
+    const badge = (x, z, n) => out.push(`<g class="p-badge"><circle cx="${X(x)}" cy="${Y(z)}" r="9"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`);
+    rect(0, 0, 16.5, 20, 'p-zm'); rect(16.5, 0, 29.2, 20, 'p-zs'); rect(29.2, 0, 40, 20, 'p-zt');
+    for (let x = 0; x <= 40; x++) line(x, 0, x, 20, 'p-grid'); for (let z = 0; z <= 20; z++) line(0, z, 40, z, 'p-grid');
+    rect(0, 4, 9, 13, 'p-ivory');
+    rect(6, 3.8, 9, 4.2, 'p-piece');
+    rect(10, 0.2, 16, 1.5, 'p-piece'); rect(10, 18.5, 16, 19.8, 'p-piece'); rect(1.5, 18.5, 7.5, 19.8, 'p-piece');
+    SPINES.forEach((sp, i) => rect(17.05 + i * 1.49, 0.18, 17.05 + i * 1.49 + 1.38, 1.18, sp[2] ? 'p-piece p-open' : 'p-piece'));
+    CASES.forEach(([x, z]) => rect(x - 0.9, z - 0.9, x + 0.9, z + 0.9, 'p-piece'));
+    rect(19.9, 4.6, 25.5, 16, 'p-dash');
+    SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; line(x - cx, z - sz, x + cx, z + sz, 'p-scroll'); });
+    rect(19.3, 19.45, 22.9, 19.8, 'p-piece'); rect(23.3, 19.45, 26.9, 19.8, 'p-piece');
+    rect(30.45, 6.85, 31.15, 13.15, 'p-piece');
+    [[34.6, 2.7], [34.6, 17.3]].forEach(([x, z]) => rect(x - 0.5, z - 0.35, x + 0.5, z + 0.35, 'p-piece'));
+    [[38.9, 4.9], [38.9, 15.1]].forEach(([x, z]) => rect(x - 0.75, z - 0.75, x + 0.75, z + 0.75, 'p-piece'));
+    rect(39.55, 6, 39.82, 14, 'p-piece');
+    WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
+    // dimensions
+    dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 20, '20 ft', 1.1);
+    dim(0, 21.3, 16.5, 21.3, 'Mandir 16.5 ft', 0.65); dim(16.5, 21.3, 29.2, 21.3, 'Shastra 12.7 ft', 0.65); dim(29.2, 21.3, 40, 21.3, 'Sant 10.8 ft', 0.65);
+    dim(-1.4, 0, -1.4, 4, '4 ft', -1.0); text(-2.2, 6.0, 'Entrance', 'p-note', 'middle');
+    dim(43.2, 0, 43.2, 4, '4 ft', 1.0); text(43.8, 6.0, 'Exit', 'p-note', 'middle');
+    dim(0, 2.6, 9, 2.6, 'Hallway 9 × 4 ft', -0.55);
+    dim(0, 14.1, 9, 14.1, '9 ft', 0.55); dim(9.8, 4, 9.8, 9, '9 × 9 ft room', 1.75);
+    dim(10, 2.3, 16, 2.3, 'Booth 6 ft', 0.55);
+    dim(17.05, 2.0, 28.9, 2.0, 'Spine wall 11.9 ft', 0.55);
+    dim(18.7, 1.25, 18.7, 5.45, '4.3 ft', -1.1);
+    dim(22.4, 8.8, 22.4, 12.1, 'Aisle 3.3 ft', 0);
+    dim(19.3, 18.6, 26.9, 18.6, 'NFC wall 7.6 ft', -0.55);
+    dim(29.6, 7, 29.6, 13, '6 ft', -0.9);
+    dim(33.2, 0.15, 33.2, 4.1, '4 ft', -0.9); dim(33.2, 15.9, 33.2, 19.85, '4 ft', -0.9);
+    // numbered pieces
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 8.5, 3], [7.5, 4.9, 4], [13, 1.0, 5], [13, 19.1, 5], [4.5, 19.1, 5], [23, 0.7, 6], [18.7, 6.4, 7], [26.7, 6.4, 7], [18.7, 14, 7], [26.7, 14, 7], [22.7, 15.2, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [31.9, 5.6, 11], [31.9, 14.4, 11], [34.6, 2.7, 12], [34.6, 17.3, 12], [38.9, 4.9, 13], [38.9, 15.1, 13], [38.6, 10, 14]].forEach(([x, z, n]) => badge(x, z, n));
+    text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
+    const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
+    const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');
+    const MEDIA = [
+      [2, 'Notification stream', 'Print', '1 strip', 'About 19 × 2 ft printed vinyl, 150 dpi, in 3 pieces (9, 6 and 4 ft)', 'One flowing stream of phone notifications and photos of everyday noise: missed calls, deadlines, bills, traffic, 99+ unread'],
+      [3, 'Shanti room photos', 'Photo', '3', '24 × 36 in, matte, framed; at least 3600 × 5400 px each', 'Approved images of Pramukh Swami Maharaj, Mahant Swami Maharaj and a mandir murti or interior'],
+      [3, 'Shanti room music', 'Audio', '1 loop', '10–15 min, seamless loop, instrumental only', 'Instrumental of a kirtan people know; confirm usage rights'],
+      [4, 'Mandir lettering', 'Fabrication', '1', 'Vector file for a 3 × 1 ft laser-cut jali lintel', '“MANDIR · મંદિર” set in the jali pattern'],
+      [5, 'Booth headers', 'Print', '3', '6 × 0.9 ft foam board', 'Names: BKY, BAPS Charities, Better Living Sessions; approved logos if used'],
+      [5, 'Booth displays', 'From others', '3 sets', 'Two display spaces per booth, on French cleats', 'Made by each activity lead; set a review date'],
+      [6, 'Spine wraps', 'Print', '8', 'About 1.4 × 7.2 ft front plus 1 ft sides each', 'Title of each scripture, leather texture, gold bands'],
+      [6, 'Spine insides', 'Print', '4', 'About 1.2 × 6.9 ft each', 'For each of the 4 that open: the teaching, a story, and what it means in everyday life. Writing needed'],
+      [7, 'Case name plates', 'Print', '4', 'About 17 × 4 in', 'Shikshapatri, Vachanamrut, Swamini Vato, Satsang Diksha'],
+      [8, 'Hanging scrolls', 'Fabric print', '5', '1.5 × 9.5 ft dye-sub voile, 150 dpi', 'Verses in Gujarati and English, top to bottom; the first scroll opens with “SHASTRA · શાસ્ત્ર”. Verse selection approved'],
+      [9, 'Question cards', 'Print', '20–30', 'About 3.5 × 5 in with an NFC sticker (QR fallback)', 'One life question per card'],
+      [9, 'Ask the Shastras page', 'Digital', '1', 'Web page: tablet tap screen plus 1920 × 1080 TV answer screen', 'One answer per question card, each with its scripture reference'],
+      [9, 'TV idle screen', 'Digital', '1', '1920 × 1080 still or slow loop', 'Shown on both TVs between taps'],
+      [10, 'Portrait fronts', 'Print', '5', '14 in × 7.5 ft each, sliced from one image; source at least 5400 × 6750 px', 'One high-resolution portrait of Mahant Swami Maharaj'],
+      [10, 'Portrait backs', 'Print', '5', '14 in × 7.5 ft each', 'What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, Living the teachings. Writing and one photo each'],
+      [10, 'Sant lettering', 'Fabrication', '1', 'Gold vinyl or cut letters about 5 in tall, about 5 ft run', '“SANT · સંત” on the portrait base'],
+      [12, 'Birthday kiosk page', 'Digital', '1', 'Offline web page, touch layout', 'Pick a date, see where Pramukh Swami Maharaj or Mahant Swami Maharaj was'],
+      [12, 'Birthday archive', 'Data', '1 file', 'One row per date: date, Swami, place, short note', 'Compiled from the archives; start this first'],
+      [13, 'Prasang story cards', 'Print', '2', 'About 12 × 8 in', 'The Bicycle, Ignited Minds. Writing approved'],
+      [13, 'Prasang objects', 'From others', '2', 'Bicycle and book', 'Source the real or a matching object'],
+      [14, 'Reflection wall', 'Print', '1', '8 × 6 ft foam board or Dibond', 'Final teaching of Pramukh Swami Maharaj and Mahant Swami Maharaj; wording to confirm'],
+      [14, 'Take-home cards', 'Print', 'About 1,500', '4 × 6 in', 'One teaching and one thing to try this week; quantity depends on expected visitors']
+    ];
+    const MTYPES = [['All', () => true], ['Print', t => t === 'Print' || t === 'Fabric print' || t === 'Photo'], ['Digital', t => t === 'Digital' || t === 'Data'], ['Audio', t => t === 'Audio'], ['Fabrication', t => t === 'Fabrication'], ['From others', t => t === 'From others']];
+    const mrow = ([n, a, t, q, spec, need]) => `<tr data-type="${t}"><td class="n"><span>${n}</span></td><td><b>${a}</b></td><td><span class="mtype">${t}</span></td><td class="q">${q}</td><td>${spec}</td><td>${need}</td></tr>`;
+    const chips = MTYPES.map(([name, f], i) => `<button type="button" class="chip" data-f="${i}" aria-pressed="${i === 0}">${name} <span>${MEDIA.filter(m => f(m[2])).length}</span></button>`).join('');
+    const p2 = document.getElementById('plan2d');
+    p2.innerHTML = `
+      <div class="tabs" role="tablist" aria-label="2D views">
+        <button type="button" role="tab" data-tab="plan" aria-selected="true">Floor plan</button>
+        <button type="button" role="tab" data-tab="mat" aria-selected="false">Materials</button>
+        <button type="button" role="tab" data-tab="media" aria-selected="false">Media assets <span class="cnt">${MEDIA.length}</span></button>
+      </div>
+      <div data-panel="plan" role="tabpanel">
+        <div class="plan-head"><h3>Floor plan</h3><p>1 square = 1 ft · walls 8 ft high · numbers match the materials and media lists</p></div>
+        <div class="plan-scroll">${svg}</div>
+      </div>
+      <div data-panel="mat" role="tabpanel" hidden>
+        <div class="plan-head"><h3>Materials and sizes</h3><p>Planning estimates, to confirm with the build team</p></div>
+        <div class="mat-scroll"><table class="mat"><thead><tr><th>#</th><th>Piece</th><th>Size</th><th>Materials</th><th>Qty</th></tr></thead><tbody>${rows}</tbody></table></div>
+      </div>
+      <div data-panel="media" role="tabpanel" hidden>
+        <div class="plan-head"><h3>Media assets to create</h3><p>Everything that needs writing, design, printing, files or sourcing. Numbers match the floor plan.</p></div>
+        <div class="media-bar"><div class="chips" role="group" aria-label="Filter by type">${chips}</div><button type="button" class="chip copy" id="mediaCopy">Copy list</button><span class="copy-msg" id="mediaMsg" aria-live="polite"></span></div>
+        <div class="mat-scroll"><table class="mat media"><thead><tr><th>#</th><th>Asset</th><th>Type</th><th>Qty</th><th>Size and spec</th><th>What it needs</th></tr></thead><tbody>${MEDIA.map(mrow).join('')}</tbody></table></div>
+      </div>`;
+    p2.querySelectorAll('[role="tab"]').forEach(t => t.addEventListener('click', () => {
+      p2.querySelectorAll('[role="tab"]').forEach(o => o.setAttribute('aria-selected', String(o === t)));
+      p2.querySelectorAll('[data-panel]').forEach(pn => { pn.hidden = pn.dataset.panel !== t.dataset.tab; });
+    }));
+    let mf = 0;
+    p2.querySelectorAll('.chip[data-f]').forEach(c => c.addEventListener('click', () => {
+      mf = Number(c.dataset.f);
+      p2.querySelectorAll('.chip[data-f]').forEach(o => o.setAttribute('aria-pressed', String(o === c)));
+      p2.querySelectorAll('table.media tbody tr').forEach(r => { r.hidden = !MTYPES[mf][1](r.dataset.type); });
+    }));
+    const msg = document.getElementById('mediaMsg');
+    document.getElementById('mediaCopy').addEventListener('click', () => {
+      const list = MEDIA.filter(m => MTYPES[mf][1](m[2]));
+      const txt = ['#\tAsset\tType\tQty\tSize and spec\tWhat it needs'].concat(list.map(m => m.join('\t'))).join('\n').replace(/[“”]/g, '"');
+      const done = ok => { msg.textContent = ok ? 'Copied ' + list.length + ' assets. Paste into a sheet or doc.' : 'Copy is blocked here. Select the table and copy it instead.'; };
+      try { navigator.clipboard.writeText(txt).then(() => done(true), () => done(false)); } catch (e) { done(false); }
+    });
+  }
+
+  // ---------- loop ----------
+  function resize() {
+    const w = viewer.clientWidth, h = viewer.clientHeight;
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', () => { resize(); if (mode === 'overview' || mode === 'plan') setMode(mode); });
+  const tmp = new THREE.Vector3();
+  const wrapAngle = a => Math.atan2(Math.sin(a), Math.cos(a));
+  let last = performance.now();
+  function tick(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const fast = keys.ShiftLeft || keys.ShiftRight ? 2 : 1;
+    if (mode === 'roam') {
+      if (keys.ArrowLeft || keys.KeyQ) roam.yaw += 1.9 * dt;
+      if (keys.ArrowRight || keys.KeyE) roam.yaw -= 1.9 * dt;
+      const f = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0), r = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0);
+      const sp = 6 * fast * dt, sy = Math.sin(roam.yaw), cy = Math.cos(roam.yaw);
+      const p = { x: roam.x + (-sy * f + cy * r) * sp, z: roam.z + (-cy * f - sy * r) * sp };
+      collide(p); roam.x = p.x; roam.z = p.z;
+      camera.up.set(0, 1, 0); camera.position.set(roam.x, EYE, roam.z); camera.rotation.set(roam.pitch, roam.yaw, 0);
+    } else if (mode === 'walk' && walkCurve) {
+      if (tour.playing) {
+        if (tour.hold > 0) tour.hold -= dt;
+        else {
+          tour.t += dt * 3.0 / walkCurve.getLength();
+          if (tour.next < stopU.length && tour.t >= stopU[tour.next]) { tour.t = stopU[tour.next]; tour.hold = 3; tour.look = STOPS[tour.next][2]; tour.next++; }
+          if (tour.t >= 1) { tour.t = 1; tour.playing = false; }
+        }
+        syncTour();
+      }
+      const p = walkCurve.getPointAt(Math.min(1, tour.t)), q = walkCurve.getPointAt(Math.min(1, tour.t + 0.02));
+      let want = null;
+      if (tour.hold > 0 && tour.look) want = Math.atan2(-(tour.look[0] - p.x), -(tour.look[1] - p.z));
+      else if (q.distanceTo(p) > 0.01) want = Math.atan2(-(q.x - p.x), -(q.z - p.z));
+      if (want !== null) tour.yaw = tour.yaw === null ? want : tour.yaw + wrapAngle(want - tour.yaw) * Math.min(1, dt * 2.6);
+      if (tour.playing && !drag) { const k = Math.min(1, dt * 0.7); tour.yawOff *= 1 - k; tour.pitchOff *= 1 - k; }
+      camera.up.set(0, 1, 0); camera.position.copy(p); camera.rotation.set(-0.06 + tour.pitchOff, (tour.yaw || 0) + tour.yawOff, 0);
+    } else {
+      const pf = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0), pr = (keys.KeyD || keys.ArrowRight ? 1 : 0) - (keys.KeyA || keys.ArrowLeft ? 1 : 0);
+      if (pf || pr) {
+        freeOrbit();
+        const s = orbit.radius * 0.6 * fast * dt, st = Math.sin(orbit.theta), ct = Math.cos(orbit.theta);
+        goal.target.x += (pr * ct - pf * st) * s; goal.target.z += (-pr * st - pf * ct) * s;
+        goal.target.x = THREE.MathUtils.clamp(goal.target.x, -5, 45); goal.target.z = THREE.MathUtils.clamp(goal.target.z, -5, 25);
+      }
+      if (keys.KeyQ) { goal.theta += 1.4 * dt; freeOrbit(); }
+      if (keys.KeyE) { goal.theta -= 1.4 * dt; freeOrbit(); }
+      const k = 1 - Math.pow(0.0015, dt);
+      orbit.target.lerp(goal.target, k); orbit.theta += (goal.theta - orbit.theta) * k; orbit.phi += (goal.phi - orbit.phi) * k; orbit.radius += (goal.radius - orbit.radius) * k;
+      const sp = Math.sin(orbit.phi);
+      camera.position.set(orbit.target.x + orbit.radius * sp * Math.sin(orbit.theta), orbit.target.y + orbit.radius * Math.cos(orbit.phi), orbit.target.z + orbit.radius * sp * Math.cos(orbit.theta));
+      camera.up.set(0, 1, 0);
+      if (orbit.phi < 0.01) camera.up.set(-Math.sin(orbit.theta), 0, -Math.cos(orbit.theta));
+      camera.lookAt(orbit.target);
+    }
+    if (shantiCeil) shantiCeil.visible = camera.position.y < 8.1;
+    doors.forEach(d => { d.a += ((d.open ? -1.7 : 0) - d.a) * Math.min(1, dt * 5); d.pivot.rotation.y = d.a; });
+    flicker.forEach((l, i) => { const f = Math.sin(now * 0.013 + i * 3) + Math.sin(now * 0.041 + i); l.intensity = f > 1.2 ? 0.1 : 0.85 + 0.15 * Math.sin(now * 0.05); });
+    if (mode === '2d') { requestAnimationFrame(tick); return; }
+    dimGroup.visible = showDims;
+    renderer.render(scene, camera);
+    const w = viewer.clientWidth, h = viewer.clientHeight;
+    const vis = showLabels && !showDims && mode !== 'walk' && mode !== 'roam';
+    DIMS.forEach(d => {
+      if (!showDims) { d.el.hidden = true; return; }
+      tmp.copy(d.pos).project(camera);
+      if (tmp.z > 1 || tmp.x < -1.1 || tmp.x > 1.1 || tmp.y < -1.1 || tmp.y > 1.1) { d.el.hidden = true; return; }
+      d.el.hidden = false; d.el.style.left = ((tmp.x + 1) / 2 * w) + 'px'; d.el.style.top = ((1 - tmp.y) / 2 * h) + 'px';
+    });
+    labelEls.forEach(({ el, pos }) => {
+      if (!vis) { el.hidden = true; return; }
+      tmp.copy(pos).project(camera);
+      if (tmp.z > 1 || tmp.x < -1.1 || tmp.x > 1.1 || tmp.y < -1.1 || tmp.y > 1.1) { el.hidden = true; return; }
+      el.hidden = false; el.style.left = ((tmp.x + 1) / 2 * w) + 'px'; el.style.top = ((1 - tmp.y) / 2 * h) + 'px';
+    });
+    requestAnimationFrame(tick);
+  }
+
+  const fontsReady = Promise.race([
+    Promise.all(['600 40px "Bodoni Moda"', 'italic 500 40px "Bodoni Moda"', '700 30px Montserrat', '500 30px Montserrat', '500 30px "Noto Sans Gujarati"'].map(f => document.fonts.load(f, f.includes('Gujarati') ? 'વચનામૃત' : 'Aa'))),
+    new Promise(res => setTimeout(res, 2500))
+  ]).catch(() => {});
+  const loadingEl = document.getElementById('loading');
+  canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); loadingEl.hidden = false; loadingEl.textContent = 'The 3D view stopped. Reload the page to see it again.'; });
+  fontsReady.then(() => {
+    try {
+    buildFloor(); buildWalls(); buildHallway(); buildShanti();
+    booth('bky', 10, 0, 1, 'BKY', 'BKY'); booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities'); booth('bls', 1.5, 20, -1, 'Better Living', 'BLS');
+    buildSpines(); buildCases(); buildPages(); buildNFC();
+    buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); applyLights(); addColliders(); buildStops(); buildDims(); build2D();
+    const img = new Image();
+    img.onload = () => { portraitImg = img; needsPortrait.forEach(t => t.redraw()); };
+    img.src = 'portrait.jpg';
+    resize(); setMode('overview'); orbit.radius = goal.radius; orbit.target.copy(goal.target);
+    document.getElementById('loading').hidden = true;
+    requestAnimationFrame(t => { last = t; tick(t); });
+    } catch (err) {
+      loadingEl.hidden = false; loadingEl.textContent = 'The 3D view could not load on this device (' + (err && err.message ? err.message : 'unknown error') + '). Try reloading the page, or open it in Chrome or Safari on a laptop.';
+      console.error(err);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
