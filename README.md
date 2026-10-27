@@ -27,9 +27,9 @@ Read this section before changing anything. These decisions were made deliberate
 - **Booths:** BKY is an L in the corner by the hallway: one 6 ft wall on the north wall joined to a second 6 ft wall on the blank end of the hallway and Shanti room. Better Living Sessions is on the side wall right outside the Shanti exit (not on the Charities wall). BAPS Charities is on the south wall. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
-- **Layout:** two columns of glass case, scroll, scroll, glass case (P S S P), running from the spine wall toward the NFC wall, with a 6 ft aisle between them. Each column is packed into about 7.5 ft, which leaves about 5.3 ft walking bands at both ends.
+- **Layout:** two columns running from the spine wall toward the NFC wall, with a 6 ft aisle between them. Left column: case, scroll, scroll, case. Right column: scroll, scroll, Vachanamrut case, a 3.9 ft opening, Satsang Diksha case. The opening lets people in the aisle see the Sant pillar photos.
 - **Walk order:** from Mandir up to the spine wall, along it, down the aisle between the columns, along the NFC wall, then on to Sant. There is no path across the middle of the columns.
-- **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, two in each column, facing the aisle. Each pair hangs from a black T-post hidden in the gap between the two scrolls.
+- **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, in two pairs facing the aisle (one pair between the left cases, one pair north of the Vachanamrut case). Each pair hangs from a black T-post hidden in the gap between the two scrolls.
 - **Spine wall:** 8 giant book spines; 4 of them open (Vachanamrut, Swamini Vato, Shikshapatri, Satsang Diksha).
 - **4 glass cases**, one scripture each, at the ends of the two columns. Name plates face the aisle.
 - **2 NFC stations, side by side** on one wall. Each has a tablet as the tap point and a TV above that shows the answer.
