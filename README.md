@@ -34,7 +34,7 @@ Read this section before changing anything. These decisions were made deliberate
 ### Sant
 - **Split portrait:** 5 panels form one portrait of Mahant Swami Maharaj from the front; the backs carry 5 topics. Two angled fins hide the rest of Sant until you walk past.
 - **Birthday wall** behind the portrait: a TV on the south wall with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
-- **2 prasangs** (the bicycle and the book), one on each side of the reflection wall at the end.
+- **2 prasangs** (the bicycle and the book) stand in front of the portrait's two wings (fins), one on each side, facing Shastra.
 - **Closing wall** (minimal): matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Signage
