@@ -19,7 +19,7 @@ Read this section before changing anything. These decisions were made deliberate
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
-- **Spot lights:** 23 fixtures (buy 25), warm white: 17 clamp-on spots on wall tops and the two Shastra T-posts, plus 6 small picture lights on the Sant pillars. No ceiling rigging is needed. The full list is in the Lighting tab of the 2D view.
+- **Spot lights:** 23 fixtures (buy 25), warm white: 17 clamp-on spots on wall tops and the two Shastra T-posts, plus 6 small picture lights on the Sant pillars. No ceiling rigging is needed. The full list is under Floor plan options in the 2D view.
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
