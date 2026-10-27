@@ -280,7 +280,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <span class="tag">Sant · living it</span>
         <h3>The Sant pillars</h3>
         <p>Three tall pillars stand in a straight row across the middle of Sant. The side facing Shastra carries one large photo each. Walk through the gaps and each back explains one idea: What is a Guru?, Pramukh Swami Maharaj and Mahant Swami Maharaj.</p>
-        <p class="build"><b>Build</b>3 plywood box pillars, 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, with inset prints on both faces and a small picture light on top of each face. 3 ft gaps between them.</p>
+        <p class="build"><b>Build</b>3 plywood box pillars, 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, with inset prints on both faces and a small picture light on top of each face. Only 16 in between them, so the row reads as one piece; people walk around the ends, not through.</p>
         <button type="button" data-item="portrait">Show in model</button>
       </article>
     </div>
@@ -427,7 +427,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     pages: { zone: 'Shastra', name: 'Floating pages', what: 'Four long scrolls of scripture, two in each column between the glass cases, facing the aisle. Each is written top to bottom with verses in Gujarati and English, and nearly touches the floor.', build: 'Each scroll is about 1.5 ft wide and 9.5 ft long, printed on translucent voile or backlit fabric, with a thin dowel at the top and a weighted dowel at the bottom hem. Each pair hangs from a black T-post (12 ft post, 4 ft top bar, weighted base) hidden in the 4 in gap between the two scrolls, or from the hall ceiling grid if the venue allows. Bottom about 1 ft off the floor. One warm spot on each post lights the scrolls across the aisle.', size: 'Two columns of case, scroll, scroll, case, each 7.5 ft long, with a 6 ft aisle between', at: [22.85, 10.3] },
     nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [21.1, 19] },
     nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, right beside the first so the two read as one Ask the Shastras wall. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [25.1, 19] },
-    portrait: { zone: 'Sant', name: 'Sant pillars', what: 'Three tall pillars in a straight row across the middle of Sant. The photo side faces Shastra, one large photo per pillar. The back of each explains one idea: What is a Guru?, Pramukh Swami Maharaj, and Mahant Swami Maharaj. Sant is lettered under the middle photo.', build: 'Plywood box pillars 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, on a weighted base. Prints inset on both faces (about 1.8 × 6.9 ft). A small LED picture light on top of each face.', size: '3 pillars in a 12 ft row, 3 ft clear between them', at: [32.6, 10.75] },
+    portrait: { zone: 'Sant', name: 'Sant pillars', what: 'Three tall pillars in a straight row across the middle of Sant. The photo side faces Shastra, one large photo per pillar. The back of each explains one idea: What is a Guru?, Pramukh Swami Maharaj, and Mahant Swami Maharaj. Sant is lettered under the middle photo.', build: 'Plywood box pillars 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, on a weighted base. Prints inset on both faces (about 1.8 × 6.9 ft). A small LED picture light on top of each face.', size: '3 pillars in an 8.7 ft row, 16 in between them (not a walkway)', at: [32.6, 10.75] },
     kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 10] },
     bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs in the corner next to the birthday wall: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.6, 18.5] },
     book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang, beside the bicycle in the corner next to the birthday wall: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [36.2, 18.5] },
@@ -921,7 +921,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- Sant ----------
   const TOPICS = ['What is a Guru?', 'Pramukh Swami Maharaj', 'Mahant Swami Maharaj'];
   // Three freestanding pillars in a straight row across the middle of Sant: photo on the front (facing Shastra), information on the back
-  const PIL = { X: 32.6, Z: [5.75, 10.75, 15.75], W: 2.0, D: 0.7, H: 7.67 };
+  const PIL = { X: 32.6, Z: [7.417, 10.75, 14.083], W: 2.0, D: 0.7, H: 7.67 };
   function buildPortrait() {
     const { X, W, D, H } = PIL, g = new THREE.Group();
     const ph = H - 0.75, py = 0.45 + ph / 2;
@@ -1123,12 +1123,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [12, 'Shastra', 'Satsang Diksha case', 'Right T-post bar, back end', [26.75, 11.8, 12.35], [26.75, 11.5, 12.35], [26.75, 3.4, 13.15], 0.24, 1.5],
     [13, 'Shastra', 'Right column scrolls', 'Left T-post, aisle side', [18.95, 11.2, 10.3], [19.4, 11.2, 10.3], [26.75, 4.5, 10.3], 0.42, 1.6],
     [14, 'Shastra', 'Left column scrolls', 'Right T-post, aisle side', [26.75, 11.2, 10.3], [26.3, 11.2, 10.3], [18.95, 4.5, 10.3], 0.42, 1.6],
-    [15, 'Sant', 'Pillar 1 photo', 'Top of pillar 1, photo side', [32.25, 7.67, 5.75], [31.85, 7.95, 5.75], [32.25, 4.0, 5.75], 0.45, 1.2],
+    [15, 'Sant', 'Pillar 1 photo', 'Top of pillar 1, photo side', [32.25, 7.67, 7.417], [31.85, 7.95, 7.417], [32.25, 4.0, 7.417], 0.45, 1.2],
     [16, 'Sant', 'Pillar 2 photo', 'Top of pillar 2, photo side', [32.25, 7.67, 10.75], [31.85, 7.95, 10.75], [32.25, 4.0, 10.75], 0.45, 1.2],
-    [17, 'Sant', 'Pillar 3 photo', 'Top of pillar 3, photo side', [32.25, 7.67, 15.75], [31.85, 7.95, 15.75], [32.25, 4.0, 15.75], 0.45, 1.2],
-    [18, 'Sant', 'Pillar 1 information', 'Top of pillar 1, back', [32.95, 7.67, 5.75], [33.35, 7.95, 5.75], [32.95, 4.0, 5.75], 0.45, 0],
+    [17, 'Sant', 'Pillar 3 photo', 'Top of pillar 3, photo side', [32.25, 7.67, 14.083], [31.85, 7.95, 14.083], [32.25, 4.0, 14.083], 0.45, 1.2],
+    [18, 'Sant', 'Pillar 1 information', 'Top of pillar 1, back', [32.95, 7.67, 7.417], [33.35, 7.95, 7.417], [32.95, 4.0, 7.417], 0.45, 0],
     [19, 'Sant', 'Pillar 2 information', 'Top of pillar 2, back', [32.95, 7.67, 10.75], [33.35, 7.95, 10.75], [32.95, 4.0, 10.75], 0.45, 0],
-    [20, 'Sant', 'Pillar 3 information', 'Top of pillar 3, back', [32.95, 7.67, 15.75], [33.35, 7.95, 15.75], [32.95, 4.0, 15.75], 0.45, 0],
+    [20, 'Sant', 'Pillar 3 information', 'Top of pillar 3, back', [32.95, 7.67, 14.083], [33.35, 7.95, 14.083], [32.95, 4.0, 14.083], 0.45, 0],
     [21, 'Sant', 'Bicycle prasang', 'South wall top', [38.6, 8, 19.8], [38.6, 8.6, 17.9], [38.6, 3, 18.5], 0.3, 1.6],
     [22, 'Sant', 'Book prasang', 'South wall top', [36.2, 8, 19.8], [36.2, 8.6, 17.9], [36.2, 3, 18.5], 0.3, 1.6],
     [23, 'Sant', 'Birthday wall graphic', 'East wall top', [39.8, 8, 10], [38.2, 8.6, 10], [39.7, 4.4, 10], 0.62, 0]
@@ -1440,7 +1440,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimLine(17.05, 1.9, 28.9, 1.9, 'Spine wall 11.9 ft'); dimLine(18.95, 1.2, 18.95, 6.55, '5.3 ft');
     dimLine(19.85, 10.3, 25.85, 10.3, 'Aisle 6 ft'); dimLine(28.3, 6.55, 28.3, 14.05, 'Column 7.5 ft'); dimLine(18.0, 14.05, 18.0, 19.4, '5.3 ft');
     dimLine(19.3, 18.4, 26.9, 18.4, 'NFC wall 7.6 ft');
-    dimLine(31.4, 4.75, 31.4, 16.75, 'Pillar row 12 ft'); dimLine(31.0, 6.75, 31.0, 9.75, '3 ft');
+    dimLine(31.4, 6.42, 31.4, 15.08, 'Pillar row 8.7 ft'); dimLine(31.0, 8.42, 31.0, 9.75, '16 in');
     dimTag(20, 8.6, 0, 'Walls 8 ft high');
     dimTag(4.5, 8.6, 9, 'Shanti room 9 × 8 × 8 ft');
     dimTag(23, 7.8, 0.7, '8 spines · 1.4 × 1 × 7.2 ft');
@@ -1496,7 +1496,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // clear widths at the places people pass
     const free = (x, z) => { const i = Math.floor(x / CG.res), j = Math.floor(z / CG.res); return i >= 0 && j >= 0 && i < CG.nx && j < CG.nz && cgrid[j * CG.nx + i] === 0; };
     const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, depthTest: false });
-    [['Hallway', 4.5, 2.0, 'z'], ['Past the BLS booth', 6.0, 18.2, 'x'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 10, 'z'], ['Into Shastra', 17.2, 10, 'z'], ['Behind spine readers', 18.95, 5.0, 'z'], ['Down the aisle', 22.85, 10.3, 'x'], ['Past the NFC line', 26.0, 15.2, 'z'], ['Between pillars', 32.6, 8.25, 'z'], ['North end of pillars', 32.6, 4.2, 'z'], ['South end of pillars', 32.6, 18.2, 'z'], ['Pillar 2 back to birthday wall', 35.6, 10.75, 'x'], ['To the exit', 38.0, 5.0, 'z'], ['Prasangs to birthday wall', 37.4, 14.0, 'z'], ['Pillar fronts to Shastra', 30.0, 10.3, 'x']]
+    [['Hallway', 4.5, 2.0, 'z'], ['Past the BLS booth', 6.0, 18.2, 'x'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 10, 'z'], ['Into Shastra', 17.2, 10, 'z'], ['Behind spine readers', 18.95, 5.0, 'z'], ['Down the aisle', 22.85, 10.3, 'x'], ['Past the NFC line', 26.0, 15.2, 'z'], ['North end of pillars', 32.6, 4.2, 'z'], ['South end of pillars', 32.6, 18.2, 'z'], ['Pillar 2 back to birthday wall', 35.6, 10.75, 'x'], ['To the exit', 38.0, 5.0, 'z'], ['Prasangs to birthday wall', 37.4, 14.0, 'z'], ['Pillar fronts to Shastra', 30.0, 10.3, 'x']]
       .forEach(([name, x, z, ax]) => {
         if (!free(x, z)) return;
         const st = 0.05; let a = 0, b = 0;
@@ -1526,7 +1526,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     ['L', 'Spot lights', '23 fixtures', '17 clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top, plus 6 small LED picture lights on the pillar tops; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '25 (2 spare)'],
     [8, 'Floating pages', '2 columns, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, 2 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '4 scrolls'],
     [9, 'NFC wall', '7.6 ft wide', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
-    [10, 'Sant pillars', '2 ft × 8 in × 7 ft 8 in each', '½ in plywood box on a 2×2 frame, painted black, weighted base 2 × 1.2 ft (no wider than the pillar, so the 3 ft gaps stay clear), inset prints on both faces about 1.8 × 6.9 ft, small LED picture light on top of each face', '3'],
+    [10, 'Sant pillars', '2 ft × 8 in × 7 ft 8 in each', '½ in plywood box on a 2×2 frame, painted black, weighted base 2 × 1.2 ft (no wider than the pillar), inset prints on both faces about 1.8 × 6.9 ft, small LED picture light on top of each face', '3'],
     [11, 'Birthday wall', '7 ft of wall, TV 3.6 × 2.1 ft', '45–50 in TV with wall mount, iPad in a lockable floor stand, wired HDMI adapter, printed wall graphic 7 × 6.4 ft, one offline web page with the date archive', '1'],
     [12, 'Prasang plinths', '1.5 × 1.5 × 2.8 ft', 'Plywood plinth painted black, the object, printed story card', '2'],
     [13, 'Closing wall', '8 ft wall, 7.2 ft photo row', 'Matte black paint, vinyl-cut lettering, 5 frameless prints face-mounted on aluminium or acrylic, 1 slim LED linear wall-washer at 2700–3000K', '1 wall, 5 prints'],
@@ -1574,7 +1574,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(19.85, 10.3, 25.85, 10.3, 'Aisle 6 ft', -0.55);
     dim(18.0, 14.1, 18.0, 19.35, '5.3 ft', -1.1);
     dim(19.3, 18.6, 26.9, 18.6, 'NFC wall 7.6 ft', -0.55);
-    dim(31.2, 4.75, 31.2, 16.75, '12 ft', -0.9);
+    dim(31.2, 6.42, 31.2, 15.08, '8.7 ft', -0.9);
     // numbered pieces
     [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 19.1, 5], [0.85, 16.5, 5], [9.85, 3.8, 5], [23, 0.7, 6], [18.95, 7.45, 7], [26.75, 7.45, 7], [18.95, 13.15, 7], [26.75, 13.15, 7], [18.95, 10.3, 8], [26.75, 10.3, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [32.6, 10.75, 10], [38.7, 10, 11], [38.6, 18.5, 12], [36.2, 18.5, 12], [34.8, 1.2, 13]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
