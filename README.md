@@ -19,7 +19,7 @@ Read this section before changing anything. These decisions were made deliberate
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
-- **Spot lights:** 20 clamp-on LED spots (buy 22), warm white. Each clamps to a wall top, one of the two Shastra T-posts, or the top of the portrait, so no ceiling rigging is needed. The full list is in the Lighting tab of the 2D view.
+- **Spot lights:** 23 fixtures (buy 25), warm white: 17 clamp-on spots on wall tops and the two Shastra T-posts, plus 6 small picture lights on the Sant pillars. No ceiling rigging is needed. The full list is in the Lighting tab of the 2D view.
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
@@ -36,13 +36,13 @@ Read this section before changing anything. These decisions were made deliberate
 - The text lantern was dropped.
 
 ### Sant
-- **Split portrait:** 5 panels form one portrait of Mahant Swami Maharaj from the front; the backs carry 5 topics. No fins.
+- **Sant pillars:** 3 freestanding pillars (2 ft wide, 8 in deep, 7 ft 8 in tall) in one straight row across the middle of Sant, 3 ft apart. The front, facing Shastra, has one large photo each. The back explains one idea each: What is a Guru?, Pramukh Swami Maharaj, Mahant Swami Maharaj. A small picture light sits on top of each face.
 - **Birthday wall** on the north wall of Sant, near the exit: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
-- **2 prasangs** (the bicycle and the book) stand right beside the two ends of the portrait row, facing Shastra.
+- **2 prasangs** (the bicycle and the book) stand between Shastra and the pillar row, one in front of each end, facing Shastra.
 - **Closing wall** (minimal): matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Signage
-- **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered on the portrait base. Each name is in English and Gujarati.
+- **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
 
 ### Content rules
 - Anything not decided yet stays as a placeholder in [brackets].
