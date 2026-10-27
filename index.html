@@ -316,7 +316,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       <li>The projector chaos-to-calm cycle became a short poster hallway into a backlit jali room with music.</li>
       <li>The text lantern became hanging scripture scrolls. A spine wall was added and the NFC stations went from 6 to 2, each with a TV above to show the answer.</li>
       <li>Each part is named inside its own statement piece instead of on signs.</li>
-      <li>The light tunnel and moving-portrait gallery were cut. The birthday idea stays as a TV and iPad wall behind the portrait.</li>
+      <li>The light tunnel and moving-portrait gallery were cut. The birthday idea stays as a TV and iPad wall on the north wall of Sant, near the exit.</li>
       <li>Sant has two prasangs instead of three, standing beside the ends of the portrait row.</li>
       <li>The portrait panels stand in a single row instead of the staggered V. No fins.</li>
       <li>BKY, Charities and Better Living became booth kits run by their activity leads.</li>
@@ -418,7 +418,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [21.1, 19] },
     nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, right beside the first so the two read as one Ask the Shastras wall. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [25.1, 19] },
     portrait: { zone: 'Sant', name: 'Split portrait', what: 'Five tall panels stand in a row. From Shastra they form one portrait of Mahant Swami Maharaj. Walk around the ends and each back carries one lesson: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, and Living the teachings.', build: '5 panels about 14 in wide and 7.5 ft tall, double-sided prints on ply or foam board, weighted bases. One spot on the front, one on the backs.', size: '6 ft wide row, with a prasang plinth at each end and about 3.4 ft to walk past', at: [30.8, 10] },
-    kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [35.6, 18.4] },
+    kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [34.8, 1.6] },
     bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs standing beside the ends of the portrait row: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [30.8, 5.6] },
     book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang, beside the other end of the portrait row: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [30.8, 14.4] },
     reflection: { zone: 'Sant', name: 'Closing wall', what: 'A quiet, minimal last wall: matte black, “AADHAR STAMBH · The pillars that sustain a legacy” set small and left-aligned, and one clean row of five frameless Sant photographs at eye level under a single slim linear light.', build: 'Matte black paint (no border), vinyl-cut lettering, 5 prints face-mounted on 3 mm aluminium or acrylic (frameless, 1.5 ft tall, 2.4 in gaps), one slim LED linear wall-washer at 2700–3000K. The statement is an exhibition line, not a quotation.', size: '7.2 ft row of photos on an 8 ft wall', at: [39.4, 10] },
@@ -972,7 +972,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
   // Birthday wall: a TV on the wall, an iPad on a stand in front, and words around the screen that explain it
   function buildKiosks() {
-    const X = 35.6, Z = 20, g = new THREE.Group();
+    const X = 34.8, Z = 0, g = new THREE.Group(); // on the north wall of Sant, facing into the room
     const wall = plate(7, 6.4, (ctx, w, h) => {
       const ppf = w / 7;
       ctx.fillStyle = '#15121a'; ctx.fillRect(0, 0, w, h);
@@ -995,8 +995,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ctx.fillStyle = 'rgba(244, 238, 226, 0.55)'; ctx.font = 'italic 500 22px "Bodoni Moda", Georgia, serif';
       ctx.fillText('From the daily record of his travels, satsang and meetings', w / 2, 5.75 * ppf);
     }, 140);
-    wall.position.set(X, 1.2 + 3.2, Z - 0.2); wall.rotation.y = Math.PI; g.add(wall);
-    g.add(box(3.6, 2.1, 0.16, M.black, X, 5.35, Z - 0.3));
+    wall.position.set(X, 1.2 + 3.2, Z + 0.2); g.add(wall);
+    g.add(box(3.6, 2.1, 0.16, M.black, X, 5.35, Z + 0.3));
     const tv = plate(3.4, 1.9, (ctx, w, h) => {
       const bg = ctx.createLinearGradient(0, 0, w, h); bg.addColorStop(0, '#2a1810'); bg.addColorStop(1, '#14121a');
       ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
@@ -1006,9 +1006,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ctx.fillStyle = '#f4eee2'; ctx.font = '500 34px "Bodoni Moda", Georgia, serif'; wrap(ctx, 'Swami was in [place]', 40, 130, w * 0.5, 42);
       ctx.fillStyle = 'rgba(244, 238, 226, 0.7)'; ctx.font = '500 18px Montserrat, sans-serif'; wrap(ctx, '[What happened that day, in one or two lines from the archive]', 40, 230, w * 0.48, 26);
     }, 200);
-    tv.position.set(X, 5.35, Z - 0.39); tv.rotation.y = Math.PI; g.add(tv);
+    tv.position.set(X, 5.35, Z + 0.39); g.add(tv);
     // iPad on a floor stand
-    const sz = Z - 2.4;
+    const sz = Z + 2.4;
     g.add(box(0.9, 0.06, 0.9, M.black, X, 0.03, sz)); g.add(box(0.12, 3.3, 0.12, M.black, X, 1.68, sz));
     const pad = plate(0.85, 0.62, (ctx, w, h) => {
       ctx.fillStyle = '#16121a'; ctx.fillRect(0, 0, w, h);
@@ -1016,7 +1016,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [['Day', 22, 34], ['Month', 64, 46], ['Year', 118, 50]].forEach(([t, x0, bw]) => { ctx.strokeStyle = 'rgba(242, 236, 224, 0.45)'; ctx.lineWidth = 2; ctx.strokeRect(x0, 46, bw, 24); ctx.fillStyle = 'rgba(242, 236, 224, 0.6)'; ctx.font = '500 10px Montserrat, sans-serif'; ctx.fillText(t, x0 + bw / 2, 62); });
       ctx.fillStyle = '#e48b62'; ctx.fillRect(w / 2 - 30, 80, 60, 16); ctx.fillStyle = '#15121a'; ctx.font = '700 10px Montserrat, sans-serif'; ctx.fillText('SHOW ME', w / 2, 92);
     }, 220);
-    pad.position.set(X, 3.5, sz - 0.03); pad.rotation.set(0, Math.PI, 0); pad.rotateX(-0.6);
+    pad.position.set(X, 3.5, sz + 0.03); pad.rotation.set(0, 0, 0); pad.rotateX(-0.6);
     const bezel = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.72, 0.05), M.trim);
     bezel.rotation.copy(pad.rotation); bezel.position.copy(pad.position); bezel.translateZ(-0.035);
     g.add(bezel); g.add(pad);
@@ -1088,7 +1088,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
 
   // ---------- route ----------
-  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 15.0], [12.5, 15.8], [13, 5.2], [15.6, 9.0], [18.4, 4.2], [22.85, 4.0], [22.85, 10.3], [22.85, 15.3], [27.2, 15.8], [32.4, 18], [35.6, 15.0], [35.6, 10.5], [37.4, 10], [36.8, 5], [37.5, 2], [43, 2]];
+  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 15.0], [12.5, 15.8], [13, 5.2], [15.6, 9.0], [18.4, 4.2], [22.85, 4.0], [22.85, 10.3], [22.85, 15.3], [27.2, 15.8], [32.4, 18], [35.6, 15.0], [35.6, 10.5], [37.4, 10], [34.8, 4.6], [37.5, 2], [43, 2]];
   let walkCurve = null;
   function buildRoute() {
     walkCurve = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, EYE, z)), false, 'centripetal', 0.5);
@@ -1165,7 +1165,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }));
 
   // Walk-through stops, timeline and pause
-  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [0, 16.5]], ['Spine wall', 12, [22, 0.7]], ['Shastra aisle', 14, [18.95, 10.3]], ['NFC wall', 15, [23.1, 19.8]], ['Portrait', 16, [30.8, 10]], ['Birthday', 18, [35.6, 20]], ['Panel backs', 19, [30.8, 10]], ['Closing wall', 20, [39.8, 10]], ['Exit', 22, [43, 2]]];
+  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [0, 16.5]], ['Spine wall', 12, [22, 0.7]], ['Shastra aisle', 14, [18.95, 10.3]], ['NFC wall', 15, [23.1, 19.8]], ['Portrait', 16, [30.8, 10]], ['Panel backs', 19, [30.8, 10]], ['Closing wall', 20, [39.8, 10]], ['Birthday', 21, [34.8, 0]], ['Exit', 22, [43, 2]]];
   let stopU = [];
   function buildStops() {
     const n = ROUTE.length - 1, L = walkCurve.getLengths(400);
@@ -1301,7 +1301,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   function addColliders() {
     CASES.forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.9, hz: 0.9 }));
     [[30.8, 5.6], [30.8, 14.4]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.75, hz: 0.75 }));
-    BOXES.push({ cx: 35.6, cz: 17.6, hx: 0.45, hz: 0.45 });
+    BOXES.push({ cx: 34.8, cz: 2.4, hx: 0.45, hz: 0.45 });
     BOXES.push({ cx: 30.8, cz: 10, hx: 0.35, hz: 3.3 });
     POSTS.forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.15, hz: 0.15 }));
     BOXES.push({ cx: 23, cz: 0.7, hx: 6, hz: 0.55 });
@@ -1380,7 +1380,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimTag(18.95, 12.3, 10.3, '4 scrolls 1.5 × 9.5 ft · T-posts 12 ft');
     dimTag(23.1, 7.9, 19.6, 'TVs 3.5 × 2 ft, 5.5–7.5 ft up');
     dimTag(30.8, 8.6, 10, '5 panels 14 in × 7.5 ft');
-    dimTag(35.6, 8.2, 19.6, 'TV 3.6 × 2.1 ft · iPad stand 3.5 ft');
+    dimTag(34.8, 8.2, 0.4, 'TV 3.6 × 2.1 ft · iPad stand 3.5 ft');
     dimTag(30.8, 3.4, 14.4, 'Plinth 1.5 × 1.5 × 2.8 ft');
     dimTag(39.4, 7.9, 10, 'Closing wall · row of 5 prints 1.5 ft tall');
     dimTag(12.2, 8.6, 0.6, 'Header 6 × 0.9 ft');
@@ -1410,7 +1410,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     BOXES.forEach(b => cgSet(inRect(b.cx - b.hx, b.cz - b.hz, b.cx + b.hx, b.cz + b.hz), 1, true));
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; cgSet(nearSeg(x - cx, z - sz, x + cx, z + sz, 0.2), 1, true); });
     // people using a piece (standing to talk, tap, read or open)
-    [[9.2, 1.5, 15.2, 4.5], [10, 15.5, 16, 18.5], [1.5, 13.5, 4.5, 19.5], [10.5, 0.4, 13.5, 6.4], [19.3, 16.4, 26.9, 19.3], [17.05, 1.2, 28.9, 3.7], [33.6, 16.6, 37.6, 19.6]]
+    [[9.2, 1.5, 15.2, 4.5], [10, 15.5, 16, 18.5], [1.5, 13.5, 4.5, 19.5], [10.5, 0.4, 13.5, 6.4], [19.3, 16.4, 26.9, 19.3], [17.05, 1.2, 28.9, 3.7], [32.8, 0.4, 36.8, 3.4]]
       .forEach(r => cgSet(inRect(...r), 2));
     // people viewing a piece
     [[19.85, 21.05], [24.65, 25.85]].forEach(([a, b]) => cgSet(inRect(a, 6.55, b, 14.05), 3)); // people reading the columns from the aisle
@@ -1486,7 +1486,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; line(x - cx, z - sz, x + cx, z + sz, 'p-scroll'); });
     rect(19.3, 19.45, 22.9, 19.8, 'p-piece'); rect(23.3, 19.45, 26.9, 19.8, 'p-piece');
     rect(30.45, 6.85, 31.15, 13.15, 'p-piece');
-    rect(33.8, 19.45, 37.4, 19.8, 'p-piece'); rect(35.15, 17.15, 36.05, 18.05, 'p-piece');
+    rect(33.0, 0.2, 36.6, 0.55, 'p-piece'); rect(34.35, 1.95, 35.25, 2.85, 'p-piece');
     [[30.8, 5.6], [30.8, 14.4]].forEach(([x, z]) => rect(x - 0.75, z - 0.75, x + 0.75, z + 0.75, 'p-piece'));
     rect(39.55, 6, 39.82, 14, 'p-piece');
     WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
@@ -1505,7 +1505,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(19.3, 18.6, 26.9, 18.6, 'NFC wall 7.6 ft', -0.55);
     dim(29.6, 7, 29.6, 13, '6 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 19.1, 5], [0.85, 16.5, 5], [9.85, 3.8, 5], [23, 0.7, 6], [18.95, 7.45, 7], [26.75, 7.45, 7], [18.95, 13.15, 7], [26.75, 13.15, 7], [18.95, 10.3, 8], [26.75, 10.3, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [35.6, 18.7, 11], [30.8, 5.6, 12], [30.8, 14.4, 12], [38.6, 10, 13]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 19.1, 5], [0.85, 16.5, 5], [9.85, 3.8, 5], [23, 0.7, 6], [18.95, 7.45, 7], [26.75, 7.45, 7], [18.95, 13.15, 7], [26.75, 13.15, 7], [18.95, 10.3, 8], [26.75, 10.3, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [34.8, 1.3, 11], [30.8, 5.6, 12], [30.8, 14.4, 12], [38.6, 10, 13]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');
