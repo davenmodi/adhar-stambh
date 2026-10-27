@@ -37,9 +37,9 @@ Read this section before changing anything. These decisions were made deliberate
 
 ### Sant
 - **Sant pillars:** 3 freestanding pillars (2 ft wide, 8 in deep, 7 ft 8 in tall) in one straight row across the middle of Sant, 3 ft apart. The front, facing Shastra, has one large photo each. The back explains one idea each: What is a Guru?, Pramukh Swami Maharaj, Mahant Swami Maharaj. A small picture light sits on top of each face.
-- **Birthday wall** on the north wall of Sant, near the exit: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
+- **Birthday wall** on the east wall of Sant, beside the exit, facing the back of the pillars: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
 - **2 prasangs** (the bicycle and the book) stand between Shastra and the pillar row, one in front of each end, facing Shastra.
-- **Closing wall** (minimal): matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
+- **Closing wall** (minimal), on the north wall of Sant, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
