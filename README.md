@@ -42,7 +42,7 @@ Read this section before changing anything. These decisions were made deliberate
 - **Closing wall** (minimal), on the north wall of Sant, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Stanchions
-- Red rope stanchions only where an open gap would let people skip ahead or leave the one-way route: out of the Shanti room, across the openings in both Shastra columns, south of the left scrolls, at the east end of the spine wall walk, and in front of the Sant pillar photos. 12 posts, 6 ropes. Nowhere that a wall or piece already guides people.
+- A red rope stanchion across the opening between the two cases in each Shastra column (4 posts, 2 ropes). No other stanchions.
 
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
