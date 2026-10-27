@@ -127,6 +127,11 @@ h1 span { font-family: var(--body); font-size: 0.32em; font-weight: 600; letter-
 .p-note { fill: var(--muted); font: 600 11px var(--body); letter-spacing: 0.08em; }
 .p-badge circle { fill: var(--accent); }
 .p-badge text { fill: var(--surface); font: 700 10px var(--body); }
+.p-fix circle { fill: #f2c46b; stroke: var(--surface); stroke-width: 1.5; }
+.p-fix text { fill: #17130b; font: 700 9px var(--body); }
+.p-aim { stroke: #d99a2b; stroke-width: 1.4; stroke-dasharray: 3 3; }
+.lf { background: #f2c46b !important; color: #17130b !important; }
+.light-note { font-size: 12.5px; color: var(--muted); margin: 10px 0; max-width: 72ch; }
 table.mat { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; }
 table.mat th { text-align: left; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line); }
 table.mat td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--muted); }
@@ -150,6 +155,9 @@ table.mat td.q { white-space: nowrap; color: var(--fg); }
 .mtype { display: inline-block; font-size: 11px; font-weight: 600; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; white-space: nowrap; }
 table.media { min-width: 820px; }
 .clr { position: absolute; transform: translate(-50%, -50%); pointer-events: none; font: 700 11px var(--body); white-space: nowrap; border-radius: 999px; padding: 3px 9px; color: #fff; }
+.spottag { position: absolute; transform: translate(-50%, -100%); pointer-events: none; font: 700 10.5px var(--body); color: #17130b; background: #f2c46b; border-radius: 999px; padding: 2px 7px; white-space: nowrap; }
+.spot-legend { position: absolute; left: 12px; bottom: 34px; display: flex; flex-direction: column; gap: 2px; max-width: calc(100% - 24px); background: rgba(14, 14, 17, 0.88); color: #ece7dc; border: 1px solid rgba(242, 196, 107, 0.5); border-radius: 8px; padding: 8px 12px; font: 600 12px var(--body); }
+.spot-legend span { font-weight: 500; color: rgba(236, 231, 220, 0.7); }
 .clr.ok { background: #2f8a55; } .clr.warn { background: #b7791f; } .clr.bad { background: #c0392b; }
 .clear-legend { position: absolute; right: 12px; bottom: 34px; display: flex; flex-wrap: wrap; gap: 6px 14px; max-width: calc(100% - 24px); background: rgba(14, 14, 17, 0.88); color: #ece7dc; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 8px 12px; font: 600 12px var(--body); }
 .clear-legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -215,6 +223,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button class="btn" id="tLights" type="button" aria-pressed="true">Exhibit lighting</button>
         <button class="btn" id="tDims" type="button" aria-pressed="false">Dimensions</button>
         <button class="btn" id="tClear" type="button" aria-pressed="false">Walking space</button>
+        <button class="btn" id="tSpots" type="button" aria-pressed="false">Spot lights</button>
       </div>
     </div>
     <div class="viewer" id="viewer">
@@ -243,6 +252,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button class="act" id="cAct" type="button" hidden></button>
       </aside>
       <div class="clear-legend" id="clearLegend" hidden><span><i class="sw g"></i>Clear walkway</span><span><i class="sw a"></i>People using it</span><span><i class="sw b"></i>Viewers / readers</span><span><i class="sw r"></i>Under 3 ft</span></div>
+      <div class="spot-legend" id="spotLegend" hidden><b>20 clamp spot lights</b><span>Numbers match the Lighting tab in the 2D view</span></div>
       <div id="plan2d" hidden></div>
       <div id="loading">Loading model…</div>
     </div>
@@ -712,9 +722,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     header.position.set(0, 7.25, 0.26); g.add(header);
     g.add(box(6, 0.12, 1.3, M.brass, 0, 3.4, 0.85));
     g.position.set(cx, 0, cz); g.rotation.y = rotY; scene.add(g); clickable(g, id);
-    g.updateMatrixWorld(true);
-    const from = g.localToWorld(new THREE.Vector3(0, 9.5, 4.5)), to = g.localToWorld(new THREE.Vector3(0, 3.5, 0.3));
-    if (!noSpot) spot(from.x, from.y, from.z, to.x, to.y, to.z, 0xffe7c2, 1.5, 14, 0.62);
   }
   function booth(id, x0, wallZ, dir, name, team) { boothAt(id, x0 + 3, wallZ, dir > 0 ? 0 : Math.PI, name, team); }
 
@@ -773,7 +780,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       scene.add(g); clickable(g, 'spines');
       if (open) { door.userData.door = doors.length; doors.push({ pivot, open: false, a: 0 }); }
     });
-    spot(23, 9.8, 6.5, 23, 4, 0.5, 0xffe2b0, 1.7, 18, 0.78);
   }
   const CASES = [[18.95, 7.45, 'Shikshapatri'], [26.75, 7.45, 'Vachanamrut'], [18.95, 13.15, 'Swamini Vato'], [26.75, 13.15, 'Satsang Diksha']];
   function buildCases() {
@@ -794,7 +800,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       const facing = x < 22.85 ? 1 : -1; // name plate faces the aisle
       tag.position.set(x + facing * 0.91, 2.5, z); tag.rotation.y = facing * Math.PI / 2; g.add(tag);
       scene.add(g); clickable(g, 'case' + i);
-      spot(x + facing * 0.6, 9.6, z, x, 3.4, z, 0xfff0d8, 1.5, 12, 0.24);
     });
   }
   // Floating pages: two scrolls in each column between the cases, hung from a T-post hidden between them
@@ -855,8 +860,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.Float32BufferAttribute(linePts, 3));
     g.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.18 })));
     scene.add(g); clickable(g, 'pages');
-    spot(26.75, top - 0.3, 10.3, 18.95, 4.5, 10.3, 0xffe2b8, 1.6, 18, 0.42);
-    spot(18.95, top - 0.3, 10.3, 26.75, 4.5, 10.3, 0xffe2b8, 1.6, 18, 0.42);
   }
 
   // ---------- names built into the pieces ----------
@@ -954,8 +957,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       p.position.set(X, 0.6 + H / 2, zc); g.add(p);
     }
     scene.add(g); clickable(g, 'portrait');
-    spot(26.5, 9.8, 10, X, 4.2, 10, 0xffe6c4, 1.6, 16, 0.42);
-    spot(35.5, 9.8, 10, X, 4.2, 10, 0xffe6c4, 1.1, 14, 0.42);
   }
   function plinthCard(x, z, dx, dz, title, id) {
     const g = new THREE.Group();
@@ -967,7 +968,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     }, 180);
     card.position.set(x + dx * 0.76, 1.9, z + dz * 0.76); card.rotation.y = Math.atan2(dx, dz); g.add(card);
     scene.add(g); clickable(g, id);
-    spot(x + dx * 1.6, 9.6, z + dz * 1.6, x, 3.0, z, 0xffe2b0, 1.6, 12, 0.26);
     return g;
   }
   // Birthday wall: a TV on the wall, an iPad on a stand in front, and words around the screen that explain it
@@ -1082,7 +1082,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const glow = new THREE.Mesh(new THREE.PlaneGeometry(total + 0.4, 2.4), new THREE.MeshBasicMaterial({ map: wash.tex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
     glow.position.set(X - 0.1, bar - 1.2, 10); glow.rotation.y = -Math.PI / 2; g.add(glow);
     scene.add(g); clickable(g, 'reflection');
-    spot(35, 9.8, 10, 39.6, 4.0, 10, 0xffe6c4, 0.9, 14, 0.55);
   }
 
 
@@ -1098,6 +1097,62 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- lights ----------
   let ambient, hemi;
+  // ---------- clamp spot lights ----------
+  // Every spot is a real clamp-on fixture: clamped to a wall top (8 ft), a T-post, or the top of the portrait.
+  // [no, zone, what it lights, clamped to, mount, can, aim, beam (rad), intensity in the model or 0 (fixture only, to stay under the light budget)]
+  const FIX = [
+    [1, 'Mandir', 'Mandir lintel', 'Hallway wall top', [7.5, 8, 0.2], [7.5, 8.5, 1.6], [7.5, 7.4, 4.8], 0.3, 0],
+    [2, 'Mandir', 'BKY booth, wall 1', 'Booth wall top', [12.2, 8, 0.2], [12.2, 8.6, 1.8], [12.2, 4.2, 0.3], 0.62, 1.5],
+    [3, 'Mandir', 'BKY booth, wall 2', 'Hallway wall top', [9.0, 8, 3.4], [10.6, 8.6, 3.4], [9.3, 4.2, 3.4], 0.62, 0],
+    [4, 'Mandir', 'Better Living booth', 'Booth wall top', [0.2, 8, 16.5], [1.8, 8.6, 16.5], [0.3, 4.2, 16.5], 0.62, 1.5],
+    [5, 'Mandir', 'BAPS Charities booth', 'Booth wall top', [13, 8, 19.8], [13, 8.6, 18.2], [13, 4.2, 19.7], 0.62, 1.5],
+    [6, 'Shastra', 'Spine wall, left', 'Wall top behind the spines', [19.0, 8, 0.2], [19.0, 8.6, 2.0], [19.0, 4, 0.8], 0.6, 0],
+    [7, 'Shastra', 'Spine wall, middle', 'Wall top behind the spines', [23.0, 8, 0.2], [23.0, 8.6, 2.0], [23.0, 4, 0.8], 0.78, 1.7],
+    [8, 'Shastra', 'Spine wall, right', 'Wall top behind the spines', [27.0, 8, 0.2], [27.0, 8.6, 2.0], [27.0, 4, 0.8], 0.6, 0],
+    [9, 'Shastra', 'Shikshapatri case', 'Left T-post bar, front end', [18.95, 11.8, 8.25], [18.95, 11.5, 8.25], [18.95, 3.4, 7.45], 0.24, 1.5],
+    [10, 'Shastra', 'Swamini Vato case', 'Left T-post bar, back end', [18.95, 11.8, 12.35], [18.95, 11.5, 12.35], [18.95, 3.4, 13.15], 0.24, 1.5],
+    [11, 'Shastra', 'Vachanamrut case', 'Right T-post bar, front end', [26.75, 11.8, 8.25], [26.75, 11.5, 8.25], [26.75, 3.4, 7.45], 0.24, 1.5],
+    [12, 'Shastra', 'Satsang Diksha case', 'Right T-post bar, back end', [26.75, 11.8, 12.35], [26.75, 11.5, 12.35], [26.75, 3.4, 13.15], 0.24, 1.5],
+    [13, 'Shastra', 'Right column scrolls', 'Left T-post, aisle side', [18.95, 11.2, 10.3], [19.4, 11.2, 10.3], [26.75, 4.5, 10.3], 0.42, 1.6],
+    [14, 'Shastra', 'Left column scrolls', 'Right T-post, aisle side', [26.75, 11.2, 10.3], [26.3, 11.2, 10.3], [18.95, 4.5, 10.3], 0.42, 1.6],
+    [15, 'Sant', 'Portrait front', 'Right T-post, Sant side', [26.75, 11.0, 10.3], [27.2, 11.0, 10.3], [30.8, 4.2, 10], 0.42, 1.6],
+    [16, 'Sant', 'Portrait backs', 'Closing wall top', [39.8, 8, 10], [38.4, 8.6, 10], [31.1, 4.2, 10], 0.42, 1.1],
+    [17, 'Sant', 'Closing wall prints', 'Top of the middle portrait panel', [30.95, 8.1, 10], [31.35, 8.4, 10], [39.6, 4.4, 10], 0.5, 0.9],
+    [18, 'Sant', 'Bicycle prasang', 'North wall top', [30.8, 8, 0.2], [30.8, 8.6, 2.0], [30.8, 3, 5.6], 0.26, 1.6],
+    [19, 'Sant', 'Book prasang', 'South wall top', [30.8, 8, 19.8], [30.8, 8.6, 18.0], [30.8, 3, 14.4], 0.26, 1.6],
+    [20, 'Sant', 'Birthday wall graphic', 'North wall top', [34.8, 8, 0.2], [34.8, 8.6, 1.8], [34.8, 4.4, 0.3], 0.62, 0]
+  ];
+  const spotGroup = new THREE.Group(); spotGroup.visible = false;
+  const SPOTTAGS = []; let showSpots = false;
+  const beamWord = a => a < 0.3 ? 'Narrow 15–25°' : a < 0.5 ? 'Medium 30–40°' : 'Flood 60°';
+  function buildFixtures() {
+    const body = std(0x161618, { roughness: 0.5, metalness: 0.4 });
+    const lens = new THREE.MeshBasicMaterial({ color: 0xffe2a8 });
+    const beamMat = new THREE.MeshBasicMaterial({ color: 0xffcf73, transparent: true, opacity: 0.1, depthWrite: false, side: THREE.DoubleSide, blending: THREE.AdditiveBlending });
+    const up = new THREE.Vector3(0, 1, 0), down = new THREE.Vector3(0, -1, 0);
+    FIX.forEach(([n, zone, what, on, m, c, t, ang, inten]) => {
+      const M0 = new THREE.Vector3(...m), C = new THREE.Vector3(...c), T = new THREE.Vector3(...t);
+      scene.add(box(0.22, 0.14, 0.3, body, m[0], m[1] + 0.05, m[2]));
+      const armLen = M0.distanceTo(C);
+      if (armLen > 0.05) {
+        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, armLen, 6), body);
+        arm.position.copy(M0).add(C).multiplyScalar(0.5); arm.quaternion.setFromUnitVectors(up, C.clone().sub(M0).normalize()); scene.add(arm);
+      }
+      const dir = T.clone().sub(C).normalize();
+      const can = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.1, 0.36, 12), body);
+      can.position.copy(C); can.quaternion.setFromUnitVectors(up, dir.clone().negate()); scene.add(can);
+      const glass = new THREE.Mesh(new THREE.CircleGeometry(0.1, 12), lens);
+      glass.position.copy(C).addScaledVector(dir, 0.185); glass.lookAt(C.clone().addScaledVector(dir, 2)); scene.add(glass);
+      if (inten) spot(c[0], c[1], c[2], t[0], t[1], t[2], 0xffe6c4, inten, 18, ang);
+      // beam shown with the Spot lights toggle
+      const h = C.distanceTo(T), cone = new THREE.ConeGeometry(Math.tan(ang) * h, h, 24, 1, true);
+      cone.translate(0, -h / 2, 0);
+      const beam = new THREE.Mesh(cone, beamMat); beam.position.copy(C); beam.quaternion.setFromUnitVectors(down, dir); beam.renderOrder = 6; spotGroup.add(beam);
+      SPOTTAGS.push({ pos: C.clone().add(new THREE.Vector3(0, 0.45, 0)), text: 'L' + n });
+    });
+    scene.add(spotGroup);
+    SPOTTAGS.forEach(d => { const el = document.createElement('div'); el.className = 'spottag'; el.textContent = d.text; el.hidden = true; labelBox.appendChild(el); d.el = el; });
+  }
   function buildLights() {
     ambient = new THREE.AmbientLight(0x8f97a8, 0.1); scene.add(ambient);
     hemi = new THREE.HemisphereLight(0xfff4e0, 0x2a2622, 0); scene.add(hemi);
@@ -1338,6 +1393,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   tLabels.addEventListener('click', () => { showLabels = !showLabels; tLabels.setAttribute('aria-pressed', String(showLabels)); });
   const tClear = document.getElementById('tClear'), clearLegend = document.getElementById('clearLegend');
   tClear.addEventListener('click', () => { showClear = !showClear; tClear.setAttribute('aria-pressed', String(showClear)); clearLegend.hidden = !showClear; });
+  const tSpots = document.getElementById('tSpots'), spotLegend = document.getElementById('spotLegend');
+  tSpots.addEventListener('click', () => { showSpots = !showSpots; tSpots.setAttribute('aria-pressed', String(showSpots)); spotLegend.hidden = !showSpots; });
   const tDims = document.getElementById('tDims'); let showDims = false;
   tDims.addEventListener('click', () => { showDims = !showDims; tDims.setAttribute('aria-pressed', String(showDims)); });
   const tWalls = document.getElementById('tWalls'); let seeThrough = false;
@@ -1454,6 +1511,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [5, 'Booth kits', '6 ft wall, 15 in ledge each', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet; BKY uses two kits as an L, onto the Shanti room wall', '4 (BKY 2, BLS 1, Charities 1)'],
     [6, 'Spine wall', '8 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 4 that open: 7 ft piano hinge, magnetic catch, door stop, printed insides', '8 spines'],
     [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '4'],
+    ['L', 'Clamp spot lights', '20 fixtures', 'Clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '22 (2 spare)'],
     [8, 'Floating pages', '2 columns, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, 2 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '4 scrolls'],
     [9, 'NFC wall', '7.6 ft wide', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
     [10, 'Split portrait', '6 ft wide, 7.5 ft panels', '5 panels 14 in wide in ¾ in plywood or 10 mm foam board, double-sided prints, base 0.7 × 6 × 0.6 ft with gold letters', '5 panels'],
@@ -1490,6 +1548,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [[30.8, 5.6], [30.8, 14.4]].forEach(([x, z]) => rect(x - 0.75, z - 0.75, x + 0.75, z + 0.75, 'p-piece'));
     rect(39.55, 6, 39.82, 14, 'p-piece');
     WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
+    const baseOut = out.slice();
     // dimensions
     dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 20, '20 ft', 1.1);
     dim(0, 21.3, 16.5, 21.3, 'Mandir 16.5 ft', 0.65); dim(16.5, 21.3, 29.2, 21.3, 'Shastra 12.7 ft', 0.65); dim(29.2, 21.3, 40, 21.3, 'Sant 10.8 ft', 0.65);
@@ -1508,6 +1567,11 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 19.1, 5], [0.85, 16.5, 5], [9.85, 3.8, 5], [23, 0.7, 6], [18.95, 7.45, 7], [26.75, 7.45, 7], [18.95, 13.15, 7], [26.75, 13.15, 7], [18.95, 10.3, 8], [26.75, 10.3, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [34.8, 1.3, 11], [30.8, 5.6, 12], [30.8, 14.4, 12], [38.6, 10, 13]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
+    const lo = baseOut.slice();
+    FIX.forEach(([n, , , , , c, t]) => lo.push(`<line x1="${X(c[0])}" y1="${Y(c[2])}" x2="${X(t[0])}" y2="${Y(t[2])}" class="p-aim"/>`));
+    FIX.forEach(([n, , , , , c]) => lo.push(`<g class="p-fix"><circle cx="${X(c[0])}" cy="${Y(c[2])}" r="8.5"/><text x="${X(c[0])}" y="${Y(c[2])}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`));
+    const lsvg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Spot light plan with 20 numbered clamp spots"><title>Spot light plan</title>${lo.join('')}</svg>`;
+    const lrows = FIX.map(([n, zone, what, on, , c, , ang]) => `<tr><td class="n"><span class="lf">${n}</span></td><td>${zone}</td><td><b>${what}</b></td><td>${on}</td><td>${beamWord(ang)}</td></tr>`).join('');
     const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');
     const MEDIA = [
       [2, 'Notification stream', 'Print', '1 strip', 'About 19 × 2 ft printed vinyl, 150 dpi, in 3 pieces (9, 6 and 4 ft)', 'One flowing stream of phone notifications and photos of everyday noise: missed calls, deadlines, bills, traffic, 99+ unread'],
@@ -1519,7 +1583,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [6, 'Spine wraps', 'Print', '8', 'About 1.4 × 7.2 ft front plus 1 ft sides each', 'Title of each scripture, leather texture, gold bands'],
       [6, 'Spine insides', 'Print', '4', 'About 1.2 × 6.9 ft each', 'For each of the 4 that open: the teaching, a story, and what it means in everyday life. Writing needed'],
       [7, 'Case name plates', 'Print', '4', 'About 17 × 4 in', 'Shikshapatri, Vachanamrut, Swamini Vato, Satsang Diksha'],
-      [8, 'Hanging scrolls', 'Fabric print', '5', '1.5 × 9.5 ft dye-sub voile, 150 dpi', 'Verses in Gujarati and English, top to bottom; the first scroll opens with “SHASTRA · શાસ્ત્ર”. Verse selection approved'],
+      [8, 'Hanging scrolls', 'Fabric print', '4', '1.5 × 9.5 ft dye-sub voile, 150 dpi', 'Verses in Gujarati and English, top to bottom; the first scroll opens with “SHASTRA · શાસ્ત્ર”. Verse selection approved'],
       [9, 'Question cards', 'Print', '20–30', 'About 3.5 × 5 in with an NFC sticker (QR fallback)', 'One life question per card'],
       [9, 'Ask the Shastras page', 'Digital', '1', 'Web page: tablet tap screen plus 1920 × 1080 TV answer screen', 'One answer per question card, each with its scripture reference'],
       [9, 'TV idle screen', 'Digital', '1', '1920 × 1080 still or slow loop', 'Shown on both TVs between taps'],
@@ -1543,6 +1607,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button type="button" role="tab" data-tab="plan" aria-selected="true">Floor plan</button>
         <button type="button" role="tab" data-tab="mat" aria-selected="false">Materials</button>
         <button type="button" role="tab" data-tab="media" aria-selected="false">Media assets <span class="cnt">${MEDIA.length}</span></button>
+        <button type="button" role="tab" data-tab="light" aria-selected="false">Lighting <span class="cnt">${FIX.length}</span></button>
       </div>
       <div data-panel="plan" role="tabpanel">
         <div class="plan-head"><h3>Floor plan</h3><p>1 square = 1 ft · walls 8 ft high · numbers match the materials and media lists</p></div>
@@ -1556,6 +1621,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <div class="plan-head"><h3>Media assets to create</h3><p>Everything that needs writing, design, printing, files or sourcing. Numbers match the floor plan.</p></div>
         <div class="media-bar"><div class="chips" role="group" aria-label="Filter by type">${chips}</div><button type="button" class="chip copy" id="mediaCopy">Copy list</button><span class="copy-msg" id="mediaMsg" aria-live="polite"></span></div>
         <div class="mat-scroll"><table class="mat media"><thead><tr><th>#</th><th>Asset</th><th>Type</th><th>Qty</th><th>Size and spec</th><th>What it needs</th></tr></thead><tbody>${MEDIA.map(mrow).join('')}</tbody></table></div>
+      </div>
+      <div data-panel="light" role="tabpanel" hidden>
+        <div class="plan-head"><h3>Spot lights</h3><p>${FIX.length} clamp-on spots, buy ${FIX.length + 2} with spares · 2700–3000 K warm white · every fixture clamps to a wall top, a T-post or the portrait, so no ceiling rigging is needed</p></div>
+        <div class="plan-scroll">${lsvg}</div>
+        <p class="light-note">Not counted as spots: 2 bare cool bulbs in the chaos hallway, the LED strip behind the Shanti room jali, and the linear light on the closing wall. TVs and tablets light themselves, so the NFC wall needs no spot. Plan on one power strip per zone, with black extension cords run along the wall tops.</p>
+        <div class="mat-scroll"><table class="mat"><thead><tr><th>#</th><th>Zone</th><th>Lights</th><th>Clamped to</th><th>Beam</th></tr></thead><tbody>${lrows}</tbody></table></div>
       </div>`;
     p2.querySelectorAll('[role="tab"]').forEach(t => t.addEventListener('click', () => {
       p2.querySelectorAll('[role="tab"]').forEach(o => o.setAttribute('aria-selected', String(o === t)));
@@ -1635,10 +1706,16 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     doors.forEach(d => { d.a += ((d.open ? -1.7 : 0) - d.a) * Math.min(1, dt * 5); d.pivot.rotation.y = d.a; });
     flicker.forEach((l, i) => { const f = Math.sin(now * 0.013 + i * 3) + Math.sin(now * 0.041 + i); l.intensity = f > 1.2 ? 0.1 : 0.85 + 0.15 * Math.sin(now * 0.05); });
     if (mode === '2d') { requestAnimationFrame(tick); return; }
-    dimGroup.visible = showDims; clearGroup.visible = showClear;
+    dimGroup.visible = showDims; clearGroup.visible = showClear; spotGroup.visible = showSpots;
     renderer.render(scene, camera);
     const w = viewer.clientWidth, h = viewer.clientHeight;
-    const vis = showLabels && !showDims && !showClear && mode !== 'walk' && mode !== 'roam';
+    const vis = showLabels && !showDims && !showClear && !showSpots && mode !== 'walk' && mode !== 'roam';
+    SPOTTAGS.forEach(d => {
+      if (!showSpots) { d.el.hidden = true; return; }
+      tmp.copy(d.pos).project(camera);
+      if (tmp.z > 1 || tmp.x < -1.1 || tmp.x > 1.1 || tmp.y < -1.1 || tmp.y > 1.1) { d.el.hidden = true; return; }
+      d.el.hidden = false; d.el.style.left = ((tmp.x + 1) / 2 * w) + 'px'; d.el.style.top = ((1 - tmp.y) / 2 * h) + 'px';
+    });
     CLEARS.forEach(c => {
       if (!showClear || mode === 'walk' || mode === 'roam') { c.el.hidden = true; return; }
       tmp.copy(c.pos).project(camera);
@@ -1672,7 +1749,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     booth('bky', 9.2, 0, 1, 'BKY', 'BKY'); boothAt('bky', 9.0, 3.4, Math.PI / 2, 'BKY', 'BKY', true);
     booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities'); boothAt('bls', 0, 16.5, Math.PI / 2, 'Better Living', 'BLS');
     buildSpines(); buildCases(); buildPages(); buildNFC();
-    buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
+    buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); buildFixtures(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
     const img = new Image();
     img.onload = () => { portraitImg = img; needsPortrait.forEach(t => t.redraw()); };
     img.src = 'portrait.jpg';

@@ -18,6 +18,7 @@ Read this section before changing anything. These decisions were made deliberate
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
+- **Spot lights:** 20 clamp-on LED spots (buy 22), warm white. Each clamps to a wall top, one of the two Shastra T-posts, or the top of the portrait, so no ceiling rigging is needed. The full list is in the Lighting tab of the 2D view.
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
@@ -47,7 +48,7 @@ Read this section before changing anything. These decisions were made deliberate
 - Never invent quotes or teachings attributed to Pramukh Swami Maharaj, Mahant Swami Maharaj or the scriptures. Leave a placeholder until the approved wording arrives.
 
 ## Technical notes
-- Keep the scene to **about 18 lights or fewer** (spot plus point lights). More than that leaves the 3D view blank on some devices.
+- Keep the scene to **about 18 lights or fewer** (spot plus point lights). More than that leaves the 3D view blank on some devices. All spot lights come from the `FIX` table: every row draws a fixture, but only rows with an intensity add a real light, which keeps the count at 18.
 - Room coordinates are in feet: x runs 0–40 along the length, z runs 0–20 across. Item info lives in `ITEMS`; the 2D materials list in `MATERIALS`; the media list in `MEDIA` (inside `build2D`).
 - The 2D plan, the dimensions and the walk-through stops are hand-placed. If you move a piece, update its `ITEMS.at`, its collider in `addColliders`, its dimension lines in `buildDims` and `build2D`, and the `ROUTE` and `STOPS` if the walk passes it.
 - Test before you merge: open the page, check Overview, Floor plan, Walk through, Walk around and the 2D tabs, and look at the browser console for errors.
