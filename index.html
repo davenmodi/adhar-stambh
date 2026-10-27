@@ -294,7 +294,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   <section class="text">
     <h2>Notes before you build</h2>
     <ul class="notes">
-      <li><b>Walls</b>Plywood in 4 × 8 ft modules on 2×3 frames, painted flat before setup, bolted together and braced with kickers, since nothing anchors to the hall floor. About 120 ft of outer wall and about 35 ft inside. Confirm which outer walls the hall or neighbouring sections already give you.</li>
+      <li><b>Walls</b>Plywood in 4 × 8 ft modules on 2×3 frames, painted flat before setup, bolted together and braced with kickers, since nothing anchors to the hall floor. About 120 ft of outer wall and about 25 ft inside. Confirm which outer walls the hall or neighbouring sections already give you.</li>
       <li><b>Walls and floor</b>The model assumes 8 ft walls from standard sheets. The gym floor gets black loop carpet (about $1 a sq ft, 12 ft wide rolls). Ask the facility what it allows on the gym floor, use only gaffer tape, and put felt pads under every wall foot.</li>
       <li><b>Shanti room</b>Confirm with the venue that a covered room is allowed (flame-retardant fabric, sprinklers, exits). At about 8 people every 2 minutes it handles about 240 people an hour, and the hallway holds the line.</li>
       <li><b>Floating pages</b>Get venue approval for the truss or ceiling rigging, and sign-off on the verses before printing. Order the fabric scrolls early: dye-sub printing takes about a week.</li>
@@ -405,7 +405,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   const ITEMS = {
     entrance: { zone: 'Route', name: 'Entrance from Mulyo', what: 'Visitors arrive from the Mulyo section and step straight into the chaos hallway.', build: 'A 4 ft opening in the outer wall.', size: '5 ft opening', at: [2, 2.5] },
     hallway: { zone: 'Mandir', name: 'Chaos hallway', what: 'A short, cramped hallway painted black from floor to ceiling. One stream of notifications and photos runs along the walls at eye level: deadlines, missed calls, bills, traffic, 99+ unread. Two cold flicker bulbs keep it restless. It doubles as the queue for the Shanti room.', build: 'Walls painted matte black. One continuous printed vinyl strip, about 19 ft long and 2 ft tall, wrapping all three walls at 4–6 ft. Two flicker bulbs. No sound, so nothing leaks into the Shanti room.', size: 'About 9 ft long, 5 ft wide', at: [4.5, 2] },
-    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the opposite side, facing the Better Living booth.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 8 ft outside, about 8.5 × 7.5 ft inside', at: [4.5, 9] },
+    shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the south wall, with the Better Living booth on their right.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 8 ft outside, about 8.5 × 7.5 ft inside', at: [4.5, 9] },
     bky: { zone: 'Mandir', name: 'BKY booth', what: 'The BKY booth in the corner by the hallway: one wall along the north wall and a second wall around the corner on the blank end of the hallway and Shanti room, joined as an L for twice the display space. Volunteers talk with visitors here; what happens is up to the BKY lead.', build: 'Two booth kits (12 ft of wall in an L): 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '12 ft of wall in an L, about 3 ft standing zone', at: [12, 3] },
     charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 18.8] },
     bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions on the side wall, on your right as you step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [2.2, 16.5] },
@@ -417,13 +417,13 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     pages: { zone: 'Shastra', name: 'Floating pages', what: 'Five long scrolls of scripture hang from above at different angles, each written top to bottom with verses in Gujarati and English. They nearly touch the floor, so visitors walk among them down a clear aisle in the middle.', build: 'Each scroll is about 1.5 ft wide and 9.5 ft long, printed on translucent voile or backlit fabric, with a thin dowel at the top and a weighted dowel at the bottom hem. Hung from a black truss about 12 ft up (or the hall ceiling grid if the venue allows). Bottom about 1 ft off the floor. Four warm spots from the side so the text glows.', size: 'About 7 × 6 ft area, 3 ft aisle down the middle', at: [22.7, 10.3] },
     nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [21.1, 19] },
     nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, right beside the first so the two read as one Ask the Shastras wall. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [25.1, 19] },
-    portrait: { zone: 'Sant', name: 'Split portrait', what: 'Five tall panels stand in a row. From Shastra they form one portrait of Mahant Swami Maharaj. Walk around the ends and each back carries one lesson: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, and Living the teachings.', build: '5 panels about 14 in wide and 7.5 ft tall, double-sided prints on ply or foam board, weighted bases. One spot on the front, one on the backs.', size: '6 ft wide row, about 3 ft to walk past each end', at: [30.8, 10] },
+    portrait: { zone: 'Sant', name: 'Split portrait', what: 'Five tall panels stand in a row. From Shastra they form one portrait of Mahant Swami Maharaj. Walk around the ends and each back carries one lesson: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, and Living the teachings.', build: '5 panels about 14 in wide and 7.5 ft tall, double-sided prints on ply or foam board, weighted bases. One spot on the front, one on the backs.', size: '6 ft wide row, with a prasang plinth at each end and about 3.4 ft to walk past', at: [30.8, 10] },
     kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [35.6, 18.4] },
-    bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs standing beside the ends of the portrait row: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.9, 4.9] },
-    book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang, beside the other end of the portrait row: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.9, 15.1] },
+    bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs standing beside the ends of the portrait row: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [30.8, 5.6] },
+    book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang, beside the other end of the portrait row: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [30.8, 14.4] },
     reflection: { zone: 'Sant', name: 'Closing wall', what: 'A quiet, minimal last wall: matte black, “AADHAR STAMBH · The pillars that sustain a legacy” set small and left-aligned, and one clean row of five frameless Sant photographs at eye level under a single slim linear light.', build: 'Matte black paint (no border), vinyl-cut lettering, 5 prints face-mounted on 3 mm aluminium or acrylic (frameless, 1.5 ft tall, 2.4 in gaps), one slim LED linear wall-washer at 2700–3000K. The statement is an exhibition line, not a quotation.', size: '7.2 ft row of photos on an 8 ft wall', at: [39.4, 10] },
     exit: { zone: 'Route', name: 'Exit', what: 'The end of Aadhar Stambh and of the exhibition route through this section.', build: 'A 4 ft opening in the outer wall.', size: '4 ft opening', at: [38, 2] },
-    signs: { zone: 'Route', name: 'Names in the pieces', what: 'No banners. Each part is named inside its own statement piece: Mandir carved into the jali over the Shanti room door, Shastra as the first word on the first scroll, and Sant lettered on the base of the portrait. Each name is in English and Gujarati.', build: 'Mandir: carved or laser-cut letters on a jali lintel, painted ivory. Shastra: printed at the top of the first scroll. Sant: brass or gold-painted letters on the front of the portrait base.', size: 'Lintel about 3 ft wide; Sant letters about 5 in tall', at: [7.5, 4] },
+    signs: { zone: 'Route', name: 'Names in the pieces', what: 'No banners. Each part is named inside its own statement piece: Mandir carved into the jali over the Shanti room door, Shastra as the first word on the first scroll, and Sant lettered on the base of the portrait. Each name is in English and Gujarati.', build: 'Mandir: carved or laser-cut letters on a jali lintel, painted ivory. Shastra: printed at the top of the first scroll. Sant: brass or gold-painted letters on the front of the portrait base.', size: 'Lintel about 3 ft wide; Sant letters about 5 in tall', at: [7.5, 5] },
   };
   const LABELS = [
     ['hallway', 'Chaos hallway', 8.8], ['shanti', 'Shanti room', 9], ['bky', 'BKY booth', 8.6], ['charities', 'BAPS Charities booth', 8.6], ['bls', 'Better Living booth', 8.6],
@@ -473,7 +473,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     wallSeg([0, 5], [6, 5], { plus: M.ivory });       // hallway / Shanti north wall, door at x 6–9
     wallSeg([9, 0], [9, 5]);                          // end of the hallway
     wallSeg([9, 5], [9, 13], { plus: M.ivory });      // Shanti east wall (closed)
-    wallSeg([0, 13], [6, 13], { minus: M.ivory });    // Shanti south wall, exit at x 6–9 facing the Better Living booth
+    wallSeg([0, 13], [6, 13], { minus: M.ivory });    // Shanti south wall, exit at x 6–9 next to the Better Living booth
     const finHit = new THREE.Group(); scene.add(finHit);
   }
 
@@ -691,7 +691,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- booths ----------
   // A booth kit built facing +z at the origin, then placed on its wall
-  function boothAt(id, cx, cz, rotY, name, team) {
+  function boothAt(id, cx, cz, rotY, name, team, noSpot) {
     const g = new THREE.Group();
     const panel = plate(6, 5.4, (ctx, w, h) => {
       ctx.fillStyle = '#1e2026'; ctx.fillRect(0, 0, w, h);
@@ -714,7 +714,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     g.position.set(cx, 0, cz); g.rotation.y = rotY; scene.add(g); clickable(g, id);
     g.updateMatrixWorld(true);
     const from = g.localToWorld(new THREE.Vector3(0, 9.5, 4.5)), to = g.localToWorld(new THREE.Vector3(0, 3.5, 0.3));
-    spot(from.x, from.y, from.z, to.x, to.y, to.z, 0xffe7c2, 1.5, 14, 0.62);
+    if (!noSpot) spot(from.x, from.y, from.z, to.x, to.y, to.z, 0xffe7c2, 1.5, 14, 0.62);
   }
   function booth(id, x0, wallZ, dir, name, team) { boothAt(id, x0 + 3, wallZ, dir > 0 ? 0 : Math.PI, name, team); }
 
@@ -1018,7 +1018,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     bezel.rotation.copy(pad.rotation); bezel.position.copy(pad.position); bezel.translateZ(-0.035);
     g.add(bezel); g.add(pad);
     scene.add(g); clickable(g, 'kiosk0');
-    spot(X, 9.6, Z - 4.5, X, 4.2, Z - 0.3, 0xffe2b0, 1.2, 14, 0.5);
   }
 
   function buildPrasangs() {
@@ -1381,7 +1380,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimTag(35.6, 8.2, 19.6, 'TV 3.6 × 2.1 ft · iPad stand 3.5 ft');
     dimTag(30.8, 3.4, 14.4, 'Plinth 1.5 × 1.5 × 2.8 ft');
     dimTag(39.4, 7.9, 10, 'Closing wall · row of 5 prints 1.5 ft tall');
-    dimTag(13, 8.6, 0.6, 'Header 6 × 0.9 ft');
+    dimTag(12.2, 8.6, 0.6, 'Header 6 × 0.9 ft');
     scene.add(dimGroup);
     DIMS.forEach(d => { const el = document.createElement('div'); el.className = d.kind; el.textContent = d.text; el.hidden = true; labelBox.appendChild(el); d.el = el; });
   }
@@ -1445,7 +1444,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- 2D plan with dimensions and materials ----------
   const MATERIALS = [
-    [1, 'Walls', '≈155 linear ft, 8 ft high', '½ in plywood in 4 × 8 ft sheets on 2×3 frames, painted flat charcoal; kickers for bracing', 'About 40 sheets'],
+    [1, 'Walls', '≈145 linear ft, 8 ft high', '½ in plywood in 4 × 8 ft sheets on 2×3 frames, painted flat charcoal; kickers for bracing', 'About 38 sheets'],
     [2, 'Chaos hallway', '9 × 5 ft', 'Matte black paint on all three walls, printed vinyl strip 2 ft tall at 4–6 ft, 2 cool LED bare-bulb pendants', '≈19 ft of strip'],
     [3, 'Shanti room', '9 × 8 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
     [4, 'Mandir lintel', '3 × 1 ft', 'Laser-cut MDF jali with carved letters, painted ivory', '1'],
@@ -1511,7 +1510,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [3, 'Shanti room photos', 'Photo', '3', '24 × 36 in, matte, framed; at least 3600 × 5400 px each', 'Approved images of Pramukh Swami Maharaj, Mahant Swami Maharaj and a mandir murti or interior'],
       [3, 'Shanti room music', 'Audio', '1 loop', '10–15 min, seamless loop, instrumental only', 'Instrumental of a kirtan people know; confirm usage rights'],
       [4, 'Mandir lettering', 'Fabrication', '1', 'Vector file for a 3 × 1 ft laser-cut jali lintel', '“MANDIR · મંદિર” set in the jali pattern'],
-      [5, 'Booth headers', 'Print', '3', '6 × 0.9 ft foam board', 'Names: BKY, BAPS Charities, Better Living Sessions; approved logos if used'],
+      [5, 'Booth headers', 'Print', '4', '6 × 0.9 ft foam board', 'BKY (2, one per wall of its L), BAPS Charities, Better Living Sessions; approved logos if used'],
       [5, 'Booth displays', 'From others', '3 sets', 'Two display spaces per 6 ft wall (BKY has four across its L), on French cleats', 'Made by each activity lead; set a review date'],
       [6, 'Spine wraps', 'Print', '8', 'About 1.4 × 7.2 ft front plus 1 ft sides each', 'Title of each scripture, leather texture, gold bands'],
       [6, 'Spine insides', 'Print', '4', 'About 1.2 × 6.9 ft each', 'For each of the 4 that open: the teaching, a story, and what it means in everyday life. Writing needed'],
@@ -1666,7 +1665,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   fontsReady.then(() => {
     try {
     buildFloor(); buildWalls(); buildHallway(); buildShanti();
-    booth('bky', 9.2, 0, 1, 'BKY', 'BKY'); boothAt('bky', 9.0, 3.4, Math.PI / 2, 'BKY', 'BKY');
+    booth('bky', 9.2, 0, 1, 'BKY', 'BKY'); boothAt('bky', 9.0, 3.4, Math.PI / 2, 'BKY', 'BKY', true);
     booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities'); boothAt('bls', 0, 16.5, Math.PI / 2, 'Better Living', 'BLS');
     buildSpines(); buildCases(); buildPages(); buildNFC();
     buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
