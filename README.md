@@ -25,9 +25,9 @@ Read this section before changing anything. These decisions were made deliberate
 - **Booths:** BKY is an L in the corner by the hallway: one 6 ft wall on the north wall joined to a second 6 ft wall on the blank end of the hallway and Shanti room. Better Living Sessions is on the side wall right outside the Shanti exit (not on the Charities wall). BAPS Charities is on the south wall. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
-- **Floating pages:** 5 long fabric scrolls, 1.5 × 9.5 ft, hanging from a truss on both sides of a clear path (about 4.8 ft) that runs straight to the portrait. Keep it to a few scrolls; more felt crowded.
+- **Floating pages:** 5 long fabric scrolls, 1.5 × 9.5 ft, hanging from a truss, with a clear aisle down the middle. Keep it to a few scrolls; more felt crowded.
 - **Spine wall:** 8 giant book spines; 4 of them open (Vachanamrut, Swamini Vato, Shikshapatri, Satsang Diksha).
-- **4 glass cases**, one scripture each, in two close pairs on either side of the path where Shastra begins.
+- **4 glass cases**, one scripture each, spread to the four corners of the zone.
 - **2 NFC stations, side by side** on one wall. Each has a tablet as the tap point and a TV above that shows the answer.
 - The text lantern was dropped.
 
@@ -51,7 +51,6 @@ Read this section before changing anything. These decisions were made deliberate
 - Test before you merge: open the page, check Overview, Floor plan, Walk through, Walk around and the 2D tabs, and look at the browser console for errors.
 
 ## Walking space
-- Flow through Shastra is one straight path down the middle: between the case pairs, then between the scroll rows, to the portrait.
 - The **Walking space** toggle shades clear walkway (green), people using a piece (amber) and viewers (blue), and measures clear widths at the places people pass. Aim for 4 ft or more; under 3 ft shows red.
 
 ## Working together
