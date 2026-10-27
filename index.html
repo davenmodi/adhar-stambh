@@ -135,6 +135,13 @@ h1 span { font-family: var(--body); font-size: 0.32em; font-weight: 600; letter-
 .lf { background: #f2c46b !important; color: #17130b !important; }
 .light-note { font-size: 12.5px; color: var(--muted); margin: 10px 0; max-width: 72ch; }
 table.mat { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; }
+table.bom { margin-top: 10px; }
+table.bom tr.grp td { font: 700 11px var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); padding-top: 16px; border-bottom: 1px solid var(--line); }
+table.bom .spec { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.bom-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin: 12px 0; }
+.bom-stats .stat { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); }
+.bom-stats b { display: block; font: 600 22px var(--display); }
+.bom-stats span { font-size: 12px; color: var(--muted); }
 table.mat th { text-align: left; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line); }
 table.mat td { padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--muted); }
 table.mat td b { color: var(--fg); font-weight: 600; }
@@ -1612,6 +1619,109 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     FIX.forEach(([n, , , , , c]) => lo.push(`<g class="p-fix"><circle cx="${X(c[0])}" cy="${Y(c[2])}" r="8.5"/><text x="${X(c[0])}" y="${Y(c[2])}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`));
     const lsvg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Spot light plan with 20 numbered clamp spots"><title>Spot light plan</title>${lo.join('')}</svg>`;
     const lrows = FIX.map(([n, zone, what, on, , c, , ang]) => `<tr><td class="n"><span class="lf">${n}</span></td><td>${zone}</td><td><b>${what}</b></td><td>${on}</td><td>${beamWord(ang)}</td></tr>`).join('');
+
+    // Shopping list: planning quantities worked out from the layout. [group, item, qty, unit, spec, used for]
+    const BOM = [
+      ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '44', 'sheets', 'Sanded one side; walls 8 ft tall. Outer walls: 111 ft, one finished face (28 sheets). Inside walls: 25 ft, both faces (16 sheets)', 'All walls'],
+      ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '8', 'sheets', '6 boxes 1.4 × 1 × 7.2 ft: front door, back, 2 sides, top and bottom', 'Spine wall'],
+      ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '4', 'sheets', '3 pillars 2 ft × 8 in × 7 ft 8 in: 2 faces and 2 sides each', 'Sant pillars'],
+      ['Plywood and lumber', '½ in plywood, 4 × 8 ft (spares)', '3', 'sheets', 'Mistakes and patches', 'Spares'],
+      ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '5', 'sheets', '4 plinths 1.8 × 1.8 × 3 ft: 4 sides and a top each', 'Glass case plinths'],
+      ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '2', 'sheets', '2 plinths 1.5 × 1.5 × 2.8 ft', 'Prasang plinths'],
+      ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '1', 'sheet', 'Bases 2 × 1.2 ft and tops for the 3 pillars', 'Sant pillars'],
+      ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '1', 'sheet', '2 recessed tablet boxes with card trays', 'NFC stations'],
+      ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '2', 'sheets', '4 ledges 6 ft × 15 in, plus French cleat strips', 'Booths'],
+      ['Plywood and lumber', '¾ in plywood, 4 × 8 ft (spare)', '1', 'sheet', 'Mistakes and patches', 'Spares'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '113', 'pieces', 'Studs every 24 in (77) plus top and bottom plates (36)', 'Wall frames'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '18', 'pieces', 'Diagonal kicker braces about every 6 ft of outer wall; nothing is screwed into the gym floor', 'Wall bracing'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '14', 'pieces', 'About 10% extra, plus blocking behind the 3 TV mounts and the booth cleats', 'Waste and blocking'],
+      ['Plywood and lumber', '2 × 4 × 10 ft', '9', 'pieces', '5 ceiling joists and 2 ledgers over the 9 × 8 ft room; 2 crossbars for the hallway bulbs', 'Shanti ceiling, hallway'],
+      ['Plywood and lumber', '2 × 2 × 8 ft', '18', 'pieces', 'Inner frame, about 6 per pillar', 'Sant pillars'],
+      ['Plywood and lumber', 'Sandbags or weights, 25 lb', '44', 'bags', '2 per kicker brace (36), 2 per T-stand (4), extras for the pillar bases (4)', 'Stability'],
+      ['Walls and finishes', 'Black loop carpet', '2', 'rolls', '12 × 40 ft each (960 sq ft), or rented exhibit carpet', 'Whole floor over the gym floor'],
+      ['Walls and finishes', 'Gym-safe carpet tape', '4', 'rolls', 'Residue-free; check with the venue', 'Carpet seams and edges'],
+      ['Walls and finishes', 'Matte black paint', '10', 'gallons', 'About 1,370 sq ft, 2 coats', 'Walls, plinths, pillars, ledges'],
+      ['Walls and finishes', 'Primer', '5', 'gallons', 'One coat on raw plywood', 'All painted plywood'],
+      ['Walls and finishes', 'Ivory paint', '2', 'gallons', 'Inside faces of the Shanti room', 'Shanti room'],
+      ['Walls and finishes', 'Leather-tone paints and metallic gold', '7', 'quarts', '6 spine colours plus gold for the bands', 'Spine wall'],
+      ['Walls and finishes', 'Rollers, trays, brushes, sandpaper, wood filler', '1', 'set', '', 'Painting'],
+      ['Mandir', 'PVC or MDF jali panels, 4 × 8 ft', '2', 'sheets', 'Painted ivory, on 6–8 in battens, LED strip behind', 'Shanti feature wall'],
+      ['Mandir', 'Foam arches and pillars (EPS)', '1', 'set', '3 arches and side pillars for the jali wall', 'Shanti room'],
+      ['Mandir', 'Moving blankets', '8', 'pieces', 'Sound damping behind the fabric', 'Shanti room'],
+      ['Mandir', 'Ivory flame-retardant fabric', '35', 'yards', 'About 25 yd for the walls and 10 yd for the ceiling', 'Shanti room'],
+      ['Mandir', 'Glossy white vinyl or laminate floor', '80', 'sq ft', '9 × 8 ft room plus trim', 'Shanti room'],
+      ['Mandir', 'Laser-cut MDF jali lintel', '1', 'piece', '3 × 1 ft with MANDIR · મંદિર cut in', 'Shanti entrance'],
+      ['Mandir', 'Speaker and audio player', '1', 'set', 'Small speaker plus a phone or player on loop', 'Shanti room music'],
+      ['Mandir', 'Booth shelf brackets', '16', 'pieces', '4 per ledge', 'Booths'],
+      ['Shastra', 'Clear acrylic display covers', '4', 'pieces', 'About 19 × 19 × 17 in, 5-sided, ⅛–3⁄16 in acrylic', 'Glass cases'],
+      ['Shastra', 'Copies of the 4 scriptures', '4', 'books', 'Shikshapatri, Vachanamrut, Swamini Vato, Satsang Diksha; book stands inside the cases', 'Glass cases'],
+      ['Shastra', 'Piano hinges, about 84 in', '4', 'pieces', 'Full height of each door that opens', 'Spine wall'],
+      ['Shastra', 'Magnetic catches and door stops', '4', 'sets', '', 'Spine wall'],
+      ['Shastra', 'Lighting T-bar stands, crank-up to 12 ft', '2', 'stands', 'Rated 50 lb or more; each holds 2 scrolls and 3–4 lights', 'Floating pages'],
+      ['Shastra', 'Dowels, 1 in × 2 ft', '8', 'pieces', 'Top and weighted bottom of each scroll', 'Floating pages'],
+      ['Shastra', 'Clear line and S-hooks', '1', 'kit', '', 'Floating pages'],
+      ['Shastra', 'TV, 45–50 in', '2', 'TVs', 'Shows the answer above each tablet', 'NFC stations'],
+      ['Shastra', 'Low-profile TV wall mounts', '2', 'mounts', 'Screwed into 2 × 4 blocking', 'NFC stations'],
+      ['Shastra', 'Android tablets with NFC', '2', 'tablets', 'Runs the Ask the Shastras page', 'NFC stations'],
+      ['Shastra', 'USB-C to HDMI adapters with charging', '2', 'adapters', 'Tablet to TV, charging at the same time', 'NFC stations'],
+      ['Shastra', 'HDMI cables, 6 ft', '2', 'cables', '', 'NFC stations'],
+      ['Shastra', 'NFC stickers (NTAG213)', '50', 'stickers', '30 cards plus spares; QR codes as a backup', 'Question cards'],
+      ['Sant', 'Pillar weights', '3', 'sets', 'About 50 lb inside each base', 'Sant pillars'],
+      ['Sant', 'Bicycle and book', '1', 'each', 'The real objects or close matches', 'Prasang plinths'],
+      ['Sant', 'TV, 45–50 in', '1', 'TV', '', 'Birthday wall'],
+      ['Sant', 'Low-profile TV wall mount', '1', 'mount', 'Screwed into 2 × 4 blocking', 'Birthday wall'],
+      ['Sant', 'iPad and lockable floor stand', '1', 'set', 'Stand about 3.5 ft tall', 'Birthday wall'],
+      ['Sant', 'iPad to HDMI adapter and 6 ft HDMI cable', '1', 'set', '', 'Birthday wall'],
+      ['Sant', 'Frameless face-mounted prints', '5', 'prints', 'All 18 in tall: 3 at 12.6 in wide, 2 at 19 in wide', 'Closing wall'],
+      ['Lighting and power', 'Clamp-on LED spot, flood beam (about 60°)', '8', 'lights', '2700–3000 K, 7–10 W, 12–24 in arm', '4 booth walls, 3 on the spine wall, birthday wall'],
+      ['Lighting and power', 'Clamp-on LED spot, medium beam (30–40°)', '5', 'lights', '2700–3000 K, 7–10 W, 12–24 in arm', 'Mandir lintel, 2 scroll pairs, 2 prasangs'],
+      ['Lighting and power', 'Clamp-on LED spot, narrow beam (15–25°)', '4', 'lights', '2700–3000 K, 7–10 W', '4 glass cases'],
+      ['Lighting and power', 'Clamp-on LED spots (spares)', '2', 'lights', 'One flood, one narrow', 'Spares'],
+      ['Lighting and power', 'LED picture lights', '6', 'lights', 'Small, mounted on the top edge of each pillar face', 'Sant pillars'],
+      ['Lighting and power', 'LED linear wall washer, about 8 ft', '1', 'light', '2700–3000 K', 'Closing wall'],
+      ['Lighting and power', 'LED strip, 2700 K, 16 ft rolls', '2', 'rolls', 'With 2 drivers', 'Behind the Shanti jali'],
+      ['Lighting and power', 'Cool bare LED bulbs and pendant cords', '2', 'sets', '', 'Chaos hallway'],
+      ['Lighting and power', 'Black extension cords, 25 ft', '12', 'cords', 'Run along the wall tops', 'All lights and AV'],
+      ['Lighting and power', 'Power strips with surge protection', '6', 'strips', 'One per zone plus AV', 'All lights and AV'],
+      ['Lighting and power', 'Cord covers', '3', 'pieces', 'Where a cord has to cross a walkway', 'Safety'],
+      ['Lighting and power', 'Black gaffer tape', '4', 'rolls', '', 'Cords and cables'],
+      ['Lighting and power', 'Zip ties and cable clips', '100', 'pieces', '', 'Cords and cables'],
+      ['Stanchions', 'Brass stanchion posts', '4', 'posts', 'About 3 ft tall, weighted bases; rent or borrow', 'Openings in the Shastra columns'],
+      ['Stanchions', 'Red velvet ropes, about 4 ft', '2', 'ropes', 'With hooks', 'Openings in the Shastra columns'],
+      ['Prints and graphics', 'Printed vinyl strip', '19', 'linear ft', '2 ft tall, in 3 pieces (9, 6 and 4 ft)', 'Chaos hallway'],
+      ['Prints and graphics', 'Framed photos, 24 × 36 in', '3', 'prints', 'Matte', 'Shanti room'],
+      ['Prints and graphics', 'Foam-board booth headers, 6 × 0.9 ft', '4', 'boards', 'BKY 2, Charities 1, Better Living 1', 'Booths'],
+      ['Prints and graphics', 'Spine wraps and spine insides', '10', 'prints', '6 wraps about 1.4 × 7.2 ft, 4 insides about 1.2 × 6.9 ft', 'Spine wall'],
+      ['Prints and graphics', 'Dye-sub voile scrolls, 1.5 × 9.5 ft', '4', 'scrolls', '', 'Floating pages'],
+      ['Prints and graphics', 'Case name plates, about 17 × 4 in', '4', 'plates', '', 'Glass cases'],
+      ['Prints and graphics', 'Question cards, about 3.5 × 5 in', '30', 'cards', '', 'NFC stations'],
+      ['Prints and graphics', 'Pillar prints, about 1.8 × 6.9 ft', '6', 'prints', '3 photos and 3 information sides', 'Sant pillars'],
+      ['Prints and graphics', 'Birthday wall graphic, 7 × 6.4 ft', '1', 'print', 'Cutout for the TV', 'Birthday wall'],
+      ['Prints and graphics', 'Prasang story cards, about 12 × 8 in', '2', 'cards', '', 'Prasang plinths'],
+      ['Prints and graphics', 'Gold vinyl lettering', '2', 'sets', 'SANT · સંત on the middle pillar; AADHAR STAMBH line on the closing wall', 'Sant, closing wall'],
+      ['Hardware', 'Wood screws #8, 1⅝ in', '2', '5 lb boxes', '', 'Plywood to frames'],
+      ['Hardware', 'Wood screws #9, 3 in', '2', '5 lb boxes', '', 'Frames and braces'],
+      ['Hardware', 'Carriage bolts ⅜ × 4 in with washers and nuts', '40', 'sets', 'Join wall sections to each other', 'Walls'],
+      ['Hardware', 'Corner braces and mending plates', '50', 'pieces', '', 'Walls, plinths, pillars'],
+      ['Hardware', 'Wood glue and construction adhesive', '1', 'set', '1 gallon glue, 6 tubes adhesive', 'Boxes and plinths'],
+      ['Hardware', 'Velcro strips and mounting tape', '1', 'set', '', 'Prints, cards and plates']
+    ];
+    const bomEsc = v => /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+    const bomCSV = () => '\uFEFF' + ['Group,Item,Qty,Unit,Spec,Used for'].concat(BOM.map(r => r.map(bomEsc).join(','))).join('\n');
+    let lastGroup = '';
+    const bomRows = BOM.map(([grp, item, qty, unit, spec, use]) => {
+      const head = grp !== lastGroup ? `<tr class="grp"><td colspan="5">${grp}</td></tr>` : ''; lastGroup = grp;
+      return head + `<tr><td><b>${item}</b>${spec ? `<div class="spec">${spec}</div>` : ''}</td><td class="q">${qty}</td><td>${unit}</td><td>${use}</td></tr>`;
+    }).join('');
+    const sumQ = (f) => BOM.filter(f).reduce((a, r) => a + Number(r[2]), 0);
+    const bomStats = [
+      [sumQ(r => r[1].startsWith('½ in plywood')), 'sheets ½ in plywood'],
+      [sumQ(r => r[1].startsWith('¾ in plywood')), 'sheets ¾ in plywood'],
+      [sumQ(r => r[1].startsWith('2 × 4 × 8')), '2 × 4 × 8 studs'],
+      [sumQ(r => r[1].startsWith('Clamp-on LED')) + 6, 'spot and picture lights'],
+      [sumQ(r => r[1].startsWith('TV,')), 'TVs'],
+      [sumQ(r => r[1] === 'Brass stanchion posts'), 'stanchion posts']
+    ].map(([n, t]) => `<div class="stat"><b>${n}</b><span>${t}</span></div>`).join('');
     const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');
     const MEDIA = [
       [2, 'Notification stream', 'Print', '1 strip', 'About 19 × 2 ft printed vinyl, 150 dpi, in 3 pieces (9, 6 and 4 ft)', 'One flowing stream of phone notifications and photos of everyday noise: missed calls, deadlines, bills, traffic, 99+ unread'],
@@ -1654,7 +1764,11 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <div class="plan-scroll">${svg}</div>
       </div>
       <div data-panel="mat" role="tabpanel" hidden>
-        <div class="plan-head"><h3>Materials and sizes</h3><p>Planning estimates, to confirm with the build team</p></div>
+        <div class="plan-head"><h3>Shopping list</h3><p>Quantities worked out from the layout, as planning estimates. Confirm them with the build team and the venue before ordering.</p></div>
+        <div class="bom-stats">${bomStats}</div>
+        <div class="media-bar"><button type="button" class="chip" id="bomExport">Export CSV</button><button type="button" class="chip" id="bomCopy">Copy list</button><span class="copy-msg" id="bomMsg" aria-live="polite"></span></div>
+        <div class="mat-scroll"><table class="mat bom"><thead><tr><th>Item</th><th>Qty</th><th>Unit</th><th>Used for</th></tr></thead><tbody>${bomRows}</tbody></table></div>
+        <div class="plan-head" style="margin-top:22px"><h3>Pieces and sizes</h3><p>What each numbered piece is made of</p></div>
         <div class="mat-scroll"><table class="mat"><thead><tr><th>#</th><th>Piece</th><th>Size</th><th>Materials</th><th>Qty</th></tr></thead><tbody>${rows}</tbody></table></div>
       </div>
       <div data-panel="media" role="tabpanel" hidden>
@@ -1678,6 +1792,26 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       p2.querySelectorAll('.chip[data-f]').forEach(o => o.setAttribute('aria-pressed', String(o === c)));
       p2.querySelectorAll('table.media tbody tr').forEach(r => { r.hidden = !MTYPES[mf][1](r.dataset.type); });
     }));
+    const bomMsg = document.getElementById('bomMsg');
+    document.getElementById('bomExport').addEventListener('click', async () => {
+      const csv = bomCSV(), name = 'aadhar-stambh-shopping-list.csv';
+      let dl = null;
+      try { if (window.claude && claude.use) dl = await claude.use('downloads'); } catch (e) { dl = null; }
+      if (dl) {
+        try { await dl.save({ filename: name, data: csv }); bomMsg.textContent = 'Saved ' + name + '.'; }
+        catch (e) { bomMsg.textContent = e && e.code === 'declined' ? 'Download cancelled.' : 'Download is not available here. Use Copy list instead.'; }
+        return;
+      }
+      try {
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = name;
+        document.body.appendChild(a); a.click(); a.remove(); bomMsg.textContent = 'Downloaded ' + name + '.';
+      } catch (e) { bomMsg.textContent = 'Download is not available here. Use Copy list instead.'; }
+    });
+    document.getElementById('bomCopy').addEventListener('click', () => {
+      const txt = ['Group\tItem\tQty\tUnit\tSpec\tUsed for'].concat(BOM.map(r => r.join('\t'))).join('\n');
+      const done = ok => { bomMsg.textContent = ok ? 'Copied ' + BOM.length + ' lines. Paste into a sheet.' : 'Copy is blocked here. Select the table and copy it instead.'; };
+      try { navigator.clipboard.writeText(txt).then(() => done(true), () => done(false)); } catch (e) { done(false); }
+    });
     const msg = document.getElementById('mediaMsg');
     document.getElementById('mediaCopy').addEventListener('click', () => {
       const list = MEDIA.filter(m => MTYPES[mf][1](m[2]));
