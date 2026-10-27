@@ -27,12 +27,12 @@ Read this section before changing anything. These decisions were made deliberate
 - **Booths:** BKY is an L in the corner by the hallway: one 6 ft wall on the north wall joined to a second 6 ft wall on the blank end of the hallway and Shanti room. Better Living Sessions is on the side wall right outside the Shanti exit (not on the Charities wall). BAPS Charities is on the south wall. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
-- **Layout:** two columns running from the spine wall toward the NFC wall, with a 6 ft aisle between them. Left column: case, scroll, scroll, case. Right column: scroll, scroll, Vachanamrut case, a 3.9 ft opening, Satsang Diksha case. The opening lets people in the aisle see the Sant pillar photos.
+- **Layout:** two columns running from the spine wall toward the NFC wall, with a 6 ft aisle between them. Left column: Shikshapatri case, opening, Swamini Vato case, scroll, scroll. Right column: scroll, scroll, Vachanamrut case, opening, Satsang Diksha case. Each opening is about 3.9 ft and closed with a rope.
 - **Walk order:** from Mandir up to the spine wall, along it, down the aisle between the columns, along the NFC wall, then on to Sant. There is no path across the middle of the columns.
-- **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, in two pairs facing the aisle (one pair between the left cases, one pair north of the Vachanamrut case). Each pair hangs from a black T-post hidden in the gap between the two scrolls.
-- **Spine wall:** 8 giant book spines; 4 of them open (Vachanamrut, Swamini Vato, Shikshapatri, Satsang Diksha).
+- **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, in two pairs facing the aisle: one pair north of the Vachanamrut case (with "SHASTRA" on the first scroll), one pair south of the Swamini Vato case. Each pair hangs from a black T-post hidden in the gap between the two scrolls.
+- **Spine wall:** 6 giant book spines (about 9 ft of wall); 4 of them open (Vachanamrut, Swamini Vato, Shikshapatri, Satsang Diksha).
 - **4 glass cases**, one scripture each, at the ends of the two columns. Name plates face the aisle.
-- **2 NFC stations, side by side** on one wall. Each has a tablet as the tap point and a TV above that shows the answer.
+- **2 NFC stations** on the south wall, 2.4 ft apart (9.6 ft of wall in all). Each has a tablet as the tap point and a TV above that shows the answer.
 - The text lantern was dropped.
 
 ### Sant
@@ -40,6 +40,9 @@ Read this section before changing anything. These decisions were made deliberate
 - **Birthday wall** on the east wall of Sant, beside the exit, facing the back of the pillars: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
 - **2 prasangs** (the bicycle and the book) stand side by side in the southeast corner, next to the birthday wall, facing into Sant.
 - **Closing wall** (minimal), on the north wall of Sant, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
+
+### Stanchions
+- Red rope stanchions only where an open gap would let people skip ahead or leave the one-way route: out of the Shanti room, across the openings in both Shastra columns, south of the left scrolls, at the east end of the spine wall walk, and in front of the Sant pillar photos. 12 posts, 6 ropes. Nowhere that a wall or piece already guides people.
 
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
