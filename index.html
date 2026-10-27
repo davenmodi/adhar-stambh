@@ -131,6 +131,13 @@ h1 span { font-family: var(--body); font-size: 0.32em; font-weight: 600; letter-
 .p-fix text { fill: #17130b; font: 700 9px var(--body); }
 .p-aim { stroke: #d99a2b; stroke-width: 1.4; stroke-dasharray: 3 3; }
 .lf { background: #f2c46b !important; color: #17130b !important; }
+.opt-card { display: grid; gap: 10px; }
+.opt-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.opt-meta h4 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 19px; }
+.opt-meta p { margin: 0; font-size: 12.5px; color: var(--muted); max-width: 80ch; }
+.opt-meta a { font: 600 12px var(--body); color: var(--accent); margin-left: auto; white-space: nowrap; }
+.opt-img { display: block; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
+.opt-img img { display: block; width: 100%; height: auto; }
 .light-note { font-size: 12.5px; color: var(--muted); margin: 10px 0; max-width: 72ch; }
 table.mat { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; }
 table.mat th { text-align: left; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line); }
@@ -1598,6 +1605,11 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [13, 'Closing wall lettering', 'Fabrication', '1', 'Vinyl-cut, about 3 in caps plus a 1.5 in line', 'AADHAR STAMBH · The pillars that sustain a legacy (exhibition line, not a quotation)'],
       [13, 'Sant photographs', 'Photo', '5', 'All 18 in tall: 3 at 12.6 in wide, 2 at 19 in wide; at least 2700 px tall', 'Approved photos of Pramukh Swami Maharaj and Mahant Swami Maharaj, colour-matched so the row reads as one set']
     ];
+    // Floor plan options: add a new layout by dropping its PDF and a preview JPG in plans/ and adding a row here.
+    const PLAN_OPTS = [
+      { name: 'Option 1 · Plan V4', file: 'plans/option-1.pdf', img: 'plans/option-1.jpg',
+        note: 'Scroll truss reduced to 7 × 5 ft with 5 scrolls (3 west, 2 east) and a north–south aisle from the spine wall to the NFC wall. Sant splits into north and south loops around the portrait. 20 spotlights, 3 guides and 3 booth volunteers.' }
+    ];
     const MTYPES = [['All', () => true], ['Print', t => t === 'Print' || t === 'Fabric print' || t === 'Photo'], ['Digital', t => t === 'Digital' || t === 'Data'], ['Audio', t => t === 'Audio'], ['Fabrication', t => t === 'Fabrication'], ['From others', t => t === 'From others']];
     const mrow = ([n, a, t, q, spec, need]) => `<tr data-type="${t}"><td class="n"><span>${n}</span></td><td><b>${a}</b></td><td><span class="mtype">${t}</span></td><td class="q">${q}</td><td>${spec}</td><td>${need}</td></tr>`;
     const chips = MTYPES.map(([name, f], i) => `<button type="button" class="chip" data-f="${i}" aria-pressed="${i === 0}">${name} <span>${MEDIA.filter(m => f(m[2])).length}</span></button>`).join('');
@@ -1607,6 +1619,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button type="button" role="tab" data-tab="plan" aria-selected="true">Floor plan</button>
         <button type="button" role="tab" data-tab="mat" aria-selected="false">Materials</button>
         <button type="button" role="tab" data-tab="media" aria-selected="false">Media assets <span class="cnt">${MEDIA.length}</span></button>
+        <button type="button" role="tab" data-tab="opts" aria-selected="false">Floor plan options <span class="cnt">${PLAN_OPTS.length}</span></button>
         <button type="button" role="tab" data-tab="light" aria-selected="false">Lighting <span class="cnt">${FIX.length}</span></button>
       </div>
       <div data-panel="plan" role="tabpanel">
@@ -1622,6 +1635,11 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <div class="media-bar"><div class="chips" role="group" aria-label="Filter by type">${chips}</div><button type="button" class="chip copy" id="mediaCopy">Copy list</button><span class="copy-msg" id="mediaMsg" aria-live="polite"></span></div>
         <div class="mat-scroll"><table class="mat media"><thead><tr><th>#</th><th>Asset</th><th>Type</th><th>Qty</th><th>Size and spec</th><th>What it needs</th></tr></thead><tbody>${MEDIA.map(mrow).join('')}</tbody></table></div>
       </div>
+      <div data-panel="opts" role="tabpanel" hidden>
+        <div class="plan-head"><h3>Floor plan options</h3><p>Alternative 2D layouts to compare. These are reference plans only; the 3D model is unchanged.</p></div>
+        <div class="chips" role="group" aria-label="Choose a layout">${PLAN_OPTS.map((o, i) => `<button type="button" class="chip" data-opt="${i}" aria-pressed="${i === 0}">${o.name}</button>`).join('')}</div>
+        <div class="opt-card" id="optCard"></div>
+      </div>
       <div data-panel="light" role="tabpanel" hidden>
         <div class="plan-head"><h3>Spot lights</h3><p>${FIX.length} clamp-on spots, buy ${FIX.length + 2} with spares · 2700–3000 K warm white · every fixture clamps to a wall top, a T-post or the portrait, so no ceiling rigging is needed</p></div>
         <div class="plan-scroll">${lsvg}</div>
@@ -1632,6 +1650,14 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       p2.querySelectorAll('[role="tab"]').forEach(o => o.setAttribute('aria-selected', String(o === t)));
       p2.querySelectorAll('[data-panel]').forEach(pn => { pn.hidden = pn.dataset.panel !== t.dataset.tab; });
     }));
+    const optCard = document.getElementById('optCard');
+    const showOpt = i => {
+      const o = PLAN_OPTS[i];
+      optCard.innerHTML = `<div class="opt-meta"><h4>${o.name}</h4><p>${o.note}</p><a href="${o.file}" target="_blank" rel="noopener">Open full PDF ↗</a></div><a class="opt-img" href="${o.file}" target="_blank" rel="noopener"><img src="${o.img}" alt="${o.name} floor plan" loading="lazy"></a>`;
+      p2.querySelectorAll('.chip[data-opt]').forEach(c => c.setAttribute('aria-pressed', String(Number(c.dataset.opt) === i)));
+    };
+    p2.querySelectorAll('.chip[data-opt]').forEach(c => c.addEventListener('click', () => showOpt(Number(c.dataset.opt))));
+    showOpt(0);
     let mf = 0;
     p2.querySelectorAll('.chip[data-f]').forEach(c => c.addEventListener('click', () => {
       mf = Number(c.dataset.f);
