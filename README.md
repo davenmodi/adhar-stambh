@@ -35,7 +35,7 @@ Read this section before changing anything. These decisions were made deliberate
 - **Split portrait:** 5 panels form one portrait of Mahant Swami Maharaj from the front; the backs carry 5 topics. Two angled fins hide the rest of Sant until you walk past.
 - **Birthday wall** behind the portrait: a TV on the south wall with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
 - **2 prasangs** (the bicycle and the book), one on each side of the reflection wall at the end.
-- **Reflection wall** with a final teaching. No take-home cards. An interactive piece for this spot is still to be decided.
+- **Closing wall** (was the reflection wall): black with a gold border, "AADHAR STAMBH · The pillars that sustain a legacy" as the central statement (an exhibition line, not a quotation), five Sant photographs in mixed sizes, and slim brass picture lights. No take-home cards.
 
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered on the portrait base. Each name is in English and Gujarati.
