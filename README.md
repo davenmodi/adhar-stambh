@@ -4,7 +4,7 @@ Interactive 3D mockup and build plan for **Section 6, Aadhar Stambh**, of the BA
 
 - `index.html`: the whole site in one file (Three.js r128 from cdnjs, all textures drawn in code)
 - `portrait.jpg`: the Mahant Swami Maharaj portrait used on the split portrait and in the Shanti room
-- `plans/`: alternative 2D floor plans shown in the 2D view under **Floor plan options** (a PDF plus a JPG preview for each). To add one, drop `option-N.pdf` and `option-N.jpg` in `plans/` and add a row to `PLAN_OPTS` in `index.html`. These are reference layouts only and do not change the 3D model.
+- `plans/`: alternative 2D floor plans shown in the 2D view under **Floor plan options** (a PDF plus a JPG preview for each). The tab shows **Current mockup** (drawn from the model's own data), **Option 1** (a PDF plan) and **Option 2** (the current mockup with the Shastra columns turned into east–west rows, drawn in code from `ALT`, `ROUTE2` and `FIX2` in `build2D`). Drawn options show the visitor path, spotlights, volunteers, guides, a legend and the spot list; this replaced the old Lighting tab. To add a PDF option, drop `option-N.pdf` and `option-N.jpg` in `plans/` and add a row to `PLAN_OPTS` in `index.html`. These are reference layouts only and do not change the 3D model.
 
 The site is served by GitHub Pages from the `main` branch. Any change merged into `main` is live within a minute or two.
 

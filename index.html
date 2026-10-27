@@ -138,6 +138,17 @@ h1 span { font-family: var(--body); font-size: 0.32em; font-weight: 600; letter-
 .opt-meta a { font: 600 12px var(--body); color: var(--accent); margin-left: auto; white-space: nowrap; }
 .opt-img { display: block; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
 .opt-img img { display: block; width: 100%; height: auto; }
+.p-path { fill: none; stroke: #c0532b; stroke-width: 2; stroke-dasharray: 6 4; stroke-linecap: round; }
+.p-arrow { fill: #c0532b; }
+.p-vol circle { fill: var(--surface); stroke: #3f6fd1; stroke-width: 2; }
+.p-vol text { fill: #3f6fd1; font: 700 9px var(--body); }
+.p-guide circle { fill: #3f6fd1; stroke: var(--surface); stroke-width: 1.5; }
+.p-guide text { fill: #fff; font: 700 8.5px var(--body); }
+.p-lbl { fill: var(--muted); font: 600 9.5px var(--body); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; stroke-linejoin: round; }
+.opt-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--muted); }
+.opt-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.opt-legend svg { width: 26px; height: 16px; overflow: visible; }
+.opt-card .mat td .moved { color: var(--accent); font-weight: 600; font-size: 11px; margin-left: 4px; }
 .light-note { font-size: 12.5px; color: var(--muted); margin: 10px 0; max-width: 72ch; }
 table.mat { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 13px; }
 table.mat th { text-align: left; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--line); }
@@ -259,7 +270,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button class="act" id="cAct" type="button" hidden></button>
       </aside>
       <div class="clear-legend" id="clearLegend" hidden><span><i class="sw g"></i>Clear walkway</span><span><i class="sw a"></i>People using it</span><span><i class="sw b"></i>Viewers / readers</span><span><i class="sw r"></i>Under 3 ft</span></div>
-      <div class="spot-legend" id="spotLegend" hidden><b>20 clamp spot lights</b><span>Numbers match the Lighting tab in the 2D view</span></div>
+      <div class="spot-legend" id="spotLegend" hidden><b>20 clamp spot lights</b><span>Numbers match Floor plan options in the 2D view</span></div>
       <div id="plan2d" hidden></div>
       <div id="loading">Loading model…</div>
     </div>
@@ -1518,7 +1529,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [5, 'Booth kits', '6 ft wall, 15 in ledge each', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet; BKY uses two kits as an L, onto the Shanti room wall', '4 (BKY 2, BLS 1, Charities 1)'],
     [6, 'Spine wall', '8 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 4 that open: 7 ft piano hinge, magnetic catch, door stop, printed insides', '8 spines'],
     [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '4'],
-    ['L', 'Clamp spot lights', '20 fixtures', 'Clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '22 (2 spare)'],
+    ['L', 'Clamp spot lights', '20 fixtures', 'Clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top; mixed narrow, medium and flood beams (see Floor plan options in the 2D view); black extension cords and one power strip per zone', '22 (2 spare)'],
     [8, 'Floating pages', '2 columns, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, 2 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '4 scrolls'],
     [9, 'NFC wall', '7.6 ft wide', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
     [10, 'Split portrait', '6 ft wide, 7.5 ft panels', '5 panels 14 in wide in ¾ in plywood or 10 mm foam board, double-sided prints, base 0.7 × 6 × 0.6 ft with gold letters', '5 panels'],
@@ -1530,7 +1541,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   ];
   function build2D() {
     const S = 20, OX = 96, OY = 70, X = v => (OX + v * S).toFixed(1), Y = v => (OY + v * S).toFixed(1);
-    const out = [];
+    let out = [];
     const rect = (x0, z0, x1, z1, cls) => out.push(`<rect x="${X(x0)}" y="${Y(z0)}" width="${((x1 - x0) * S).toFixed(1)}" height="${((z1 - z0) * S).toFixed(1)}" class="${cls}"/>`);
     const line = (x0, z0, x1, z1, cls) => out.push(`<line x1="${X(x0)}" y1="${Y(z0)}" x2="${X(x1)}" y2="${Y(z1)}" class="${cls}"/>`);
     const text = (x, z, t, cls, anchor) => out.push(`<text x="${X(x)}" y="${Y(z)}" class="${cls}" text-anchor="${anchor || 'middle'}" dominant-baseline="central">${t}</text>`);
@@ -1540,22 +1551,36 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       const o = off || 0; text((x0 + x1) / 2 + (dz ? o : 0), (z0 + z1) / 2 + (dx ? o : 0), t, 'p-dimt');
     };
     const badge = (x, z, n) => out.push(`<g class="p-badge"><circle cx="${X(x)}" cy="${Y(z)}" r="9"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`);
+    // Option 2: the two Shastra columns turned 90° into east–west rows, so the 6 ft aisle points at the split portrait
+    const ALT = {
+      cases: [[19.5, 6.4], [25.2, 6.4], [19.5, 14.2], [25.2, 14.2]],
+      posts: [[22.35, 6.4], [22.35, 14.2]],
+      scrolls: [[21.45, 6.4], [23.25, 6.4], [21.45, 14.2], [23.25, 14.2]]
+    };
+    function base(alt) {
     rect(0, 0, 16.5, 20, 'p-zm'); rect(16.5, 0, 29.2, 20, 'p-zs'); rect(29.2, 0, 40, 20, 'p-zt');
     for (let x = 0; x <= 40; x++) line(x, 0, x, 20, 'p-grid'); for (let z = 0; z <= 20; z++) line(0, z, 40, z, 'p-grid');
     rect(0, 5, 9, 13, 'p-ivory');
     rect(6, 4.8, 9, 5.2, 'p-piece');
     rect(9.2, 0.2, 15.2, 1.5, 'p-piece'); rect(10, 18.5, 16, 19.8, 'p-piece'); rect(0.2, 13.5, 1.5, 19.5, 'p-piece'); rect(9.2, 0.4, 10.5, 6.4, 'p-piece');
     SPINES.forEach((sp, i) => rect(17.05 + i * 1.49, 0.18, 17.05 + i * 1.49 + 1.38, 1.18, sp[2] ? 'p-piece p-open' : 'p-piece'));
+    if (alt) {
+      ALT.cases.forEach(([x, z]) => rect(x - 0.9, z - 0.9, x + 0.9, z + 0.9, 'p-piece'));
+      ALT.posts.forEach(([x, z]) => rect(x - 2.1, z - 0.1, x + 2.1, z + 0.1, 'p-dash'));
+      ALT.scrolls.forEach(([x, z]) => line(x - 0.75, z, x + 0.75, z, 'p-scroll'));
+    } else {
     CASES.forEach(([x, z]) => rect(x - 0.9, z - 0.9, x + 0.9, z + 0.9, 'p-piece'));
     POSTS.forEach(([x, z]) => rect(x - 0.1, z - 2.1, x + 0.1, z + 2.1, 'p-dash'));
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; line(x - cx, z - sz, x + cx, z + sz, 'p-scroll'); });
+    }
     rect(19.3, 19.45, 22.9, 19.8, 'p-piece'); rect(23.3, 19.45, 26.9, 19.8, 'p-piece');
     rect(30.45, 6.85, 31.15, 13.15, 'p-piece');
     rect(33.0, 0.2, 36.6, 0.55, 'p-piece'); rect(34.35, 1.95, 35.25, 2.85, 'p-piece');
     [[30.8, 5.6], [30.8, 14.4]].forEach(([x, z]) => rect(x - 0.75, z - 0.75, x + 0.75, z + 0.75, 'p-piece'));
     rect(39.55, 6, 39.82, 14, 'p-piece');
     WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
-    const baseOut = out.slice();
+    }
+    base(false);
     // dimensions
     dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 20, '20 ft', 1.1);
     dim(0, 21.3, 16.5, 21.3, 'Mandir 16.5 ft', 0.65); dim(16.5, 21.3, 29.2, 21.3, 'Shastra 12.7 ft', 0.65); dim(29.2, 21.3, 40, 21.3, 'Sant 10.8 ft', 0.65);
@@ -1574,11 +1599,83 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 19.1, 5], [0.85, 16.5, 5], [9.85, 3.8, 5], [23, 0.7, 6], [18.95, 7.45, 7], [26.75, 7.45, 7], [18.95, 13.15, 7], [26.75, 13.15, 7], [18.95, 10.3, 8], [26.75, 10.3, 8], [21.1, 19.1, 9], [25.1, 19.1, 9], [30.8, 10, 10], [34.8, 1.3, 11], [30.8, 5.6, 12], [30.8, 14.4, 12], [38.6, 10, 13]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
-    const lo = baseOut.slice();
-    FIX.forEach(([n, , , , , c, t]) => lo.push(`<line x1="${X(c[0])}" y1="${Y(c[2])}" x2="${X(t[0])}" y2="${Y(t[2])}" class="p-aim"/>`));
-    FIX.forEach(([n, , , , , c]) => lo.push(`<g class="p-fix"><circle cx="${X(c[0])}" cy="${Y(c[2])}" r="8.5"/><text x="${X(c[0])}" y="${Y(c[2])}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`));
-    const lsvg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Spot light plan with 20 numbered clamp spots"><title>Spot light plan</title>${lo.join('')}</svg>`;
-    const lrows = FIX.map(([n, zone, what, on, , c, , ang]) => `<tr><td class="n"><span class="lf">${n}</span></td><td>${zone}</td><td><b>${what}</b></td><td>${on}</td><td>${beamWord(ang)}</td></tr>`).join('');
+    // ---------- floor plan options: visitor path, spots, volunteers and guides ----------
+    const crSample = (P, n) => {
+      const pts = [];
+      for (let i = 0; i < P.length - 1; i++) {
+        const p0 = P[Math.max(0, i - 1)], p1 = P[i], p2 = P[i + 1], p3 = P[Math.min(P.length - 1, i + 2)];
+        for (let k = 0; k < n; k++) {
+          const t = k / n, t2 = t * t, t3 = t2 * t;
+          pts.push([0, 1].map(j => 0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3)));
+        }
+      }
+      pts.push(P[P.length - 1]); return pts;
+    };
+    const flow = P => {
+      const sm = crSample(P, 14), o = [`<path class="p-path" d="M${sm.map(([x, z]) => X(x) + ' ' + Y(z)).join(' L')}"/>`];
+      let acc = 0, next = 2.4;
+      for (let i = 1; i < sm.length - 1; i++) {
+        acc += Math.hypot(sm[i][0] - sm[i - 1][0], sm[i][1] - sm[i - 1][1]);
+        if (acc >= next) {
+          next += 3.6;
+          const a = Math.atan2(sm[i + 1][1] - sm[i - 1][1], sm[i + 1][0] - sm[i - 1][0]) * 180 / Math.PI;
+          o.push(`<path class="p-arrow" d="M-5 -4 L4 0 L-5 4 Z" transform="translate(${X(sm[i][0])} ${Y(sm[i][1])}) rotate(${a.toFixed(1)})"/>`);
+        }
+      }
+      return o.join('');
+    };
+    const spotMarks = F => F.map(([n, , , , , c, t]) => `<line x1="${X(c[0])}" y1="${Y(c[2])}" x2="${X(t[0])}" y2="${Y(t[2])}" class="p-aim"/>`).join('') +
+      F.map(([n, , , , , c]) => `<g class="p-fix"><circle cx="${X(c[0])}" cy="${Y(c[2])}" r="8.5"/><text x="${X(c[0])}" y="${Y(c[2])}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`).join('');
+    // Booth volunteers and guides, placed as in Option 1: V at BKY, Better Living and BAPS Charities; G1 hallway, G2 Shastra, G3 Sant
+    const VOLS = [[12.4, 3.4], [2.9, 17.4], [14.6, 17.0]];
+    const GUIDES = [[8.3, 1.0, 'G1'], [17.5, 4.4, 'G2'], [28.7, 13.6, 'G3']], GUIDES_NOW = [[8.3, 1.0, 'G1'], [21.0, 2.7, 'G2'], [28.7, 13.6, 'G3']];
+    const people = G => VOLS.map(([x, z]) => `<g class="p-vol"><circle cx="${X(x)}" cy="${Y(z)}" r="7.5"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">V</text></g>`).join('') +
+      G.map(([x, z, t]) => `<g class="p-guide"><circle cx="${X(x)}" cy="${Y(z)}" r="9"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">${t}</text></g>`).join('');
+    const lbl = (x, z, t, rot) => out.push(`<text x="${X(x)}" y="${Y(z)}" class="p-lbl" text-anchor="middle" dominant-baseline="central"${rot ? ` transform="rotate(-90 ${X(x)} ${Y(z)})"` : ''}>${t}</text>`);
+    const labels = () => {
+      lbl(3.4, 3.9, 'Chaos hallway'); lbl(3.2, 10.6, 'Shanti room'); lbl(14.0, 2.6, 'BKY booth'); lbl(2.6, 14.3, 'Better Living'); lbl(11.6, 17.6, 'Charities');
+      lbl(23, 0.68, 'Spine wall · 8 spines'); lbl(23.1, 18.85, 'NFC wall · 2 TVs'); lbl(31.85, 12.4, 'Split portrait', true);
+      lbl(30.8, 4.4, 'Bicycle'); lbl(30.8, 15.6, 'Book'); lbl(34.8, 3.4, 'Birthday wall'); lbl(39.1, 13.6, 'Closing wall', true);
+      lbl(-1.9, 0.9, 'In'); lbl(42, 0.9, 'Exit');
+    };
+    // Option 2 path: same Mandir loop, then east along the spine wall, back west through the scroll aisle, east along the NFC wall into Sant
+    const ROUTE2 = ROUTE.slice(0, 11).concat([[16.6, 3.3], [22.35, 3.3], [27.4, 3.6], [28.3, 6.6], [27.2, 10.3], [22.35, 10.3], [17.6, 10.5], [17.0, 14.2], [18.6, 17.3], [22.35, 17.3], [27.6, 17.3], [32.4, 18]], ROUTE.slice(18));
+    const FIX2 = FIX.map(f => f.slice());
+    const setF = (n, what, on, c, t) => { const f = FIX2[n - 1]; f[2] = what; f[3] = on; f[5] = c; f[6] = t; f.moved = true; };
+    setF(9, 'Shikshapatri case', 'North T-post bar, west end', [20.3, 11.5, 6.4], [19.5, 3.4, 6.4]);
+    setF(10, 'Swamini Vato case', 'South T-post bar, west end', [20.3, 11.5, 14.2], [19.5, 3.4, 14.2]);
+    setF(11, 'Vachanamrut case', 'North T-post bar, east end', [24.4, 11.5, 6.4], [25.2, 3.4, 6.4]);
+    setF(12, 'Satsang Diksha case', 'South T-post bar, east end', [24.4, 11.5, 14.2], [25.2, 3.4, 14.2]);
+    setF(13, 'South row scrolls', 'North T-post, aisle side', [22.35, 11.2, 6.75], [22.35, 4.5, 14.2]);
+    setF(14, 'North row scrolls', 'South T-post, aisle side', [22.35, 11.2, 13.85], [22.35, 4.5, 6.4]);
+    setF(15, 'Portrait front', 'North wall top, Sant side', [28.6, 8.6, 1.8], [30.8, 4.2, 10]);
+    const optSvg = (alt, F, route, label) => {
+      out = []; base(alt); labels();
+      dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 20, '20 ft', 1.1);
+      if (alt) {
+        dim(20.6, 1.25, 20.6, 5.45, '', 0); dim(20.6, 7.35, 20.6, 13.25, '', 0); dim(20.6, 15.15, 20.6, 19.4, '', 0);
+        text(20.85, 4.75, '4.3 ft', 'p-dimt', 'start'); text(20.85, 8.4, 'Aisle 6 ft', 'p-dimt', 'start'); text(20.85, 15.85, '4.3 ft', 'p-dimt', 'start');
+        dim(26.15, 11.8, 30.4, 11.8, '4.3 ft', -0.5);
+      } else {
+        dim(18.95, 1.25, 18.95, 6.5, '5.3 ft', -1.1); dim(19.85, 10.3, 25.85, 10.3, 'Aisle 6 ft', -0.55); dim(18.0, 14.1, 18.0, 19.35, '5.3 ft', -1.1);
+        dim(27.65, 8.2, 30.45, 8.2, '2.8 ft', -0.5);
+      }
+      text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
+      return `<svg viewBox="0 0 1000 500" role="img" aria-label="${label}"><title>${label}</title>${out.join('')}${flow(route)}${spotMarks(F)}${people(alt ? GUIDES : GUIDES_NOW)}</svg>`;
+    };
+    const optLegend = `<div class="opt-legend">
+      <span><svg viewBox="0 0 26 16"><line x1="2" y1="8" x2="24" y2="8" class="p-wall" style="stroke-width:4"/></svg>Wall (8 ft)</span>
+      <span><svg viewBox="0 0 26 16"><rect x="5" y="3" width="16" height="10" class="p-piece"/></svg>Display / object</span>
+      <span><svg viewBox="0 0 26 16"><line x1="5" y1="8" x2="21" y2="8" class="p-scroll"/></svg>Hanging scroll</span>
+      <span><svg viewBox="0 0 26 16"><rect x="2" y="6.5" width="22" height="3" class="p-dash"/></svg>T-post bar (12 ft)</span>
+      <span><svg viewBox="0 0 26 16"><line x1="1" y1="8" x2="19" y2="8" class="p-path"/><path class="p-arrow" d="M-5 -4 L4 0 L-5 4 Z" transform="translate(21 8)"/></svg>Visitor path</span>
+      <span><svg viewBox="0 0 26 16"><line x1="13" y1="8" x2="26" y2="8" class="p-aim"/><g class="p-fix"><circle cx="9" cy="8" r="7"/></g></svg>Spotlight + aim line</span>
+      <span><svg viewBox="0 0 26 16"><g class="p-vol"><circle cx="13" cy="8" r="6.5"/><text x="13" y="8" text-anchor="middle" dominant-baseline="central">V</text></g></svg>Booth volunteer</span>
+      <span><svg viewBox="0 0 26 16"><g class="p-guide"><circle cx="13" cy="8" r="7.5"/><text x="13" y="8" text-anchor="middle" dominant-baseline="central">G</text></g></svg>Tour guide</span>
+      <span><svg viewBox="0 0 26 16"><line x1="2" y1="8" x2="24" y2="8" class="p-dim"/><line x1="2" y1="4" x2="2" y2="12" class="p-dim"/><line x1="24" y1="4" x2="24" y2="12" class="p-dim"/></svg>Dimension</span>
+    </div>`;
+    const spotTable = F => `<div class="mat-scroll"><table class="mat"><thead><tr><th>#</th><th>Zone</th><th>Lights</th><th>Clamped to</th><th>Beam</th></tr></thead><tbody>${F.map(f => `<tr><td class="n"><span class="lf">${f[0]}</span></td><td>${f[1]}</td><td><b>${f[2]}</b>${f.moved ? '<span class="moved">moved</span>' : ''}</td><td>${f[3]}</td><td>${beamWord(f[7])}</td></tr>`).join('')}</tbody></table></div>`;
+    const guideNote = '<p class="light-note">Guides: G1 holds the line in the chaos hallway and sends about 8 people into the Shanti room every 90 seconds; G2 speaks in front of the spine wall and sends each group on; G3 speaks facing the split portrait, then sends groups around both ends to the panel backs. One volunteer stands in each booth’s standing zone so the walkway stays clear.</p>';
     const rows = MATERIALS.map(([n, piece, size, mat, qty]) => `<tr><td class="n"><span>${n}</span></td><td><b>${piece}</b></td><td>${size}</td><td>${mat}</td><td class="q">${qty}</td></tr>`).join('');
     const MEDIA = [
       [2, 'Notification stream', 'Print', '1 strip', 'About 19 × 2 ft printed vinyl, 150 dpi, in 3 pieces (9, 6 and 4 ft)', 'One flowing stream of phone notifications and photos of everyday noise: missed calls, deadlines, bills, traffic, 99+ unread'],
@@ -1607,8 +1704,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     ];
     // Floor plan options: add a new layout by dropping its PDF and a preview JPG in plans/ and adding a row here.
     const PLAN_OPTS = [
+      { name: 'Current mockup', svg: optSvg(false, FIX, ROUTE, 'Current mockup floor plan with visitor path, spotlights, volunteers and guides'), spots: FIX,
+        note: 'The layout in the 3D model today. Shastra has two north–south columns (case, scroll, scroll, case) with a 6 ft aisle between them, walked from the spine wall down to the NFC wall. The east column stands 2.8 ft in front of the split portrait. 20 clamp spots.' },
       { name: 'Option 1 · Plan V4', file: 'plans/option-1.pdf', img: 'plans/option-1.jpg',
-        note: 'Scroll truss reduced to 7 × 5 ft with 5 scrolls (3 west, 2 east) and a north–south aisle from the spine wall to the NFC wall. Sant splits into north and south loops around the portrait. 20 spotlights, 3 guides and 3 booth volunteers.' }
+        note: 'Scroll truss reduced to 7 × 5 ft with 5 scrolls (3 west, 2 east) and a north–south aisle from the spine wall to the NFC wall. Sant splits into north and south loops around the portrait. 20 spotlights, 3 guides and 3 booth volunteers.' },
+      { name: 'Option 2 · Rows turned 90°', svg: optSvg(true, FIX2, ROUTE2, 'Option 2 floor plan with the Shastra columns turned into east–west rows'), spots: FIX2,
+        note: 'The current mockup with the two Shastra columns turned 90° into east–west rows. The 6 ft aisle now points straight at the split portrait, and the nearest row ends 4.3 ft from it, so nothing stands in front of the portrait. Visitors snake around the centre: east along the spine wall, back west through the scroll aisle, then east along the NFC wall into Sant. Spots 9–15 move with the rows; everything else is unchanged.' }
     ];
     const MTYPES = [['All', () => true], ['Print', t => t === 'Print' || t === 'Fabric print' || t === 'Photo'], ['Digital', t => t === 'Digital' || t === 'Data'], ['Audio', t => t === 'Audio'], ['Fabrication', t => t === 'Fabrication'], ['From others', t => t === 'From others']];
     const mrow = ([n, a, t, q, spec, need]) => `<tr data-type="${t}"><td class="n"><span>${n}</span></td><td><b>${a}</b></td><td><span class="mtype">${t}</span></td><td class="q">${q}</td><td>${spec}</td><td>${need}</td></tr>`;
@@ -1620,7 +1721,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button type="button" role="tab" data-tab="mat" aria-selected="false">Materials</button>
         <button type="button" role="tab" data-tab="media" aria-selected="false">Media assets <span class="cnt">${MEDIA.length}</span></button>
         <button type="button" role="tab" data-tab="opts" aria-selected="false">Floor plan options <span class="cnt">${PLAN_OPTS.length}</span></button>
-        <button type="button" role="tab" data-tab="light" aria-selected="false">Lighting <span class="cnt">${FIX.length}</span></button>
       </div>
       <div data-panel="plan" role="tabpanel">
         <div class="plan-head"><h3>Floor plan</h3><p>1 square = 1 ft · walls 8 ft high · numbers match the materials and media lists</p></div>
@@ -1639,12 +1739,6 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <div class="plan-head"><h3>Floor plan options</h3><p>Alternative 2D layouts to compare. These are reference plans only; the 3D model is unchanged.</p></div>
         <div class="chips" role="group" aria-label="Choose a layout">${PLAN_OPTS.map((o, i) => `<button type="button" class="chip" data-opt="${i}" aria-pressed="${i === 0}">${o.name}</button>`).join('')}</div>
         <div class="opt-card" id="optCard"></div>
-      </div>
-      <div data-panel="light" role="tabpanel" hidden>
-        <div class="plan-head"><h3>Spot lights</h3><p>${FIX.length} clamp-on spots, buy ${FIX.length + 2} with spares · 2700–3000 K warm white · every fixture clamps to a wall top, a T-post or the portrait, so no ceiling rigging is needed</p></div>
-        <div class="plan-scroll">${lsvg}</div>
-        <p class="light-note">Not counted as spots: 2 bare cool bulbs in the chaos hallway, the LED strip behind the Shanti room jali, and the linear light on the closing wall. TVs and tablets light themselves, so the NFC wall needs no spot. Plan on one power strip per zone, with black extension cords run along the wall tops.</p>
-        <div class="mat-scroll"><table class="mat"><thead><tr><th>#</th><th>Zone</th><th>Lights</th><th>Clamped to</th><th>Beam</th></tr></thead><tbody>${lrows}</tbody></table></div>
       </div>`;
     p2.querySelectorAll('[role="tab"]').forEach(t => t.addEventListener('click', () => {
       p2.querySelectorAll('[role="tab"]').forEach(o => o.setAttribute('aria-selected', String(o === t)));
@@ -1653,7 +1747,10 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const optCard = document.getElementById('optCard');
     const showOpt = i => {
       const o = PLAN_OPTS[i];
-      optCard.innerHTML = `<div class="opt-meta"><h4>${o.name}</h4><p>${o.note}</p><a href="${o.file}" target="_blank" rel="noopener">Open full PDF ↗</a></div><a class="opt-img" href="${o.file}" target="_blank" rel="noopener"><img src="${o.img}" alt="${o.name} floor plan" loading="lazy"></a>`;
+      const meta = `<div class="opt-meta"><h4>${o.name}</h4><p>${o.note}</p>${o.file ? `<a href="${o.file}" target="_blank" rel="noopener">Open full PDF ↗</a>` : ''}</div>`;
+      optCard.innerHTML = o.svg
+        ? `${meta}<div class="plan-scroll">${o.svg}</div>${optLegend}${guideNote}<div class="plan-head"><h3 style="font-size:19px">Spotlights</h3><p>${o.spots.length} clamp-on LED spots, 2700–3000 K, dimmable · numbers match the plan</p></div>${spotTable(o.spots)}`
+        : `${meta}<a class="opt-img" href="${o.file}" target="_blank" rel="noopener"><img src="${o.img}" alt="${o.name} floor plan" loading="lazy"></a>`;
       p2.querySelectorAll('.chip[data-opt]').forEach(c => c.setAttribute('aria-pressed', String(Number(c.dataset.opt) === i)));
     };
     p2.querySelectorAll('.chip[data-opt]').forEach(c => c.addEventListener('click', () => showOpt(Number(c.dataset.opt))));
