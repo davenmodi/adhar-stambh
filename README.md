@@ -47,9 +47,6 @@ Read this section before changing anything. These decisions were made deliberate
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
 
-### Sources
-- Sant prasangs come from *When the World Sleeps* (Sadhu Saumyavadandas, 2026). The book is copyrighted, so it is not stored in this repo; see `docs/prasang-index.md` for an index with page numbers.
-
 ### Content rules
 - Anything not decided yet stays as a placeholder in [brackets].
 - Never invent quotes or teachings attributed to Pramukh Swami Maharaj, Mahant Swami Maharaj or the scriptures. Leave a placeholder until the approved wording arrives.
