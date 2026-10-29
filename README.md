@@ -32,7 +32,7 @@ Read this section before changing anything. These decisions were made deliberate
 - **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, two between the cases in each column, facing the aisle ("SHASTRA" on the first). Each pair hangs from a black T-post hidden in the gap between the two scrolls.
 - **Spine wall:** 6 giant book spines (about 9 ft of wall); every other one opens (1st, 3rd and 5th: Vachanamrut, Swamini Vato, Shikshapatri); the rest stay closed.
 - **4 glass cases**, one scripture each, at the ends of the two columns. Name plates face the aisle.
-- **2 NFC stations** on the south wall, centred on the aisle, 2.4 ft apart. Each has a tablet as the tap point and a TV above that shows the answer.
+- **2 NFC stations** on the south wall, centred on the aisle, 1.4 ft apart. Each has a tablet as the tap point and a TV above that shows the answer.
 - The text lantern was dropped.
 
 ### Sant
