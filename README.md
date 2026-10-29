@@ -13,13 +13,13 @@ The site is served by GitHub Pages from the `main` branch. Any change merged int
 Read this section before changing anything. These decisions were made deliberately. Don't undo them unless the section lead asks.
 
 ### Space
-- 40 × 30 ft, one open room (grew from 40 × 20; the extra 10 ft went along the south side, so entrance, exit and walk order are unchanged). Plywood walls, 8 ft high, built from 4 × 8 ft modules. No walls between the three parts.
+- 40 × 30 ft, one open room (grew from 40 × 20; the extra 10 ft went along the south side, so the entrance and walk order are unchanged). Plywood walls, 8 ft high, built from 4 × 8 ft modules. No walls between the three parts.
 - Gym floor covered with black loop carpet.
-- Entrance at the top-left (5 ft opening, from the Mulyo section), exit at the top-right.
+- Entrance at the top-left (5 ft opening, from the Mulyo section), exit at the bottom-right (south end of the east wall), so Sant is walked as an S: up the photo side, round the north end, back down the information side.
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
-- **Spot lights:** 21 fixtures (buy 23), warm white: 15 clamp-on spots on wall tops and the two Shastra T-posts, plus 6 small picture lights on the Sant pillars. No ceiling rigging is needed.
+- **Spot lights:** 25 fixtures (buy 27), warm white: 15 clamp-on spots on wall tops and the two Shastra T-posts, plus 10 small picture lights on the Sant panels. No ceiling rigging is needed.
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
@@ -36,16 +36,16 @@ Read this section before changing anything. These decisions were made deliberate
 - The text lantern was dropped.
 
 ### Sant
-- **Sant pillars:** 3 freestanding pillars (2 ft wide, 8 in deep, 7 ft 8 in tall) in one straight row across Sant, about 4.5 ft in from the Shastra columns, only 16 in apart so the row reads as one piece (people walk around the ends, not through). The front, facing Shastra, has one large photo each. The back explains one idea each: What is a Guru?, Pramukh Swami Maharaj, Mahant Swami Maharaj. A small picture light sits on top of each face.
-- **Birthday wall** on the east wall of Sant, beside the exit, facing the back of the pillars: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
+- **Sant panels:** 5 freestanding panels (2 ft wide, 8 in deep, 7 ft 8 in tall) in one 15.3 ft row down the middle of Sant, 16 in apart so the row reads as one piece. People walk up the photo side (facing Shastra), turn at the north end past the night-prasang corner, and come back down the information side. The backs explain one idea each: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, Living the teachings. A small picture light sits on top of each face.
+- **Birthday wall** on the east wall of Sant, facing the back of the panels: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
 - **Night prasangs (to come):** the south-east corner, next to the birthday wall, is saved for the night prasangs of Mahant Swami Maharaj. The bicycle and book plinths were removed.
-- **Closing wall** (minimal), on the north wall of Sant, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
+- **Closing wall** (minimal), on the east face of a short divider wall that runs from the south end of the panel row to the south wall, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Stanchions
 - None for now. The scrolls fill the space between the cases, so the earlier ropes were removed.
 
 ### Signage
-- **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
+- **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant panel. Each name is in English and Gujarati.
 
 ### Content rules
 - Anything not decided yet stays as a placeholder in [brackets].
@@ -63,3 +63,5 @@ Read this section before changing anything. These decisions were made deliberate
 ## Working together
 - One person changes a part at a time, or works on a branch and opens a pull request.
 - Write a clear commit message for each change (for example "Move NFC stations side by side").
+
+- A short stub wall (9 ft) closes the gap at the end of the spine wall so people go down the Shastra aisle instead of cutting straight across to Sant. The north-east corner of Sant is saved for the night prasangs.
