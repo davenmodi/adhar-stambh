@@ -233,6 +233,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button class="btn" id="tDims" type="button" aria-pressed="false">Dimensions</button>
         <button class="btn" id="tClear" type="button" aria-pressed="false">Walking space</button>
         <button class="btn" id="tSpots" type="button" aria-pressed="false">Spot lights</button>
+        <button class="btn" id="tPath" type="button" aria-pressed="true">Visitor path</button>
       </div>
     </div>
     <div class="viewer" id="viewer">
@@ -434,9 +435,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     case2: { zone: 'Shastra', name: 'Swamini Vato case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [15.95, 20.65] },
     case3: { zone: 'Shastra', name: 'Satsang Diksha case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [23.75, 20.65] },
     pages: { zone: 'Shastra', name: 'Floating pages', what: 'Four long scrolls of scripture, two in each column between the glass cases, facing the aisle. Each is written top to bottom with verses in Gujarati and English, and nearly touches the floor.', build: 'Each scroll is about 1.5 ft wide and 9.5 ft long, printed on translucent voile or backlit fabric, with a thin dowel at the top and a weighted dowel at the bottom hem. Each pair hangs from a black T-post (12 ft post, 4 ft top bar, weighted base) hidden in the 4 in gap between the two scrolls, or from the hall ceiling grid if the venue allows. Bottom about 1 ft off the floor. One warm spot on each post lights the scrolls across the aisle.', size: 'Two columns of case, scroll, scroll, case, each 7.5 ft long, with a 6 ft aisle between', at: [19.85, 17.3] },
-    nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [16.85, 29] },
-    nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, on the same wall, 2.4 ft from the first, so each group has room to stand. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [22.85, 29] },
-    ropes: { zone: 'Sant', name: 'Stanchions', what: 'Three red rope lines that keep the walk in order without building walls. One runs south from the corner of the Shanti room, so people leaving the room go down past the Better Living booth to BAPS Charities before turning back up towards Shastra. One runs from the end of the spine wall to the Vachanamrut case, so people go down the Shastra aisle instead of cutting across to Sant. The other runs from the south end of the Sant panels to the south wall, so people go up the photo side instead of straight to the exit.', build: 'Brass posts about 3 ft tall on weighted bases, red velvet ropes with hooks. Rent or borrow; no drilling.', size: '9 posts, 6 ropes about 6 ft each', at: [31.1, 25.2] },
+    nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [17.35, 29] },
+    nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, on the same wall, 1.4 ft from the first, so each group has room to stand. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [22.35, 29] },
+    ropes: { zone: 'Sant', name: 'Stanchions', what: 'Four red rope lines that keep the walk in order without building walls. One runs south from the corner of the Shanti room, so people leaving the room go down past the Better Living booth to BAPS Charities before turning back up towards Shastra. One closes the gap between the Swamini Vato case and the NFC wall, so people coming back from Charities go up to the BKY booth instead of cutting across. One runs from the end of the spine wall to the Vachanamrut case, so people go down the Shastra aisle instead of cutting across to Sant. The other runs from the south end of the Sant panels to the south wall, so people go up the photo side instead of straight to the exit.', build: 'Brass posts about 3 ft tall on weighted bases, red velvet ropes with hooks. Rent or borrow; no drilling.', size: '12 posts, 8 ropes about 6 ft each', at: [31.1, 25.2] },
     portrait: { zone: 'Sant', name: 'Sant pillars', what: 'Four tall panels in a straight row down the middle of Sant. People walk up the photo side (facing Shastra) first, turn at the north end, and come back down the other side, where each back explains one idea: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj and Mahant Swami Maharaj. Sant is lettered under the third photo.', build: 'Plywood box pillars 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, on a weighted base. Prints inset on both faces (about 1.8 × 6.9 ft). A small LED picture light on top of each face.', size: '4 panels in a 12 ft row, 16 in between them (not a walkway)', at: [31.1, 14.5] },
     kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 15] },
     nightcorner: { zone: 'Sant', name: 'City at night', what: 'A dark skyline wrapped around the north-east corner of Sant, half on the north wall and half on the east wall, where the walk turns from the photo side to the information side. “AWAKE FOR ALL OF US” (an exhibition line, not a quotation) runs across the top. Six towers each show a time, 10:53 PM to 2:30 AM, and have one glowing window: one room still awake in a sleeping city. On the ledge below, a card for each night gives the time, place and date, and what Mahant Swami Maharaj was praying for, summarised from When the World Sleeps. It shows how selflessly he cares for all of us.', build: 'Three layers of foam board: ½ in back layer painted night blue-black with the headline and a dim back skyline; 1 in front towers 2 in off the wall, matte black with painted windows; one window per tower cut out and backed with frosted acrylic and an LED puck. Times in gold vinyl above each tower. A gold-painted 1 × 4 ledge at 4 ft 10 in hides the wiring, with a warm LED strip under it lighting six printed cards (1.95 × 1.75 ft, foam board) tilted up slightly. Paint foam with latex or acrylic, not spray paint; check if the venue needs fire-rated foam board.', size: 'About 7 ft on each wall of the corner, 8 ft tall; towers 1.75 ft wide, tops 6.6–7.5 ft; cards 3.1–4.8 ft up; about 6 in deep at the ledge', at: [36.6, 2.2] },
@@ -847,7 +848,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
   const SCROLLS = [[15.95, 16.1, Math.PI / 2], [15.95, 18.5, Math.PI / 2], [23.75, 16.1, -Math.PI / 2], [23.75, 18.5, -Math.PI / 2]]; // two scrolls between the cases in each column
   const POSTS = [[15.95, 17.3], [23.75, 17.3]];
-  const ROPES = [[9.2, 13.3, 9.2, 18.7], [9.2, 18.7, 9.2, 24.0], [25.2, 1.6, 25.2, 7.3], [25.2, 7.3, 25.2, 12.9], [31.1, 20.7, 31.1, 25.2], [31.1, 25.2, 31.1, 29.7]]; // end of the spine wall to the Vachanamrut case; south end of the Sant panels to the south wall
+  const ROPES = [[9.2, 13.3, 9.2, 18.7], [9.2, 18.7, 9.2, 24.0], [15.3, 21.7, 15.3, 25.7], [15.3, 25.7, 15.3, 29.7], [25.2, 1.6, 25.2, 7.3], [25.2, 7.3, 25.2, 12.9], [31.1, 20.7, 31.1, 25.2], [31.1, 25.2, 31.1, 29.7]]; // end of the spine wall to the Vachanamrut case; south end of the Sant panels to the south wall
   function buildRopes() {
     const brass = std(0xb08d57, { roughness: 0.35, metalness: 0.8 }), red = std(0x8e1b1b, { roughness: 0.85 });
     const g = new THREE.Group();
@@ -912,7 +913,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
 
   function buildNFC() {
-    [[16.85, 'nfc0'], [22.85, 'nfc1']].forEach(([x, id]) => {
+    [[17.35, 'nfc0'], [22.35, 'nfc1']].forEach(([x, id]) => {
       const g = new THREE.Group(), z = 29.8;
       // TV above: the answer shows here, big enough for the whole group
       g.add(box(3.55, 2.05, 0.16, M.black, x, 6.5, z - 0.1));
@@ -1194,7 +1195,39 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- route ----------
   const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 18.0], [5.5, 25.0], [8.0, 27.0], [11.0, 25.5], [11.6, 14.0], [12.5, 7.5], [13.2, 5.6], [16.2, 5.0], [19.85, 5.5], [19.85, 17.3], [19.85, 25.3], [26.5, 25.5], [28.2, 20.0], [28.2, 9.0], [30.0, 3.6], [35.4, 4.3], [36.0, 8.2], [34.8, 11.0], [35.6, 16.0], [35.2, 23.5], [37.6, 27.4], [43, 28]];
   let walkCurve = null;
+  // Visitor path: a fixed line on the floor with arrows, and one figure walking it on a loop
+  const pathGroup = new THREE.Group(); let showPath = true, walker = null, floorCurve = null, walkerU = 0, floorLen = 1;
+  function buildPath() {
+    floorCurve = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, 0.06, z)), false, 'centripetal', 0.5);
+    floorLen = floorCurve.getLength();
+    const gold = new THREE.MeshBasicMaterial({ color: 0xe8b25c, transparent: true, opacity: 0.85, depthWrite: false });
+    pathGroup.add(new THREE.Mesh(new THREE.TubeGeometry(floorCurve, 600, 0.07, 6, false), gold));
+    const cone = new THREE.ConeGeometry(0.28, 0.6, 3);
+    for (let d = 3; d < floorLen - 1; d += 4) {
+      const u = d / floorLen, pnt = floorCurve.getPointAt(u), tan = floorCurve.getTangentAt(u);
+      const a = new THREE.Mesh(cone, gold); a.position.copy(pnt); a.position.y = 0.08;
+      a.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tan.clone().setY(0).normalize()); pathGroup.add(a);
+    }
+    walker = new THREE.Group();
+    const skin = std(0xc98a62, { roughness: 0.7 }), shirt = std(0xe48b62, { roughness: 0.7, emissive: 0x6a2e14, emissiveIntensity: 0.6 }), pants = std(0x2b2f3a, { roughness: 0.8 });
+    const legs = [-0.22, 0.22].map(dx => { const l = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.13, 2.6, 10), pants); l.geometry.translate(0, -1.3, 0); l.position.set(dx, 2.7, 0); walker.add(l); return l; });
+    const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.36, 2.0, 14), shirt); torso.position.y = 3.7; walker.add(torso);
+    const arms = [-0.55, 0.55].map(dx => { const a = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.1, 1.9, 8), shirt); a.geometry.translate(0, -0.95, 0); a.position.set(dx, 4.6, 0); walker.add(a); return a; });
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.36, 16, 12), skin); head.position.y = 5.1; walker.add(head);
+    walker.userData = { legs, arms };
+    pathGroup.add(walker); scene.add(pathGroup);
+  }
+  function stepWalker(dt, now) {
+    if (!walker || !pathGroup.visible) return;
+    walkerU = (walkerU + dt * 2.4 / floorLen) % 1;
+    const pnt = floorCurve.getPointAt(walkerU), tan = floorCurve.getTangentAt(walkerU);
+    walker.position.set(pnt.x, 0, pnt.z); walker.rotation.y = Math.atan2(tan.x, tan.z);
+    const sw = Math.sin(now * 0.008) * 0.45;
+    walker.userData.legs[0].rotation.x = sw; walker.userData.legs[1].rotation.x = -sw;
+    walker.userData.arms[0].rotation.x = -sw * 0.8; walker.userData.arms[1].rotation.x = sw * 0.8;
+  }
   function buildRoute() {
+    buildPath();
     walkCurve = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, EYE, z)), false, 'centripetal', 0.5);
     const lab = (text, x, z) => { const p = plate(5, 1.2, (ctx, w, h) => { ctx.fillStyle = 'rgba(232, 178, 92, 0.75)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '700 84px Montserrat, sans-serif'; ctx.fillText(text, w / 2, h / 2); }, 120); p.rotation.x = -Math.PI / 2; p.position.set(x, 0.03, z); scene.add(p); };
     lab('FROM MULYO', -5.5, 2); lab('EXIT', 44, 28);
@@ -1468,7 +1501,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     POSTS.forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.15, hz: 0.15 }));
     BOXES.push({ cx: 21.5, cz: 0.7, hx: 4.5, hz: 0.55 });
     BOXES.push({ cx: 12.2, cz: 0.85, hx: 3, hz: 0.65 }, { cx: 4.5, cz: 29.15, hx: 3, hz: 0.65 }, { cx: 0.85, cz: 18.5, hx: 0.65, hz: 3 }, { cx: 9.85, cz: 3.4, hx: 0.65, hz: 3 });
-    [16.85, 22.85].forEach(x => BOXES.push({ cx: x, cz: 29.4, hx: 0.7, hz: 0.4 }));
+    [17.35, 22.35].forEach(x => BOXES.push({ cx: x, cz: 29.4, hx: 0.7, hz: 0.4 }));
   }
 
   // ---------- info card & labels ----------
@@ -1502,6 +1535,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   tClear.addEventListener('click', () => { showClear = !showClear; tClear.setAttribute('aria-pressed', String(showClear)); clearLegend.hidden = !showClear; });
   const tSpots = document.getElementById('tSpots'), spotLegend = document.getElementById('spotLegend');
   tSpots.addEventListener('click', () => { showSpots = !showSpots; tSpots.setAttribute('aria-pressed', String(showSpots)); spotLegend.hidden = !showSpots; });
+  const tPath = document.getElementById('tPath');
+  tPath.addEventListener('click', () => { showPath = !showPath; tPath.setAttribute('aria-pressed', String(showPath)); });
   const tDims = document.getElementById('tDims'); let showDims = false;
   tDims.addEventListener('click', () => { showDims = !showDims; tDims.setAttribute('aria-pressed', String(showDims)); });
   const tWalls = document.getElementById('tWalls'); let seeThrough = false;
@@ -1535,7 +1570,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimLine(9.2, 2.3, 15.2, 2.3, 'BKY 6 ft + 6 ft');
     dimLine(17.05, 1.9, 25.99, 1.9, 'Spine wall 8.9 ft'); dimLine(23.75, 1.2, 23.75, 10.55, '9.3 ft');
     dimLine(16.85, 17.3, 22.85, 17.3, 'Aisle 6 ft'); dimLine(25.3, 13.05, 25.3, 21.55, 'Column 8.5 ft');
-    dimLine(15.05, 28.4, 24.65, 28.4, 'NFC wall 9.6 ft');
+    dimLine(15.55, 28.4, 24.15, 28.4, 'NFC wall 8.6 ft');
     dimLine(29.9, 8.5, 29.9, 20.5, 'Panel row 12 ft'); dimLine(29.5, 10.5, 29.5, 11.83, '16 in');
     dimTag(20, 8.6, 0, 'Walls 8 ft high');
     dimTag(4.5, 8.6, 9, 'Shanti room 9 × 8 × 8 ft');
@@ -1574,7 +1609,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; cgSet(nearSeg(x - cx, z - sz, x + cx, z + sz, 0.2), 1, true); });
     ROPES.forEach(([ax, az, bx, bz]) => cgSet(nearSeg(ax, az, bx, bz, 0.25), 1, true));
     // people using a piece (standing to talk, tap, read or open)
-    [[9.2, 1.5, 15.2, 4.5], [1.5, 25.5, 7.5, 28.5], [1.5, 15.5, 4.5, 21.5], [10.5, 0.4, 13.5, 6.4], [15.65, 26.4, 18.05, 29.3], [21.65, 26.4, 24.05, 29.3], [17.05, 1.2, 26.0, 3.7], [36.7, 13.0, 39.7, 17.0]]
+    [[9.2, 1.5, 15.2, 4.5], [1.5, 25.5, 7.5, 28.5], [1.5, 15.5, 4.5, 21.5], [10.5, 0.4, 13.5, 6.4], [16.15, 26.4, 18.55, 29.3], [21.15, 26.4, 23.55, 29.3], [17.05, 1.2, 26.0, 3.7], [36.7, 13.0, 39.7, 17.0]]
       .forEach(r => cgSet(inRect(...r), 2));
     // people viewing a piece
     [[16.85, 13.05, 18.05, 21.55], [21.65, 13.05, 22.85, 21.55]].forEach(r => cgSet(inRect(...r), 3)); // people reading the columns from the aisle
@@ -1621,7 +1656,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     ['L', 'Spot lights', '23 fixtures', '15 clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top, plus 8 small LED picture lights on the panel tops; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '25 (2 spare)'],
     [8, 'Floating pages', '2 pairs, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, 2 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '4 scrolls'],
     [9, 'NFC wall', '9.6 ft wide, 2.4 ft between the TVs', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
-    ['R', 'Stanchions', '9 posts, 6 ropes', 'Brass posts about 3 ft tall on weighted bases, red velvet ropes about 6 ft with hooks; rent or borrow, no drilling', '9 posts, 6 ropes'],
+    ['R', 'Stanchions', '12 posts, 8 ropes', 'Brass posts about 3 ft tall on weighted bases, red velvet ropes about 6 ft with hooks; rent or borrow, no drilling', '12 posts, 8 ropes'],
     [10, 'Sant panels', '2 ft × 8 in × 7 ft 8 in each', '½ in plywood box on a 2×2 frame, painted black, weighted base 2 × 1.2 ft (no wider than the pillar), inset prints on both faces about 1.8 × 6.9 ft, small LED picture light on top of each face', '4'],
     [11, 'Birthday wall', '7 ft of wall, TV 3.6 × 2.1 ft', '45–50 in TV with wall mount, iPad in a lockable floor stand, wired HDMI adapter, printed wall graphic 7 × 6.4 ft, one offline web page with the date archive', '1'],
     [12, 'City at night', 'North-east corner, about 7 ft on each wall, 6 towers, 6 cards', 'Foam board in 3 layers (back, towers, cards), 6 frosted acrylic windows with LED pucks, gold vinyl times, painted 1 × 4 ledge with a warm LED strip under it', '1'],
@@ -1651,7 +1686,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     POSTS.forEach(([x, z]) => rect(x - 0.1, z - 2.1, x + 0.1, z + 2.1, 'p-dash'));
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; line(x - cx, z - sz, x + cx, z + sz, 'p-scroll'); });
     ROPES.forEach(([ax, az, bx, bz]) => { line(ax, az, bx, bz, 'p-rope'); [[ax, az], [bx, bz]].forEach(([x, z]) => out.push(`<circle cx="${X(x)}" cy="${Y(z)}" r="3.2" class="p-ropepost"/>`)); });
-    rect(15.05, 29.45, 18.65, 29.8, 'p-piece'); rect(21.05, 29.45, 24.65, 29.8, 'p-piece');
+    rect(15.55, 29.45, 19.15, 29.8, 'p-piece'); rect(20.55, 29.45, 24.15, 29.8, 'p-piece');
     PIL.Z.forEach(z => rect(PIL.X - 0.35, z - 1, PIL.X + 0.35, z + 1, 'p-piece'));
     rect(39.45, 13.2, 39.8, 16.8, 'p-piece'); rect(37.15, 14.55, 38.05, 15.45, 'p-piece');
     rect(32.9, 0.18, 39.8, 0.7, 'p-piece'); rect(39.3, 0.7, 39.8, 7.1, 'p-piece'); text(36.0, 1.6, 'City at night', 'p-note', 'middle');
@@ -1669,10 +1704,10 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(17.05, 2.0, 25.99, 2.0, 'Spine wall 8.9 ft', 0.55);
     dim(23.75, 1.25, 23.75, 13.05, '11.8 ft', 1.1);
     dim(16.85, 17.3, 22.85, 17.3, 'Aisle 6 ft', -0.55);
-    dim(15.05, 28.6, 24.65, 28.6, 'NFC wall 9.6 ft', -0.55);
+    dim(15.55, 28.6, 24.15, 28.6, 'NFC wall 8.6 ft', -0.55);
     dim(29.7, 8.5, 29.7, 20.5, '12 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [4.5, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [15.95, 13.95, 7], [23.75, 13.95, 7], [15.95, 20.65, 7], [23.75, 20.65, 7], [15.95, 17.3, 8], [23.75, 17.3, 8], [16.85, 29.1, 9], [22.85, 29.1, 9], [31.1, 14.5, 10], [38.7, 15, 11], [35.4, 28.8, 13], [38.9, 1.3, 12]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [4.5, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [15.95, 13.95, 7], [23.75, 13.95, 7], [15.95, 20.65, 7], [23.75, 20.65, 7], [15.95, 17.3, 8], [23.75, 17.3, 8], [17.35, 29.1, 9], [22.35, 29.1, 9], [31.1, 14.5, 10], [38.7, 15, 11], [35.4, 28.8, 13], [38.9, 1.3, 12]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 760" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 30 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const lo = baseOut.slice();
@@ -1733,8 +1768,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Sant', 'Battery LED puck lights, warm white', '6', 'lights', 'One behind each glowing window; remote on/off', 'City at night'],
       ['Sant', 'Warm LED strip, 16 ft', '1', 'roll', 'Under the ledge, lighting the cards; USB or plug-in', 'City at night'],
       ['Sant', '1 × 4 × 8 ft board', '2', 'pieces', 'Ledge, painted gold', 'City at night'],
-      ['Sant', 'Brass stanchion posts', '9', 'posts', 'About 3 ft tall, weighted bases; rent or borrow', 'Stanchions'],
-      ['Sant', 'Red velvet ropes, 6 ft', '6', 'ropes', 'With hooks', 'Stanchions'],
+      ['Sant', 'Brass stanchion posts', '12', 'posts', 'About 3 ft tall, weighted bases; rent or borrow', 'Stanchions'],
+      ['Sant', 'Red velvet ropes, 6 ft', '8', 'ropes', 'With hooks', 'Stanchions'],
       ['Sant', 'TV, 45–50 in', '1', 'TV', '', 'Birthday wall'],
       ['Sant', 'Low-profile TV wall mount', '1', 'mount', 'Screwed into 2 × 4 blocking', 'Birthday wall'],
       ['Sant', 'iPad and lockable floor stand', '1', 'set', 'Stand about 3.5 ft tall', 'Birthday wall'],
@@ -1944,6 +1979,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     flicker.forEach((l, i) => { const f = Math.sin(now * 0.013 + i * 3) + Math.sin(now * 0.041 + i); l.intensity = f > 1.2 ? 0.1 : 0.85 + 0.15 * Math.sin(now * 0.05); });
     if (mode === '2d') { requestAnimationFrame(tick); return; }
     dimGroup.visible = showDims; clearGroup.visible = showClear; spotGroup.visible = showSpots;
+    pathGroup.visible = showPath && mode !== 'walk' && mode !== 'roam'; stepWalker(dt, now);
     renderer.render(scene, camera);
     const w = viewer.clientWidth, h = viewer.clientHeight;
     const vis = showLabels && !showDims && !showClear && !showSpots && mode !== 'walk' && mode !== 'roam';
