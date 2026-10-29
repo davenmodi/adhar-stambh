@@ -19,7 +19,7 @@ Read this section before changing anything. These decisions were made deliberate
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
-- **Spot lights:** 23 fixtures (buy 25), warm white: 17 clamp-on spots on wall tops and the two Shastra T-posts, plus 6 small picture lights on the Sant pillars. No ceiling rigging is needed. The full list is under Floor plan options in the 2D view.
+- **Spot lights:** 21 fixtures (buy 23), warm white: 15 clamp-on spots on wall tops and the two Shastra T-posts, plus 6 small picture lights on the Sant pillars. No ceiling rigging is needed.
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
@@ -27,22 +27,22 @@ Read this section before changing anything. These decisions were made deliberate
 - **Booths:** BKY is an L in the corner by the hallway: one 6 ft wall on the north wall joined to a second 6 ft wall on the blank end of the hallway and Shanti room. Better Living Sessions is on the side wall right outside the Shanti exit (not on the Charities wall). BAPS Charities is on the south wall. All are booth kits (wall, header, ledge, spot, outlet). Volunteers stand there and talk with visitors. Each activity lead decides what happens in their booth. **No people figures in the model.**
 
 ### Shastra
-- **Layout:** two columns running from the spine wall toward the NFC wall, with a 6 ft aisle between them. Left column: Shikshapatri case, opening, Swamini Vato case, scroll, scroll. Right column: scroll, scroll, Vachanamrut case, opening, Satsang Diksha case. Each opening is about 3.9 ft and closed with a rope.
+- **Layout:** two compact columns of case, scroll, scroll, case (about 7.5 ft each) with a 6 ft aisle between them, set 3 ft toward the Shanti room from the earlier plan. The NFC wall is centred on the aisle.
 - **Walk order:** from Mandir up to the spine wall, along it, down the aisle between the columns, along the NFC wall, then on to Sant. There is no path across the middle of the columns.
-- **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, in two pairs facing the aisle: one pair north of the Vachanamrut case (with "SHASTRA" on the first scroll), one pair south of the Swamini Vato case. Each pair hangs from a black T-post hidden in the gap between the two scrolls.
+- **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, two between the cases in each column, facing the aisle ("SHASTRA" on the first). Each pair hangs from a black T-post hidden in the gap between the two scrolls.
 - **Spine wall:** 6 giant book spines (about 9 ft of wall); 4 of them open (Vachanamrut, Swamini Vato, Shikshapatri, Satsang Diksha).
 - **4 glass cases**, one scripture each, at the ends of the two columns. Name plates face the aisle.
-- **2 NFC stations** on the south wall, 2.4 ft apart (9.6 ft of wall in all). Each has a tablet as the tap point and a TV above that shows the answer.
+- **2 NFC stations** on the south wall, centred on the aisle, 2.4 ft apart. Each has a tablet as the tap point and a TV above that shows the answer.
 - The text lantern was dropped.
 
 ### Sant
 - **Sant pillars:** 3 freestanding pillars (2 ft wide, 8 in deep, 7 ft 8 in tall) in one straight row across Sant, about 4.5 ft in from the Shastra columns, only 16 in apart so the row reads as one piece (people walk around the ends, not through). The front, facing Shastra, has one large photo each. The back explains one idea each: What is a Guru?, Pramukh Swami Maharaj, Mahant Swami Maharaj. A small picture light sits on top of each face.
 - **Birthday wall** on the east wall of Sant, beside the exit, facing the back of the pillars: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
-- **2 prasangs** (the bicycle and the book) stand side by side in the southeast corner, next to the birthday wall, facing into Sant.
+- **Night prasangs (to come):** the south-east corner, next to the birthday wall, is saved for the night prasangs of Mahant Swami Maharaj. The bicycle and book plinths were removed.
 - **Closing wall** (minimal), on the north wall of Sant, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Stanchions
-- A red rope stanchion across the opening between the two cases in each Shastra column (4 posts, 2 ropes). No other stanchions.
+- None for now. The scrolls fill the space between the cases, so the earlier ropes were removed.
 
 ### Signage
 - **No banners or hanging signs.** Each part is named inside its own piece: "Mandir" is carved into the jali lintel over the Shanti room door, "Shastra" is the first word on the first scroll, and "Sant" is lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.
