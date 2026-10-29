@@ -33,7 +33,7 @@ Read this section before changing anything. These decisions were made deliberate
 - **Spine wall:** 6 giant book spines (about 9 ft of wall); every other one opens (1st, 3rd and 5th: Vachanamrut, Swamini Vato, Shikshapatri); the rest stay closed.
 - **4 glass cases**, one scripture each, at the ends of the two columns. Name plates face the aisle.
 - **Satsang Diksha World Record panel:** a freestanding 3 × 6.5 ft matte black panel with gold lines, 4 in deep on a weighted base, standing in the stanchion line between the spine wall and the Vachanamrut case and facing visitors coming along the spine wall. "ONE WISH. THOUSANDS INSPIRED.", a landscape photo of the mass recitation (placeholder until an approved BAPS image is chosen), 12,723 children in the simultaneous recitation on 2 February 2026, 15,666 who memorized all 315 shlokas, and "Shastra learned. Shastra remembered. Shastra lived." Figures checked against baps.org. One small LED picture light on top.
-- **2 NFC stations** on the south wall, centred on the aisle, 1.4 ft apart. Each has a tablet as the tap point and a TV above that shows the answer.
+- **2 NFC stations** on the south wall, on the NFC wall at the end of the aisle, with one floating-page scroll (1.5 × 7 ft, hung from the wall top) between the two TVs; the second station sits 7.5 ft east of the first, toward Sant. Each has a tablet as the tap point and a TV above that shows the answer.
 - The text lantern was dropped.
 
 ### Sant
