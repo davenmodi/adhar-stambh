@@ -315,13 +315,13 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   <section class="text">
     <h2>Notes before you build</h2>
     <ul class="notes">
-      <li><b>Walls</b>Plywood in 4 × 8 ft modules on 2×3 frames, painted flat before setup, bolted together and braced with kickers, since nothing anchors to the hall floor. About 120 ft of outer wall and about 25 ft inside. Confirm which outer walls the hall or neighbouring sections already give you.</li>
+      <li><b>Walls</b>Plywood in 4 × 8 ft modules on 2×4 frames, painted before setup, bolted together and braced with kickers, since nothing anchors to the hall floor. About 131 ft of outer wall and about 25 ft inside. Confirm which outer walls the hall or neighbouring sections already give you.</li>
       <li><b>Walls and floor</b>The model assumes 8 ft walls from standard sheets. The gym floor gets black loop carpet (about $1 a sq ft, 12 ft wide rolls). Ask the facility what it allows on the gym floor, use only gaffer tape, and put felt pads under every wall foot.</li>
       <li><b>Shanti room</b>Confirm with the venue that a covered room is allowed (flame-retardant fabric, sprinklers, exits). At about 8 people every 2 minutes it handles about 240 people an hour, and the hallway holds the line.</li>
       <li><b>Floating pages</b>Get venue approval for the T-post or ceiling rigging, and sign-off on the verses before printing. Order the fabric scrolls early: dye-sub printing takes about a week.</li>
       <li><b>NFC</b>Each station is a tablet (the tap point) with a 45–50 in TV above, connected by a wired HDMI adapter rather than wireless casting. One web page and one working card by day 5. If not, put QR codes on the same cards so nothing is reprinted.</li>
       <li><b>Crowds</b>About 6 ft of clear walking space everywhere. Places where people stop, like the booths, spines and NFC stations, sit outside that line.</li>
-      <li><b>Lighting</b>About 18 clamp-on spots at 3000K on dimmers, plus LED strip behind the jali. Hall lights off; exit signs stay on.</li>
+      <li><b>Lighting</b>14 clamp-on spots and 11 small picture lights at 3000K on dimmers, plus LED strip behind the jali. Hall lights off; exit signs stay on.</li>
       <li><b>Booth leads</b>Each lead gets a 6 ft wall, a ledge, one spot and one outlet. No speakers or mics, nothing freestanding in the walkway, and content shown to you by a set date.</li>
       <li><b>Birthday wall</b>Someone needs to compile the archive of where Swami was each day into one file early. That data is the long pole, not the kiosk. Test with real birthdays before the show.</li>
       <li><b>Still open</b>The five closing-wall photos, the three Shanti room photos, the final wording of the six city-at-night cards, and whether the entrance and exit really sit on opposite 30 ft ends.</li>
@@ -1694,7 +1694,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- 2D plan with dimensions and materials ----------
   const MATERIALS = [
-    [1, 'Walls', '≈145 linear ft, 8 ft high', '½ in plywood in 4 × 8 ft sheets on 2×3 frames, painted flat charcoal; kickers for bracing', 'About 38 sheets'],
+    [1, 'Walls', '≈156 linear ft, 8 ft high', '½ in plywood in 4 × 8 ft sheets on 2×4 frames, painted matte black; kickers for bracing', 'About 50 sheets'],
     [2, 'Chaos hallway', '9 × 5 ft', 'Matte black paint on all three walls, printed vinyl strip 2 ft tall at 4–6 ft, 2 cool LED bare-bulb pendants', '≈19 ft of strip'],
     [3, 'Shanti room', '9 × 8 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
     [4, 'Mandir lintel', '3 × 1 ft', 'Laser-cut MDF jali with carved letters, painted ivory', '1'],
@@ -1703,14 +1703,14 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '3'],
     ['L', 'Spot lights', '25 fixtures', '14 clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top, plus 11 small LED picture lights on the Sant panel tops and the record panel; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '27 (2 spare)'],
     [8, 'Floating pages', '1 pair, 12 ft high, plus 1 on the wall', 'Dye-sub printed voile scrolls (2 at 1.5 × 9.5 ft, 1 at 1.5 × 7 ft for the NFC wall, hung from a bar clamped to the wall top), dowels top and bottom, 1 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '3 scrolls'],
-    [9, 'NFC wall', '9.6 ft wide, 2.4 ft between the TVs', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
+    [9, 'NFC wall', '11.1 ft wide, TVs 7.5 ft apart with a scroll between', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
     ['R', 'Stanchions', '12 posts, 8 ropes', 'Brass posts about 3 ft tall on weighted bases, red velvet ropes about 6 ft with hooks; rent or borrow, no drilling', '12 posts, 8 ropes'],
     [10, 'Sant panels', '2 ft × 8 in × 7 ft 8 in each', '½ in plywood box on a 2×2 frame, painted black, weighted base 2 × 1.2 ft (no wider than the pillar), inset prints on both faces about 1.8 × 6.9 ft, small LED picture light on top of each face', '5'],
     [11, 'Birthday wall', '7 ft of wall, TV 3.6 × 2.1 ft', '45–50 in TV with wall mount, iPad in a lockable floor stand, wired HDMI adapter, printed wall graphic 7 × 6.4 ft, one offline web page with the date archive', '1'],
     [12, 'City at night', 'North-east corner, about 7 ft on each wall, 6 towers, 6 cards', 'Foam board in 3 layers (back, towers, cards), 6 frosted acrylic windows with LED pucks, gold vinyl times, painted 1 × 4 ledge with a warm LED strip under it', '1'],
     [16, 'Satsang Diksha record panel', '3 × 6.5 ft, 4 in deep', 'Matte black ½ in plywood box on a 2 × 2 frame, weighted ¾ in base, printed aluminium composite face with thin gold lines, 1 LED picture light', '1'],
     [13, 'Closing wall', '8 ft wall, 7.2 ft photo row', 'Matte black paint, vinyl-cut lettering, 5 frameless prints face-mounted on aluminium or acrylic, 1 slim LED linear wall-washer at 2700–3000K', '1 wall, 5 prints'],
-    [14, 'Lighting', 'Whole section', 'Clamp-on LED spots at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', 'About 18 spots'],
+    [14, 'Lighting', 'Whole section', 'Clamp-on LED spots at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', '14 spots + 11 picture lights'],
     [15, 'Floor covering', '40 × 30 ft', 'Black loop carpet in 12 ft wide rolls (three runs of 40 ft, one trimmed to 6 ft), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 960 sq ft']
   ];
   function build2D() {
