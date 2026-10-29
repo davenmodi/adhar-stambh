@@ -1708,7 +1708,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [10, 'Sant panels', '2 ft × 8 in × 7 ft 8 in each', '½ in plywood box on a 2×2 frame, painted black, weighted base 2 × 1.2 ft (no wider than the pillar), inset prints on both faces about 1.8 × 6.9 ft, small LED picture light on top of each face', '5'],
     [11, 'Birthday wall', '7 ft of wall, TV 3.6 × 2.1 ft', '45–50 in TV with wall mount, iPad in a lockable floor stand, wired HDMI adapter, printed wall graphic 7 × 6.4 ft, one offline web page with the date archive', '1'],
     [12, 'City at night', 'North-east corner, about 7 ft on each wall, 6 towers, 6 cards', 'Foam board in 3 layers (back, towers, cards), 6 frosted acrylic windows with LED pucks, gold vinyl times, painted 1 × 4 ledge with a warm LED strip under it', '1'],
-    [15, 'Satsang Diksha record panel', '3 × 6.5 ft, 4 in deep', 'Matte black ½ in plywood box on a 2 × 2 frame, weighted ¾ in base, printed aluminium composite face with thin gold lines, 1 LED picture light', '1'],
+    [16, 'Satsang Diksha record panel', '3 × 6.5 ft, 4 in deep', 'Matte black ½ in plywood box on a 2 × 2 frame, weighted ¾ in base, printed aluminium composite face with thin gold lines, 1 LED picture light', '1'],
     [13, 'Closing wall', '8 ft wall, 7.2 ft photo row', 'Matte black paint, vinyl-cut lettering, 5 frameless prints face-mounted on aluminium or acrylic, 1 slim LED linear wall-washer at 2700–3000K', '1 wall, 5 prints'],
     [14, 'Lighting', 'Whole section', 'Clamp-on LED spots at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', 'About 18 spots'],
     [15, 'Floor covering', '40 × 30 ft', 'Black loop carpet in 12 ft wide rolls (three runs of 40 ft, one trimmed to 6 ft), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 960 sq ft']
@@ -1757,7 +1757,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(15.55, 28.6, 26.65, 28.6, 'NFC wall 11.1 ft', -0.55);
     dim(29.7, 8.5, 29.7, 23.83, '15.3 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [4.5, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [15.95, 13.95, 7], [23.75, 13.95, 7], [15.95, 20.65, 7], [15.95, 17.3, 8], [17.35, 29.1, 9], [24.85, 29.1, 9], [21.1, 28.9, 8], [31.1, 14.5, 10], [38.7, 15, 11], [35.4, 28.8, 13], [38.9, 1.3, 12], [25.0, 11.55, 15]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [4.5, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [15.95, 13.95, 7], [23.75, 13.95, 7], [15.95, 20.65, 7], [15.95, 17.3, 8], [17.35, 29.1, 9], [24.85, 29.1, 9], [21.1, 28.9, 8], [31.1, 14.5, 10], [38.7, 15, 11], [35.4, 28.8, 13], [38.9, 1.3, 12], [25.0, 11.55, 16]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 760" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 30 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const lo = baseOut.slice();
@@ -1890,8 +1890,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [9, 'Ask the Shastras page', 'Digital', '1', 'Web page: tablet tap screen plus 1920 × 1080 TV answer screen', 'One answer per question card, each with its scripture reference'],
       [9, 'TV idle screen', 'Digital', '1', '1920 × 1080 still or slow loop', 'Shown on both TVs between taps'],
       [10, 'Panel photos', 'Print', '5', 'About 1.8 × 6.9 ft each; a tall crop, source at least 3300 × 12500 px', 'One large photo per panel: Swami among people, at a mandir, in a moment of seva. Approved images'],
-      [15, 'Record panel photograph', 'Photo', '1', 'Landscape, prints about 2.5 × 1.55 ft; at least 4500 px wide', 'An actual BAPS photo of the Satsang Diksha mass recitation (2 Feb 2026); approved image only'],
-      [15, 'Record panel graphic', 'Print', '1', '3 × 6.5 ft, aluminium composite', 'Eyebrow, headline, photo, 12,723, three supporting stats, description, takeaway. Figures checked against baps.org'],
+      [16, 'Record panel photograph', 'Photo', '1', 'Landscape, prints about 2.5 × 1.55 ft; at least 4500 px wide', 'An actual BAPS photo of the Satsang Diksha mass recitation (2 Feb 2026); approved image only'],
+      [16, 'Record panel graphic', 'Print', '1', '3 × 6.5 ft, aluminium composite', 'Eyebrow, headline, photo, 12,723, three supporting stats, description, takeaway. Figures checked against baps.org'],
       [12, 'City at night cards', 'Print', '6', '1.95 × 1.75 ft each, on foam board', 'Time, place and date, a 2–3 sentence summary of the prasang, source page. Wording to be checked against When the World Sleeps'],
       [12, 'City at night wall', 'Print or paint', '1', 'Back layer in two 7 × 8 ft pieces, one per wall; gold vinyl times', 'Headline AWAKE FOR ALL OF US (exhibition line, not a quotation), back skyline, six times'],
       [10, 'Panel backs', 'Print', '5', 'About 1.8 × 6.9 ft each', 'What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, Living the teachings. Short text and two photos each; writing approved'],
