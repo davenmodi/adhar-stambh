@@ -13,7 +13,7 @@ The site is served by GitHub Pages from the `main` branch. Any change merged int
 Read this section before changing anything. These decisions were made deliberately. Don't undo them unless the section lead asks.
 
 ### Space
-- 40 × 20 ft, one open room. Plywood walls, 8 ft high, built from 4 × 8 ft modules. No walls between the three parts.
+- 40 × 30 ft, one open room (grew from 40 × 20; the extra 10 ft went along the south side, so entrance, exit and walk order are unchanged). Plywood walls, 8 ft high, built from 4 × 8 ft modules. No walls between the three parts.
 - Gym floor covered with black loop carpet.
 - Entrance at the top-left (5 ft opening, from the Mulyo section), exit at the top-right.
 - Walk order: **Mandir → Shastra → Sant**.
@@ -53,7 +53,7 @@ Read this section before changing anything. These decisions were made deliberate
 
 ## Technical notes
 - Keep the scene to **about 18 lights or fewer** (spot plus point lights). More than that leaves the 3D view blank on some devices. All spot lights come from the `FIX` table: every row draws a fixture, but only rows with an intensity add a real light, which keeps the count at 18.
-- Room coordinates are in feet: x runs 0–40 along the length, z runs 0–20 across. Item info lives in `ITEMS`; the 2D materials list in `MATERIALS`; the shopping list in `BOM` and the media list in `MEDIA` (both inside `build2D`). If you change a piece, update its quantities in `BOM` too.
+- Room coordinates are in feet: x runs 0–40 along the length, z runs 0–30 across. Item info lives in `ITEMS`; the 2D materials list in `MATERIALS`; the shopping list in `BOM` and the media list in `MEDIA` (both inside `build2D`). If you change a piece, update its quantities in `BOM` too.
 - The 2D plan, the dimensions and the walk-through stops are hand-placed. If you move a piece, update its `ITEMS.at`, its collider in `addColliders`, its dimension lines in `buildDims` and `build2D`, and the `ROUTE` and `STOPS` if the walk passes it.
 - Test before you merge: open the page, check Overview, Floor plan, Walk through, Walk around and the 2D tabs, and look at the browser console for errors.
 

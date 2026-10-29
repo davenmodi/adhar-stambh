@@ -205,7 +205,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   <header>
     <p class="eyebrow">Light Beyond Lamps · Section 6</p>
     <h1><b>Aadhar Stambh</b><span>V2</span></h1>
-    <p class="intro">A 40 × 20 ft open room in three movements: the Mandir gives peace and belonging, the Shastras give wisdom, and the Sant shows what living it looks like. One statement piece leads each part, with supporting pieces around it. Drag to orbit, scroll or pinch to zoom, right-drag or Shift-drag to pan, double-click a spot to zoom in, and click any piece. Walk around puts you at eye level, moving with WASD, the arrow keys or the on-screen pad.</p>
+    <p class="intro">A 40 × 30 ft open room in three movements: the Mandir gives peace and belonging, the Shastras give wisdom, and the Sant shows what living it looks like. One statement piece leads each part, with supporting pieces around it. Drag to orbit, scroll or pinch to zoom, right-drag or Shift-drag to pan, double-click a spot to zoom in, and click any piece. Walk around puts you at eye level, moving with WASD, the arrow keys or the on-screen pad.</p>
     <p class="route"><i>Mulyo</i><i>→</i><b class="m">Mandir</b><i>→</i><b class="s">Shastra</b><i>→</i><b class="t">Sant</b><i>→</i><i>Exit</i></p>
   </header>
 
@@ -322,7 +322,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       <li><b>Lighting</b>About 18 clamp-on spots at 3000K on dimmers, plus LED strip behind the jali. Hall lights off; exit signs stay on.</li>
       <li><b>Booth leads</b>Each lead gets a 6 ft wall, a ledge, one spot and one outlet. No speakers or mics, nothing freestanding in the walkway, and content shown to you by a set date.</li>
       <li><b>Birthday wall</b>Someone needs to compile the archive of where Swami was each day into one file early. That data is the long pole, not the kiosk. Test with real birthdays before the show.</li>
-      <li><b>Still open</b>The five closing-wall photos, the three Shanti room photos, the prasang story cards, and whether the entrance and exit really sit on opposite 20 ft ends.</li>
+      <li><b>Still open</b>The five closing-wall photos, the three Shanti room photos, the prasang story cards, and whether the entrance and exit really sit on opposite 30 ft ends.</li>
       <li><b>Timeline</b>Order prints, jali sheets, foam pieces, plinths, glass cases and tablets in the first 3 days. Week 2 is painting, setup and testing. The Media assets tab in the 2D view lists every print, file and piece of writing to make; give each one an owner this week.</li>
     </ul>
   </section>
@@ -330,7 +330,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   <section class="text">
     <h2>What changed from V1</h2>
     <ul class="changes">
-      <li>40 × 20 ft instead of 45 × 50 ft, as one open room with no walls between the three parts.</li>
+      <li>40 × 30 ft instead of 45 × 50 ft, as one open room with no walls between the three parts.</li>
       <li>The walk now runs Mandir, then Shastra, then Sant.</li>
       <li>The projector chaos-to-calm cycle became a short poster hallway into a backlit jali room with music.</li>
       <li>The text lantern became hanging scripture scrolls. A spine wall was added and the NFC stations went from 6 to 2, each with a TV above to show the answer.</li>
@@ -388,7 +388,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   function add(o) { scene.add(o); return o; }
   function box(w, h, d, mat, x, y, z) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); return m; }
 
-  // A wall from a to b (plan feet: x along 40 ft, z along 20 ft). plus/minus pick the material of each broad face.
+  // A wall from a to b (plan feet: x along 40 ft, z along 30 ft). plus/minus pick the material of each broad face.
   function wallSeg(a, b, opts) {
     opts = opts || {};
     const h = opts.h || 8, plus = opts.plus || M.wall, minus = opts.minus || M.wall;
@@ -426,23 +426,23 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     hallway: { zone: 'Mandir', name: 'Chaos hallway', what: 'A short, cramped hallway painted black from floor to ceiling. One stream of notifications and photos runs along the walls at eye level: deadlines, missed calls, bills, traffic, 99+ unread. Two cold flicker bulbs keep it restless. It doubles as the queue for the Shanti room.', build: 'Walls painted matte black. One continuous printed vinyl strip, about 19 ft long and 2 ft tall, wrapping all three walls at 4–6 ft. Two flicker bulbs. No sound, so nothing leaks into the Shanti room.', size: 'About 9 ft long, 5 ft wide', at: [4.5, 2] },
     shanti: { zone: 'Mandir', name: 'Shanti room', what: 'Out of the chaos into a sealed, glowing room: a backlit carved jali wall with three arches and three framed photos, a glossy white floor that reflects it, and a soft kirtan instrumental. No screens. Groups of about 8 for 90 seconds. People enter at one corner and leave through the south wall, with the Better Living booth on their right.', build: 'Ready-made PVC or MDF jali sheets painted ivory, framed 6–8 in off the plywood with warm LED strip behind. Foam arches and pillars. Moving blankets behind ivory fabric on the side walls. Fabric or thin ply ceiling, flame-retardant. Glossy white vinyl floor. One speaker.', size: '9 × 8 ft outside, about 8.5 × 7.5 ft inside', at: [4.5, 9] },
     bky: { zone: 'Mandir', name: 'BKY booth', what: 'The BKY booth in the corner by the hallway: one wall along the north wall and a second wall around the corner on the blank end of the hallway and Shanti room, joined as an L for twice the display space. Volunteers talk with visitors here; what happens is up to the BKY lead.', build: 'Two booth kits (12 ft of wall in an L): 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '12 ft of wall in an L, about 3 ft standing zone', at: [12, 3] },
-    charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 18.8] },
-    bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions on the side wall, on your right as you step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [2.2, 16.5] },
+    charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [13, 28.8] },
+    bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions on the side wall, on your right as you step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [2.2, 18.5] },
     spines: { zone: 'Shastra', name: 'Scripture spine wall', what: 'Six giant book spines line the wall like a library shelf. Four of them open: Vachanamrut, Swamini Vato, Shikshapatri and Satsang Diksha. Inside each: the teaching, a story, and what it means in everyday life.', build: 'Plywood boxes about 1.4 ft wide and 7 ft tall, painted as leather spines with gold bands. Full-length piano hinge, door stop and magnetic catch on the four that open.', size: 'About 9 ft of wall, 1 ft deep', at: [21.5, 1] },
-    case0: { zone: 'Shastra', name: 'Shikshapatri case', what: 'One of the four core scriptures in a glass case under its own spotlight. The cases sit at the ends of two columns that line a 6 ft aisle, so people read them as they walk from the spine wall to the NFC wall.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.95, 7.45] },
-    case1: { zone: 'Shastra', name: 'Vachanamrut case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.75, 7.45] },
-    case2: { zone: 'Shastra', name: 'Swamini Vato case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.95, 13.15] },
-    case3: { zone: 'Shastra', name: 'Satsang Diksha case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.75, 13.15] },
-    pages: { zone: 'Shastra', name: 'Floating pages', what: 'Four long scrolls of scripture facing the aisle: one pair north of the Vachanamrut case, the first thing you see down the spine wall, and one pair south of the Swamini Vato case by the NFC wall. Each column keeps an opening between its cases, closed with a rope. Each is written top to bottom with verses in Gujarati and English, and nearly touches the floor.', build: 'Each scroll is about 1.5 ft wide and 9.5 ft long, printed on translucent voile or backlit fabric, with a thin dowel at the top and a weighted dowel at the bottom hem. Each pair hangs from a black T-post (12 ft post, 4 ft top bar, weighted base) hidden in the 4 in gap between the two scrolls, or from the hall ceiling grid if the venue allows. Bottom about 1 ft off the floor. One warm spot on each post lights the scrolls across the aisle.', size: 'Left column: case, opening, case, scroll, scroll. Right column: scroll, scroll, case, opening, case. 6 ft aisle between', at: [22.85, 10.4] },
-    nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [20.4, 19] },
-    nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, on the same wall, 2.4 ft from the first, so each group has room to stand. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [26.4, 19] },
-    portrait: { zone: 'Sant', name: 'Sant pillars', what: 'Three tall pillars in a straight row across the middle of Sant. The photo side faces Shastra, one large photo per pillar. The back of each explains one idea: What is a Guru?, Pramukh Swami Maharaj, and Mahant Swami Maharaj. Sant is lettered under the middle photo.', build: 'Plywood box pillars 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, on a weighted base. Prints inset on both faces (about 1.8 × 6.9 ft). A small LED picture light on top of each face.', size: '3 pillars in an 8.7 ft row, 16 in between them (not a walkway)', at: [32.6, 10.75] },
-    kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 10] },
-    bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs in the corner next to the birthday wall: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.6, 18.5] },
-    book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang, beside the bicycle in the corner next to the birthday wall: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [36.2, 18.5] },
+    case0: { zone: 'Shastra', name: 'Shikshapatri case', what: 'One of the four core scriptures in a glass case under its own spotlight. The cases sit at the ends of two columns that line a 6 ft aisle, so people read them as they walk from the spine wall to the NFC wall.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.95, 11.45] },
+    case1: { zone: 'Shastra', name: 'Vachanamrut case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.75, 11.45] },
+    case2: { zone: 'Shastra', name: 'Swamini Vato case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [18.95, 17.15] },
+    case3: { zone: 'Shastra', name: 'Satsang Diksha case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [26.75, 17.15] },
+    pages: { zone: 'Shastra', name: 'Floating pages', what: 'Four long scrolls of scripture facing the aisle: one pair north of the Vachanamrut case, the first thing you see down the spine wall, and one pair south of the Swamini Vato case by the NFC wall. Each column keeps an opening between its cases, closed with a rope. Each is written top to bottom with verses in Gujarati and English, and nearly touches the floor.', build: 'Each scroll is about 1.5 ft wide and 9.5 ft long, printed on translucent voile or backlit fabric, with a thin dowel at the top and a weighted dowel at the bottom hem. Each pair hangs from a black T-post (12 ft post, 4 ft top bar, weighted base) hidden in the 4 in gap between the two scrolls, or from the hall ceiling grid if the venue allows. Bottom about 1 ft off the floor. One warm spot on each post lights the scrolls across the aisle.', size: 'Left column: case, opening, case, scroll, scroll. Right column: scroll, scroll, case, opening, case. 6 ft aisle between', at: [22.85, 14.4] },
+    nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [20.4, 29] },
+    nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, on the same wall, 2.4 ft from the first, so each group has room to stand. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [26.4, 29] },
+    portrait: { zone: 'Sant', name: 'Sant pillars', what: 'Three tall pillars in a straight row across the middle of Sant. The photo side faces Shastra, one large photo per pillar. The back of each explains one idea: What is a Guru?, Pramukh Swami Maharaj, and Mahant Swami Maharaj. Sant is lettered under the middle photo.', build: 'Plywood box pillars 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, on a weighted base. Prints inset on both faces (about 1.8 × 6.9 ft). A small LED picture light on top of each face.', size: '3 pillars in an 8.7 ft row, 16 in between them (not a walkway)', at: [32.6, 15.25] },
+    kiosk0: { zone: 'Sant', name: 'Birthday wall', what: 'A TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 15] },
+    bike: { zone: 'Sant', name: 'Prasang · The Bicycle', what: 'One of two prasangs in the corner next to the birthday wall: a bicycle on a plinth, one light, and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [38.6, 28.5] },
+    book: { zone: 'Sant', name: 'Prasang · Ignited Minds', what: 'The second prasang, beside the bicycle in the corner next to the birthday wall: the book, on a plinth with one light and a short story card.', build: 'Plinth, the object, one spot, printed story card. Story wording to be approved.', size: '1.5 × 1.5 ft plinth', at: [36.2, 28.5] },
     reflection: { zone: 'Sant', name: 'Closing wall', what: 'A quiet, minimal last wall: matte black, “AADHAR STAMBH · The pillars that sustain a legacy” set small and left-aligned, and one clean row of five frameless Sant photographs at eye level under a single slim linear light.', build: 'Matte black paint (no border), vinyl-cut lettering, 5 prints face-mounted on 3 mm aluminium or acrylic (frameless, 1.5 ft tall, 2.4 in gaps), one slim LED linear wall-washer at 2700–3000K. The statement is an exhibition line, not a quotation.', size: '7.2 ft row of photos on an 8 ft wall', at: [34.8, 0.6] },
     exit: { zone: 'Route', name: 'Exit', what: 'The end of Aadhar Stambh and of the exhibition route through this section.', build: 'A 4 ft opening in the outer wall.', size: '4 ft opening', at: [38, 2] },
-    ropes: { zone: 'Shastra', name: 'Stanchions', what: 'A red rope across the opening between the two cases in each Shastra column, so people stay in the aisle but can still see through to the Sant pillars.', build: 'Brass posts about 3 ft tall on weighted bases, red velvet ropes with hooks. Rent or borrow; no drilling.', size: '4 posts, 2 ropes about 4 ft each', at: [18.95, 10.3] },
+    ropes: { zone: 'Shastra', name: 'Stanchions', what: 'A red rope across the opening between the two cases in each Shastra column, so people stay in the aisle but can still see through to the Sant pillars.', build: 'Brass posts about 3 ft tall on weighted bases, red velvet ropes with hooks. Rent or borrow; no drilling.', size: '4 posts, 2 ropes about 4 ft each', at: [18.95, 14.3] },
     signs: { zone: 'Route', name: 'Names in the pieces', what: 'No banners. Each part is named inside its own statement piece: Mandir carved into the jali over the Shanti room door, Shastra as the first word on the first scroll, and Sant lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.', build: 'Mandir: carved or laser-cut letters on a jali lintel, painted ivory. Shastra: printed at the top of the first scroll. Sant: gold vinyl letters on the strip under the middle pillar photo.', size: 'Lintel about 3 ft wide; Sant letters about 3 in tall', at: [7.5, 5] },
   };
   const LABELS = [
@@ -465,18 +465,18 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     });
     carpet.tex.wrapS = carpet.tex.wrapT = THREE.RepeatWrapping; carpet.tex.repeat.set(10, 10);
     M.floor.map = carpet.tex; M.floor.color.set(0xffffff); M.floor.roughness = 1; M.floor.needsUpdate = true;
-    floorRect(9, 0, 40, 20, M.floor); floorRect(0, 0, 9, 5, M.floor); floorRect(0, 13, 9, 20, M.floor);
+    floorRect(9, 0, 40, 30, M.floor); floorRect(0, 0, 9, 5, M.floor); floorRect(0, 13, 9, 30, M.floor);
     const apron = std(0x0d0d0f, { roughness: 1 });
-    floorRect(-12, -10, 52, 0, apron, -0.01); floorRect(-12, 20, 52, 32, apron, -0.01);
-    floorRect(-12, 0, 0, 20, apron, -0.01); floorRect(40, 0, 52, 20, apron, -0.01);
+    floorRect(-12, -10, 52, 0, apron, -0.01); floorRect(-12, 30, 52, 42, apron, -0.01);
+    floorRect(-12, 0, 0, 30, apron, -0.01); floorRect(40, 0, 52, 30, apron, -0.01);
     const tint = (x0, z0, x1, z1, c) => floorRect(x0, z0, x1, z1, new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.07, depthWrite: false }), 0.006);
-    tint(9, 0, 16.5, 20, 0x9b6cc4); tint(0, 0, 9, 5, 0x9b6cc4); tint(0, 13, 9, 20, 0x9b6cc4);
-    tint(16.5, 0, 29.2, 20, 0x3fb39a); tint(29.2, 0, 40, 20, 0xe07a4a);
+    tint(9, 0, 16.5, 30, 0x9b6cc4); tint(0, 0, 9, 5, 0x9b6cc4); tint(0, 13, 9, 30, 0x9b6cc4);
+    tint(16.5, 0, 29.2, 30, 0x3fb39a); tint(29.2, 0, 40, 30, 0xe07a4a);
     const pts = [];
     for (let x = 0; x <= 40; x++) {
-      if (x > SH.x0 && x < SH.x1) { pts.push(x, 0, 0, x, 0, SH.z0, x, 0, SH.z1, x, 0, 20); } else pts.push(x, 0, 0, x, 0, 20);
+      if (x > SH.x0 && x < SH.x1) { pts.push(x, 0, 0, x, 0, SH.z0, x, 0, SH.z1, x, 0, 30); } else pts.push(x, 0, 0, x, 0, 30);
     }
-    for (let z = 0; z <= 20; z++) {
+    for (let z = 0; z <= 30; z++) {
       if (z > SH.z0 && z < SH.z1) pts.push(SH.x1, 0, z, 40, 0, z); else pts.push(0, 0, z, 40, 0, z);
     }
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
@@ -486,10 +486,10 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- walls ----------
   function buildWalls() {
     wallSeg([0, 0], [40, 0]);
-    wallSeg([0, 20], [40, 20]);
+    wallSeg([0, 30], [40, 30]);
     wallSeg([0, 5], [0, 13], { minus: M.ivory });
-    wallSeg([0, 13], [0, 20]);
-    wallSeg([40, 4], [40, 20]);
+    wallSeg([0, 13], [0, 30]);
+    wallSeg([40, 4], [40, 30]);
     wallSeg([0, 5], [6, 5], { plus: M.ivory });       // hallway / Shanti north wall, door at x 6–9
     wallSeg([9, 0], [9, 5]);                          // end of the hallway
     wallSeg([9, 5], [9, 13], { plus: M.ivory });      // Shanti east wall (closed)
@@ -791,7 +791,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       if (open) { door.userData.door = doors.length; doors.push({ pivot, open: false, a: 0 }); }
     });
   }
-  const CASES = [[18.95, 7.45, 'Shikshapatri'], [26.75, 7.45, 'Vachanamrut'], [18.95, 13.15, 'Swamini Vato'], [26.75, 13.15, 'Satsang Diksha']];
+  const CASES = [[18.95, 11.45, 'Shikshapatri'], [26.75, 11.45, 'Vachanamrut'], [18.95, 17.15, 'Swamini Vato'], [26.75, 17.15, 'Satsang Diksha']];
   function buildCases() {
     CASES.forEach(([x, z, name], i) => {
       const g = new THREE.Group();
@@ -846,12 +846,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       }
     });
   }
-  const SCROLLS = [[26.75, 3.9, -Math.PI / 2], [26.75, 5.6, -Math.PI / 2], [18.95, 15.1, Math.PI / 2], [18.95, 16.9, Math.PI / 2]]; // right pair north of Vachanamrut, left pair south of Swamini Vato; each column keeps a 3.9 ft opening
-  const POSTS = [[18.95, 16.0], [26.75, 4.75]];
+  const SCROLLS = [[26.75, 7.9, -Math.PI / 2], [26.75, 9.6, -Math.PI / 2], [18.95, 19.1, Math.PI / 2], [18.95, 20.9, Math.PI / 2]]; // right pair north of Vachanamrut, left pair south of Swamini Vato; each column keeps a 3.9 ft opening
+  const POSTS = [[18.95, 20.0], [26.75, 8.75]];
   // Red rope stanchions across the opening between the two cases in each Shastra column. [ax, az, bx, bz, why]
   const ROPES = [
-    [18.95, 8.6, 18.95, 12.0, 'Between the Shikshapatri and Swamini Vato cases'],
-    [26.75, 8.6, 26.75, 12.0, 'Between the Vachanamrut and Satsang Diksha cases; keeps the view to the pillar photos']
+    [18.95, 12.6, 18.95, 16.0, 'Between the Shikshapatri and Swamini Vato cases'],
+    [26.75, 12.6, 26.75, 16.0, 'Between the Vachanamrut and Satsang Diksha cases; keeps the view to the pillar photos']
   ];
   function buildRopes() {
     const brass = std(0xb08d57, { roughness: 0.35, metalness: 0.8 }), red = std(0x8e1b1b, { roughness: 0.85 });
@@ -918,7 +918,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   function buildNFC() {
     [[20.4, 'nfc0'], [26.4, 'nfc1']].forEach(([x, id]) => {
-      const g = new THREE.Group(), z = 19.8;
+      const g = new THREE.Group(), z = 29.8;
       // TV above: the answer shows here, big enough for the whole group
       g.add(box(3.55, 2.05, 0.16, M.black, x, 6.5, z - 0.1));
       const tv = plate(3.4, 1.9, (ctx, w, h) => {
@@ -953,7 +953,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- Sant ----------
   const TOPICS = ['What is a Guru?', 'Pramukh Swami Maharaj', 'Mahant Swami Maharaj'];
   // Three freestanding pillars in a straight row across the middle of Sant: photo on the front (facing Shastra), information on the back
-  const PIL = { X: 32.6, Z: [7.417, 10.75, 14.083], W: 2.0, D: 0.7, H: 7.67 };
+  const PIL = { X: 32.6, Z: [11.917, 15.25, 18.583], W: 2.0, D: 0.7, H: 7.67 };
   function buildPortrait() {
     const { X, W, D, H } = PIL, g = new THREE.Group();
     const ph = H - 0.75, py = 0.45 + ph / 2;
@@ -1058,20 +1058,20 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const bezel = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.72, 0.05), M.trim);
     bezel.rotation.copy(pad.rotation); bezel.position.copy(pad.position); bezel.translateZ(-0.035);
     g.add(bezel); g.add(pad);
-    g.rotation.y = -Math.PI / 2; g.position.set(40, 0, 10);
+    g.rotation.y = -Math.PI / 2; g.position.set(40, 0, 15);
     scene.add(g); clickable(g, 'kiosk0');
   }
 
   function buildPrasangs() {
     const metal = std(0x2b2b2e, { roughness: 0.4, metalness: 0.6 });
-    const b = plinthCard(38.6, 18.5, 0, -1, 'The Bicycle', 'bike');
+    const b = plinthCard(38.6, 28.5, 0, -1, 'The Bicycle', 'bike');
     const bike = new THREE.Group();
     [-0.42, 0.42].forEach(dx => { const w = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.035, 8, 28), metal); w.position.set(dx, 0.36, 0); bike.add(w); });
     const bar = (x1, y1, x2, y2) => { const len = Math.hypot(x2 - x1, y2 - y1); const m = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, len, 6), metal); m.position.set((x1 + x2) / 2, (y1 + y2) / 2, 0); m.rotation.z = Math.atan2(y2 - y1, x2 - x1) - Math.PI / 2; bike.add(m); };
     bar(-0.42, 0.36, 0, 0.36); bar(0, 0.36, -0.12, 0.78); bar(-0.42, 0.36, -0.12, 0.78); bar(-0.12, 0.78, 0.3, 0.8); bar(0.3, 0.8, 0.42, 0.36); bar(0, 0.36, 0.3, 0.8); bar(0.3, 0.8, 0.26, 1.0);
-    bike.position.set(38.6, 2.8, 18.5); b.add(bike);
-    const k = plinthCard(36.2, 18.5, 0, -1, 'Ignited Minds', 'book');
-    const bk = box(0.6, 0.12, 0.85, std(0x23324f, { roughness: 0.6 }), 36.2, 2.88, 18.5); bk.rotation.y = 0.3; k.add(bk);
+    bike.position.set(38.6, 2.8, 28.5); b.add(bike);
+    const k = plinthCard(36.2, 28.5, 0, -1, 'Ignited Minds', 'book');
+    const bk = box(0.6, 0.12, 0.85, std(0x23324f, { roughness: 0.6 }), 36.2, 2.88, 28.5); bk.rotation.y = 0.3; k.add(bk);
   }
   // Closing wall: minimal. Matte black, one line of type, one row of frameless prints, one linear light
   function buildReflection() {
@@ -1127,7 +1127,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
 
   // ---------- route ----------
-  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 15.0], [12.5, 15.8], [13, 5.2], [15.6, 9.0], [18.4, 4.2], [22.85, 4.0], [22.85, 10.3], [22.85, 15.3], [27.2, 15.8], [31.0, 18.4], [35.2, 16.2], [35.0, 12.6], [36.2, 10.2], [34.8, 3.6], [37.5, 2], [43, 2]];
+  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 18.0], [12.5, 25.5], [13, 6.2], [15.6, 9.0], [18.4, 5.0], [22.85, 5.5], [22.85, 14.3], [22.85, 25.3], [27.2, 25.8], [31.5, 24.0], [35.4, 25.0], [35.0, 16.6], [36.2, 15.2], [34.8, 3.6], [37.5, 2], [43, 2]];
   let walkCurve = null;
   function buildRoute() {
     walkCurve = new THREE.CatmullRomCurve3(ROUTE.map(([x, z]) => new THREE.Vector3(x, EYE, z)), false, 'centripetal', 0.5);
@@ -1144,26 +1144,26 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [1, 'Mandir', 'Mandir lintel', 'Hallway wall top', [7.5, 8, 0.2], [7.5, 8.5, 1.6], [7.5, 7.4, 4.8], 0.3, 0],
     [2, 'Mandir', 'BKY booth, wall 1', 'Booth wall top', [12.2, 8, 0.2], [12.2, 8.6, 1.8], [12.2, 4.2, 0.3], 0.62, 1.5],
     [3, 'Mandir', 'BKY booth, wall 2', 'Hallway wall top', [9.0, 8, 3.4], [10.6, 8.6, 3.4], [9.3, 4.2, 3.4], 0.62, 0],
-    [4, 'Mandir', 'Better Living booth', 'Booth wall top', [0.2, 8, 16.5], [1.8, 8.6, 16.5], [0.3, 4.2, 16.5], 0.62, 1.5],
-    [5, 'Mandir', 'BAPS Charities booth', 'Booth wall top', [13, 8, 19.8], [13, 8.6, 18.2], [13, 4.2, 19.7], 0.62, 1.5],
+    [4, 'Mandir', 'Better Living booth', 'Booth wall top', [0.2, 8, 18.5], [1.8, 8.6, 18.5], [0.3, 4.2, 18.5], 0.62, 1.5],
+    [5, 'Mandir', 'BAPS Charities booth', 'Booth wall top', [13, 8, 29.8], [13, 8.6, 28.2], [13, 4.2, 29.7], 0.62, 1.5],
     [6, 'Shastra', 'Spine wall, left', 'Wall top behind the spines', [18.6, 8, 0.2], [18.6, 8.6, 2.0], [18.6, 4, 0.8], 0.6, 0],
     [7, 'Shastra', 'Spine wall, middle', 'Wall top behind the spines', [21.5, 8, 0.2], [21.5, 8.6, 2.0], [21.5, 4, 0.8], 0.78, 1.7],
     [8, 'Shastra', 'Spine wall, right', 'Wall top behind the spines', [24.4, 8, 0.2], [24.4, 8.6, 2.0], [24.4, 4, 0.8], 0.6, 0],
-    [9, 'Shastra', 'Shikshapatri case', 'Wall top behind the spines', [19.9, 8, 0.2], [19.6, 8.8, 2.6], [18.95, 3.4, 7.45], 0.24, 1.5],
-    [10, 'Shastra', 'Swamini Vato case', 'Left T-post bar, north end', [18.95, 11.8, 13.95], [18.95, 11.5, 13.95], [18.95, 3.4, 13.15], 0.24, 1.5],
-    [11, 'Shastra', 'Vachanamrut case', 'Right T-post bar, south end', [26.75, 11.8, 6.8], [26.75, 11.5, 6.8], [26.75, 3.4, 7.45], 0.24, 1.5],
-    [12, 'Shastra', 'Satsang Diksha case', 'South wall top, east of the NFC TVs', [28.7, 8, 19.8], [28.1, 8.6, 18.2], [26.75, 3.4, 13.15], 0.24, 1.5],
-    [13, 'Shastra', 'Right pair of scrolls', 'Left T-post, aisle side', [18.95, 11.2, 16.0], [19.4, 11.2, 16.0], [26.75, 4.5, 4.75], 0.42, 1.6],
-    [14, 'Shastra', 'Left pair of scrolls', 'Right T-post, aisle side', [26.75, 11.2, 4.75], [26.3, 11.2, 4.75], [18.95, 4.5, 16.0], 0.42, 1.6],
-    [15, 'Sant', 'Pillar 1 photo', 'Top of pillar 1, photo side', [32.25, 7.67, 7.417], [31.85, 7.95, 7.417], [32.25, 4.0, 7.417], 0.45, 1.2],
-    [16, 'Sant', 'Pillar 2 photo', 'Top of pillar 2, photo side', [32.25, 7.67, 10.75], [31.85, 7.95, 10.75], [32.25, 4.0, 10.75], 0.45, 1.2],
-    [17, 'Sant', 'Pillar 3 photo', 'Top of pillar 3, photo side', [32.25, 7.67, 14.083], [31.85, 7.95, 14.083], [32.25, 4.0, 14.083], 0.45, 1.2],
-    [18, 'Sant', 'Pillar 1 information', 'Top of pillar 1, back', [32.95, 7.67, 7.417], [33.35, 7.95, 7.417], [32.95, 4.0, 7.417], 0.45, 0],
-    [19, 'Sant', 'Pillar 2 information', 'Top of pillar 2, back', [32.95, 7.67, 10.75], [33.35, 7.95, 10.75], [32.95, 4.0, 10.75], 0.45, 0],
-    [20, 'Sant', 'Pillar 3 information', 'Top of pillar 3, back', [32.95, 7.67, 14.083], [33.35, 7.95, 14.083], [32.95, 4.0, 14.083], 0.45, 0],
-    [21, 'Sant', 'Bicycle prasang', 'South wall top', [38.6, 8, 19.8], [38.6, 8.6, 17.9], [38.6, 3, 18.5], 0.3, 1.6],
-    [22, 'Sant', 'Book prasang', 'South wall top', [36.2, 8, 19.8], [36.2, 8.6, 17.9], [36.2, 3, 18.5], 0.3, 1.6],
-    [23, 'Sant', 'Birthday wall graphic', 'East wall top', [39.8, 8, 10], [38.2, 8.6, 10], [39.7, 4.4, 10], 0.62, 0]
+    [9, 'Shastra', 'Shikshapatri case', 'Wall top behind the spines', [19.9, 8, 0.2], [19.6, 8.8, 3.0], [18.95, 3.4, 11.45], 0.24, 1.5],
+    [10, 'Shastra', 'Swamini Vato case', 'Left T-post bar, north end', [18.95, 11.8, 17.95], [18.95, 11.5, 17.95], [18.95, 3.4, 17.15], 0.24, 1.5],
+    [11, 'Shastra', 'Vachanamrut case', 'Right T-post bar, south end', [26.75, 11.8, 10.8], [26.75, 11.5, 10.8], [26.75, 3.4, 11.45], 0.24, 1.5],
+    [12, 'Shastra', 'Satsang Diksha case', 'South wall top, east of the NFC TVs', [28.7, 8, 29.8], [28.1, 8.6, 28.2], [26.75, 3.4, 17.15], 0.24, 1.5],
+    [13, 'Shastra', 'Right pair of scrolls', 'Left T-post, aisle side', [18.95, 11.2, 20.0], [19.4, 11.2, 20.0], [26.75, 4.5, 8.75], 0.42, 1.6],
+    [14, 'Shastra', 'Left pair of scrolls', 'Right T-post, aisle side', [26.75, 11.2, 8.75], [26.3, 11.2, 8.75], [18.95, 4.5, 20.0], 0.42, 1.6],
+    [15, 'Sant', 'Pillar 1 photo', 'Top of pillar 1, photo side', [32.25, 7.67, 11.917], [31.85, 7.95, 11.917], [32.25, 4.0, 11.917], 0.45, 1.2],
+    [16, 'Sant', 'Pillar 2 photo', 'Top of pillar 2, photo side', [32.25, 7.67, 15.25], [31.85, 7.95, 15.25], [32.25, 4.0, 15.25], 0.45, 1.2],
+    [17, 'Sant', 'Pillar 3 photo', 'Top of pillar 3, photo side', [32.25, 7.67, 18.583], [31.85, 7.95, 18.583], [32.25, 4.0, 18.583], 0.45, 1.2],
+    [18, 'Sant', 'Pillar 1 information', 'Top of pillar 1, back', [32.95, 7.67, 11.917], [33.35, 7.95, 11.917], [32.95, 4.0, 11.917], 0.45, 0],
+    [19, 'Sant', 'Pillar 2 information', 'Top of pillar 2, back', [32.95, 7.67, 15.25], [33.35, 7.95, 15.25], [32.95, 4.0, 15.25], 0.45, 0],
+    [20, 'Sant', 'Pillar 3 information', 'Top of pillar 3, back', [32.95, 7.67, 18.583], [33.35, 7.95, 18.583], [32.95, 4.0, 18.583], 0.45, 0],
+    [21, 'Sant', 'Bicycle prasang', 'South wall top', [38.6, 8, 29.8], [38.6, 8.6, 27.9], [38.6, 3, 28.5], 0.3, 1.6],
+    [22, 'Sant', 'Book prasang', 'South wall top', [36.2, 8, 29.8], [36.2, 8.6, 27.9], [36.2, 3, 28.5], 0.3, 1.6],
+    [23, 'Sant', 'Birthday wall graphic', 'East wall top', [39.8, 8, 15], [38.2, 8.6, 15], [39.7, 4.4, 15], 0.62, 0]
   ];
   const spotGroup = new THREE.Group(); spotGroup.visible = false;
   const SPOTTAGS = []; let showSpots = false;
@@ -1203,7 +1203,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- camera: orbit, plan, walk-through, walk around ----------
   camera.rotation.order = 'YXZ';
-  const orbit = { target: new THREE.Vector3(20, 0, 10), theta: -0.6, phi: 0.82, radius: 42 };
+  const orbit = { target: new THREE.Vector3(20, 0, 15), theta: -0.6, phi: 0.82, radius: 48 };
   const goal = { target: orbit.target.clone(), theta: orbit.theta, phi: orbit.phi, radius: orbit.radius };
   let mode = 'overview';
   const tour = { t: 0, playing: true, yawOff: 0, pitchOff: 0, yaw: null, hold: 0, next: 0, look: null };
@@ -1235,8 +1235,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     scaleEl.hidden = m === 'walk';
     hintEl.hidden = m === 'walk';
     hintEl.textContent = m === 'roam' ? HINTS.roam : HINTS.orbit;
-    if (m === 'overview') setGoal({ target: new THREE.Vector3(20, 0, 10), theta: -0.6, phi: 0.82, radius: fitRadius(42) });
-    if (m === 'plan') setGoal({ target: new THREE.Vector3(20, 0, 10), theta: 0, phi: 0.001, radius: fitRadius(44) });
+    if (m === 'overview') setGoal({ target: new THREE.Vector3(20, 0, 15), theta: -0.6, phi: 0.82, radius: fitRadius(48) });
+    if (m === 'plan') setGoal({ target: new THREE.Vector3(20, 0, 15), theta: 0, phi: 0.001, radius: fitRadius(52) });
     if (m === 'walk') { tour.t = 0; tour.playing = true; tour.hold = 0; tour.next = 0; tour.look = null; tour.yawOff = 0; tour.pitchOff = 0; tour.yaw = null; card.hidden = true; syncTour(); }
     if (m === 'roam' && prev !== 'roam') { roam.x = -2.5; roam.z = 2; roam.yaw = -Math.PI / 2; roam.pitch = -0.05; card.hidden = true; canvas.focus({ preventScroll: true }); }
   }
@@ -1249,9 +1249,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // Go to a part of the section, in whichever mode is active
   const ZONES = {
-    mandir: { at: [7.5, 10], roam: [-2.5, 2, -Math.PI / 2], stop: 0 },
-    shastra: { at: [23, 10], roam: [16.8, 10.2, -Math.PI / 2], stop: 3 },
-    sant: { at: [34.5, 10], roam: [24.5, 10.3, -Math.PI / 2], stop: 4 }
+    mandir: { at: [7.5, 14], roam: [-2.5, 2, -Math.PI / 2], stop: 0 },
+    shastra: { at: [23, 15], roam: [16.8, 5.0, -Math.PI / 2], stop: 3 },
+    sant: { at: [34.5, 15], roam: [29.0, 24.5, -Math.PI / 2], stop: 4 }
   };
   document.querySelectorAll('[data-zone]').forEach(b => b.addEventListener('click', () => {
     const Z = ZONES[b.dataset.zone];
@@ -1263,7 +1263,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }));
 
   // Walk-through stops, timeline and pause
-  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [0, 16.5]], ['Spine wall', 12, [22, 0.7]], ['Shastra aisle', 14, [18.95, 10.3]], ['NFC wall', 15, [23.4, 19.8]], ['Sant pillars', 16, [32.25, 10.75]], ['Prasangs', 18, [37.4, 18.5]], ['Pillar backs', 19, [32.95, 10.75]], ['Birthday', 20, [40, 10]], ['Closing wall', 21, [34.8, 0]], ['Exit', 22, [43, 2]]];
+  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [0, 18.5]], ['Spine wall', 12, [22, 0.7]], ['Shastra aisle', 14, [18.95, 14.3]], ['NFC wall', 15, [23.4, 29.8]], ['Sant pillars', 16, [32.25, 15.25]], ['Prasangs', 18, [37.4, 28.5]], ['Pillar backs', 19, [32.95, 15.25]], ['Birthday', 20, [40, 15]], ['Closing wall', 21, [34.8, 0]], ['Exit', 22, [43, 2]]];
   let stopU = [];
   function buildStops() {
     const n = ROUTE.length - 1, L = walkCurve.getLengths(400);
@@ -1394,17 +1394,17 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
   function collide(p) {
     for (let i = 0; i < 3; i++) { SEGS.forEach(s => pushSeg(p, s)); BOXES.forEach(b => pushBox(p, b)); }
-    p.x = THREE.MathUtils.clamp(p.x, -6, 46); p.z = THREE.MathUtils.clamp(p.z, -3, 23);
+    p.x = THREE.MathUtils.clamp(p.x, -6, 46); p.z = THREE.MathUtils.clamp(p.z, -3, 33);
   }
   function addColliders() {
     CASES.forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.9, hz: 0.9 }));
-    [[38.6, 18.5], [36.2, 18.5]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.75, hz: 0.75 }));
-    BOXES.push({ cx: 37.6, cz: 10, hx: 0.45, hz: 0.45 });
+    [[38.6, 28.5], [36.2, 28.5]].forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.75, hz: 0.75 }));
+    BOXES.push({ cx: 37.6, cz: 15, hx: 0.45, hz: 0.45 });
     PIL.Z.forEach(z => BOXES.push({ cx: PIL.X, cz: z, hx: 0.6, hz: 1.0 }));
     POSTS.forEach(([x, z]) => BOXES.push({ cx: x, cz: z, hx: 0.15, hz: 0.15 }));
     BOXES.push({ cx: 21.5, cz: 0.7, hx: 4.5, hz: 0.55 });
-    BOXES.push({ cx: 12.2, cz: 0.85, hx: 3, hz: 0.65 }, { cx: 13, cz: 19.15, hx: 3, hz: 0.65 }, { cx: 0.85, cz: 16.5, hx: 0.65, hz: 3 }, { cx: 9.85, cz: 3.4, hx: 0.65, hz: 3 });
-    [20.4, 26.4].forEach(x => BOXES.push({ cx: x, cz: 19.4, hx: 0.7, hz: 0.4 }));
+    BOXES.push({ cx: 12.2, cz: 0.85, hx: 3, hz: 0.65 }, { cx: 13, cz: 29.15, hx: 3, hz: 0.65 }, { cx: 0.85, cz: 18.5, hx: 0.65, hz: 3 }, { cx: 9.85, cz: 3.4, hx: 0.65, hz: 3 });
+    [20.4, 26.4].forEach(x => BOXES.push({ cx: x, cz: 29.4, hx: 0.7, hz: 0.4 }));
   }
 
   // ---------- info card & labels ----------
@@ -1463,25 +1463,25 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
   function dimTag(x, y, z, text) { DIMS.push({ pos: new THREE.Vector3(x, y, z), text, kind: 'dimtag' }); }
   function buildDims() {
-    dimLine(0, -1.6, 40, -1.6, '40 ft'); dimLine(41.8, 0, 41.8, 20, '20 ft');
-    dimLine(0, 21.6, 16.5, 21.6, 'Mandir 16.5 ft'); dimLine(16.5, 21.6, 29.2, 21.6, 'Shastra 12.7 ft'); dimLine(29.2, 21.6, 40, 21.6, 'Sant 10.8 ft');
+    dimLine(0, -1.6, 40, -1.6, '40 ft'); dimLine(41.8, 0, 41.8, 30, '30 ft');
+    dimLine(0, 31.6, 16.5, 31.6, 'Mandir 16.5 ft'); dimLine(16.5, 31.6, 29.2, 31.6, 'Shastra 12.7 ft'); dimLine(29.2, 31.6, 40, 31.6, 'Sant 10.8 ft');
     dimLine(-1.6, 0, -1.6, 5, 'Entrance 5 ft'); dimLine(43.4, 0, 43.4, 4, 'Exit 4 ft');
     dimLine(0, 1.2, 9, 1.2, 'Hallway 9 ft'); dimLine(0.7, 0, 0.7, 5, '5 ft');
     dimLine(0, 13.7, 9, 13.7, '9 ft'); dimLine(9.7, 5, 9.7, 13, '8 ft');
     dimLine(9.2, 2.3, 15.2, 2.3, 'BKY 6 ft + 6 ft');
-    dimLine(17.05, 1.9, 25.99, 1.9, 'Spine wall 8.9 ft'); dimLine(18.95, 1.2, 18.95, 6.55, '5.3 ft');
-    dimLine(19.85, 10.3, 25.85, 10.3, 'Aisle 6 ft'); dimLine(28.3, 8.35, 28.3, 12.25, 'Opening 3.9 ft');
-    dimLine(18.6, 18.4, 28.2, 18.4, 'NFC wall 9.6 ft');
-    dimLine(31.4, 6.42, 31.4, 15.08, 'Pillar row 8.7 ft'); dimLine(31.0, 8.42, 31.0, 9.75, '16 in');
+    dimLine(17.05, 1.9, 25.99, 1.9, 'Spine wall 8.9 ft'); dimLine(18.95, 1.2, 18.95, 10.55, '9.3 ft');
+    dimLine(19.85, 14.3, 25.85, 14.3, 'Aisle 6 ft'); dimLine(28.3, 12.35, 28.3, 16.25, 'Opening 3.9 ft');
+    dimLine(18.6, 28.4, 28.2, 28.4, 'NFC wall 9.6 ft');
+    dimLine(31.4, 10.92, 31.4, 19.58, 'Pillar row 8.7 ft'); dimLine(31.0, 12.92, 31.0, 14.25, '16 in');
     dimTag(20, 8.6, 0, 'Walls 8 ft high');
     dimTag(4.5, 8.6, 9, 'Shanti room 9 × 8 × 8 ft');
     dimTag(21.5, 7.8, 0.7, '6 spines · 1.4 × 1 × 7.2 ft');
-    dimTag(18.95, 4.9, 7.45, 'Case 1.8 × 1.8 × 4.4 ft');
-    dimTag(18.95, 12.3, 10.3, '4 scrolls 1.5 × 9.5 ft · T-posts 12 ft');
-    dimTag(23.4, 7.9, 19.6, 'TVs 3.5 × 2 ft, 5.5–7.5 ft up');
-    dimTag(32.6, 8.4, 10.75, '3 pillars 2 ft × 8 in × 7 ft 8 in');
-    dimTag(39.6, 8.2, 10, 'TV 3.6 × 2.1 ft · iPad stand 3.5 ft');
-    dimTag(30.8, 3.4, 14.4, 'Plinth 1.5 × 1.5 × 2.8 ft');
+    dimTag(18.95, 4.9, 11.45, 'Case 1.8 × 1.8 × 4.4 ft');
+    dimTag(18.95, 12.3, 20.0, '4 scrolls 1.5 × 9.5 ft · T-posts 12 ft');
+    dimTag(23.4, 7.9, 29.6, 'TVs 3.5 × 2 ft, 5.5–7.5 ft up');
+    dimTag(32.6, 8.4, 15.25, '3 pillars 2 ft × 8 in × 7 ft 8 in');
+    dimTag(39.6, 8.2, 15, 'TV 3.6 × 2.1 ft · iPad stand 3.5 ft');
+    dimTag(37.4, 3.4, 28.5, 'Plinth 1.5 × 1.5 × 2.8 ft');
     dimTag(34.8, 7.9, 0.6, 'Closing wall · row of 5 prints 1.5 ft tall');
     dimTag(12.2, 8.6, 0.6, 'Header 6 × 0.9 ft');
     scene.add(dimGroup);
@@ -1490,7 +1490,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- walking space ----------
   // A 3 in grid over the floor: objects, people using a piece, people viewing a piece, and the clear walkway left over.
-  const CG = { res: 0.25, nx: 160, nz: 80 };
+  const CG = { res: 0.25, nx: 160, nz: 120 };
   const cgrid = new Uint8Array(CG.nx * CG.nz); // 0 walkway, 1 object, 2 using, 3 viewing
   const clearGroup = new THREE.Group(); clearGroup.visible = false;
   const CLEARS = [];
@@ -1511,11 +1511,11 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; cgSet(nearSeg(x - cx, z - sz, x + cx, z + sz, 0.2), 1, true); });
     ROPES.forEach(([ax, az, bx, bz]) => cgSet(nearSeg(ax, az, bx, bz, 0.25), 1, true));
     // people using a piece (standing to talk, tap, read or open)
-    [[9.2, 1.5, 15.2, 4.5], [10, 15.5, 16, 18.5], [1.5, 13.5, 4.5, 19.5], [10.5, 0.4, 13.5, 6.4], [19.2, 16.4, 21.6, 19.3], [25.2, 16.4, 27.6, 19.3], [17.05, 1.2, 26.0, 3.7], [36.7, 8.0, 39.7, 12.0]]
+    [[9.2, 1.5, 15.2, 4.5], [10, 25.5, 16, 28.5], [1.5, 15.5, 4.5, 21.5], [10.5, 0.4, 13.5, 6.4], [19.2, 26.4, 21.6, 29.3], [25.2, 26.4, 27.6, 29.3], [17.05, 1.2, 26.0, 3.7], [36.7, 13.0, 39.7, 17.0]]
       .forEach(r => cgSet(inRect(...r), 2));
     // people viewing a piece
-    [[19.85, 6.55, 21.05, 8.35], [19.85, 12.25, 21.05, 17.65], [24.65, 3.15, 25.85, 8.35], [24.65, 12.25, 25.85, 14.05]].forEach(r => cgSet(inRect(...r), 3)); // people reading the columns from the aisle
-    [[38.6, 18.5], [36.2, 18.5]].forEach(([x, z]) => cgSet(inRect(x - 1.1, z - 2.25, x + 1.1, z - 0.75), 3));
+    [[19.85, 10.55, 21.05, 12.35], [19.85, 16.25, 21.05, 21.65], [24.65, 7.15, 25.85, 12.35], [24.65, 16.25, 25.85, 18.05]].forEach(r => cgSet(inRect(...r), 3)); // people reading the columns from the aisle
+    [[38.6, 28.5], [36.2, 28.5]].forEach(([x, z]) => cgSet(inRect(x - 1.1, z - 2.25, x + 1.1, z - 0.75), 3));
     PIL.Z.forEach(z => { cgSet(inRect(PIL.X - 1.85, z - 1, PIL.X - 0.35, z + 1), 3); cgSet(inRect(PIL.X + 0.35, z - 1, PIL.X + 1.85, z + 1), 3); }); // reading each pillar
     [[0.2, 5.2, 8.8, 12.8], [30.8, 0.3, 38.8, 3.1]].forEach(r => cgSet(inRect(...r), 3));
     // floor texture
@@ -1524,12 +1524,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       for (let j = 0; j < CG.nz; j++) for (let i = 0; i < CG.nx; i++) { const v = cgrid[j * CG.nx + i]; if (v === 1) continue; ctx.fillStyle = COL[v]; ctx.fillRect(i * 4, j * 4, 4, 4); }
     });
     t.tex.magFilter = THREE.NearestFilter; t.tex.minFilter = THREE.LinearFilter;
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(40, 20), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true, depthWrite: false }));
-    plane.rotation.x = -Math.PI / 2; plane.position.set(20, 0.025, 10); plane.renderOrder = 5; clearGroup.add(plane);
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(40, 30), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true, depthWrite: false }));
+    plane.rotation.x = -Math.PI / 2; plane.position.set(20, 0.025, 15); plane.renderOrder = 5; clearGroup.add(plane);
     // clear widths at the places people pass
     const free = (x, z) => { const i = Math.floor(x / CG.res), j = Math.floor(z / CG.res); return i >= 0 && j >= 0 && i < CG.nx && j < CG.nz && cgrid[j * CG.nx + i] === 0; };
     const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, depthTest: false });
-    [['Hallway', 4.5, 2.0, 'z'], ['Past the BLS booth', 6.0, 18.2, 'x'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 10, 'z'], ['Into Shastra', 17.2, 10, 'z'], ['Behind spine readers', 18.95, 5.0, 'z'], ['Down the aisle', 22.85, 13.0, 'x'], ['Past the NFC line', 26.0, 15.2, 'z'], ['North end of pillars', 32.6, 4.2, 'z'], ['South end of pillars', 32.6, 18.2, 'z'], ['Pillar 2 back to birthday wall', 35.6, 10.75, 'x'], ['To the exit', 38.0, 5.0, 'z'], ['Prasangs to birthday wall', 37.4, 14.0, 'z'], ['Pillar fronts to Shastra', 30.0, 10.3, 'x']]
+    [['Hallway', 4.5, 2.0, 'z'], ['Past the BLS booth', 6.0, 20.5, 'x'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 15, 'z'], ['Behind spine readers', 18.95, 7.0, 'z'], ['Down the aisle', 22.85, 17.0, 'x'], ['Past the NFC line', 26.0, 23.0, 'z'], ['North end of pillars', 32.6, 7.0, 'z'], ['South end of pillars', 32.6, 23.0, 'z'], ['Pillar 2 back to birthday wall', 35.6, 15.25, 'x'], ['To the exit', 38.0, 5.0, 'z'], ['Prasangs to birthday wall', 37.4, 22.0, 'z'], ['Pillar fronts to Shastra', 30.0, 15.25, 'x']]
       .forEach(([name, x, z, ax]) => {
         if (!free(x, z)) return;
         const st = 0.05; let a = 0, b = 0;
@@ -1565,7 +1565,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [12, 'Prasang plinths', '1.5 × 1.5 × 2.8 ft', 'Plywood plinth painted black, the object, printed story card', '2'],
     [13, 'Closing wall', '8 ft wall, 7.2 ft photo row', 'Matte black paint, vinyl-cut lettering, 5 frameless prints face-mounted on aluminium or acrylic, 1 slim LED linear wall-washer at 2700–3000K', '1 wall, 5 prints'],
     [14, 'Lighting', 'Whole section', 'Clamp-on LED spots at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', 'About 18 spots'],
-    [15, 'Floor covering', '40 × 20 ft', 'Black loop carpet in 12 ft wide rolls (two runs of 40 ft, one cut to 8 ft), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 960 sq ft']
+    [15, 'Floor covering', '40 × 30 ft', 'Black loop carpet in 12 ft wide rolls (three runs of 40 ft, one trimmed to 6 ft), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 960 sq ft']
   ];
   function build2D() {
     const S = 20, OX = 96, OY = 70, X = v => (OX + v * S).toFixed(1), Y = v => (OY + v * S).toFixed(1);
@@ -1579,50 +1579,50 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       const o = off || 0; text((x0 + x1) / 2 + (dz ? o : 0), (z0 + z1) / 2 + (dx ? o : 0), t, 'p-dimt');
     };
     const badge = (x, z, n) => out.push(`<g class="p-badge"><circle cx="${X(x)}" cy="${Y(z)}" r="9"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`);
-    rect(0, 0, 16.5, 20, 'p-zm'); rect(16.5, 0, 29.2, 20, 'p-zs'); rect(29.2, 0, 40, 20, 'p-zt');
-    for (let x = 0; x <= 40; x++) line(x, 0, x, 20, 'p-grid'); for (let z = 0; z <= 20; z++) line(0, z, 40, z, 'p-grid');
+    rect(0, 0, 16.5, 30, 'p-zm'); rect(16.5, 0, 29.2, 30, 'p-zs'); rect(29.2, 0, 40, 30, 'p-zt');
+    for (let x = 0; x <= 40; x++) line(x, 0, x, 30, 'p-grid'); for (let z = 0; z <= 30; z++) line(0, z, 40, z, 'p-grid');
     rect(0, 5, 9, 13, 'p-ivory');
     rect(6, 4.8, 9, 5.2, 'p-piece');
-    rect(9.2, 0.2, 15.2, 1.5, 'p-piece'); rect(10, 18.5, 16, 19.8, 'p-piece'); rect(0.2, 13.5, 1.5, 19.5, 'p-piece'); rect(9.2, 0.4, 10.5, 6.4, 'p-piece');
+    rect(9.2, 0.2, 15.2, 1.5, 'p-piece'); rect(10, 28.5, 16, 29.8, 'p-piece'); rect(0.2, 15.5, 1.5, 21.5, 'p-piece'); rect(9.2, 0.4, 10.5, 6.4, 'p-piece');
     SPINES.forEach((sp, i) => rect(17.05 + i * 1.49, 0.18, 17.05 + i * 1.49 + 1.38, 1.18, sp[2] ? 'p-piece p-open' : 'p-piece'));
     CASES.forEach(([x, z]) => rect(x - 0.9, z - 0.9, x + 0.9, z + 0.9, 'p-piece'));
     POSTS.forEach(([x, z]) => rect(x - 0.1, z - 2.1, x + 0.1, z + 2.1, 'p-dash'));
     SCROLLS.forEach(([x, z, r]) => { const cx = Math.cos(r) * 0.75, sz = -Math.sin(r) * 0.75; line(x - cx, z - sz, x + cx, z + sz, 'p-scroll'); });
     ROPES.forEach(([ax, az, bx, bz]) => { line(ax, az, bx, bz, 'p-rope'); [[ax, az], [bx, bz]].forEach(([x, z]) => out.push(`<circle cx="${X(x)}" cy="${Y(z)}" r="3.2" class="p-ropepost"/>`)); });
-    rect(18.6, 19.45, 22.2, 19.8, 'p-piece'); rect(24.6, 19.45, 28.2, 19.8, 'p-piece');
+    rect(18.6, 29.45, 22.2, 29.8, 'p-piece'); rect(24.6, 29.45, 28.2, 29.8, 'p-piece');
     PIL.Z.forEach(z => rect(PIL.X - 0.35, z - 1, PIL.X + 0.35, z + 1, 'p-piece'));
-    rect(39.45, 8.2, 39.8, 11.8, 'p-piece'); rect(37.15, 9.55, 38.05, 10.45, 'p-piece');
-    [[38.6, 18.5], [36.2, 18.5]].forEach(([x, z]) => rect(x - 0.75, z - 0.75, x + 0.75, z + 0.75, 'p-piece'));
+    rect(39.45, 13.2, 39.8, 16.8, 'p-piece'); rect(37.15, 14.55, 38.05, 15.45, 'p-piece');
+    [[38.6, 28.5], [36.2, 28.5]].forEach(([x, z]) => rect(x - 0.75, z - 0.75, x + 0.75, z + 0.75, 'p-piece'));
     rect(30.8, 0.18, 38.8, 0.45, 'p-piece');
     WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
     const baseOut = out.slice();
     // dimensions
-    dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 20, '20 ft', 1.1);
-    dim(0, 21.3, 16.5, 21.3, 'Mandir 16.5 ft', 0.65); dim(16.5, 21.3, 29.2, 21.3, 'Shastra 12.7 ft', 0.65); dim(29.2, 21.3, 40, 21.3, 'Sant 10.8 ft', 0.65);
+    dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 30, '30 ft', 1.1);
+    dim(0, 31.3, 16.5, 31.3, 'Mandir 16.5 ft', 0.65); dim(16.5, 31.3, 29.2, 31.3, 'Shastra 12.7 ft', 0.65); dim(29.2, 31.3, 40, 31.3, 'Sant 10.8 ft', 0.65);
     dim(-1.4, 0, -1.4, 5, '5 ft', -1.0); text(-2.2, 6.0, 'Entrance', 'p-note', 'middle');
     dim(43.2, 0, 43.2, 4, '4 ft', 1.0); text(43.8, 6.0, 'Exit', 'p-note', 'middle');
     dim(0, 3.1, 9, 3.1, 'Hallway 9 × 5 ft', -0.55);
     dim(0, 14.1, 9, 14.1, '9 ft', 0.55); dim(9.8, 5, 9.8, 9, '9 × 8 ft room', 1.75);
     dim(9.2, 2.3, 15.2, 2.3, 'BKY 6 + 6 ft', 0.55);
     dim(17.05, 2.0, 25.99, 2.0, 'Spine wall 8.9 ft', 0.55);
-    dim(18.95, 1.25, 18.95, 6.5, '5.3 ft', -1.1);
-    dim(19.85, 10.3, 25.85, 10.3, 'Aisle 6 ft', -0.55);
-    dim(18.0, 14.1, 18.0, 19.35, '5.3 ft', -1.1);
-    dim(18.6, 18.6, 28.2, 18.6, 'NFC wall 9.6 ft', -0.55);
-    dim(31.2, 6.42, 31.2, 15.08, '8.7 ft', -0.9);
+    dim(18.95, 1.25, 18.95, 10.5, '9.3 ft', -1.1);
+    dim(19.85, 14.3, 25.85, 14.3, 'Aisle 6 ft', -0.55);
+    dim(18.0, 21.7, 18.0, 29.35, '7.7 ft', -1.1);
+    dim(18.6, 28.6, 28.2, 28.6, 'NFC wall 9.6 ft', -0.55);
+    dim(31.2, 10.92, 31.2, 19.58, '8.7 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 19.1, 5], [0.85, 16.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [18.95, 7.45, 7], [26.75, 7.45, 7], [18.95, 13.15, 7], [26.75, 13.15, 7], [18.95, 16.0, 8], [26.75, 4.75, 8], [20.4, 19.1, 9], [26.4, 19.1, 9], [32.6, 10.75, 10], [38.7, 10, 11], [38.6, 18.5, 12], [36.2, 18.5, 12], [34.8, 1.2, 13]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [13, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [18.95, 11.45, 7], [26.75, 11.45, 7], [18.95, 17.15, 7], [26.75, 17.15, 7], [18.95, 20.0, 8], [26.75, 8.75, 8], [20.4, 29.1, 9], [26.4, 29.1, 9], [32.6, 15.25, 10], [38.7, 15, 11], [38.6, 28.5, 12], [36.2, 28.5, 12], [34.8, 1.2, 13]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
-    const svg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 20 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
+    const svg = `<svg viewBox="0 0 1000 760" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 30 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const lo = baseOut.slice();
     FIX.forEach(([n, , , , , c, t]) => lo.push(`<line x1="${X(c[0])}" y1="${Y(c[2])}" x2="${X(t[0])}" y2="${Y(t[2])}" class="p-aim"/>`));
     FIX.forEach(([n, , , , , c]) => lo.push(`<g class="p-fix"><circle cx="${X(c[0])}" cy="${Y(c[2])}" r="8.5"/><text x="${X(c[0])}" y="${Y(c[2])}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`));
-    const lsvg = `<svg viewBox="0 0 1000 560" role="img" aria-label="Spot light plan with 20 numbered clamp spots"><title>Spot light plan</title>${lo.join('')}</svg>`;
+    const lsvg = `<svg viewBox="0 0 1000 760" role="img" aria-label="Spot light plan with 23 numbered spots"><title>Spot light plan</title>${lo.join('')}</svg>`;
     const lrows = FIX.map(([n, zone, what, on, , c, , ang]) => `<tr><td class="n"><span class="lf">${n}</span></td><td>${zone}</td><td><b>${what}</b></td><td>${on}</td><td>${beamWord(ang)}</td></tr>`).join('');
 
     // Shopping list: planning quantities worked out from the layout. [group, item, qty, unit, spec, used for]
     const BOM = [
-      ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '44', 'sheets', 'Sanded one side; walls 8 ft tall. Outer walls: 111 ft, one finished face (28 sheets). Inside walls: 25 ft, both faces (16 sheets)', 'All walls'],
+      ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '50', 'sheets', 'Sanded one side; walls 8 ft tall. Outer walls: 131 ft, one finished face (34 sheets). Inside walls: 25 ft, both faces (16 sheets)', 'All walls'],
       ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '8', 'sheets', '6 boxes 1.4 × 1 × 7.2 ft: front door, back, 2 sides, top and bottom', 'Spine wall'],
       ['Plywood and lumber', '½ in plywood, 4 × 8 ft', '4', 'sheets', '3 pillars 2 ft × 8 in × 7 ft 8 in: 2 faces and 2 sides each', 'Sant pillars'],
       ['Plywood and lumber', '½ in plywood, 4 × 8 ft (spares)', '3', 'sheets', 'Mistakes and patches', 'Spares'],
@@ -1632,16 +1632,16 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '1', 'sheet', '2 recessed tablet boxes with card trays', 'NFC stations'],
       ['Plywood and lumber', '¾ in plywood, 4 × 8 ft', '2', 'sheets', '4 ledges 6 ft × 15 in, plus French cleat strips', 'Booths'],
       ['Plywood and lumber', '¾ in plywood, 4 × 8 ft (spare)', '1', 'sheet', 'Mistakes and patches', 'Spares'],
-      ['Plywood and lumber', '2 × 4 × 8 ft studs', '113', 'pieces', 'Studs every 24 in (77) plus top and bottom plates (36)', 'Wall frames'],
-      ['Plywood and lumber', '2 × 4 × 8 ft studs', '18', 'pieces', 'Diagonal kicker braces about every 6 ft of outer wall; nothing is screwed into the gym floor', 'Wall bracing'],
-      ['Plywood and lumber', '2 × 4 × 8 ft studs', '14', 'pieces', 'About 10% extra, plus blocking behind the 3 TV mounts and the booth cleats', 'Waste and blocking'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '129', 'pieces', 'Studs every 24 in (87) plus top and bottom plates (42)', 'Wall frames'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '22', 'pieces', 'Diagonal kicker braces about every 6 ft of outer wall; nothing is screwed into the gym floor', 'Wall bracing'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '15', 'pieces', 'About 10% extra, plus blocking behind the 3 TV mounts and the booth cleats', 'Waste and blocking'],
       ['Plywood and lumber', '2 × 4 × 10 ft', '9', 'pieces', '5 ceiling joists and 2 ledgers over the 9 × 8 ft room; 2 crossbars for the hallway bulbs', 'Shanti ceiling, hallway'],
       ['Plywood and lumber', '2 × 2 × 8 ft', '18', 'pieces', 'Inner frame, about 6 per pillar', 'Sant pillars'],
-      ['Plywood and lumber', 'Sandbags or weights, 25 lb', '44', 'bags', '2 per kicker brace (36), 2 per T-stand (4), extras for the pillar bases (4)', 'Stability'],
-      ['Walls and finishes', 'Black loop carpet', '2', 'rolls', '12 × 40 ft each (960 sq ft), or rented exhibit carpet', 'Whole floor over the gym floor'],
-      ['Walls and finishes', 'Gym-safe carpet tape', '4', 'rolls', 'Residue-free; check with the venue', 'Carpet seams and edges'],
-      ['Walls and finishes', 'Matte black paint', '10', 'gallons', 'About 1,370 sq ft, 2 coats', 'Walls, plinths, pillars, ledges'],
-      ['Walls and finishes', 'Primer', '5', 'gallons', 'One coat on raw plywood', 'All painted plywood'],
+      ['Plywood and lumber', 'Sandbags or weights, 25 lb', '52', 'bags', '2 per kicker brace (44), 2 per T-stand (4), extras for the pillar bases (4)', 'Stability'],
+      ['Walls and finishes', 'Black loop carpet', '3', 'rolls', '12 × 40 ft each (1,440 sq ft for a 1,200 sq ft floor), or rented exhibit carpet', 'Whole floor over the gym floor'],
+      ['Walls and finishes', 'Gym-safe carpet tape', '6', 'rolls', 'Residue-free; check with the venue', 'Carpet seams and edges'],
+      ['Walls and finishes', 'Matte black paint', '12', 'gallons', 'About 1,550 sq ft, 2 coats', 'Walls, plinths, pillars, ledges'],
+      ['Walls and finishes', 'Primer', '6', 'gallons', 'One coat on raw plywood', 'All painted plywood'],
       ['Walls and finishes', 'Ivory paint', '2', 'gallons', 'Inside faces of the Shanti room', 'Shanti room'],
       ['Walls and finishes', 'Leather-tone paints and metallic gold', '7', 'quarts', '6 spine colours plus gold for the bands', 'Spine wall'],
       ['Walls and finishes', 'Rollers, trays, brushes, sandpaper, wood filler', '1', 'set', '', 'Painting'],
@@ -1681,7 +1681,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Lighting and power', 'LED linear wall washer, about 8 ft', '1', 'light', '2700–3000 K', 'Closing wall'],
       ['Lighting and power', 'LED strip, 2700 K, 16 ft rolls', '2', 'rolls', 'With 2 drivers', 'Behind the Shanti jali'],
       ['Lighting and power', 'Cool bare LED bulbs and pendant cords', '2', 'sets', '', 'Chaos hallway'],
-      ['Lighting and power', 'Black extension cords, 25 ft', '12', 'cords', 'Run along the wall tops', 'All lights and AV'],
+      ['Lighting and power', 'Black extension cords, 25 ft', '14', 'cords', 'Run along the wall tops', 'All lights and AV'],
       ['Lighting and power', 'Power strips with surge protection', '6', 'strips', 'One per zone plus AV', 'All lights and AV'],
       ['Lighting and power', 'Cord covers', '3', 'pieces', 'Where a cord has to cross a walkway', 'Safety'],
       ['Lighting and power', 'Black gaffer tape', '4', 'rolls', '', 'Cords and cables'],
@@ -1921,7 +1921,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     try {
     buildFloor(); buildWalls(); buildHallway(); buildShanti();
     booth('bky', 9.2, 0, 1, 'BKY', 'BKY'); boothAt('bky', 9.0, 3.4, Math.PI / 2, 'BKY', 'BKY', true);
-    booth('charities', 10, 20, -1, 'BAPS Charities', 'Charities'); boothAt('bls', 0, 16.5, Math.PI / 2, 'Better Living', 'BLS');
+    booth('charities', 10, 30, -1, 'BAPS Charities', 'Charities'); boothAt('bls', 0, 18.5, Math.PI / 2, 'Better Living', 'BLS');
     buildSpines(); buildCases(); buildPages(); buildRopes(); buildNFC();
     buildPortrait(); buildKiosks(); buildPrasangs(); buildReflection(); buildNames(); buildRoute(); buildLights(); buildFixtures(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
     const img = new Image();
