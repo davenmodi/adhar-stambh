@@ -300,7 +300,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     <div class="grid3">
       <article class="piece m-c"><span class="tag">Mandir</span><h3>Chaos hallway</h3><p>About 9 ft of cramped hallway, black from floor to ceiling, with one stream of notifications and photos running along the walls at eye level under two cold flicker bulbs. It doubles as the Shanti queue.</p><button type="button" data-item="hallway">Show in model</button></article>
       <article class="piece m-c"><span class="tag">Mandir</span><h3>Three booth kits</h3><p>BKY is an L in the corner by the hallway, with twice the display wall. Better Living Sessions is on the side wall right outside the Shanti exit, and BAPS Charities is on the south wall. Volunteers stand and talk with visitors; each lead decides what happens in their booth.</p><button type="button" data-item="bky">Show in model</button></article>
-      <article class="piece s-c"><span class="tag">Shastra</span><h3>Scripture spine wall</h3><p>Six giant spines like a library shelf. Four open to show the teaching, a story, and what it means in everyday life.</p><button type="button" data-item="spines">Show in model</button></article>
+      <article class="piece s-c"><span class="tag">Shastra</span><h3>Scripture spine wall</h3><p>Six giant spines like a library shelf. Every other one opens (1st, 3rd and 5th) to show the teaching, a story, and what it means in everyday life.</p><button type="button" data-item="spines">Show in model</button></article>
       <article class="piece s-c"><span class="tag">Shastra</span><h3>Four glass cases</h3><p>Shikshapatri, Vachanamrut, Swamini Vato and Satsang Diksha, each in its own case and spotlight, at the ends of the two columns that line the aisle.</p><button type="button" data-item="case0">Show in model</button></article>
       <article class="piece s-c"><span class="tag">Shastra</span><h3>Two NFC stations</h3><p>Side by side on one wall as an “Ask the Shastras” spot. Tap a question card on a tablet and the answer comes up on the TV above, so the whole group can read it.</p><button type="button" data-item="nfc0">Show in model</button></article>
       <article class="piece t-c"><span class="tag">Sant</span><h3>Birthday wall</h3><p>A TV on the wall with an iPad on a stand in front. Type your birthday and see where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day, with words around the screen that explain it.</p><button type="button" data-item="kiosk0">Show in model</button></article>
@@ -428,7 +428,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     bky: { zone: 'Mandir', name: 'BKY booth', what: 'The BKY booth in the corner by the hallway: one wall along the north wall and a second wall around the corner on the blank end of the hallway and Shanti room, joined as an L for twice the display space. Volunteers talk with visitors here; what happens is up to the BKY lead.', build: 'Two booth kits (12 ft of wall in an L): 6 ft painted wall with a name header, a 12–18 in ledge, one clamp spot, one outlet, French cleats. No speakers or mics.', size: '12 ft of wall in an L, about 3 ft standing zone', at: [12, 3] },
     charities: { zone: 'Mandir', name: 'BAPS Charities booth', what: 'A volunteer-run booth for BAPS Charities. What happens here is up to the Charities lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [4.5, 28.8] },
     bls: { zone: 'Mandir', name: 'Better Living Sessions booth', what: 'A volunteer-run booth for Better Living Sessions on the side wall, on your right as you step out of the Shanti room. What happens here is up to the BLS lead.', build: 'Same booth kit: 6 ft wall, header, ledge, one spot, one outlet, French cleats. No speakers or mics.', size: '6 ft wall, about 3 ft standing zone', at: [2.2, 18.5] },
-    spines: { zone: 'Shastra', name: 'Scripture spine wall', what: 'Six giant book spines line the wall like a library shelf. Four of them open: Vachanamrut, Swamini Vato, Shikshapatri and Satsang Diksha. Inside each: the teaching, a story, and what it means in everyday life.', build: 'Plywood boxes about 1.4 ft wide and 7 ft tall, painted as leather spines with gold bands. Full-length piano hinge, door stop and magnetic catch on the four that open.', size: 'About 9 ft of wall, 1 ft deep', at: [21.5, 1] },
+    spines: { zone: 'Shastra', name: 'Scripture spine wall', what: 'Six giant book spines line the wall like a library shelf. Every other one opens (1st, 3rd and 5th): Vachanamrut, Swamini Vato and Shikshapatri. The rest stay closed. Inside each: the teaching, a story, and what it means in everyday life.', build: 'Plywood boxes about 1.4 ft wide and 7 ft tall, painted as leather spines with gold bands. Full-length piano hinge, door stop and magnetic catch on the four that open.', size: 'About 9 ft of wall, 1 ft deep', at: [21.5, 1] },
     case0: { zone: 'Shastra', name: 'Shikshapatri case', what: 'One of the four core scriptures in a glass case under its own spotlight. The cases sit at the ends of two columns that line a 6 ft aisle, so people read them as they walk from the spine wall to the NFC wall.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [15.95, 13.95] },
     case1: { zone: 'Shastra', name: 'Vachanamrut case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [23.75, 13.95] },
     case2: { zone: 'Shastra', name: 'Swamini Vato case', what: 'One of the four core scriptures in a glass case under its own spotlight.', build: 'Black plinth about 3 ft tall, glass or acrylic cube, name plate, one clamp spot from above.', size: '1.8 × 1.8 ft', at: [15.95, 20.65] },
@@ -737,7 +737,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // ---------- Shastra ----------
   const SPINES = [
     ['Vachanamrut', 0x5a1f1f, true], ['Bhaktachintamani', 0x1f2f4f, false], ['Swamini Vato', 0x1f3a2e, true], ['Swaminarayan Bhashyam', 0x4a3216, false],
-    ['Shikshapatri', 0x3b2a52, true], ['Satsang Diksha', 0x5a3a12, true]
+    ['Shikshapatri', 0x3b2a52, true], ['Satsang Diksha', 0x5a3a12, false]
   ];
   const doors = [];
   function spineTex(title, color, open) {
@@ -1555,7 +1555,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [3, 'Shanti room', '9 × 8 × 8 ft', 'PVC or MDF jali sheets painted ivory on 6–8 in battens, 2700K LED strip, foam arches and pillars, moving blankets under ivory fabric, flame-retardant fabric ceiling on 2×4s, glossy white vinyl floor, 3 matte framed photos 24 × 36 in, 1 speaker', '1 room'],
     [4, 'Mandir lintel', '3 × 1 ft', 'Laser-cut MDF jali with carved letters, painted ivory', '1'],
     [5, 'Booth kits', '6 ft wall, 15 in ledge each', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet; BKY uses two kits as an L, onto the Shanti room wall', '4 (BKY 2, BLS 1, Charities 1)'],
-    [6, 'Spine wall', '6 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 4 that open: 7 ft piano hinge, magnetic catch, door stop, printed insides', '6 spines'],
+    [6, 'Spine wall', '6 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 3 that open (1st, 3rd, 5th): 7 ft piano hinge, magnetic catch, door stop, printed insides', '6 spines'],
     [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '4'],
     ['L', 'Spot lights', '23 fixtures', '15 clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top, plus 8 small LED picture lights on the panel tops; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '25 (2 spare)'],
     [8, 'Floating pages', '2 pairs, 12 ft high', 'Dye-sub printed voile scrolls 1.5 × 9.5 ft, dowels top and bottom, 2 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '4 scrolls'],
@@ -1653,8 +1653,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Mandir', 'Booth shelf brackets', '16', 'pieces', '4 per ledge', 'Booths'],
       ['Shastra', 'Clear acrylic display covers', '4', 'pieces', 'About 19 × 19 × 17 in, 5-sided, ⅛–3⁄16 in acrylic', 'Glass cases'],
       ['Shastra', 'Copies of the 4 scriptures', '4', 'books', 'Shikshapatri, Vachanamrut, Swamini Vato, Satsang Diksha; book stands inside the cases', 'Glass cases'],
-      ['Shastra', 'Piano hinges, about 84 in', '4', 'pieces', 'Full height of each door that opens', 'Spine wall'],
-      ['Shastra', 'Magnetic catches and door stops', '4', 'sets', '', 'Spine wall'],
+      ['Shastra', 'Piano hinges, about 84 in', '3', 'pieces', 'Full height of each door that opens', 'Spine wall'],
+      ['Shastra', 'Magnetic catches and door stops', '3', 'sets', '', 'Spine wall'],
       ['Shastra', 'Lighting T-bar stands, crank-up to 12 ft', '2', 'stands', 'Rated 50 lb or more; each holds 2 scrolls and 3–4 lights', 'Floating pages'],
       ['Shastra', 'Dowels, 1 in × 2 ft', '8', 'pieces', 'Top and weighted bottom of each scroll', 'Floating pages'],
       ['Shastra', 'Clear line and S-hooks', '1', 'kit', '', 'Floating pages'],
@@ -1688,7 +1688,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Prints and graphics', 'Printed vinyl strip', '19', 'linear ft', '2 ft tall, in 3 pieces (9, 6 and 4 ft)', 'Chaos hallway'],
       ['Prints and graphics', 'Framed photos, 24 × 36 in', '3', 'prints', 'Matte', 'Shanti room'],
       ['Prints and graphics', 'Foam-board booth headers, 6 × 0.9 ft', '4', 'boards', 'BKY 2, Charities 1, Better Living 1', 'Booths'],
-      ['Prints and graphics', 'Spine wraps and spine insides', '10', 'prints', '6 wraps about 1.4 × 7.2 ft, 4 insides about 1.2 × 6.9 ft', 'Spine wall'],
+      ['Prints and graphics', 'Spine wraps and spine insides', '9', 'prints', '6 wraps about 1.4 × 7.2 ft, 3 insides about 1.2 × 6.9 ft', 'Spine wall'],
       ['Prints and graphics', 'Dye-sub voile scrolls, 1.5 × 9.5 ft', '4', 'scrolls', '', 'Floating pages'],
       ['Prints and graphics', 'Case name plates, about 17 × 4 in', '4', 'plates', '', 'Glass cases'],
       ['Prints and graphics', 'Question cards, about 3.5 × 5 in', '30', 'cards', '', 'NFC stations'],
@@ -1726,7 +1726,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [5, 'Booth headers', 'Print', '4', '6 × 0.9 ft foam board', 'BKY (2, one per wall of its L), BAPS Charities, Better Living Sessions; approved logos if used'],
       [5, 'Booth displays', 'From others', '3 sets', 'Two display spaces per 6 ft wall (BKY has four across its L), on French cleats', 'Made by each activity lead; set a review date'],
       [6, 'Spine wraps', 'Print', '6', 'About 1.4 × 7.2 ft front plus 1 ft sides each', 'Title of each scripture, leather texture, gold bands'],
-      [6, 'Spine insides', 'Print', '4', 'About 1.2 × 6.9 ft each', 'For each of the 4 that open: the teaching, a story, and what it means in everyday life. Writing needed'],
+      [6, 'Spine insides', 'Print', '3', 'About 1.2 × 6.9 ft each', 'For each of the 3 that open: the teaching, a story, and what it means in everyday life. Writing needed'],
       [7, 'Case name plates', 'Print', '4', 'About 17 × 4 in', 'Shikshapatri, Vachanamrut, Swamini Vato, Satsang Diksha'],
       [8, 'Hanging scrolls', 'Fabric print', '4', '1.5 × 9.5 ft dye-sub voile, 150 dpi', 'Verses in Gujarati and English, top to bottom; the first scroll opens with “SHASTRA · શાસ્ત્ર”. Verse selection approved'],
       [9, 'Question cards', 'Print', '20–30', 'About 3.5 × 5 in with an NFC sticker (QR fallback)', 'One life question per card'],

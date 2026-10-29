@@ -30,7 +30,7 @@ Read this section before changing anything. These decisions were made deliberate
 - **Layout:** two compact columns of case, scroll, scroll, case (about 7.5 ft each) with a 6 ft aisle between them, set 3 ft toward the Shanti room from the earlier plan. The NFC wall is centred on the aisle.
 - **Walk order:** from Mandir up to the spine wall, along it, down the aisle between the columns, along the NFC wall, then on to Sant. There is no path across the middle of the columns.
 - **Floating pages:** 4 fabric scrolls, 1.5 × 9.5 ft, two between the cases in each column, facing the aisle ("SHASTRA" on the first). Each pair hangs from a black T-post hidden in the gap between the two scrolls.
-- **Spine wall:** 6 giant book spines (about 9 ft of wall); 4 of them open (Vachanamrut, Swamini Vato, Shikshapatri, Satsang Diksha).
+- **Spine wall:** 6 giant book spines (about 9 ft of wall); every other one opens (1st, 3rd and 5th: Vachanamrut, Swamini Vato, Shikshapatri); the rest stay closed.
 - **4 glass cases**, one scripture each, at the ends of the two columns. Name plates face the aisle.
 - **2 NFC stations** on the south wall, centred on the aisle, 2.4 ft apart. Each has a tablet as the tap point and a TV above that shows the answer.
 - The text lantern was dropped.
