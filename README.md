@@ -19,7 +19,7 @@ Read this section before changing anything. These decisions were made deliberate
 - Walk order: **Mandir → Shastra → Sant**.
 - Mood: dark, quiet and museum-like. Light comes from warm spotlights on each piece; hall lights are off.
 - Each part has one statement piece plus supporting pieces.
-- **Spot lights:** 25 fixtures (buy 27), warm white: 15 clamp-on spots on wall tops and the two Shastra T-posts, plus 10 small picture lights on the Sant panels. No ceiling rigging is needed.
+- **Spot lights:** 23 fixtures (buy 25), warm white: 15 clamp-on spots on wall tops and the two Shastra T-posts, plus 8 small picture lights on the Sant panels. No ceiling rigging is needed.
 
 ### Mandir
 - **Chaos hallway** (about 9 × 5 ft, widened so the entrance isn't tight): walls black from floor to ceiling, with one continuous stream of phone notifications and photos running at eye level and two cold flicker bulbs. No sound. It doubles as the queue.
@@ -36,10 +36,10 @@ Read this section before changing anything. These decisions were made deliberate
 - The text lantern was dropped.
 
 ### Sant
-- **Sant panels:** 5 freestanding panels (2 ft wide, 8 in deep, 7 ft 8 in tall) in one 15.3 ft row down the middle of Sant, 16 in apart so the row reads as one piece. People walk up the photo side (facing Shastra), turn at the north end past the night-prasang corner, and come back down the information side. The backs explain one idea each: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj, Living the teachings. A small picture light sits on top of each face.
+- **Sant panels:** 4 freestanding panels (2 ft wide, 8 in deep, 7 ft 8 in tall) in one 12 ft row down the middle of Sant, 16 in apart so the row reads as one piece. People walk up the photo side (facing Shastra), turn at the north end past the night-prasang corner, and come back down the information side. The backs explain one idea each: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj. A small picture light sits on top of each face.
 - **Birthday wall** on the east wall of Sant, facing the back of the panels: a TV with an iPad on a floor stand in front. Type a birthday on the iPad; the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Printed words around the TV explain it.
-- **Night prasangs (to come):** the south-east corner, next to the birthday wall, is saved for the night prasangs of Mahant Swami Maharaj. The bicycle and book plinths were removed.
-- **Closing wall** (minimal), on the east face of a short divider wall that runs from the south end of the panel row to the south wall, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
+- **Night prasangs (to come):** the north-east corner, where the Sant walk turns, is saved for the night prasangs of Mahant Swami Maharaj. The bicycle and book plinths were removed.
+- **Closing wall** (minimal), on the south wall of Sant, facing people as they come down the back of the panels, the last thing before the exit: matte black, no border; "AADHAR STAMBH · The pillars that sustain a legacy" set small and left-aligned (an exhibition line, not a quotation); one row of five frameless Sant prints, all 18 in tall, at eye level; one slim linear light above the row. Keep it clean. No take-home cards.
 
 ### Stanchions
 - None for now. The scrolls fill the space between the cases, so the earlier ropes were removed.
@@ -64,4 +64,4 @@ Read this section before changing anything. These decisions were made deliberate
 - One person changes a part at a time, or works on a branch and opens a pull request.
 - Write a clear commit message for each change (for example "Move NFC stations side by side").
 
-- A short stub wall (9 ft) closes the gap at the end of the spine wall so people go down the Shastra aisle instead of cutting straight across to Sant. The north-east corner of Sant is saved for the night prasangs.
+- Two red rope stanchion lines (no extra walls) keep the walk in order: one from the end of the spine wall to the Vachanamrut case, so people go down the Shastra aisle instead of cutting across to Sant; one from the south end of the Sant panels to the south wall, so people go up the photo side before the exit. The north-east corner of Sant is saved for the night prasangs.
