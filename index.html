@@ -260,7 +260,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <button class="act" id="cAct" type="button" hidden></button>
       </aside>
       <div class="clear-legend" id="clearLegend" hidden><span><i class="sw g"></i>Clear walkway</span><span><i class="sw a"></i>People using it</span><span><i class="sw b"></i>Viewers / readers</span><span><i class="sw r"></i>Under 3 ft</span></div>
-      <div class="spot-legend" id="spotLegend" hidden><b>25 spot lights</b><span>Numbers match the Lighting tab in the 2D view</span></div>
+      <div class="spot-legend" id="spotLegend" hidden><b>26 spot lights</b><span>Numbers match the Lighting tab in the 2D view</span></div>
       <div id="plan2d" hidden></div>
       <div id="loading">Loading model…</div>
     </div>
@@ -305,7 +305,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       <article class="piece s-c"><span class="tag">Shastra</span><h3>Two NFC stations</h3><p>Side by side on one wall as an “Ask the Shastras” spot. Tap a question card on a tablet and the answer comes up on the TV above, so the whole group can read it.</p><button type="button" data-item="nfc0">Show in model</button></article>
       <article class="piece t-c"><span class="tag">Sant</span><h3>Vicharan wall</h3><p>A TV on the wall loops Mahant Swami Maharaj’s vicharan since 2016: the globe turns and the route draws itself stop by stop while the distance counts up. Words around the screen give the totals. Nothing to touch; people stop and watch.</p><button type="button" data-item="kiosk0">Show in model</button></article>
       <article class="piece t-c"><span class="tag">Sant</span><h3>City at night</h3><p>Wrapped around the north-east corner, where the walk turns, a dark foam skyline: “AWAKE FOR ALL OF US”. Each of six towers shows a time and one glowing window. On the ledge below, a card for each night tells where Mahant Swami Maharaj was and who he was praying for. The point: while the world sleeps, he stays awake for all of us.</p><button type="button" data-item="nightcorner">Show in model</button></article>
-      <article class="piece t-c"><span class="tag">Sant</span><h3>Closing wall</h3><p>Minimal and quiet: matte black, “AADHAR STAMBH · The pillars that sustain a legacy” in small clean type, and one row of five frameless Sant photographs under a single slim light.</p><button type="button" data-item="reflection">Show in model</button></article>
+      <article class="piece t-c"><span class="tag">Sant</span><h3>Birthday wall</h3><p>Next to the vicharan wall: a TV on the wall with an iPad on a stand in front. Type your birthday and see where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day, with words around the screen that explain it.</p><button type="button" data-item="bday">Show in model</button></article>
       <article class="piece r-c"><span class="tag">All three</span><h3>Names in the pieces</h3><p>No banners. Mandir is carved into the jali over the Shanti room door, Shastra is the first word on the first scroll, and Sant is lettered under the photo on the middle Sant pillar, each in English and Gujarati.</p><button type="button" data-item="signs">Show in model</button></article>
     </div>
   </section>
@@ -322,7 +322,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       <li><b>Lighting</b>14 clamp-on spots and 11 small picture lights at 3000K on dimmers, plus LED strip behind the jali. Hall lights off; exit signs stay on.</li>
       <li><b>Booth leads</b>Each lead gets a 6 ft wall, a ledge, one spot and one outlet. No speakers or mics, nothing freestanding in the walkway, and content shown to you by a set date.</li>
       <li><b>Vicharan wall</b>The route page has to run offline, full-screen and on autoplay, and loop by itself all day. Check every figure on the wall graphic against the vicharan record before printing.</li>
-      <li><b>Still open</b>The five closing-wall photos, the three Shanti room photos, the final wording of the six city-at-night cards, and whether the entrance and exit really sit on opposite 30 ft ends.</li>
+      <li><b>Still open</b>The birthday archive (where Swami was each day), the three Shanti room photos, the final wording of the six city-at-night cards, and whether the entrance and exit really sit on opposite 30 ft ends.</li>
       <li><b>Timeline</b>Order prints, jali sheets, foam pieces, plinths, glass cases and tablets in the first 3 days. Week 2 is painting, setup and testing. The Media assets tab in the 2D view lists every print, file and piece of writing to make; give each one an owner this week.</li>
     </ul>
   </section>
@@ -335,7 +335,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       <li>The projector chaos-to-calm cycle became a short poster hallway into a backlit jali room with music.</li>
       <li>The text lantern became hanging scripture scrolls. A spine wall was added and the NFC stations went from 6 to 2, each with a TV above to show the answer.</li>
       <li>Each part is named inside its own statement piece instead of on signs.</li>
-      <li>The light tunnel and moving-portrait gallery were cut. The birthday wall was replaced by a vicharan wall on the same spot: a TV looping Mahant Swami Maharaj’s travels since 2016, with no iPad.</li>
+      <li>The light tunnel and moving-portrait gallery were cut. A vicharan wall was added beside the birthday wall on the east wall: a TV looping Mahant Swami Maharaj’s travels since 2016. The closing wall on the south wall was removed; the birthday wall is now the last stop before the exit.</li>
       <li>The bicycle and book plinths were removed. The north wall of Sant became the city at night: six towers, six night prasangs.</li>
       <li>The split portrait became five Sant panels in a straight row: photos on one side, information on the other. The exit moved to the bottom-right so the walk passes both sides.</li>
       <li>BKY, Charities and Better Living became booth kits run by their activity leads.</li>
@@ -436,18 +436,18 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     gwr: { zone: 'Shastra', name: 'Satsang Diksha World Record', what: 'Inspired by Mahant Swami Maharaj’s wish, thousands of children dedicated themselves to memorizing Satsang Diksha. On February 2, 2026, 12,723 children participated in a historic simultaneous recitation, setting a Guinness World Record (largest simultaneous Hindu text recital, Atladara, Vadodara). 15,666 children memorized all 315 Sanskrit shlokas. Headline: ONE WISH. THOUSANDS INSPIRED. Takeaway: Shastra learned. Shastra remembered. Shastra lived.', build: 'Freestanding box panel, 3 ft wide, 6.5 ft tall, 4 in deep: ½ in plywood on a 2 × 2 frame, matte black, on a weighted ¾ in plywood base. Front graphic printed on 3 mm aluminium composite (or direct to the board), matte, with thin gold lines. A small warm LED picture light on the top edge lights the face. It stands directly north of the Satsang Diksha case on the right side of the aisle, facing people as they come from the spine wall, so the scripture and its record read as one piece. A rope from the end of the spine wall to the back corner of the panel keeps people out of Sant until they finish Shastra.', size: '3 × 6.5 ft, 4 in deep, on a 3.2 × 1.3 ft base', at: [23.75, 11.55] },
     nfc0: { zone: 'Shastra', name: 'NFC station', what: 'Pick up a question card and tap it on the tablet. The answer comes up on the TV above, big enough for the whole group to read.', build: 'Android tablet in a recessed plywood box reads the NFC sticker on each card through one web page, and shows the answer on a 45–50 in TV above through a wired HDMI adapter. Card tray below. If NFC is not working by day 5, use QR codes on the same cards.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [17.35, 29] },
     nfc1: { zone: 'Shastra', name: 'NFC station', what: 'The second NFC station, on the same wall, with a scripture scroll hanging between the two TVs. Tap a card on the tablet and the answer shows on the TV above.', build: 'Android tablet in a recessed plywood box with a 45–50 in TV above on a wired HDMI adapter. Card tray below. Same web page as the first station.', size: 'TV about 3.5 ft wide, tablet below, about 3 ft standing zone', at: [24.85, 29] },
-    ropes: { zone: 'Sant', name: 'Stanchions', what: 'Five red rope lines that keep the walk in order without building walls. One runs about 5 ft south from the corner of the Shanti room, so people leaving the room go down past the Better Living booth to BAPS Charities before turning back up towards Shastra. One closes the gap between the Swamini Vato case and the NFC wall, and one runs down the right side of the aisle from the Satsang Diksha case, so people coming back from Charities go up to the BKY booth instead of cutting across. One runs from the end of the spine wall to the Satsang Diksha case, ending at the back corner of the Satsang Diksha record panel, so people go down the Shastra aisle instead of cutting across to Sant. One runs from the south end of the Sant panels to the south wall, beside the closing wall, so people go up the photo side instead of straight to the exit.', build: 'Brass posts about 3 ft tall on weighted bases, red velvet ropes with hooks. Rent or borrow; no drilling.', size: '12 posts, 8 ropes about 3–6 ft each', at: [31.1, 25.2] },
+    ropes: { zone: 'Sant', name: 'Stanchions', what: 'Five red rope lines that keep the walk in order without building walls. One runs about 5 ft south from the corner of the Shanti room, so people leaving the room go down past the Better Living booth to BAPS Charities before turning back up towards Shastra. One closes the gap between the Swamini Vato case and the NFC wall, and one runs down the right side of the aisle from the Satsang Diksha case, so people coming back from Charities go up to the BKY booth instead of cutting across. One runs from the end of the spine wall to the Satsang Diksha case, ending at the back corner of the Satsang Diksha record panel, so people go down the Shastra aisle instead of cutting across to Sant. One runs from the south end of the Sant panels to the south wall, so people go up the photo side instead of straight to the exit.', build: 'Brass posts about 3 ft tall on weighted bases, red velvet ropes with hooks. Rent or borrow; no drilling.', size: '12 posts, 8 ropes about 3–6 ft each', at: [31.1, 25.2] },
     portrait: { zone: 'Sant', name: 'Sant pillars', what: 'Five tall panels in a straight row down the middle of Sant. People walk up the photo side (facing Shastra) first, turn at the north end, and come back down the other side, where each back explains one idea: What is a Guru?, The Guru Parampara, Pramukh Swami Maharaj, Mahant Swami Maharaj and Living the teachings. Sant is lettered under the middle photo.', build: 'Plywood box pillars 2 ft wide, 8 in deep and 7 ft 8 in tall, painted black, on a weighted base. Prints inset on both faces (about 1.8 × 6.9 ft). A small LED picture light on top of each face.', size: '5 panels in a 15.3 ft row, 16 in between them (not a walkway)', at: [31.1, 14.5] },
-    kiosk0: { zone: 'Sant', name: 'Vicharan wall', what: 'A TV on the wall loops an animation of Mahant Swami Maharaj’s vicharan since August 2016: the globe turns and the route draws itself stop by stop, flights and car journeys in different colours, while the distance counts up. Words around the screen give the totals. Nothing to touch; people stop and watch, then walk on to the closing wall.', build: '45–50 in TV on a wall mount, a small PC or media player behind the wall running the route page full-screen, offline and on a loop, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 15] },
+    kiosk0: { zone: 'Sant', name: 'Vicharan wall', what: 'A TV on the wall loops an animation of Mahant Swami Maharaj’s vicharan since August 2016: the globe turns and the route draws itself stop by stop, flights and car journeys in different colours, while the distance counts up. Words around the screen give the totals. Nothing to touch; people stop and watch, then move on to the birthday wall beside it.', build: '45–50 in TV on a wall mount, a small PC or media player behind the wall running the route page full-screen, offline and on a loop, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 12] },
     nightcorner: { zone: 'Sant', name: 'City at night', what: 'A dark skyline wrapped around the north-east corner of Sant, half on the north wall and half on the east wall, where the walk turns from the photo side to the information side. “AWAKE FOR ALL OF US” (an exhibition line, not a quotation) runs across the top. Six towers each show a time, 10:53 PM to 2:30 AM, and have one glowing window: one room still awake in a sleeping city. On the ledge below, a card for each night gives the time, place and date, and what Mahant Swami Maharaj was praying for, summarised from When the World Sleeps. It shows how selflessly he cares for all of us.', build: 'Three layers of foam board: ½ in back layer painted night blue-black with the headline and a dim back skyline; 1 in front towers 2 in off the wall, matte black with painted windows; one window per tower cut out and backed with frosted acrylic and an LED puck. Times in gold vinyl above each tower. A gold-painted 1 × 4 ledge at 4 ft 10 in hides the wiring, with a warm LED strip under it lighting six printed cards (1.95 × 1.75 ft, foam board) tilted up slightly. Paint foam with latex or acrylic, not spray paint; check if the venue needs fire-rated foam board.', size: 'About 7 ft on each wall of the corner, 8 ft tall; towers 1.75 ft wide, tops 6.6–7.5 ft; cards 3.1–4.8 ft up; about 6 in deep at the ledge', at: [36.6, 2.2] },
-    reflection: { zone: 'Sant', name: 'Closing wall', what: 'A quiet, minimal last wall: matte black, “AADHAR STAMBH · The pillars that sustain a legacy” set small and left-aligned, and one clean row of five frameless Sant photographs at eye level under a single slim linear light.', build: 'Matte black paint (no border), vinyl-cut lettering, 5 prints face-mounted on 3 mm aluminium or acrylic (frameless, 1.5 ft tall, 2.4 in gaps), one slim LED linear wall-washer at 2700–3000K. The statement is an exhibition line, not a quotation.', size: '7.2 ft row of photos on an 8 ft wall', at: [35.4, 29.4] },
+    bday: { zone: 'Sant', name: 'Birthday wall', what: 'Beside the vicharan wall, a TV on the wall with an iPad on a stand in front of it. Type your birthday on the iPad and the TV shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day. Words around the screen explain what to do.', build: '45–50 in TV on a wall mount, iPad in a lockable floor stand, wired HDMI adapter from iPad to TV, one offline web page with the date archive, printed wall graphic 7 × 6.4 ft around the TV.', size: '7 ft of wall, about 3 ft standing zone', at: [38.4, 20] },
     exit: { zone: 'Route', name: 'Exit', what: 'The end of Aadhar Stambh and of the exhibition route through this section.', build: 'A 4 ft opening in the outer wall.', size: '4 ft opening', at: [38, 28] },
     signs: { zone: 'Route', name: 'Names in the pieces', what: 'No banners. Each part is named inside its own statement piece: Mandir carved into the jali over the Shanti room door, Shastra as the first word on the first scroll, and Sant lettered under the photo on the middle Sant pillar. Each name is in English and Gujarati.', build: 'Mandir: carved or laser-cut letters on a jali lintel, painted ivory. Shastra: printed at the top of the first scroll. Sant: gold vinyl letters on the strip under the middle pillar photo.', size: 'Lintel about 3 ft wide; Sant letters about 3 in tall', at: [7.5, 5] },
   };
   const LABELS = [
     ['hallway', 'Chaos hallway', 8.8], ['shanti', 'Shanti room', 9], ['bky', 'BKY booth', 8.6], ['charities', 'BAPS Charities booth', 8.6], ['bls', 'Better Living booth', 8.6],
     ['spines', 'Spine wall', 8.4], ['case0', 'Shikshapatri', 5.2], ['case2', 'Swamini Vato', 5.2], ['case3', 'Satsang Diksha', 5.2], ['pages', 'Floating pages', 12],
-    ['nfc0', 'NFC + TV', 8.2], ['nfc1', 'NFC + TV', 8.2], ['gwr', 'Satsang Diksha World Record', 7.0], ['ropes', 'Stanchions', 3.6], ['portrait', 'Sant pillars', 8.4], ['kiosk0', 'Vicharan wall', 8.2], ['nightcorner', 'City at night', 8.3], ['reflection', 'Closing wall', 8]
+    ['nfc0', 'NFC + TV', 8.2], ['nfc1', 'NFC + TV', 8.2], ['gwr', 'Satsang Diksha World Record', 7.0], ['ropes', 'Stanchions', 3.6], ['portrait', 'Sant pillars', 8.4], ['kiosk0', 'Vicharan wall', 8.2], ['nightcorner', 'City at night', 8.3], ['bday', 'Birthday wall', 8.2]
   ];
 
   // ---------- floor, grid, zones ----------
@@ -1072,7 +1072,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const tvTex = new THREE.TextureLoader().load(VICHARAN_TV); tvTex.encoding = THREE.sRGBEncoding; tvTex.anisotropy = maxAniso;
     const tv = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 1.9), new THREE.MeshBasicMaterial({ map: tvTex }));
     tv.position.set(X, 5.35, Z + 0.39); g.add(tv);
-    g.rotation.y = -Math.PI / 2; g.position.set(40, 0, 15);
+    g.rotation.y = -Math.PI / 2; g.position.set(40, 0, 12);
     scene.add(g); clickable(g, 'kiosk0');
   }
 
@@ -1157,61 +1157,64 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     const k = plinthCard(36.2, 28.5, 0, -1, 'Ignited Minds', 'book');
     const bk = box(0.6, 0.12, 0.85, std(0x23324f, { roughness: 0.6 }), 36.2, 2.88, 28.5); bk.rotation.y = 0.3; k.add(bk);
   }
-  // Closing wall: minimal. Matte black, one line of type, one row of frameless prints, one linear light
-  function buildReflection() {
-    const g = new THREE.Group(), X = 39.78;
-    const bg = plate(8, 7, (ctx, w, h) => {
-      const ppf = w / 8;
-      ctx.fillStyle = '#0e0e10'; ctx.fillRect(0, 0, w, h);
-      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      const x0 = 0.42 * ppf;
-      ctx.fillStyle = '#f2efe8'; ctx.font = '500 34px Montserrat, sans-serif';
-      ctx.fillText('AADHAR STAMBH'.split('').join(String.fromCharCode(8202, 8202)), x0, 1.05 * ppf);
-      ctx.fillStyle = 'rgba(242, 239, 232, 0.55)'; ctx.font = '400 20px Montserrat, sans-serif';
-      ctx.fillText('The pillars that sustain a legacy', x0, 1.05 * ppf + 34);
-    }, 130);
-    bg.position.set(X, 0.6 + 3.5, 10); bg.rotation.y = -Math.PI / 2; g.add(bg);
-    const edge = std(0x18181a, { roughness: 0.6 });
-    const H = 1.5, base = 3.3, widths = [1.05, 1.6, 1.05, 1.6, 1.05], gap = 0.2;
-    const total = widths.reduce((a, b) => a + b, 0) + gap * (widths.length - 1);
-    let z = 10 - total / 2;
-    widths.forEach((w, i) => {
-      const zc = z + w / 2, yc = base + H / 2;
-      g.add(box(0.05, H, w, edge, X - 0.03, yc, zc));
-      const usePortrait = i === 2;
-      const t = canvasTex(Math.round(w * 150), Math.round(H * 150), (ctx, cw, ch) => {
-        if (usePortrait && portraitImg) {
-          const ir = portraitImg.width / portraitImg.height, fr = cw / ch;
-          let sw = portraitImg.width, sh = portraitImg.height, sx = 0, sy = 0;
-          if (ir > fr) { sw = sh * fr; sx = (portraitImg.width - sw) / 2; } else { sh = sw / fr; sy = (portraitImg.height - sh) / 2; }
-          ctx.drawImage(portraitImg, sx, sy, sw, sh, 0, 0, cw, ch);
-        } else {
-          const gr = ctx.createLinearGradient(0, 0, 0, ch); gr.addColorStop(0, '#9b8a78'); gr.addColorStop(1, '#4a4038');
-          ctx.fillStyle = gr; ctx.fillRect(0, 0, cw, ch);
-          ctx.fillStyle = 'rgba(255, 250, 240, 0.7)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '500 15px Montserrat, sans-serif';
-          ctx.fillText('[Sant photo ' + (i + 1) + ']', cw / 2, ch / 2);
-        }
+  // Birthday wall: a TV on the wall, an iPad on a stand in front, and words around the screen that explain it
+  function buildBirthday() {
+    const X = 0, Z = 0, g = new THREE.Group(); // built facing +z, then turned onto the east wall of Sant next to the vicharan wall
+    const wall = plate(7, 6.4, (ctx, w, h) => {
+      const ppf = w / 7;
+      ctx.fillStyle = '#15121a'; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = 'rgba(216, 166, 80, 0.55)'; ctx.lineWidth = 3; ctx.strokeRect(14, 14, w - 28, h - 28);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillStyle = '#e48b62'; ctx.font = '700 17px Montserrat, sans-serif'; ctx.fillText('ON YOUR BIRTHDAY', w / 2, 0.42 * ppf);
+      ctx.fillStyle = '#f4eee2'; ctx.font = '500 46px "Bodoni Moda", Georgia, serif'; ctx.fillText('Where was Swami on the day you were born?', w / 2, 0.85 * ppf);
+      // timeline either side of the TV
+      const ty = 2.3 * ppf;
+      ctx.strokeStyle = 'rgba(216, 166, 80, 0.6)'; ctx.lineWidth = 2;
+      [[30, 1.4 * ppf], [w - 1.4 * ppf, w - 30]].forEach(([a, b]) => { ctx.beginPath(); ctx.moveTo(a, ty); ctx.lineTo(b, ty); ctx.stroke(); for (let x = a + 14; x < b; x += 26) { ctx.fillStyle = 'rgba(216, 166, 80, 0.75)'; ctx.beginPath(); ctx.arc(x, ty, 3, 0, Math.PI * 2); ctx.fill(); } });
+      // steps under the TV
+      const sy = 4.35 * ppf;
+      [['1', 'Type your birthday on the iPad'], ['2', 'The screen shows where Pramukh Swami Maharaj or Mahant Swami Maharaj was that day']].forEach(([n, t], i) => {
+        const cx = w * (i === 0 ? 0.3 : 0.7);
+        ctx.fillStyle = '#e48b62'; ctx.beginPath(); ctx.arc(cx, sy, 16, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#15121a'; ctx.font = '700 18px Montserrat, sans-serif'; ctx.fillText(n, cx, sy + 1);
+        ctx.fillStyle = 'rgba(244, 238, 226, 0.88)'; ctx.font = '500 20px Montserrat, sans-serif'; wrap(ctx, t, cx, sy + 42, w * 0.34, 26);
       });
-      if (usePortrait) needsPortrait.push(t);
-      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, H), new THREE.MeshStandardMaterial({ map: t.tex, roughness: 0.8, emissive: 0xffffff, emissiveMap: t.tex, emissiveIntensity: 0.2 }));
-      m.position.set(X - 0.06, yc, zc); m.rotation.y = -Math.PI / 2; g.add(m);
-      z += w + gap;
-    });
-    // one slim linear light across the whole row, with a soft wash
-    const bar = base + H + 0.45;
-    g.add(box(0.07, 0.05, total, std(0x2a2a2c, { roughness: 0.4, metalness: 0.5 }), X - 0.28, bar, 10));
-    [10 - total / 2 + 0.3, 10 + total / 2 - 0.3].forEach(zz => g.add(box(0.26, 0.03, 0.03, std(0x2a2a2c), X - 0.15, bar, zz)));
-    const wash = canvasTex(512, 256, (ctx, w, h) => { const gr = ctx.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, 'rgba(255, 228, 185, 0.32)'); gr.addColorStop(1, 'rgba(255, 228, 185, 0)'); ctx.fillStyle = gr; ctx.fillRect(0, 0, w, h); const sides = ctx.createLinearGradient(0, 0, w, 0); sides.addColorStop(0, 'rgba(0,0,0,1)'); sides.addColorStop(0.08, 'rgba(0,0,0,0)'); sides.addColorStop(0.92, 'rgba(0,0,0,0)'); sides.addColorStop(1, 'rgba(0,0,0,1)'); ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = sides; ctx.fillRect(0, 0, w, h); });
-    const glow = new THREE.Mesh(new THREE.PlaneGeometry(total + 0.4, 2.4), new THREE.MeshBasicMaterial({ map: wash.tex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
-    glow.position.set(X - 0.1, bar - 1.2, 10); glow.rotation.y = -Math.PI / 2; g.add(glow);
-    g.rotation.y = -Math.PI / 2; g.position.set(35.4 + 10, 0, 29.78 - 39.78); // turned onto the south wall of Sant, centred at x 35.4, facing people coming down the back lane
-    scene.add(g); clickable(g, 'reflection');
+      ctx.fillStyle = 'rgba(244, 238, 226, 0.55)'; ctx.font = 'italic 500 22px "Bodoni Moda", Georgia, serif';
+      ctx.fillText('From the daily record of his travels, satsang and meetings', w / 2, 5.75 * ppf);
+    }, 140);
+    wall.position.set(X, 1.2 + 3.2, Z + 0.2); g.add(wall);
+    g.add(box(3.6, 2.1, 0.16, M.black, X, 5.35, Z + 0.3));
+    const tv = plate(3.4, 1.9, (ctx, w, h) => {
+      const bg = ctx.createLinearGradient(0, 0, w, h); bg.addColorStop(0, '#2a1810'); bg.addColorStop(1, '#14121a');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(228, 139, 98, 0.25)'; ctx.fillRect(w * 0.58, 40, w * 0.36, h - 80);
+      ctx.fillStyle = 'rgba(244, 238, 226, 0.6)'; ctx.font = '500 18px Montserrat, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('[photo from that day]', w * 0.76, h / 2);
+      ctx.textAlign = 'left'; ctx.fillStyle = '#e48b62'; ctx.font = '700 18px Montserrat, sans-serif'; ctx.fillText('[YOUR BIRTHDAY]', 40, 70);
+      ctx.fillStyle = '#f4eee2'; ctx.font = '500 34px "Bodoni Moda", Georgia, serif'; wrap(ctx, 'Swami was in [place]', 40, 130, w * 0.5, 42);
+      ctx.fillStyle = 'rgba(244, 238, 226, 0.7)'; ctx.font = '500 18px Montserrat, sans-serif'; wrap(ctx, '[What happened that day, in one or two lines from the archive]', 40, 230, w * 0.48, 26);
+    }, 200);
+    tv.position.set(X, 5.35, Z + 0.39); g.add(tv);
+    // iPad on a floor stand
+    const sz = Z + 2.4;
+    g.add(box(0.9, 0.06, 0.9, M.black, X, 0.03, sz)); g.add(box(0.12, 3.3, 0.12, M.black, X, 1.68, sz));
+    const pad = plate(0.85, 0.62, (ctx, w, h) => {
+      ctx.fillStyle = '#16121a'; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#f2ece0'; ctx.textAlign = 'center'; ctx.font = '500 17px "Bodoni Moda", Georgia, serif'; ctx.fillText('When were you born?', w / 2, 30);
+      [['Day', 22, 34], ['Month', 64, 46], ['Year', 118, 50]].forEach(([t, x0, bw]) => { ctx.strokeStyle = 'rgba(242, 236, 224, 0.45)'; ctx.lineWidth = 2; ctx.strokeRect(x0, 46, bw, 24); ctx.fillStyle = 'rgba(242, 236, 224, 0.6)'; ctx.font = '500 10px Montserrat, sans-serif'; ctx.fillText(t, x0 + bw / 2, 62); });
+      ctx.fillStyle = '#e48b62'; ctx.fillRect(w / 2 - 30, 80, 60, 16); ctx.fillStyle = '#15121a'; ctx.font = '700 10px Montserrat, sans-serif'; ctx.fillText('SHOW ME', w / 2, 92);
+    }, 220);
+    pad.position.set(X, 3.5, sz + 0.03); pad.rotation.set(0, 0, 0); pad.rotateX(-0.6);
+    const bezel = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.72, 0.05), M.trim);
+    bezel.rotation.copy(pad.rotation); bezel.position.copy(pad.position); bezel.translateZ(-0.035);
+    g.add(bezel); g.add(pad);
+    g.rotation.y = -Math.PI / 2; g.position.set(40, 0, 20);
+    scene.add(g); clickable(g, 'bday');
   }
 
 
 
   // ---------- route ----------
-  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 18.0], [5.5, 25.0], [8.0, 27.0], [11.0, 25.5], [11.6, 14.0], [12.5, 7.5], [13.2, 5.6], [16.2, 5.0], [19.85, 5.5], [20.9, 9.4], [19.85, 12.0], [19.85, 17.3], [19.85, 25.3], [26.5, 25.5], [28.2, 20.0], [28.2, 9.0], [30.0, 3.6], [35.4, 4.3], [36.0, 8.2], [34.8, 11.0], [35.6, 16.0], [35.2, 23.5], [37.6, 27.4], [43, 28]];
+  const ROUTE = [[-3, 2], [1.5, 2], [5, 2], [7.5, 2.6], [7.5, 6.2], [6.4, 9.0], [7.5, 11.6], [7.5, 14.4], [5.6, 18.0], [5.5, 25.0], [8.0, 27.0], [11.0, 25.5], [11.6, 14.0], [12.5, 7.5], [13.2, 5.6], [16.2, 5.0], [19.85, 5.5], [20.9, 9.4], [19.85, 12.0], [19.85, 17.3], [19.85, 25.3], [26.5, 25.5], [28.2, 20.0], [28.2, 9.0], [30.0, 3.6], [35.4, 4.3], [36.0, 8.2], [34.8, 11.0], [35.6, 14.0], [35.4, 20.5], [37.6, 27.4], [43, 28]];
   let walkCurve = null;
   // Visitor path: a fixed line on the floor with arrows, and one figure walking it on a loop
   const pathGroup = new THREE.Group(); let showPath = true, walker = null, floorCurve = null, walkerU = 0, floorLen = 1;
@@ -1281,7 +1284,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [22, 'Sant', 'Panel 3 information', 'Top of panel 3, back', [31.45, 7.67, 16.167], [31.85, 7.95, 16.167], [31.45, 4.0, 16.167], 0.45, 0],
     [23, 'Sant', 'Panel 4 information', 'Top of panel 4, back', [31.45, 7.67, 19.5], [31.85, 7.95, 19.5], [31.45, 4.0, 19.5], 0.45, 0],
     [24, 'Sant', 'Panel 5 information', 'Top of panel 5, back', [31.45, 7.67, 22.833], [31.85, 7.95, 22.833], [31.45, 4.0, 22.833], 0.45, 0],
-    [25, 'Sant', 'Vicharan wall graphic', 'East wall top', [39.8, 8, 15], [38.2, 8.6, 15], [39.7, 4.4, 15], 0.62, 0]
+    [25, 'Sant', 'Vicharan wall graphic', 'East wall top', [39.8, 8, 12], [38.2, 8.6, 12], [39.7, 4.4, 12], 0.62, 0],
+    [26, 'Sant', 'Birthday wall graphic', 'East wall top', [39.8, 8, 20], [38.2, 8.6, 20], [39.7, 4.4, 20], 0.62, 0]
   ];
   const spotGroup = new THREE.Group(); spotGroup.visible = false;
   const SPOTTAGS = []; let showSpots = false;
@@ -1381,7 +1385,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }));
 
   // Walk-through stops, timeline and pause
-  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [0, 18.5]], ['BAPS Charities', 10, [4.5, 29.8]], ['Spine wall', 15, [22, 0.7]], ['World record', 17, [23.75, 11.55]], ['Shastra aisle', 19, [15.95, 17.3]], ['NFC wall', 20, [19.85, 29.8]], ['Panel photos', 22, [30.75, 14.5]], ['City at night', 25, [39.5, 0.6]], ['Panel backs', 27, [31.45, 12.5]], ['Vicharan', 28, [40, 15]], ['Closing wall', 30, [35.4, 29.8]], ['Exit', 31, [43, 28]]];
+  const STOPS = [['Chaos hallway', 2, [9, 2]], ['Shanti room', 5, [0, 8.5]], ['Booths', 8, [0, 18.5]], ['BAPS Charities', 10, [4.5, 29.8]], ['Spine wall', 15, [22, 0.7]], ['World record', 17, [23.75, 11.55]], ['Shastra aisle', 19, [15.95, 17.3]], ['NFC wall', 20, [19.85, 29.8]], ['Panel photos', 22, [30.75, 14.5]], ['City at night', 25, [39.5, 0.6]], ['Panel backs', 27, [31.45, 12.5]], ['Vicharan', 27, [40, 12]], ['Birthday', 29, [40, 20]], ['Exit', 31, [43, 28]]];
   let stopU = [];
   function buildStops() {
     const n = ROUTE.length - 1, L = walkCurve.getLengths(400);
@@ -1600,8 +1604,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimTag(15.95, 12.3, 17.3, '2 scrolls 1.5 × 9.5 ft · T-post 12 ft'); dimTag(21.1, 8.5, 29.6, 'Wall scroll 1.5 × 7 ft');
     dimTag(19.85, 7.9, 29.6, 'TVs 3.5 × 2 ft, 5.5–7.5 ft up');
     dimTag(31.1, 8.4, 16.167, '5 panels 2 ft × 8 in × 7 ft 8 in');
-    dimTag(39.6, 8.2, 15, 'TV 3.6 × 2.1 ft · wall graphic 7 × 6.4 ft');
-    dimTag(37.5, 8.4, 0.6, 'City at night · 7 ft on each wall · cards 1.95 × 1.75 ft'); dimTag(35.4, 7.9, 29.4, 'Closing wall · row of 5 prints 1.5 ft tall');
+    dimTag(39.6, 8.2, 12, 'Vicharan · TV 3.6 × 2.1 ft'); dimTag(39.6, 8.2, 20, 'Birthday · TV + iPad stand 3.5 ft');
+    dimTag(37.5, 8.4, 0.6, 'City at night · 7 ft on each wall · cards 1.95 × 1.75 ft');
     dimTag(12.2, 8.6, 0.6, 'Header 6 × 0.9 ft');
     scene.add(dimGroup);
     DIMS.forEach(d => { const el = document.createElement('div'); el.className = d.kind; el.textContent = d.text; el.hidden = true; labelBox.appendChild(el); d.el = el; });
@@ -1647,7 +1651,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // clear widths at the places people pass
     const free = (x, z) => { const i = Math.floor(x / CG.res), j = Math.floor(z / CG.res); return i >= 0 && j >= 0 && i < CG.nx && j < CG.nz && cgrid[j * CG.nx + i] === 0; };
     const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.8, depthTest: false });
-    [['Hallway', 4.5, 2.0, 'z'], ['Past the BLS booth', 6.0, 20.5, 'x'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 15, 'z'], ['Behind spine readers', 17.3, 6.0, 'z'], ['Spine readers to record panel readers', 22.2, 6.0, 'z'], ['Record panel back to Sant photo lane', 26.5, 12.4, 'x'], ['Down the aisle', 19.85, 17.3, 'x'], ['Past the NFC line', 23.75, 24.0, 'z'], ['North turn', 32.0, 5.5, 'z'], ['Back lane at the vicharan wall', 34.6, 16.167, 'x'], ['To the exit', 36.0, 25.5, 'x'], ['Photo lane', 27.5, 16.167, 'x']]
+    [['Hallway', 4.5, 2.0, 'z'], ['Past the BLS booth', 6.0, 20.5, 'x'], ['Shanti exit', 8.6, 14.5, 'z'], ['Between booths', 14.6, 15, 'z'], ['Behind spine readers', 17.3, 6.0, 'z'], ['Spine readers to record panel readers', 22.2, 6.0, 'z'], ['Record panel back to Sant photo lane', 26.5, 12.4, 'x'], ['Down the aisle', 19.85, 17.3, 'x'], ['Past the NFC line', 23.75, 24.0, 'z'], ['North turn', 32.0, 5.5, 'z'], ['Back lane at the birthday stand', 34.6, 20, 'x'], ['To the exit', 36.0, 25.5, 'x'], ['Photo lane', 27.5, 16.167, 'x']]
       .forEach(([name, x, z, ax]) => {
         if (!free(x, z)) return;
         const st = 0.05; let a = 0, b = 0;
@@ -1674,7 +1678,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [5, 'Booth kits', '6 ft wall, 15 in ledge each', 'Printed foam-board header 6 × 0.9 ft, plywood ledge, French cleats, 1 clamp spot, 1 outlet; BKY uses two kits as an L, onto the Shanti room wall', '4 (BKY 2, BLS 1, Charities 1)'],
     [6, 'Spine wall', '6 × (1.4 × 1 × 7.2 ft)', '½ in plywood boxes painted leather tones with gold bands; on the 3 that open (1st, 3rd, 5th): 7 ft piano hinge, magnetic catch, door stop, printed insides', '6 spines'],
     [7, 'Glass cases', '1.8 × 1.8 × 4.4 ft', 'Plywood plinth 3 ft high painted black, acrylic cube 1.6 × 1.6 × 1.4 ft, name plate', '3'],
-    ['L', 'Spot lights', '25 fixtures', '14 clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top, plus 11 small LED picture lights on the Sant panel tops and the record panel; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '27 (2 spare)'],
+    ['L', 'Spot lights', '26 fixtures', '15 clamp-on LED spots, 7–10 W, 2700–3000 K, with a 12–24 in arm where they reach past a wall top, plus 11 small LED picture lights on the Sant panel tops and the record panel; mixed narrow, medium and flood beams (see the Lighting tab); black extension cords and one power strip per zone', '28 (2 spare)'],
     [8, 'Floating pages', '1 pair, 12 ft high, plus 1 on the wall', 'Dye-sub printed voile scrolls (2 at 1.5 × 9.5 ft, 1 at 1.5 × 7 ft for the NFC wall, hung from a bar clamped to the wall top), dowels top and bottom, 1 black T-posts (12 ft post, 4 ft top bar, weighted base) or ceiling rigging, clear line', '3 scrolls'],
     [9, 'NFC wall', '11.1 ft wide, TVs 7.5 ft apart with a scroll between', '45–50 in TVs with wall mounts, Android tablets with NFC in recessed plywood boxes, wired HDMI adapters, card trays, NFC-sticker question cards', '2 stations'],
     ['R', 'Stanchions', '12 posts, 8 ropes', 'Brass posts about 3 ft tall on weighted bases, red velvet ropes about 6 ft with hooks; rent or borrow, no drilling', '12 posts, 8 ropes'],
@@ -1682,7 +1686,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [11, 'Vicharan wall', '7 ft of wall, TV 3.6 × 2.1 ft', '45–50 in TV with wall mount, small PC or media player looping the route page offline, printed wall graphic 7 × 6.4 ft around the TV', '1'],
     [12, 'City at night', 'North-east corner, about 7 ft on each wall, 6 towers, 6 cards', 'Foam board in 3 layers (back, towers, cards), 6 frosted acrylic windows with LED pucks, gold vinyl times, painted 1 × 4 ledge with a warm LED strip under it', '1'],
     [16, 'Satsang Diksha record panel', '3 × 6.5 ft, 4 in deep', 'Matte black ½ in plywood box on a 2 × 2 frame, weighted ¾ in base, printed aluminium composite face with thin gold lines, 1 LED picture light', '1'],
-    [13, 'Closing wall', '8 ft wall, 7.2 ft photo row', 'Matte black paint, vinyl-cut lettering, 5 frameless prints face-mounted on aluminium or acrylic, 1 slim LED linear wall-washer at 2700–3000K', '1 wall, 5 prints'],
+    [13, 'Birthday wall', '7 ft of wall, TV 3.6 × 2.1 ft', '45–50 in TV with wall mount, iPad in a lockable floor stand, wired HDMI adapter, printed wall graphic 7 × 6.4 ft, one offline web page with the date archive', '1'],
     [14, 'Lighting', 'Whole section', 'Clamp-on LED spots at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', '14 spots + 11 picture lights'],
     [15, 'Floor covering', '40 × 30 ft', 'Black loop carpet in 12 ft wide rolls (three runs of 40 ft, one trimmed to 6 ft), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 960 sq ft']
   ];
@@ -1711,9 +1715,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     rect(23.42, 10.05, 24.08, 13.05, 'p-piece');
     rect(15.55, 29.45, 19.15, 29.8, 'p-piece'); rect(23.05, 29.45, 26.65, 29.8, 'p-piece');
     PIL.Z.forEach(z => rect(PIL.X - 0.35, z - 1, PIL.X + 0.35, z + 1, 'p-piece'));
-    rect(39.45, 13.2, 39.8, 16.8, 'p-piece'); rect(37.15, 14.55, 38.05, 15.45, 'p-piece');
+    rect(39.45, 10.2, 39.8, 13.8, 'p-piece'); rect(39.45, 18.2, 39.8, 21.8, 'p-piece'); rect(37.15, 19.55, 38.05, 20.45, 'p-piece');
     rect(32.9, 0.18, 39.8, 0.7, 'p-piece'); rect(39.3, 0.7, 39.8, 7.1, 'p-piece'); text(36.0, 1.6, 'City at night', 'p-note', 'middle');
-    rect(31.4, 29.55, 39.4, 29.82, 'p-piece');
     WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
     const baseOut = out.slice();
     // dimensions
@@ -1730,7 +1733,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dim(15.55, 28.6, 26.65, 28.6, 'NFC wall 11.1 ft', -0.55);
     dim(29.7, 8.5, 29.7, 23.83, '15.3 ft', -0.9);
     // numbered pieces
-    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [4.5, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [15.95, 13.95, 7], [23.75, 13.95, 7], [15.95, 20.65, 7], [15.95, 17.3, 8], [17.35, 29.1, 9], [24.85, 29.1, 9], [21.1, 28.9, 8], [31.1, 14.5, 10], [38.7, 15, 11], [35.4, 28.8, 13], [38.9, 1.3, 12], [25.0, 11.55, 16]].forEach(([x, z, n]) => badge(x, z, n));
+    [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7.5, 5.9, 4], [12.2, 1.0, 5], [4.5, 29.1, 5], [0.85, 18.5, 5], [9.85, 3.8, 5], [21.5, 0.7, 6], [15.95, 13.95, 7], [23.75, 13.95, 7], [15.95, 20.65, 7], [15.95, 17.3, 8], [17.35, 29.1, 9], [24.85, 29.1, 9], [21.1, 28.9, 8], [31.1, 14.5, 10], [38.7, 12, 11], [38.7, 20, 13], [38.9, 1.3, 12], [25.0, 11.55, 16]].forEach(([x, z, n]) => badge(x, z, n));
     text(-0.2, -2.9, 'N ↑', 'p-note', 'start');
     const svg = `<svg viewBox="0 0 1000 760" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 30 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const lo = baseOut.slice();
@@ -1752,7 +1755,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Plywood and lumber', '¾ in plywood, 4 × 8 ft (spare)', '1', 'sheet', 'Mistakes and patches', 'Spares'],
       ['Plywood and lumber', '2 × 4 × 8 ft studs', '129', 'pieces', 'Studs every 24 in (87) plus top and bottom plates (42)', 'Wall frames'],
       ['Plywood and lumber', '2 × 4 × 8 ft studs', '22', 'pieces', 'Diagonal kicker braces about every 6 ft of outer wall; nothing is screwed into the gym floor', 'Wall bracing'],
-      ['Plywood and lumber', '2 × 4 × 8 ft studs', '15', 'pieces', 'About 10% extra, plus blocking behind the 3 TV mounts and the booth cleats', 'Waste and blocking'],
+      ['Plywood and lumber', '2 × 4 × 8 ft studs', '15', 'pieces', 'About 10% extra, plus blocking behind the 4 TV mounts and the booth cleats', 'Waste and blocking'],
       ['Plywood and lumber', '2 × 4 × 10 ft', '9', 'pieces', '5 ceiling joists and 2 ledgers over the 9 × 8 ft room; 2 crossbars for the hallway bulbs', 'Shanti ceiling, hallway'],
       ['Plywood and lumber', '2 × 2 × 8 ft', '30', 'pieces', 'Inner frame, about 6 per panel', 'Sant panels'],
       ['Plywood and lumber', 'Sandbags or weights, 25 lb', '52', 'bags', '2 per kicker brace (44), 2 per T-stand (4), extras for the pillar bases (4)', 'Stability'],
@@ -1797,16 +1800,16 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Sant', '1 × 4 × 8 ft board', '2', 'pieces', 'Ledge, painted gold', 'City at night'],
       ['Sant', 'Brass stanchion posts', '12', 'posts', 'About 3 ft tall, weighted bases; rent or borrow', 'Stanchions'],
       ['Sant', 'Red velvet ropes, 6 ft', '8', 'ropes', 'With hooks', 'Stanchions'],
-      ['Sant', 'TV, 45–50 in', '1', 'TV', '', 'Vicharan wall'],
-      ['Sant', 'Low-profile TV wall mount', '1', 'mount', 'Screwed into 2 × 4 blocking', 'Vicharan wall'],
+      ['Sant', 'TV, 45–50 in', '2', 'TVs', '', 'Vicharan wall, birthday wall'],
+      ['Sant', 'Low-profile TV wall mount', '2', 'mounts', 'Screwed into 2 × 4 blocking', 'Vicharan wall, birthday wall'],
+      ['Sant', 'iPad and lockable floor stand', '1', 'set', 'Stand about 3.5 ft tall', 'Birthday wall'],
+      ['Sant', 'iPad to HDMI adapter and 6 ft HDMI cable', '1', 'set', '', 'Birthday wall'],
       ['Sant', 'Mini PC or media player and 6 ft HDMI cable', '1', 'set', 'Runs the route page full-screen, offline, on a loop', 'Vicharan wall'],
-      ['Sant', 'Frameless face-mounted prints', '5', 'prints', 'All 18 in tall: 3 at 12.6 in wide, 2 at 19 in wide', 'Closing wall'],
-      ['Lighting and power', 'Clamp-on LED spot, flood beam (about 60°)', '8', 'lights', '2700–3000 K, 7–10 W, 12–24 in arm', '4 booth walls, 3 on the spine wall, vicharan wall'],
+      ['Lighting and power', 'Clamp-on LED spot, flood beam (about 60°)', '9', 'lights', '2700–3000 K, 7–10 W, 12–24 in arm', '4 booth walls, 3 on the spine wall, vicharan and birthday walls'],
       ['Lighting and power', 'Clamp-on LED spot, medium beam (30–40°)', '3', 'lights', '2700–3000 K, 7–10 W, 12–24 in arm', 'Mandir lintel, scroll column, wall scroll'],
       ['Lighting and power', 'Clamp-on LED spot, narrow beam (15–25°)', '3', 'lights', '2700–3000 K, 7–10 W', '3 glass cases'],
       ['Lighting and power', 'Clamp-on LED spots (spares)', '2', 'lights', 'One flood, one narrow', 'Spares'],
       ['Lighting and power', 'LED picture lights', '11', 'lights', 'Small, mounted on the top edge of each panel face (10 Sant, 1 record panel)', 'Sant panels, record panel'],
-      ['Lighting and power', 'LED linear wall washer, about 8 ft', '1', 'light', '2700–3000 K', 'Closing wall'],
       ['Lighting and power', 'LED strip, 2700 K, 16 ft rolls', '2', 'rolls', 'With 2 drivers', 'Behind the Shanti jali'],
       ['Lighting and power', 'Cool bare LED bulbs and pendant cords', '2', 'sets', '', 'Chaos hallway'],
       ['Lighting and power', 'Black extension cords, 25 ft', '14', 'cords', 'Run along the wall tops', 'All lights and AV'],
@@ -1823,7 +1826,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Prints and graphics', 'Question cards, about 3.5 × 5 in', '30', 'cards', '', 'NFC stations'],
       ['Prints and graphics', 'Panel prints, about 1.8 × 6.9 ft', '10', 'prints', '5 photos and 5 information sides', 'Sant panels'],
       ['Prints and graphics', 'Vicharan wall graphic, 7 × 6.4 ft', '1', 'print', 'Cutout for the TV', 'Vicharan wall'],
-      ['Prints and graphics', 'Gold vinyl lettering', '2', 'sets', 'SANT · સંત on the middle pillar; AADHAR STAMBH line on the closing wall', 'Sant, closing wall'],
+      ['Prints and graphics', 'Birthday wall graphic, 7 × 6.4 ft', '1', 'print', 'Cutout for the TV', 'Birthday wall'],
+      ['Prints and graphics', 'Gold vinyl lettering', '1', 'set', 'SANT · સંત on the middle pillar', 'Sant'],
       ['Hardware', 'Wood screws #8, 1⅝ in', '2', '5 lb boxes', '', 'Plywood to frames'],
       ['Hardware', 'Wood screws #9, 3 in', '2', '5 lb boxes', '', 'Frames and braces'],
       ['Hardware', 'Carriage bolts ⅜ × 4 in with washers and nuts', '40', 'sets', 'Join wall sections to each other', 'Walls'],
@@ -1870,8 +1874,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [10, 'Sant lettering', 'Fabrication', '1', 'Gold vinyl letters about 3 in tall', '“SANT · સંત” under the middle pillar photo'],
       [11, 'Vicharan route loop', 'Digital', '1', '1920 × 1080, runs offline in full-screen and loops on its own', 'The route page set to play from 2016 to today and start again; no buttons on screen'],
       [11, 'Vicharan wall graphic', 'Print', '1', '7 × 6.4 ft printed panel with a cutout for the TV', 'Heading, the totals (distance, countries, places) checked against the vicharan record'],
-      [13, 'Closing wall lettering', 'Fabrication', '1', 'Vinyl-cut, about 3 in caps plus a 1.5 in line', 'AADHAR STAMBH · The pillars that sustain a legacy (exhibition line, not a quotation)'],
-      [13, 'Sant photographs', 'Photo', '5', 'All 18 in tall: 3 at 12.6 in wide, 2 at 19 in wide; at least 2700 px tall', 'Approved photos of Pramukh Swami Maharaj and Mahant Swami Maharaj, colour-matched so the row reads as one set']
+      [13, 'Birthday page', 'Digital', '1', 'iPad entry screen plus 1920 × 1080 TV result screen, works offline', 'Pick a date, see where Pramukh Swami Maharaj or Mahant Swami Maharaj was, with a photo where one exists'],
+      [13, 'Birthday wall graphic', 'Print', '1', '7 × 6.4 ft printed panel with a cutout for the TV', 'Heading, two-step instructions and a timeline line around the screen'],
+      [13, 'Birthday archive', 'Data', '1 file', 'One row per date: date, Swami, place, short note', 'Compiled from the archives; start this first']
     ];
     const MTYPES = [['All', () => true], ['Print', t => t === 'Print' || t === 'Fabric print' || t === 'Photo'], ['Digital', t => t === 'Digital' || t === 'Data'], ['Audio', t => t === 'Audio'], ['Fabrication', t => t === 'Fabrication'], ['From others', t => t === 'From others']];
     const mrow = ([n, a, t, q, spec, need]) => `<tr data-type="${t}"><td class="n"><span>${n}</span></td><td><b>${a}</b></td><td><span class="mtype">${t}</span></td><td class="q">${q}</td><td>${spec}</td><td>${need}</td></tr>`;
@@ -1902,9 +1907,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         <div class="mat-scroll"><table class="mat media"><thead><tr><th>#</th><th>Asset</th><th>Type</th><th>Qty</th><th>Size and spec</th><th>What it needs</th></tr></thead><tbody>${MEDIA.map(mrow).join('')}</tbody></table></div>
       </div>
       <div data-panel="light" role="tabpanel" hidden>
-        <div class="plan-head"><h3>Spot lights</h3><p>${FIX.length} spots, buy ${FIX.length + 2} with spares: 14 clamp-on spots on wall tops and T-posts, plus 11 small picture lights on the Sant panels and the record panel tops · 2700–3000 K warm white · no ceiling rigging needed</p></div>
+        <div class="plan-head"><h3>Spot lights</h3><p>${FIX.length} spots, buy ${FIX.length + 2} with spares: 15 clamp-on spots on wall tops and T-posts, plus 11 small picture lights on the Sant panels and the record panel tops · 2700–3000 K warm white · no ceiling rigging needed</p></div>
         <div class="plan-scroll">${lsvg}</div>
-        <p class="light-note">Not counted as spots: 2 bare cool bulbs in the chaos hallway, the LED strip behind the Shanti room jali, and the linear light on the closing wall, which lights it on its own. TVs and tablets light themselves, so the NFC wall needs no spot. Plan on one power strip per zone, with black extension cords run along the wall tops.</p>
+        <p class="light-note">Not counted as spots: 2 bare cool bulbs in the chaos hallway, the LED strip behind the Shanti room jali. TVs and tablets light themselves, so the NFC wall needs no spot. Plan on one power strip per zone, with black extension cords run along the wall tops.</p>
         <div class="mat-scroll"><table class="mat"><thead><tr><th>#</th><th>Zone</th><th>Lights</th><th>Clamped to</th><th>Beam</th></tr></thead><tbody>${lrows}</tbody></table></div>
       </div>`;
     p2.querySelectorAll('[role="tab"]').forEach(t => t.addEventListener('click', () => {
@@ -2049,7 +2054,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     booth('bky', 9.2, 0, 1, 'BKY', 'BKY'); boothAt('bky', 9.0, 3.4, Math.PI / 2, 'BKY', 'BKY', true);
     booth('charities', 1.5, 30, -1, 'BAPS Charities', 'Charities'); boothAt('bls', 0, 18.5, Math.PI / 2, 'Better Living', 'BLS');
     buildSpines(); buildCases(); buildPages(); buildRopes(); buildNFC();
-    buildPortrait(); buildKiosks(); buildNightCorner(); buildRecord(); buildReflection(); buildNames(); buildRoute(); buildLights(); buildFixtures(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
+    buildPortrait(); buildKiosks(); buildBirthday(); buildNightCorner(); buildRecord(); buildNames(); buildRoute(); buildLights(); buildFixtures(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
     const img = new Image();
     img.onload = () => { portraitImg = img; needsPortrait.forEach(t => t.redraw()); };
     img.src = 'portrait.jpg';
