@@ -59,6 +59,9 @@ Read this section before changing anything. These decisions were made deliberate
 - The 2D plan, the dimensions and the walk-through stops are hand-placed. If you move a piece, update its `ITEMS.at`, its collider in `addColliders`, its dimension lines in `buildDims` and `build2D`, and the `ROUTE` and `STOPS` if the walk passes it.
 - Test before you merge: open the page, check Overview, Floor plan, Walk through, Walk around and the 2D tabs, and look at the browser console for errors.
 
+### Walls (Nov 1)
+- Every wall is whole panels, 8 ft high: **16 × 10 ft and 4 × 5 ft**, with a 4 × 4 post at each corner and free end. West wall is one 30 ft run from the entrance; exit is 5 ft (east wall, 10–15 ft from the south-east corner); Shanti door and exit are 4 ft; the hallway/Shanti east wall runs on 2 ft past the Shanti corner (15 ft); projection room walls are 5 ft (west, at x 24.5) and 10 ft (south). Colours: matte black everywhere visitors see, ivory inside the Shanti room, **white** on the projection room's north and east walls inside (the projection surface).
+
 ## Walking space
 - The **Walking space** toggle shades clear walkway (green), people using a piece (amber) and viewers (blue), and measures clear widths at the places people pass. Aim for 4 ft or more; under 3 ft shows red.
 
