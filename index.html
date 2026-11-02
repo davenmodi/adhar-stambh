@@ -1254,6 +1254,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // projected band 3 to 7.5 ft off the floor; the east wall stops 3 ft short of the exit (z 28–35)
     const a = frameWall(10, 4.5, 3); a.position.set(34.5, 5.25, 34.8); a.rotation.y = Math.PI; g.add(a);
     const b = frameWall(7, 4.5, 9); b.position.set(39.8, 5.25, 31.5); b.rotation.y = -Math.PI / 2; g.add(b);
+    // the whole wall is white, floor to top, not just the frame band
+    const wn = plate(15.5, 8, (ctx, w, h) => { ctx.fillStyle = '#ecebe6'; ctx.fillRect(0, 0, w, h); }, 20); wn.position.set(32.25, 4, 34.82); wn.rotation.y = Math.PI; g.add(wn);
+    const we = plate(12.25, 8, (ctx, w, h) => { ctx.fillStyle = '#ecebe6'; ctx.fillRect(0, 0, w, h); }, 20); we.position.set(39.82, 4, 28.875); we.rotation.y = -Math.PI / 2; g.add(we);
     const lt = canvasTex(512, 256, (ctx, w, h) => {
       ctx.clearRect(0, 0, w, h);
       for (let i = 0; i < 4; i++) { const x = i * w / 4 + w / 8; const gr = ctx.createLinearGradient(x - 70, 0, x + 70, 0); gr.addColorStop(0, 'rgba(255, 214, 150, 0)'); gr.addColorStop(0.5, 'rgba(255, 214, 150, 0.6)'); gr.addColorStop(1, 'rgba(255, 214, 150, 0)'); ctx.fillStyle = gr; ctx.fillRect(x - 70, 0, 140, h); }
