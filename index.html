@@ -208,7 +208,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   <header>
     <p class="eyebrow">Light Beyond Lamps · Section 6</p>
     <h1><b>Aadhar Stambh</b><span>V2</span></h1>
-    <p class="intro">A 40 × 35 ft room in three movements: the Mandir gives peace and belonging, the Shastras give wisdom, and the Sant shows what living it looks like. One statement piece leads each part, with supporting pieces around it. Drag to orbit, scroll or pinch to zoom, right-drag or Shift-drag to pan, double-click a spot to zoom in, and click any piece. Walk around puts you at eye level, moving with WASD, the arrow keys or the on-screen pad.</p>
+    <p class="intro">A 40 × 40 ft room in three movements: the Mandir gives peace and belonging, the Shastras give wisdom, and the Sant shows what living it looks like. One statement piece leads each part, with supporting pieces around it. Drag to orbit, scroll or pinch to zoom, right-drag or Shift-drag to pan, double-click a spot to zoom in, and click any piece. Walk around puts you at eye level, moving with WASD, the arrow keys or the on-screen pad.</p>
     <p class="route"><i>Mulyo</i><i>→</i><b class="m">Mandir</b><i>→</i><b class="s">Shastra</b><i>→</i><b class="t">Sant</b><i>→</i><i>Exit</i></p>
   </header>
 
@@ -347,6 +347,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       <li>The whole layout was reflected top to bottom: the entrance from Mulyo is now bottom left and the exit top right. Every piece keeps its size and spacing.</li>
       <li>The bicycle and book plinths were removed. The south wall of Sant became the city at night: six towers, six night prasangs.</li>
       <li>The city at night was later removed; the south wall of Sant between the birthday wall and the east wall is now plain black.</li>
+      <li>The room became 40 × 40 ft. The extra 5 ft went inside the projection room (now 15.5 × 17.25 ft, way in 12.25 ft), so the north wall, BKY, the stage, the record panel and the Satsang Diksha case moved 5 ft north.</li>
       <li>The split portrait became five Sant panels in a straight row: photos on one side, information on the other. The exit moved to the bottom-right so the walk passes both sides.</li>
       <li>BKY, Charities and Better Living became booth kits run by their activity leads.</li>
       <li>The room grew to 40 × 35 ft and was re-laid out. BAPS Charities was removed and BKY moved to the north-west corner. The spine wall moved onto the Shastra side of the hallway wall, the cases became one column with two pairs of scrolls, the NFC wall moved to the south wall, and the record panel moved to the north wall with a shloka stage beside it. The Sant panels now stand on the line between Shastra and Sant. Sant is entered through a new projection room (projection wall), then past the vicharan TV on the outside of its wall, down the panel backs, to the birthday wall, a 4-tower city at night and a Learn more booth. The exit moved to the middle of the east wall.</li>
@@ -366,8 +367,12 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   // written in the original plan numbers (x 0-40, z 0-35) inside a mirrored group; MZ() turns a plan z into a world z.
   const stage = new THREE.Scene();
   stage.background = new THREE.Color(0x0b0b0d);
-  const scene = new THREE.Group(); scene.scale.z = -1; scene.position.z = 35; stage.add(scene);
-  const MZ = z => 35 - z;
+  // Nov 2: the room became 40 × 40. Pieces are still written in the 40 × 35 numbers below; everything north of WCUT (inside the
+  // projection room, the north wall, BKY, the stage and the record panel) is moved 5 ft north by warpScene() after the build.
+  const WCUT = 27.9, ROOMD = 40, WZ = z => z > WCUT ? z + 5 : z;
+  const scene = new THREE.Group(); scene.scale.z = -1; scene.position.z = ROOMD; stage.add(scene);
+  const MZ = z => ROOMD - WZ(z);   // plan z (40 × 35 numbers) to world z
+  const FZ = z => ROOMD - z;       // final room z to world z and back
   const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 500);
   const maxAniso = renderer.capabilities.getMaxAnisotropy();
   const EYE = 5.3;
@@ -462,7 +467,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     stage: { zone: 'Shastra', name: 'Shloka stage', what: 'A low stage beside the Satsang Diksha record panel. Two or three children, dressed like the children in the record photo, stand here and recite Satsang Diksha shlokas, so the record is something people see happening, not only read about.', build: '4 × 4 ft platform about 1 ft high: ¾ in plywood top on a 2 × 4 frame, black carpet, gold edge strip on the front. One clamp spot from the north wall top. A rota of children for the day.', size: '4 × 4 ft, 1 ft high', at: [15.5, 33] },
     poster: { zone: 'Mandir', name: 'Poster', what: 'A poster on the north wall where Mandir hands over to Shastra. Content still to be decided.', build: 'Printed foam board or vinyl on the wall, one clamp spot.', size: 'About 4 ft wide', at: [9.5, 34.7] },
     santtitle: { zone: 'Sant', name: 'Sant entrance', what: 'The way into Sant is announced by a title wall facing Shastra: a gold pointed arch, “Aadhar Stambh” small at the top, સંત large in gold Gujarati and SANT in English below. A black lintel with SANT · સંત spans the opening beside it, so people know they are stepping into the last part.', build: 'Cut from foam on the foam machine and stuck straight onto the black wall (no panel): a pointed arch border about 52 in wide and 1 in thick-line, સંત about 23 × 16 in in Anek Gujarati, SANT in 6 in Cinzel capitals, AADHAR STAMBH in 2 in capitals and a short divider, all painted gold (water-based paint) and fixed with foam-safe mounting tape. Lintel: a 2 × 10 box beam painted black with a gold strip and gold vinyl letters, fixed between the wall end and the north wall at 7–8 ft. One spot from above.', size: 'Title 5 × 7.6 ft; lintel 5.5 ft wide, 9 in tall', at: [24.35, 25.3] },
-    projection: { zone: 'Sant', name: 'Projection wall', what: 'The projection room is the way into Sant. Photo frames hang on its north wall (10 ft) and east wall (the north 7 ft; the last 3 ft by the exit stay black), in a band from 3 to 7.5 ft off the floor. Two projectors map light and motion over the frames so the photos seem to come alive one after another, like the reel you shared. People stand in the room, then leave through the 5.5 ft exit. The vicharan TV is on the outside of the south wall, facing Sant.', build: 'White walls inside the room (north and east, the projection surface), 10–14 photo frames in the 3–7.5 ft band, 2 projectors (about 1:1 throw ratio, 3,000+ lumens) at 10 ft on 2 × 4 risers braced to the south wall top: one at 33.5 ft aimed at the north wall (about 13° down), one at 31 ft aimed at the east wall (about 16° down and angled, warped in software). A laptop running projection-mapping software (for example MadMapper or HeavyM) and a content loop made to fit the frame layout. Keep the room dim.', size: '10 ft on the north wall, 7 ft on the east wall, 3–7.5 ft up; exit 5.5 ft', at: [36, 33] },
+    projection: { zone: 'Sant', name: 'Projection wall', what: 'The projection room is the way into Sant: about 15.5 × 17.25 ft, entered through a 12.25 ft opening under the lintel. Photo frames hang on its north wall (10 ft) and the north 7 ft of its east wall, in a band from 3 to 7.5 ft off the floor, all on white walls. Two projectors map light and motion over the frames: who Mahant Swami Maharaj is, in short videos and testimonials. OUR LIVING GURU / MAHANT SWAMI MAHARAJ in foam letters fills the 5 ft of the north wall beside the frames. People leave through the 5.5 ft exit. The vicharan TV is on the outside of the south wall, facing Sant.', build: 'White walls inside the room (north and east; skin them with ¼ in lauan or hardboard so the plywood grain does not show), 10–14 photo frames in the 3–7.5 ft band, 2 projectors at 10 ft on 2 × 4 risers braced to the south wall top: PT-VW435N at 33.5 ft for the north wall (about 17.7 ft throw, zoomed to about 1.7:1 for a 10.5 ft image) and PT-DZ570 at 31 ft for the east wall (about 16 ft throw, about 2.15:1 for 7.5 ft, angled, warped in software). Raise them to 12 ft if the venue allows: it cuts the head-shadow zone in front of the frames from about 7 ft to about 5.5 ft. A laptop running projection-mapping software (for example MadMapper or HeavyM) and a content loop made to fit the frame layout. Two speakers high in the north wall corners. Keep the room dim.', size: 'Room 15.5 × 17.25 ft; frames 10 ft on the north wall, 7 ft on the east wall, 3–7.5 ft up; way in 12.25 ft; exit 5.5 ft', at: [36, 33] },
     learn: { zone: 'Sant', name: 'Learn more about Swami', what: 'A staffed booth on the east wall just before the exit: QR codes and books that explain who Mahant Swami Maharaj is. The books are here to look at; visitors can buy them at the Aksharpith that comes next. A volunteer stands here to explain and answer questions.', build: '8 × 6 ft wall graphic with 3–4 large QR codes, a 15 in ledge with book stands, one clamp spot, one volunteer.', size: '8 ft of wall, about 3 ft standing zone', at: [38.6, 6] },
     signs: { zone: 'Route', name: 'Names in the pieces', what: 'No banners. Each part is named inside its own statement piece: Mandir carved into the jali over the Shanti room door, Shastra as the first word on the first scroll, and Sant on a title wall and lintel at the way into Sant. Each name is in English and Gujarati.', build: 'Mandir: carved or laser-cut letters on a jali lintel, painted ivory. Shastra: printed at the top of the first scroll. Sant: see the Sant entrance.', size: 'Lintel about 3 ft wide; Sant title 5 × 7.6 ft', at: [7.5, 5] },
   };
@@ -496,13 +501,13 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     tint(9.5, 0, 25, 35, 0x3fb39a); tint(25, 0, 40, 35, 0xe07a4a);
     const pts = [];
     for (let x = 0; x <= 40; x++) {
-      if (x > SH.x0 && x < SH.x1) { pts.push(x, 0, 0, x, 0, SH.z0, x, 0, SH.z1, x, 0, 35); } else pts.push(x, 0, 0, x, 0, 35);
+      if (x > SH.x0 && x < SH.x1) { pts.push(x, 0, 0, x, 0, SH.z0, x, 0, SH.z1, x, 0, ROOMD); } else pts.push(x, 0, 0, x, 0, ROOMD);
     }
-    for (let z = 0; z <= 35; z++) {
+    for (let z = 0; z <= ROOMD; z++) {
       if (z > SH.z0 && z < SH.z1) pts.push(SH.x1, 0, z, 40, 0, z); else pts.push(0, 0, z, 40, 0, z);
     }
     const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-    const grid = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0x2c2e35, transparent: true, opacity: 0.55 })); grid.position.y = 0.012; scene.add(grid);
+    const grid = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: 0x2c2e35, transparent: true, opacity: 0.55 })); grid.position.y = 0.012; grid.userData.noWarp = true; scene.add(grid);
   }
 
   // ---------- walls ----------
@@ -1350,7 +1355,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ctx.fillText('SANT'.split('').join(String.fromCharCode(8202, 8202, 8202)), cx, 5.15 * ppf);
     }, 120);
     t.position.set(24.31, 4.0, 25.34); t.rotation.y = -Math.PI / 2; g.add(t);
-    // lintel over the way into Sant (x 25.25, z 29.5 to 35)
+    // lintel over the way into Sant (x 24.5, z 27.75 to 40 once the room is 40 deep: 12.25 ft)
     const gold = std(0xb08d57, { roughness: 0.4, metalness: 0.55 });
     g.add(box(0.35, 0.9, 7.25, M.black, 24.5, 7.55, 31.375));
     g.add(box(0.37, 0.05, 7.25, gold, 24.5, 7.12, 31.375));
@@ -1360,7 +1365,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ctx.fillText('SANT'.split('').join(String.fromCharCode(8202, 8202)) + '   ·   ', w / 2 - h * 0.6, h / 2 + 2);
       ctx.font = '600 ' + Math.round(h * 0.5) + 'px "Anek Gujarati", "Noto Sans Gujarati", sans-serif'; ctx.fillText('સંત', w / 2 + h * 1.25, h / 2);
     }, 160);
-    lt.position.set(24.31, 7.58, 31.375); lt.rotation.y = -Math.PI / 2; g.add(lt);
+    lt.position.set(24.31, 7.58, 28.875); // lands at z 33.9, the middle of the 12.25 ft way in lt.rotation.y = -Math.PI / 2; g.add(lt);
     scene.add(g); clickable(g, 'santtitle');
   }
 
@@ -1508,7 +1513,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
 
   // ---------- camera: orbit, plan, walk-through, walk around ----------
   camera.rotation.order = 'YXZ';
-  const orbit = { target: new THREE.Vector3(20, 0, 17.5), theta: -0.6, phi: 0.82, radius: 48 };
+  const orbit = { target: new THREE.Vector3(20, 0, 20), theta: -0.6, phi: 0.82, radius: 48 };
   const goal = { target: orbit.target.clone(), theta: orbit.theta, phi: orbit.phi, radius: orbit.radius };
   let mode = 'overview';
   const tour = { t: 0, playing: true, yawOff: 0, pitchOff: 0, yaw: null, hold: 0, next: 0, look: null };
@@ -1540,8 +1545,8 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     scaleEl.hidden = m === 'walk';
     hintEl.hidden = m === 'walk';
     hintEl.textContent = m === 'roam' ? HINTS.roam : HINTS.orbit;
-    if (m === 'overview') setGoal({ target: new THREE.Vector3(20, 0, 17.5), theta: -0.6, phi: 0.82, radius: fitRadius(51) });
-    if (m === 'plan') setGoal({ target: new THREE.Vector3(20, 0, 17.5), theta: 0, phi: 0.001, radius: fitRadius(57) });
+    if (m === 'overview') setGoal({ target: new THREE.Vector3(20, 0, 20), theta: -0.6, phi: 0.82, radius: fitRadius(51) });
+    if (m === 'plan') setGoal({ target: new THREE.Vector3(20, 0, 20), theta: 0, phi: 0.001, radius: fitRadius(57) });
     if (m === 'walk') { tour.t = 0; tour.playing = true; tour.hold = 0; tour.next = 0; tour.look = null; tour.yawOff = 0; tour.pitchOff = 0; tour.yaw = null; card.hidden = true; syncTour(); }
     if (m === 'roam' && prev !== 'roam') { roam.x = -2.5; roam.z = MZ(2); roam.yaw = Math.PI + Math.PI / 2; roam.pitch = -0.05; card.hidden = true; canvas.focus({ preventScroll: true }); }
   }
@@ -1773,7 +1778,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
   }
   function dimTag(x, y, z, text) { DIMS.push({ pos: new THREE.Vector3(x, y, z), text, kind: 'dimtag' }); }
   function buildDims() {
-    dimLine(0, -1.6, 40, -1.6, '40 ft'); dimLine(41.8, 0, 41.8, 35, '35 ft');
+    dimLine(0, -1.6, 40, -1.6, '40 ft'); dimLine(41.8, 0, 41.8, 35, '40 ft');
     dimLine(0, 36.6, 9.5, 36.6, 'Mandir 9.5 ft'); dimLine(9.5, 36.6, 25, 36.6, 'Shastra 15.5 ft'); dimLine(25, 36.6, 40, 36.6, 'Sant 15 ft');
     dimLine(-1.6, 0, -1.6, 5, 'Entrance 5 ft'); dimLine(43.4, 10, 43.4, 15, 'Exit 5 ft');
     dimLine(0, 1.2, 9, 1.2, 'Hallway 9 ft'); dimLine(0.7, 0, 0.7, 5, '5 ft');
@@ -1793,7 +1798,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     dimTag(25.33, 8.4, 14.5, '5 panels 2 ft × 8 in × 7 ft 8 in');
     dimTag(29.5, 8.3, 22.5, 'Vicharan · 85 in TV 6.2 × 3.5 ft'); dimTag(28.5, 8.3, 0.4, 'Birthday · 85 in TV 6.2 × 3.5 ft + iPad stand');
     dimTag(15.5, 2.0, 33, 'Stage 4 × 4 ft, 1 ft high'); dimTag(34.5, 8.4, 34.8, 'Projection wall 10 + 7 ft, 3–7.5 ft up'); dimTag(32.2, 10.7, 22.9, '2 projectors at 10 ft'); dimLine(34.5, 23.4, 40, 23.4, 'Exit 5.5 ft');
-    dimTag(24.35, 8.6, 25.3, 'Sant title wall 58 in · lintel 5.75 ft'); dimTag(39.6, 8.2, 6, 'Learn more · 8 ft wall');
+    dimTag(24.35, 8.6, 25.3, 'Sant title wall 58 in · lintel 12.25 ft'); dimTag(39.6, 8.2, 6, 'Learn more · 8 ft wall');
     scene.add(dimGroup);
     DIMS.forEach(d => { const el = document.createElement('div'); el.className = d.kind; el.textContent = d.text; el.hidden = true; labelBox.appendChild(el); d.el = el; });
   }
@@ -1833,7 +1838,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       for (let j = 0; j < CG.nz; j++) for (let i = 0; i < CG.nx; i++) { const v = cgrid[j * CG.nx + i]; if (v === 1) continue; ctx.fillStyle = COL[v]; ctx.fillRect(i * 4, j * 4, 4, 4); }
     });
     t.tex.magFilter = THREE.NearestFilter; t.tex.minFilter = THREE.LinearFilter; NOFLIP.add(t.tex); // drawn in plan coordinates already
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(40, 35), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true, depthWrite: false }));
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(40, 35, 1, 140), new THREE.MeshBasicMaterial({ map: t.tex, transparent: true, depthWrite: false }));
     plane.rotation.x = -Math.PI / 2; plane.position.set(20, 0.025, 17.5); plane.renderOrder = 5; clearGroup.add(plane);
     // clear widths at the places people pass
     const free = (x, z) => { const i = Math.floor(x / CG.res), j = Math.floor(z / CG.res); return i >= 0 && j >= 0 && i < CG.nx && j < CG.nz && cgrid[j * CG.nx + i] === 0; };
@@ -1845,7 +1850,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
         const step = (s) => ax === 'z' ? free(x, z + s) : free(x + s, z);
         while (step(-(a + st)) && a < 25) a += st;
         while (step(b + st) && b < 25) b += st;
-        const w = a + b;
+        const w = ax === 'z' ? WZ(z + b) - WZ(z - a) : a + b;
         const p0 = ax === 'z' ? [x, z - a] : [x - a, z], p1 = ax === 'z' ? [x, z + b] : [x + b, z];
         const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute([p0[0], 0.06, p0[1], p1[0], 0.06, p1[1]], 3));
         const ln = new THREE.Line(g, lineMat); ln.renderOrder = 11; clearGroup.add(ln);
@@ -1876,15 +1881,15 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     [17, 'Shloka stage', '4 × 4 ft, 1 ft high', '¾ in plywood top on a 2 × 4 frame, black carpet, gold edge strip, 1 clamp spot', '1'],
     [18, 'Poster', 'About 4 ft wide', 'Printed foam board or vinyl on the north wall, content to be decided', '1'],
     [19, 'Projection wall', '10 ft north wall + 7 ft east wall', 'White walls (projection surface), 10–14 photo frames in a 3–7.5 ft band, 2 projectors at 10 ft on risers on the south wall top, laptop with projection-mapping software, content loop made to the frame layout', '1'],
-    [22, 'Sant entrance', 'Title 5 × 7.6 ft, lintel 5.5 ft', 'Printed title on foam board or dibond (or foam letters on a black panel) on the Shastra face of the projection room wall; 2 × 10 lintel painted black with a gold strip and gold vinyl letters; 1 overhang spot', '1'],
+    [22, 'Sant entrance', 'Title 5 × 7.6 ft, lintel 12.25 ft', 'Printed title on foam board or dibond (or foam letters on a black panel) on the Shastra face of the projection room wall; 2 × 10 lintel painted black with a gold strip and gold vinyl letters; 1 overhang spot', '1'],
     [21, 'Learn more about Swami', '8 ft of the east wall', 'Wall graphic 8 × 6 ft with 3–4 QR codes, 15 in ledge with book stands, 1 clamp spot, a volunteer', '1'],
     [14, 'Lighting', 'Whole section', 'Overhang spots and bars at 3000K on dimmers, plus the Shanti LED strip; hall lights off, exit signs on', '10 spots + 18 bars'],
-    [15, 'Floor covering', '40 × 35 ft', 'Black loop carpet in 12 ft wide rolls (three runs of 40 ft, trimmed), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 1,400 sq ft']
+    [15, 'Floor covering', '40 × 40 ft', 'Black loop carpet in 12 ft wide rolls (four runs of 40 ft, the last one trimmed), seams taped with gaffer tape only; felt pads under wall feet and plinths. Shanti room gets glossy white vinyl on hardboard on top', 'About 1,400 sq ft']
   ];
   function build2D() {
-    const S = 20, OX = 96, OY = 70, X = v => (OX + v * S).toFixed(1), Y = v => (OY + (35 - v) * S).toFixed(1);
+    const S = 20, OX = 96, OY = 70, X = v => (OX + v * S).toFixed(1), YR = v => (OY + (ROOMD - v) * S), Y = v => YR(WZ(v)).toFixed(1);
     const out = [];
-    const rect = (x0, z0, x1, z1, cls) => out.push(`<rect x="${X(x0)}" y="${Y(Math.max(z0, z1))}" width="${((x1 - x0) * S).toFixed(1)}" height="${((z1 - z0) * S).toFixed(1)}" class="${cls}"/>`);
+    const rect = (x0, z0, x1, z1, cls) => { let a = Math.min(z0, z1), b = Math.max(z0, z1); if (a <= WCUT && b > WCUT && b - a > 4) { b += 5; } else if ((a + b) / 2 > WCUT) { a += 5; b += 5; } out.push(`<rect x="${X(x0)}" y="${YR(b).toFixed(1)}" width="${((x1 - x0) * S).toFixed(1)}" height="${((b - a) * S).toFixed(1)}" class="${cls}"/>`); };
     const line = (x0, z0, x1, z1, cls) => out.push(`<line x1="${X(x0)}" y1="${Y(z0)}" x2="${X(x1)}" y2="${Y(z1)}" class="${cls}"/>`);
     const text = (x, z, t, cls, anchor) => out.push(`<text x="${X(x)}" y="${Y(z)}" class="${cls}" text-anchor="${anchor || 'middle'}" dominant-baseline="central">${t}</text>`);
     const dim = (x0, z0, x1, z1, t, off) => {
@@ -1894,7 +1899,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     };
     const badge = (x, z, n) => out.push(`<g class="p-badge"><circle cx="${X(x)}" cy="${Y(z)}" r="9"/><text x="${X(x)}" y="${Y(z)}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`);
     rect(0, 0, 9.5, 35, 'p-zm'); rect(9.5, 0, 25, 35, 'p-zs'); rect(25, 0, 40, 35, 'p-zt');
-    for (let x = 0; x <= 40; x++) line(x, 0, x, 35, 'p-grid'); for (let z = 0; z <= 35; z++) line(0, z, 40, z, 'p-grid');
+    for (let x = 0; x <= 40; x++) out.push(`<line x1="${X(x)}" y1="${YR(0)}" x2="${X(x)}" y2="${YR(ROOMD)}" class="p-grid"/>`); for (let z = 0; z <= ROOMD; z++) out.push(`<line x1="${X(0)}" y1="${YR(z)}" x2="${X(40)}" y2="${YR(z)}" class="p-grid"/>`);
     rect(0, 5, 9, 13, 'p-ivory');
     rect(5, 4.8, 9, 5.2, 'p-piece');
     rect(0.2, 28.8, 1.5, 34.8, 'p-piece'); rect(0.4, 33.5, 6.4, 34.8, 'p-piece'); rect(0.2, 18, 1.5, 24, 'p-piece');
@@ -1916,7 +1921,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     WALLS.forEach(([a, b]) => line(a[0], a[1], b[0], b[1], 'p-wall'));
     const baseOut = out.slice();
     // dimensions
-    dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 35, '35 ft', 1.1);
+    dim(0, -1.4, 40, -1.4, '40 ft', -0.6); dim(41.4, 0, 41.4, 35, '40 ft', 1.1);
     dim(0, 36.3, 9.5, 36.3, 'Mandir 9.5 ft', 0.65); dim(9.5, 36.3, 25, 36.3, 'Shastra 15.5 ft', 0.65); dim(25, 36.3, 40, 36.3, 'Sant 15 ft', 0.65);
     dim(-1.4, 0, -1.4, 5, '5 ft', -1.0); text(-2.2, 6.0, 'Entrance', 'p-note', 'middle');
     dim(43.2, 10, 43.2, 15, '5 ft', 1.0); text(43.8, 8.0, 'Exit', 'p-note', 'middle');
@@ -1930,14 +1935,14 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // numbered pieces
     [[-0.6, 12, 1], [4.5, 1.2, 2], [4.5, 9, 3], [7, 5.9, 4], [0.85, 30.2, 5], [4.6, 34.15, 5], [2.6, 21, 5], [9.68, 7.9, 6], [17.4, 9.9, 7], [17.4, 15.9, 7], [17.4, 21.9, 7], [22.9, 33.9, 7], [18.4, 13, 8], [18.4, 19, 8], [22.6, 1.3, 8], [17.5, 1.3, 9], [24.3, 14.5, 10], [29.5, 21.6, 11], [26.8, 1.4, 13], [19.5, 32.8, 16], [15.5, 33.3, 17], [9.5, 33.7, 18], [34.5, 33.6, 19], [38.6, 30, 19], [37.8, 6, 21], [23.7, 25.3, 22]].forEach(([x, z, n]) => badge(x, z, n));
     
-    const svg = `<svg viewBox="0 0 1000 860" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 35 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
+    const svg = `<svg viewBox="0 0 1000 960" role="img" aria-label="Dimensioned floor plan of Aadhar Stambh, 40 by 40 feet"><title>Aadhar Stambh floor plan</title>${out.join('')}</svg>`;
     const lo = baseOut.slice();
     FIX.forEach(([n, , , , m, c, t, , , type, len]) => {
       lo.push(`<line x1="${X(c[0])}" y1="${Y(c[2])}" x2="${X(t[0])}" y2="${Y(t[2])}" class="p-aim"/>`);
       if (type === 'bar') { let hx = t[0] - c[0], hz = t[2] - c[2]; if (Math.hypot(hx, hz) < 0.05) { hx = c[0] - m[0]; hz = c[2] - m[2]; } const L = Math.hypot(hx, hz), ux = -hz / L * len / 2, uz = hx / L * len / 2; lo.push(`<line x1="${X(c[0] - ux)}" y1="${Y(c[2] - uz)}" x2="${X(c[0] + ux)}" y2="${Y(c[2] + uz)}" class="p-bar"/>`); }
     });
     FIX.forEach(([n, , , , , c, , , , type]) => lo.push(`<g class="p-fix${type === 'bar' ? ' b' : ''}"><circle cx="${X(c[0])}" cy="${Y(c[2])}" r="8.5"/><text x="${X(c[0])}" y="${Y(c[2])}" text-anchor="middle" dominant-baseline="central">${n}</text></g>`));
-    const lsvg = `<svg viewBox="0 0 1000 860" role="img" aria-label="Spot light plan with 32 numbered lights"><title>Spot light plan</title>${lo.join('')}</svg>`;
+    const lsvg = `<svg viewBox="0 0 1000 960" role="img" aria-label="Spot light plan with 32 numbered lights"><title>Spot light plan</title>${lo.join('')}</svg>`;
     const lrows = FIX.map(([n, zone, what, on, , c, , ang, , type, len, why]) => `<tr><td class="n"><span class="lf${type === 'bar' ? ' lb' : ''}">${n}</span></td><td>${zone}</td><td><b>${what}</b></td><td><b>${type === 'bar' ? 'Overhang bar, ' + len + ' ft' : 'Overhang spot, ' + beamWord(ang).toLowerCase()}</b><div class="spec">${why}</div></td><td>${on}</td></tr>`).join('') + NOLIGHT.map(([a, b]) => `<tr><td class="n"></td><td></td><td><b>${a}</b></td><td>No fixture<div class="spec">${b}</div></td><td></td></tr>`).join('');
 
     // Shopping list: planning quantities worked out from the layout. [group, item, qty, unit, spec, used for]
@@ -1999,7 +2004,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Sant', 'iPad and lockable floor stand', '1', 'set', 'Stand about 3.5 ft tall', 'Birthday wall'],
       ['Sant', 'iPad to HDMI adapter and 6 ft HDMI cable', '1', 'set', '', 'Birthday wall'],
       ['Sant', 'Mini PC or media player and 6 ft HDMI cable', '1', 'set', 'Runs the route page full-screen, offline, on a loop', 'Vicharan wall'],
-      ['Sant', 'Projector, about 1:1 throw ratio, 3,000+ lumens', '2', 'projectors', 'One per frame wall, at 10 ft on the south wall top', 'Projection wall'],
+      ['Sant', 'Projectors (have them): PT-VW435N and PT-DZ570', '2', 'projectors', 'VW435N on the north wall (about 1.7:1), DZ570 on the east wall (about 2.15:1); at 10 ft on the south wall top, 12 ft if allowed', 'Projection wall'],
       ['Sant', 'Projector risers and mounts', '2', 'sets', '2 × 4 post braced to the south wall top with a projector mount at 10 ft', 'Projection wall'],
       ['Sant', 'Laptop with projection-mapping software', '1', 'set', 'For example MadMapper or HeavyM; HDMI splitter if two projectors', 'Projection wall'],
       ['Sant', 'Photo frames, assorted sizes', '12', 'frames', 'About 1–2 ft, black or gold', 'Projection wall'],
@@ -2030,7 +2035,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       ['Prints and graphics', 'Poster', '1', 'print', 'About 4 ft wide, content to be decided', 'Poster'],
       ['Prints and graphics', 'Projection wall photos', '12', 'prints', 'To fit the frames', 'Projection wall'],
       ['Prints and graphics', 'Sant entrance title, 5 × 7.6 ft', '1', 'print', 'On foam board or dibond, plus gold vinyl SANT · સંત for the lintel', 'Sant entrance'],
-      ['Plywood and lumber', '2 × 10 × 8 ft board', '1', 'piece', 'Lintel over the way into Sant, painted black with a gold strip', 'Sant entrance'],
+      ['Plywood and lumber', '2 × 10 × 14 ft board', '2', 'pieces', 'Lintel over the 12.25 ft way into Sant, doubled so it does not sag, painted black with a gold strip', 'Sant entrance'],
       ['Hardware', 'Wood screws #8, 1⅝ in', '2', '5 lb boxes', '', 'Plywood to frames'],
       ['Hardware', 'Wood screws #9, 3 in', '2', '5 lb boxes', '', 'Frames and braces'],
       ['Hardware', 'Carriage bolts ⅜ × 4 in with washers and nuts', '40', 'sets', 'Join wall sections to each other', 'Walls'],
@@ -2175,7 +2180,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       const f = (keys.KeyW || keys.ArrowUp ? 1 : 0) - (keys.KeyS || keys.ArrowDown ? 1 : 0), r = (keys.KeyD ? 1 : 0) - (keys.KeyA ? 1 : 0);
       const sp = 6 * fast * dt, sy = Math.sin(roam.yaw), cy = Math.cos(roam.yaw);
       const p = { x: roam.x + (-sy * f + cy * r) * sp, z: roam.z + (-cy * f - sy * r) * sp };
-      const pd = { x: p.x, z: MZ(p.z) }; collide(pd); roam.x = pd.x; roam.z = MZ(pd.z);
+      const pd = { x: p.x, z: FZ(p.z) }; collide(pd); roam.x = pd.x; roam.z = FZ(pd.z);
       camera.up.set(0, 1, 0); camera.position.set(roam.x, EYE, roam.z); camera.rotation.set(roam.pitch, roam.yaw, 0);
     } else if (mode === 'walk' && walkCurve) {
       if (tour.playing) {
@@ -2249,6 +2254,30 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     requestAnimationFrame(tick);
   }
 
+  // Move everything north of WCUT 5 ft north; anything that crosses the cut (walls, floor, ropes, beams, the route) is stretched.
+  function warpScene() {
+    scene.updateMatrixWorld(true);
+    const inv = new THREE.Matrix4().copy(scene.matrixWorld).invert(), M = new THREE.Matrix4(), Mi = new THREE.Matrix4(), v = new THREE.Vector3();
+    const list = []; scene.traverse(o => { if (o !== scene && o.children.length === 0 && !o.userData.noWarp) list.push(o); });
+    const shift = o => { const w = o.getWorldPosition(new THREE.Vector3()).applyMatrix4(inv); w.z += 5; w.applyMatrix4(scene.matrixWorld); o.parent.updateMatrixWorld(true); o.parent.worldToLocal(w); o.position.copy(w); };
+    list.forEach(o => {
+      const pos = o.geometry && o.geometry.attributes && o.geometry.attributes.position;
+      if (!pos) { if (o.getWorldPosition(v).applyMatrix4(inv).z > WCUT) shift(o); return; }
+      M.multiplyMatrices(inv, o.matrixWorld); Mi.copy(M).invert();
+      let lo = Infinity, hi = -Infinity;
+      for (let i = 0; i < pos.count; i++) { v.fromBufferAttribute(pos, i).applyMatrix4(M); lo = Math.min(lo, v.z); hi = Math.max(hi, v.z); }
+      if (hi <= WCUT) return;
+      if (lo > WCUT) { shift(o); return; }
+      o.geometry = o.geometry.clone(); const p2 = o.geometry.attributes.position;
+      for (let i = 0; i < p2.count; i++) { v.fromBufferAttribute(p2, i).applyMatrix4(M); if (v.z > WCUT) v.z += 5; v.applyMatrix4(Mi); p2.setXYZ(i, v.x, v.y, v.z); }
+      p2.needsUpdate = true; o.geometry.computeBoundingBox(); o.geometry.computeBoundingSphere();
+    });
+    scene.updateMatrixWorld(true);
+    // walls and solid pieces for walking and the clearance check
+    SEGS.forEach(sg => { sg.az = WZ(sg.az); sg.bz = WZ(sg.bz); });
+    BOXES.forEach(b => { const a = b.cz - b.hz, c = b.cz + b.hz; if (a > WCUT) b.cz += 5; else if (c > WCUT) { b.cz += 2.5; b.hz += 2.5; } });
+  }
+
   const fontsReady = Promise.race([
     Promise.all(['600 40px "Bodoni Moda"', 'italic 500 40px "Bodoni Moda"', '700 30px Montserrat', '500 30px Montserrat', '500 30px "Noto Sans Gujarati"', '600 40px Cinzel', '600 40px "Anek Gujarati"'].map(f => document.fonts.load(f, f.includes('Gujarati') ? 'વચનામૃત સંત' : 'Aa'))),
     new Promise(res => setTimeout(res, 2500))
@@ -2265,6 +2294,7 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     placed(buildNFC, Math.PI, 39.6, 30);              // NFC wall built on the old north wall, turned onto the south wall
     buildPortrait(); buildKiosks(); buildBirthday(); buildRecord(); buildNames();
     buildStage(); buildPoster(); buildProjection(); buildLearnMore(); buildSantTitle(); buildRoute(); buildLights(); buildFixtures(); applyLights(); addColliders(); buildStops(); buildDims(); buildClearance(); build2D();
+    warpScene();
     // The world group is mirrored, so every picture and word would read backwards: flip each texture once to read right again.
     // Upright surfaces flip across, flat ones (floor and ceiling) flip front to back.
     scene.updateMatrixWorld(true);
