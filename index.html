@@ -1257,6 +1257,21 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
     // the whole wall is white, floor to top, not just the frame band
     const wn = plate(15.5, 8, (ctx, w, h) => { ctx.fillStyle = '#ecebe6'; ctx.fillRect(0, 0, w, h); }, 20); wn.position.set(32.25, 4, 34.82); wn.rotation.y = Math.PI; g.add(wn);
     const we = plate(12.25, 8, (ctx, w, h) => { ctx.fillStyle = '#ecebe6'; ctx.fillRect(0, 0, w, h); }, 20); we.position.set(39.82, 4, 28.875); we.rotation.y = -Math.PI / 2; g.add(we);
+    // foam letters on the free 5 ft west of the frames (x 24.5–29.5): OUR LIVING GURU / MAHANT SWAMI MAHARAJ
+    const msm = plate(4.6, 4.5, (ctx, w, h) => {
+      const f = w / 4.6; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = '#ecebe6'; ctx.fillRect(0, 0, w, h); // same white as the wall
+      ctx.fillStyle = '#1a1820'; ctx.font = '600 ' + Math.round(0.4 * f) + 'px Montserrat, sans-serif';
+      if ('letterSpacing' in ctx) ctx.letterSpacing = Math.round(0.1 * f) + 'px';
+      const tw = ctx.measureText('OUR LIVING GURU').width; if (tw > 4.3 * f) ctx.font = '600 ' + Math.round(0.4 * f * 4.3 * f / tw) + 'px Montserrat, sans-serif';
+      ctx.fillText('OUR LIVING GURU', w / 2, 0.55 * f);
+      ctx.fillStyle = '#b08d57'; ctx.fillRect(w / 2 - 1.08 * f, 0.78 * f, 2.17 * f, 0.083 * f);
+      if ('letterSpacing' in ctx) ctx.letterSpacing = Math.round(0.06 * f) + 'px';
+      ctx.font = '600 ' + Math.round(1.07 * f) + 'px Cinzel, serif';
+      const mw = ctx.measureText('MAHARAJ').width; if (mw > 4.3 * f) ctx.font = '600 ' + Math.round(1.07 * f * 4.3 * f / mw) + 'px Cinzel, serif';
+      ['MAHANT', 'SWAMI', 'MAHARAJ'].forEach((s, i) => ctx.fillText(s, w / 2, (1.75 + i * 0.833) * f));
+    }, 120);
+    msm.position.set(27, 5.0, 34.79); msm.rotation.y = Math.PI; g.add(msm); clickable(msm, 'projection');
     const lt = canvasTex(512, 256, (ctx, w, h) => {
       ctx.clearRect(0, 0, w, h);
       for (let i = 0; i < 4; i++) { const x = i * w / 4 + w / 8; const gr = ctx.createLinearGradient(x - 70, 0, x + 70, 0); gr.addColorStop(0, 'rgba(255, 214, 150, 0)'); gr.addColorStop(0.5, 'rgba(255, 214, 150, 0.6)'); gr.addColorStop(1, 'rgba(255, 214, 150, 0)'); ctx.fillStyle = gr; ctx.fillRect(x - 70, 0, 140, h); }
