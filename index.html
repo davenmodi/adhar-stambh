@@ -1943,6 +1943,9 @@ h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 30px; 
       [vert ? z0 : x0, ...js, vert ? z1 : x1].forEach(v => { const [x, z] = vert ? [x0, v] : [v, z0]; out.push(`<line x1="${X(vert ? x - 0.35 : x)}" y1="${YR(vert ? z : z - 0.35).toFixed(1)}" x2="${X(vert ? x + 0.35 : x)}" y2="${YR(vert ? z : z + 0.35).toFixed(1)}" class="p-joint"/>`); });
       out.push(`<text x="${X(lx)}" y="${YR(lz).toFixed(1)}" class="p-wallt" text-anchor="middle" dominant-baseline="central"${rot ? ` transform="rotate(${rot} ${X(lx)} ${YR(lz).toFixed(1)})"` : ''}>${t}</text>`);
     });
+    // projection room head-shadow zone (reference: 10 ft visuals 3–8 ft up on the north and east walls, projectors 10 ft up on the south wall and the title wall)
+    [[[31.21, 32.61], [36.93, 32.61], [39.5, 40], [29.5, 40]], [[33.36, 32.14], [33.36, 37.86], [40, 40], [40, 30]]].forEach(pp => out.push(`<polygon points="${pp.map(([x, z]) => X(x) + ',' + YR(z).toFixed(1)).join(' ')}" style="fill:#7b2cbf;fill-opacity:0.18;stroke:#7b2cbf;stroke-width:1"/>`));
+    out.push(`<text x="${X(35.5)}" y="${YR(35.6).toFixed(1)}" class="p-note" text-anchor="middle" style="fill:#7b2cbf">Shadow zone</text>`);
     // openings (room numbers)
     [[0, 0, 0, 5, 'Entrance 5 ft', -0.65, 2.5, -90], [5, 5, 9, 5, '4 ft', 7, 4.45, 0], [5, 15, 9, 15, '4 ft', 7, 15.55, 0], [40, 10, 40, 15, 'Exit 5 ft', 40.65, 12.5, 90],
      [24.5, 22.75, 24.5, 30, 'Way in 7.25 ft', 23.3, 26.4, -90], [34.5, 22.75, 40, 22.75, '5.5 ft', 37.25, 23.3, 0]]
